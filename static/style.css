@@ -503,7 +503,32 @@ h2 {
   font-size: 120%;
 }
 
+.ui_tabs_links a.yellow {
+  background-color: #fec;
+  color: #000;
+}
 
+.ui_tabs_links a.yellow:hover {
+  background-color: #edb;
+}
+
+.ui_tabs_links a.yellow.selected {
+  background-color: #654;
+  color: #fff;
+  text-decoration: none;
+  padding: 1ex;
+}
+
+.web20 .ui_tabs_accordeon_head.yellow {
+  background-color: #fec;
+  border-color: #b96;
+  xpadding: 1ex;
+  xmargin-bottom: 2ex;
+}
+
+.web20 .ui_tabs_accordeon_content.yellow {
+  border-color: #b96;
+}
 
 /*************************************************************************
  * ui.filters
@@ -955,7 +980,8 @@ z-index: 2;
 .draft_updated_info,
 .voting_active_info,
 .initiator_invite_info,
-.motd {
+.motd,
+.public_access_issue_head {
   background-color: #fec;
   border: 1px solid #b96;
   padding: 1ex;
