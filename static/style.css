@@ -1,0 +1,1152 @@
+/*************************************************************************
+ * Some global definitions 
+ */
+
+body, th, td {
+  font-family: sans-serif;
+  font-size: 15px;
+  font-size: 14px;
+  padding: 0;
+  margin: 0;
+}
+
+.area_list {
+  line-height: 170%;
+}
+
+body, a {
+  color: #000;
+}
+
+img {
+  border: none;
+}
+
+table {
+  border-collapse: collapse;
+  border: none;
+}
+
+td, th {
+  padding: 0.5ex 0.5em 0.5ex 0.5em;
+}
+
+td {
+  vertical-align: top;
+}
+
+th {
+  vertical-align: bottom;
+  font-size: 75%;
+  font-weight: bold;
+}
+
+a.active {
+  color: #fff; 
+}
+
+.revoked {
+  text-decoration: line-through;
+}
+
+.highlighted {
+  background-color: #fa7;
+  color: #000;
+}
+
+.admin_only {
+  font-style: italic;
+}
+
+a {
+  xvertical-align: middle;
+}
+
+h1 {
+  font-size: 150%;
+}
+
+h2 {
+  font-size: 125%;
+}
+
+
+/*************************************************************************
+ * Notices, warnings and errors
+ */
+
+.layout_notice, .layout_error, .layout_warning {
+        background: #fff;
+        font-weight: bold;
+        line-height: 1.7em;
+        -moz-opacity:0.7;
+}
+
+.slot_notice, .slot_warning, .slot_error {
+        padding-left: 1em;
+}
+
+.slot_notice {
+        background-color: #cfc;
+        color: #040;
+}
+
+.slot_warning {
+        background-color: #fec;
+        color: #420;
+}
+
+.slot_error {
+        background-color: #fcc;
+        color: #400;
+}
+
+/*************************************************************************
+ * Navigation, search and language chooser bar 
+ */
+
+.topbar {
+  background-color: #444;
+  color: #fff;
+  font-size: 75%;
+  line-height: 140%;
+  margin-bottom: 1.8ex;
+}
+
+.topbar a {
+  background-color: #444;
+  color: #fff;
+}
+
+.topbar  a:hover {
+  background-color: #fff;
+  color: #000;
+}
+
+.navigation,
+.logout_button {
+  line-height: 250%;
+}
+
+.navigation img,
+.logout_button img {
+  margin-right: 0.5em;
+  vertical-align: middle;
+}
+
+.navigation a,
+.logout_button a {
+  padding: 1ex;
+}
+
+.logout_button {
+  float: right;
+}
+
+.searchbox {
+  margin: 0;
+  padding: 0.1ex 1em 0ex 1em;
+  float: right;
+  line-height: 250%;
+}
+
+.searchbox form {
+  float: left;
+}
+
+.searchbox div {
+  display: inline;
+}
+
+.searchbox select {
+  margin-left: 0.3em;
+  margin-right: 0.4em;
+  font-size: 100%;
+  width: 8em;
+}
+
+.searchbox input[type=text] {
+  width: 8em;
+  padding: 0.25ex 0.25em 0.25ex 0.25em;
+  margin-right: 0.5em;
+  font-size: 100%;
+}
+
+.searchbox input[type=submit] {
+  font-size: 100%;
+}
+
+/*************************************************************************
+ * Title of current page including path and actions
+ */
+
+.title_bar {
+  border-bottom: 1px solid #777;
+  margin-bottom: 2ex;
+  padding-top: 1ex;
+  padding-bottom: 0.5ex;
+}
+
+.title_bar_content {
+  margin-left: 1em;
+}
+
+.path {
+  color: #444;
+}
+
+.path div {
+  font-size: 100%;
+  line-height: 180%;
+}
+
+.path a {
+  color: #444;
+}
+
+.slot_path div {
+  display: inline;
+  margin-left: 1em;
+  margin-right: 1em;
+}
+
+.title {
+  color: #000;
+  margin-bottom: 0.5ex;
+}
+
+.slot_title {
+}
+
+.title div {
+  font-weight: bold;
+  font-size: 135%;
+  line-height: 110%;
+}
+
+.title a {
+  color: #000;
+}
+
+.member_image_avatar {
+  float: left;
+  margin-right: 0.5em;
+}
+
+.actions {
+  font-size: 75%;
+  line-height: 220%;
+}
+
+.slot_actions {
+  display: inline;
+}
+
+.actions a {
+  float: left;
+  display: block;
+  padding: 1px 0.5em 1px 0.0em;
+  margin-right: 1em;
+  vertical-align: middle;
+}
+
+.actions a:hover {
+  background-color: #d7d7d7;
+}
+
+.actions img {
+  padding-left: 0.2em;
+  padding-right: 0.2em;
+  vertical-align: middle;
+}
+
+.logo { 
+  float: right;
+  margin-right: 1em;
+}
+
+/*************************************************************************
+ * vote info / delegation 
+ */
+
+.interest,
+.slot_support,
+.delegation,
+.voting_requested {
+  float: left;
+  position: relative;
+  z-index: 1;
+}
+
+.interest img,
+.slot_support img,
+.delegation img,
+.voting_requested img {
+  padding-left: 0.2em;
+  padding-right: 0.2em;
+}
+.vote_info .head {
+  float: left;
+  margin-right: 1em;
+}
+
+.interest .head_active,
+.slot_support .head_potential_supporter{
+  background-color: #fec;
+  border: 1px solid #b96;
+}
+
+.interest .head_autoreject {
+  background-color: #fdd;
+  border: 1px solid #b77;
+}
+
+.slot_support .head_supporter {
+  background-color: #dfc;
+  border: 1px solid #8b8;
+}
+
+.slot_support .head_initiator {
+  background-color: #eee;
+  border: 1px solid #999;
+}
+
+.delegation .head_active {
+  background-color: #ddf;
+  border: 1px solid #88b;
+}
+
+.delegation .change_delegation {
+  margin-bottom: 2ex;
+}
+
+.delegation .change_delegation a {
+  display: inline;
+  float: none;
+  padding: 1ex;
+}
+
+.delegation .delegation_participation {
+  margin-left: 20.5em;
+  margin-top: 3ex;
+  font-style: italic;
+  font-size: 80%;
+}
+
+.voting_requested .head_active {
+  background-color: #fdd;
+  border: 1px solid #b77;
+}
+
+.vote_info .close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 1ex;
+  display: block;
+}
+
+.vote_info .content {
+  font-size: 133%;
+  line-height: 100%;
+  top: 3ex;
+  display: none;
+  position: absolute;
+  z-index: 10;
+  background-color: #fff;
+  border: 1px solid #999;
+  padding: 1em;
+  width: 35em;
+}
+
+.vote_info .delegation_arrow {
+  margin-top: 1ex;
+  margin-bottom: 1ex;
+  vertical-align: middle;
+}
+
+.vote_info .delegation_arrow_overridden {
+  opacity: 0.4;
+}
+
+.vote_info .delegation_scope_overridden {
+  color: #777;
+}
+
+.vote_info .delegation_scope {
+  display: inline;
+}
+
+.vote_info .delegation_info {
+}
+
+.vote_info .member_thumb {
+  clear: left;
+}
+
+.delegation_overridden .member_thumb {
+  opacity: 0.4;
+}
+
+.delegation .revoke {
+  margin: 0.5ex;
+  float: right;
+}
+
+.delegation .revoke img {
+  vertical-align: middle;
+}
+
+
+.sub_title div {
+  padding-top: 1ex;
+  margin-top: 1ex;
+  font-weight: bold;
+  font-size: 135%;
+  line-height: 110%;
+}
+
+/*************************************************************************
+ * Main content
+ */
+
+.main {
+  margin-left: 1em;
+  margin-right: 1em;
+}
+
+
+/*************************************************************************
+ * ui.tab
+ */
+
+.ui_tabs_links {
+  margin-top: 4ex;
+  font-size: 75%;
+}
+
+.ui_tabs_links a {
+  padding: 1ex;
+  line-height: 200%;
+  background-color: #e7e7e7;
+  white-space: nowrap;
+}
+
+.ui_tabs_links a:hover {
+  background-color: #d7d7d7;
+}
+
+.ui_tabs_links a.selected {
+  background-color: #444;
+  color: #fff;
+  text-decoration: none;
+  padding: 1ex;
+}
+
+.ui_tabs_content {
+  border: 1px solid #444;
+  padding: 1ex 1ex 1ex 1ex;
+}
+
+.web10 .ui_tabs_accordeon_head {
+  margin-bottom: 1ex;
+}
+
+.web20 .ui_tabs_accordeon_head {
+  font-size: 80%;
+  font-weight: bold;
+  display: block;
+  background: #eee;
+  border: 1px solid #bbb;
+  color: #000;
+  padding: 0.75ex;
+  margin-top: 2ex;
+  cursor: pointer;
+}
+
+.web20 .ui_tabs_accordeon_head img {
+  vertical-align: middle;
+  margin-right: 0.5em;
+}
+
+.web20 .ui_tabs_accordeon_head .bargraph {
+  margin-right: 0.5em;
+}
+
+.web20 .ui_tabs_accordeon_content {
+  border: 1px solid #aaa;
+  border-top: none;
+  padding: 2ex 1em 2ex 1em;
+  margin-bottom: 3ex;
+}
+
+.web20 .issue_initiative_list .ui_tabs_accordeon_head {
+  background-color: #e5e5ff;
+}
+
+.web20 .issue_initiative_list .ui_tabs_accordeon_head,
+.web20 .issue_initiative_list .ui_tabs_accordeon_content {
+  border-color: #aad;
+}
+
+.web20 .issue_initiative_list .ui_tabs_accordeon_content .ui_tabs_accordeon_content {
+  border-color: #bbb;
+  border-width: 1px;
+}
+
+.web20 .issue_initiative_list .ui_tabs_accordeon_content .ui_tabs_accordeon_head {
+  background-color: #eee;
+  border: 1px solid #bbb;
+}
+
+.web20 .issue_initiative_list .ui_tabs_accordeon_head a {
+  font-size: 120%;
+}
+
+.ui_tabs_links a.yellow {
+  background-color: #fec;
+  color: #000;
+}
+
+.ui_tabs_links a.yellow:hover {
+  background-color: #edb;
+}
+
+.ui_tabs_links a.yellow.selected {
+  background-color: #654;
+  color: #fff;
+  text-decoration: none;
+  padding: 1ex;
+}
+
+.web20 .ui_tabs_accordeon_head.yellow {
+  background-color: #fec;
+  border-color: #b96;
+  xpadding: 1ex;
+  xmargin-bottom: 2ex;
+}
+
+.web20 .ui_tabs_accordeon_content.yellow {
+  border-color: #b96;
+}
+
+/*************************************************************************
+ * ui.filters
+ */
+
+.ui_filter_closed_head,
+.ui_filter_head {
+  color: #777;
+  margin-top: 1ex;
+  margin-bottom: 1.5ex;
+  font-size: 75%;
+}
+
+.ui_filter_head a {
+  color: #777;
+  padding: 0.5ex;
+}
+
+.ui_filter_head a.active {
+  color: #fff;
+  background-color: #777;
+  padding: 0.5ex;
+}
+
+/*************************************************************************
+ * ui.paginate
+ */
+
+.ui_paginate_head {
+  margin-bottom: 1ex;
+}
+
+.ui_paginate_foot {
+  margin-top: 1ex;
+}
+
+.ui_paginate_select a {
+  padding: 0.5ex;
+}
+
+/*************************************************************************
+ * ui.bargraph
+ */
+
+.bargraph {
+  width: 103px;
+}
+
+.bargraph50 {
+  width: 52px;
+}
+
+.bargraph div {
+  float: left;
+  margin-top: 0.5ex;
+  height: 1.3ex;
+}
+
+.bargraph_legend {
+  margin-top: 2ex;
+}
+
+.bargraph_legend .bargraph {
+  width: 26px;
+}
+
+.bargraph_legend div,
+.bargraph_legend div div,
+.bargraph_legend div div div {
+  float: left;
+}
+
+.bargraph_legend_label {
+  margin-left: 0.5em;
+  margin-right: 1em;
+}
+
+/*************************************************************************
+ * vertical ui.form
+ */
+
+.login input[type=text],
+.vertical input[type=text],
+.login input[type=password],
+.vertical input[type=password],
+.vertical textarea,
+.vertical select {
+  font-family: sans-serif;
+  font-size: 100%;
+  width: 50em;
+  border: 1px solid #444;
+  padding: 0.2ex 0.2em 0.2ex 0.2em;
+  margin-bottom: 1ex;
+}
+
+.login input[type=password],
+.vertical input[type=password] {
+  width: 16em;
+}
+
+.vertical select {
+  padding-right: 0;
+}
+
+.login .ui_field_label,
+.vertical .ui_field_label {
+  text-transform: uppercase;
+  font-size: 70%;
+  line-height: 120%;
+  font-weight: bold;
+  color: #777;
+  width: 15em;
+  display: block;
+  float: left;
+  clear: left;
+  text-align: right;
+  padding-right: 0.5em;
+}
+
+.ui_field_label.label_right {
+  text-align: left;
+  width: auto;
+}
+
+.login input[type=text],
+.login input[type=password] {
+  width: 10em;
+}
+
+.login div,
+.vertical div {
+  clear: left;
+}
+
+.vertical span {
+  display: block;
+  margin-bottom: 0.5ex;
+}
+
+.vertical span:after {
+  content: " ";
+}
+
+.vertical span span {
+  display: inline;
+  margin-bottom: 0;
+}
+
+.login input[type=submit],
+.vertical input[type=submit] {
+  font-size: 100%;
+  margin-left: 11em;
+  background-color: #444444;
+  color: #fff;
+  border: none;
+  padding: 0.75ex;
+}
+
+.login input[type=submit]:hover,
+.vertical input[type=submit]:hover {
+  background-color: #444444;
+}
+
+/*************************************************************************
+ * Tables
+ */
+
+
+table a.action {
+  font-size: 70%;
+  line-height: 190%;
+  padding: 0.5ex;
+  color: #777;
+}
+
+table a.active {
+  color: #fff; 
+}
+
+th {
+  text-align: left;
+  border-bottom: 1px solid #000;
+}
+
+tr:hover td {
+  background-color: #ddd;
+}
+
+.nohover tr:hover td {
+  background-color: #fff;
+}
+
+.nohover table tr:hover td {
+  background-color: #ddd;
+}
+
+
+tr table tr:hover td {
+  background-color: #fff;
+}
+
+
+/*************************************************************************
+ * Hidden inline form
+ */
+
+.hidden_inline_form {
+  display: none;
+  border: 1px solid #444;
+  width: 42em;
+  position: fixed;
+  background-color: #fff;
+  left: 5em;
+  top: 5ex;
+z-index: 2;
+}
+
+.hidden_inline_form a {
+  padding: 0.5ex;
+  color: #fff;
+}
+
+
+.hidden_inline_form .head {
+  background-color: #444;
+  color: #fff;
+  display: block;
+  padding: 0.5ex;
+}
+
+.hidden_inline_form input[type=text],
+.hidden_inline_form textarea,
+.hidden_inline_form select {
+  width: 30em;
+}
+
+/*************************************************************************
+ * Positive / Negtive votes
+ */
+
+
+.positive_votes span {
+  display: inline;
+}
+
+.positive_votes {
+  display: inline;
+  background-color: #cfc;
+  padding: 0.3ex 0.5em 0.3ex 0.5em;
+}
+
+.negative_votes span {
+  display: inline;
+}
+
+.negative_votes {
+  display: inline;
+  background-color: #fcc;
+  padding: 0.3ex 0.5em 0.3ex 0.5em;
+}
+
+.suggestion_my_opinion a,
+.suggestion_my_opinion span {
+  white-space: nowrap;
+  padding-left: 0.2ex !important;
+  padding-right: 0.2ex !important;
+}
+
+.active {
+  background-color: #444;
+  color: #fff;
+}
+
+.active_red2 { background-color: #a00; color: #fff !important; }
+.active_red1 { background-color: #f88; color: #000 !important; }
+.active_green1 { background-color: #8f8; color: #000 !important; }
+.active_green2 { background-color: #0a0; color: #000 !important; }
+
+
+
+
+/*************************************************************************
+ * Issues
+ */
+
+.issues tr {
+  border: 1px solid #ccc;
+}
+
+.issues tr tr {
+  border: none;
+}
+
+.lang_chooser {
+  float: right;
+  margin-right: 0.5em;
+}
+
+.delegation_list_entry {
+  margin-right: 2em;
+  margin-bottom: 2ex;
+  float: left;
+  clear: left;
+}
+
+.delegation_list_entry .delegation_arrow {
+  float: left;
+}
+
+.delegation_list_entry .delegation_scope {
+  float: left;
+  width: 25em;
+}
+
+.delegation_list_entry .delegation_scope a {
+  display: block;
+}
+
+.member_list .member_thumb {
+  float: left;
+  margin-right: 1em;
+  margin-bottom: 2ex;
+}
+
+.member_thumb {
+  text-decoration: none;
+  width: 14.5em;
+  height: 48px;
+  display: block;
+  float: left;
+  border: 1px solid #999;
+  overflow: hidden;
+  xwhite-space: nowrap;
+  position: relative;
+}
+
+.member_thumb a{
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 0;
+  margin: 0;
+}
+
+.member_thumb a:hover div {
+  background-color: #444;
+  color: #fff;
+}
+
+.member_thumb img {
+  padding: 0;
+  margin: 0;
+  vertical-align: bottom;
+}
+
+.member_thumb div {
+}
+
+.member_thumb .member_image {
+}
+
+.member_thumb .member_name {
+  position: absolute;
+  left: 48px;
+  top: 2ex;
+  font-size: 100%;
+  width: 14em;
+}
+
+.member_thumb .flags {
+  text-align: right;
+  font-size: 75%;
+}
+
+.member_thumb .flags a,
+.member_thumb .flags img {
+  position: static;
+  float: right;
+  margin-left: 0.5em;
+}
+
+
+.member .right {
+  float: right;
+}
+
+.member_thumb.not_accepted,
+.member_thumb.not_informed {
+  opacity: 0.5;
+}
+
+.member_statement,
+.draft_content,
+.suggestion_content {
+  background-color: #eee;
+  border: 1px solid #ccc;
+  padding-left: 1ex;
+  padding-right: 1ex;
+}
+
+.diff {
+  background-color: #eee;
+  border: 1px solid #ccc;
+  padding: 1ex;
+}
+
+.diff_added {
+  background-color: #cfc;
+  text-decoration: underline;
+}
+
+.diff_removed {
+  background-color: #fcc;
+  text-decoration: line-through;
+}
+
+.slot_issue_info {
+  background-color: #eee;
+  border: 1px solid #ccc;
+  float: right;
+  padding: 0.5ex;
+  line-height: 130%;
+  margin-right: 1em;
+}
+
+.issue_info label {
+  float: left;
+  width: 8em;
+  text-transform: uppercase;
+  font-size: 70%;
+  color: #777;
+  font-weight: bold;
+  clear: left;
+  text-align: right;
+  margin-right: 0.7em;
+}
+
+.admitted_info {
+  background-color: #dfd;
+  padding: 1ex;
+  margin-bottom: 2ex;
+}
+
+.not_admitted_info,
+.revoked_info {
+  background-color: #fdd;
+  padding: 1ex;
+  margin-bottom: 2ex;
+}
+
+.draft_updated_info,
+.voting_active_info,
+.initiator_invite_info,
+.motd,
+.public_access_issue_head {
+  background-color: #fec;
+  border: 1px solid #b96;
+  padding: 1ex;
+  margin-bottom: 2ex;
+}
+
+.suggestion_fulfilled {
+  width: 15em;
+}
+.suggestion_fulfilled a.action {
+  padding-left: 0;
+  line-height: 120%;
+}
+
+.help,
+.use_terms {
+  border: 1px solid #bcd;
+  background-color: #def;
+  color: #000;
+  padding: 1ex;
+}
+
+.help_visible {
+  margin-bottom: 1ex;
+}
+
+.help_visible .help_icon {
+  float: right;
+}
+
+.slot_help_hidden {
+  float: right;
+  margin-right: 1em;
+}
+
+.help_actions {
+  font-size: 75%;
+  float: right;
+}
+
+.help_actions a {
+  margin-right: 1em;
+  color: #468;
+}
+
+.wiki {
+}
+
+.wiki h1,
+.wiki h2,
+.wiki h3,
+.wiki h4 {
+  margin-top: 1ex;
+  margin-bottom: 1ex;
+}
+
+.wiki h1 {
+  font-size: 150%;
+}
+
+.wiki h2 {
+  font-size: 125%;
+}
+
+.wiki p {
+  margin-top: 1ex;
+  margin-bottom: 1ex;
+}
+
+form .warning {
+  background-color: #ffd;
+  color: #000;
+  border: 1px solid #dda;
+  margin: 1ex;
+  margin-bottom: 2ex;
+  padding: 1ex;
+}
+
+a.not_voted {
+  display: block;
+  background-color: #fec;
+  color: #000;
+}
+
+.action_active {
+  background-color: #fec;
+}
+
+.heading {
+  font-size: 120%;
+  font-weight: bold;
+  margin-top: 2ex;
+  margin-bottom: 1ex;
+}
+
+.heading.first {
+  margin-top: 0;
+}
+
+.menu_list li {
+  padding-top: 1ex;
+  padding-bottom: 1ex;
+}
+
+.deactivated_member_info {
+  background-color: #a00;
+  color: #fff;
+}
+
+/*************************************************************************
+ * Voting
+ */
+
+#voting {
+  position: relative;
+}
+#voting .approval, .abstention, .disapproval {
+  border: 2px black solid;
+  margin-top:    5ex;
+  margin-bottom: 5ex;
+  padding: 1ex;
+  padding-bottom: 2ex;
+}
+#voting .approval {
+  background-color: #9f9;
+}
+#voting .approval .movable {
+  background-color: #dfd;
+}
+#voting .abstention {
+  background-color: #ccc;
+}
+#voting .abstention .movable {
+  background-color: #eee;
+}
+#voting .disapproval {
+  background-color: #f88;
+}
+#voting .disapproval .movable {
+  background-color: #fbb;
+}
+#voting .cathead {
+  font-weight: bold;
+}
+#voting .movable {
+  position: relative;
+  border: 1px black solid;
+  margin: 1ex;
+  padding: 0.5ex;
+}
+#voting .voting_form_active .movable {
+  cursor: pointer;
+}
+#voting .voting_form_active .clickable {
+  cursor: auto;
+}
+#voting .voting_form_active a.clickable {
+  cursor: pointer;
+}
+
+#voting .grabber {
+  vertical-align: middle;
+  cursor: move;
+}
+
+
