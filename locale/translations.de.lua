@@ -346,7 +346,7 @@ return {
 ["Member is now invited to be initiator"] = "Mitglied ist jetzt als Initiator eingeladen";
 ["Member is participating in this area"] = "Mitglied ist Teilnehmer im Themenbereich";
 ["Member list"] = "Mitgliederliste";
-["Member menu"] = "Mietglieds-Menü";
+["Member menu"] = "Mitglieds-Menü";
 ["Member name"] = "Mitglied Name";
 ["Member name history for '#{name}'"] = "Namenshistorie für '#{name}'";
 ["Member of area"] = "Mitglied des Themenbereichs";
