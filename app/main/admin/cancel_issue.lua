@@ -18,7 +18,7 @@ else
   local issue = Issue:by_id(id)
     
   execute.view{ module = "initiative", view = "_list", params = {
-    issue = issue, initiatives = issue.initiatives
+    initiatives = issue.initiatives
   } }
 
   ui.form{
