@@ -26,7 +26,7 @@ else
     action = "cancel_issue",
     id = id,
     content = function()
-      ui.field.text{ label = _"Administraive notice", name = "id" }
+      ui.field.text{ label = _"Administrative notice", name = "id" }
       ui.submit{ text = _"Cancel issue now" }
     end
   }
