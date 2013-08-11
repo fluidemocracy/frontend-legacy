@@ -6,7 +6,7 @@ local issue = Issue
   :exec()
 
 if issue.closed then
-  error("issue is already closed")
+  slot.put_into("error", _"This issue is already closed.")
   return false
 end  
 
@@ -25,3 +25,5 @@ admin_notice = admin_notice .. param.get("admin_notice")
 issue.admin_notice = admin_notice
 
 issue:save()
+
+slot.put_into("notice", _"Issue has been canceled")
