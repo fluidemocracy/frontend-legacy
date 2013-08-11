@@ -197,10 +197,11 @@ function Issue:get_state_name_for_state(value)
     canceled_issue_not_accepted = _"Canceled (issue not accepted)",
     canceled_after_revocation_during_discussion = _"Canceled (during discussion due to revocation)",
     canceled_after_revocation_during_verification = _"Canceled (during verification due to revocation)",
+    canceled_by_admin = _"Canceled by administrative intervention"
     calculation = _"Calculation",
     canceled_no_initiative_admitted = _"Canceled (no initiative admitted)",
     finished_without_winner = _"Finished (without winner)",
-    finished_with_winner = _"Finished (with winner)"
+    finished_with_winner = _"Finished (with winner)",
   }
   return state_name_table[value] or value or ''
 end
