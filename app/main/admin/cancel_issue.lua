@@ -13,11 +13,12 @@ if not id then
     end
   }
 else
-
+ 
+  local issue = Issue:by_id(id)
+ 
   ui.title(_("Cancel issue #{id}", { id = issue.id })
   ui.actions()
 
-  local issue = Issue:by_id(id)
     
   execute.view{ module = "initiative", view = "_list", params = {
     initiatives_selector = issue:get_reference_selector("initiatives")
