@@ -2,7 +2,7 @@
 local id = param.get("id")
 
 if not id then
-  ui.title("Cancel issue #{id}")
+  ui.title("Cancel issue")
   ui.actions()
   ui.form{
     module = "admin",
