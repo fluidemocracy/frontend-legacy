@@ -9,7 +9,7 @@ if not id then
     module = "admin",
     view = "issue_delete",
     content = function()
-      ui.input{ label = _"Issue ID", name = "id" }
+      ui.field.text{ label = _"Issue ID", name = "id" }
       ui.submit{ text = _"Cancel issue" }
     end
   }
@@ -27,7 +27,7 @@ else
     view = "issue_delete",
     id = id,
     content = function()
-      ui.input{ label = _"Administraive notice", name = "id" }
+      ui.field.text{ label = _"Administraive notice", name = "id" }
       ui.submit{ text = _"Cancel issue now" }
     end
   }
