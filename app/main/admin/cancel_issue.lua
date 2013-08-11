@@ -30,7 +30,7 @@ else
     id = id,
     attr = { class = "vertical" },
     content = function()
-      ui.field.text{ label = _"Administrative notice", name = "id", multiline = true }
+      ui.field.text{ label = _"Public administrative notice:", name = "id", multiline = true }
       ui.submit{ text = _"Cancel issue now" }
     end
   }
