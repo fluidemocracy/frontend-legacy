@@ -15,7 +15,7 @@ if not id then
   }
 else
 
-  local issue = Issue.by_id(id)
+  local issue = Issue:by_id(id)
   issue:load("initiatives")
     
   execute.view{ module = "initiative", view = "_list", params = {
