@@ -25,6 +25,7 @@ else
     module = "admin",
     action = "cancel_issue",
     id = id,
+    attr = { class = "vertical" },
     content = function()
       ui.field.text{ label = _"Administrative notice", name = "id", multiline = true }
       ui.submit{ text = _"Cancel issue now" }
