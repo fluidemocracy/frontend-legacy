@@ -16,7 +16,7 @@ else
  
   local issue = Issue:by_id(id)
  
-  ui.title(_("Cancel issue #{id}", { id = issue.id })
+  ui.title(_("Cancel issue #{id}", { id = issue.id }))
   ui.actions()
 
     
