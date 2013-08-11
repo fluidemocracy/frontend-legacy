@@ -18,7 +18,7 @@ else
   local issue = Issue:by_id(id)
     
   execute.view{ module = "initiative", view = "_list", params = {
-    initiatives_selector = issue:get_selector("initiatives")
+    initiatives_selector = issue:get_reference_selector("initiatives")
   } }
 
   ui.form{
