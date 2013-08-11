@@ -7,7 +7,7 @@ local id = param.get("id")
 if not id then
   ui.form{
     module = "admin",
-    view = "issue_delete",
+    view = "cancel_issue",
     content = function()
       ui.field.text{ label = _"Issue ID", name = "id" }
       ui.submit{ text = _"Cancel issue" }
@@ -24,7 +24,7 @@ else
 
   ui.form{
     module = "admin",
-    view = "issue_delete",
+    action = "cancel_issue",
     id = id,
     content = function()
       ui.field.text{ label = _"Administraive notice", name = "id" }
