@@ -1,10 +1,9 @@
-ui.title(_"Cancel issue")
-
-ui.actions()
 
 local id = param.get("id")
 
 if not id then
+  ui.title("Cancel issue #{id}")
+  ui.actions()
   ui.form{
     module = "admin",
     view = "cancel_issue",
@@ -14,6 +13,9 @@ if not id then
     end
   }
 else
+
+  ui.title(_("Cancel issue #{id}", { id = issue.id })
+  ui.actions()
 
   local issue = Issue:by_id(id)
     
