@@ -99,6 +99,9 @@ return {
 ["Can't send confirmation email"] = "Nem lehet elküldeni a megerõsítõ emailt";
 ["Cancel"] = "Megszakítás";
 ["Cancel [nullify]"] = false;
+["Cancel issue"] = false;
+["Cancel issue #{id}"] = false;
+["Cancel issue now"] = false;
 ["Cancel refuse of invitation"] = "Meghívás elutasításának megszakítása";
 ["Cancel registration"] = "Regisztrálás megszakítása";
 ["Canceled"] = "Megszakítva";
@@ -107,6 +110,7 @@ return {
 ["Canceled (during verification due to revocation)"] = "Megszakítva (ellenõrzés közben, visszavonás miatt)";
 ["Canceled (issue not accepted)"] = "Megszakítva (el nem fogadott téma)";
 ["Canceled (no initiative admitted)"] = "Megszakítva (nem engedélyezett kezdeményezés)";
+["Canceled by administrative intervention"] = false;
 ["Change area delegation"] = "Témakör-delegáció módosítása";
 ["Change email"] = "Email-cím módosítása";
 ["Change email address"] = "Email-cím módosítása";
@@ -302,6 +306,7 @@ return {
 ["Invited"] = "Meghívva";
 ["Issue"] = "Téma";
 ["Issue ##{id}"] = "Téma: ##{id}";
+["Issue ID"] = false;
 ["Issue accepted"] = "Téma elfogadva";
 ["Issue canceled"] = "Téma megszakítva";
 ["Issue delegation"] = "Témadelegáció";
@@ -309,6 +314,7 @@ return {
 ["Issue finished"] = "Téma lezárva";
 ["Issue finished without voting"] = "Téma szavazás nélkül lezárva";
 ["Issue frozen"] = "Téma befagyasztva";
+["Issue has been canceled"] = false;
 ["Issue pad"] = "Téma padje";
 ["Issue quorum"] = "Téma-határozatképesség";
 ["Issue quorum denumerator"] = "Téma-határozatképesség-nevezõ";
@@ -477,6 +483,7 @@ return {
 ["Proceed with registration"] = false;
 ["Profession"] = "Foglalkozás";
 ["Profile"] = "Profil";
+["Public administrative notice:"] = false;
 ["Publish"] = "Közzététel";
 ["Published"] = "Közzétéve";
 ["Quorum"] = "Határozatképesség";
@@ -588,6 +595,7 @@ return {
 ["This initiative is already revoked"] = "Ezt a kezdeményezést már visszavonták";
 ["This initiative is revoked"] = "Ezt a kezdeményezést visszavonták";
 ["This invite key is connected with the following information:"] = "Ehhez a meghívókulcshoz a következõ adatok kapcsolódnak:";
+["This issue has been canceled by administrative intervention."] = false;
 ["This issue has been canceled."] = false;
 ["This issue has been canceled. It failed the quorum of #{quorum}."] = "Téma megszakítva. Nincs meg a határozatképesség: #(quorum).";
 ["This issue is already closed."] = "Téma már lezárva.";

@@ -99,6 +99,9 @@ return {
 ["Can't send confirmation email"] = false;
 ["Cancel"] = false;
 ["Cancel [nullify]"] = false;
+["Cancel issue"] = false;
+["Cancel issue #{id}"] = false;
+["Cancel issue now"] = false;
 ["Cancel refuse of invitation"] = false;
 ["Cancel registration"] = false;
 ["Canceled"] = false;
@@ -107,6 +110,7 @@ return {
 ["Canceled (during verification due to revocation)"] = false;
 ["Canceled (issue not accepted)"] = false;
 ["Canceled (no initiative admitted)"] = false;
+["Canceled by administrative intervention"] = false;
 ["Change area delegation"] = false;
 ["Change email"] = false;
 ["Change email address"] = false;
@@ -302,6 +306,7 @@ return {
 ["Invited"] = false;
 ["Issue"] = false;
 ["Issue ##{id}"] = false;
+["Issue ID"] = false;
 ["Issue accepted"] = false;
 ["Issue canceled"] = false;
 ["Issue delegation"] = false;
@@ -309,6 +314,7 @@ return {
 ["Issue finished"] = false;
 ["Issue finished without voting"] = false;
 ["Issue frozen"] = false;
+["Issue has been canceled"] = false;
 ["Issue pad"] = false;
 ["Issue quorum"] = false;
 ["Issue quorum denumerator"] = false;
@@ -477,6 +483,7 @@ return {
 ["Proceed with registration"] = false;
 ["Profession"] = false;
 ["Profile"] = false;
+["Public administrative notice:"] = false;
 ["Publish"] = false;
 ["Published"] = false;
 ["Quorum"] = false;
@@ -588,6 +595,7 @@ return {
 ["This initiative is already revoked"] = false;
 ["This initiative is revoked"] = false;
 ["This invite key is connected with the following information:"] = false;
+["This issue has been canceled by administrative intervention."] = false;
 ["This issue has been canceled."] = false;
 ["This issue has been canceled. It failed the quorum of #{quorum}."] = false;
 ["This issue is already closed."] = false;

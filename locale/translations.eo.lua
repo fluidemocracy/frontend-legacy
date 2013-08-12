@@ -99,6 +99,9 @@ return {
 ["Can't send confirmation email"] = "Ne povas dissendi konfirmoretpoŝton.";
 ["Cancel"] = "Nuligi";
 ["Cancel [nullify]"] = false;
+["Cancel issue"] = false;
+["Cancel issue #{id}"] = false;
+["Cancel issue now"] = false;
 ["Cancel refuse of invitation"] = "Nuligi rifuzon de la invito";
 ["Cancel registration"] = "Nuligi registradon";
 ["Canceled"] = "Abolita";
@@ -107,6 +110,7 @@ return {
 ["Canceled (during verification due to revocation)"] = false;
 ["Canceled (issue not accepted)"] = false;
 ["Canceled (no initiative admitted)"] = false;
+["Canceled by administrative intervention"] = false;
 ["Change area delegation"] = "Ŝanĝi delegacion por temaro";
 ["Change email"] = "Ŝanĝi retpoŝton";
 ["Change email address"] = "Ŝanĝi retpoŝtadreson";
@@ -302,6 +306,7 @@ return {
 ["Invited"] = "Invitita";
 ["Issue"] = "Temo";
 ["Issue ##{id}"] = "Temo ##{id}";
+["Issue ID"] = false;
 ["Issue accepted"] = "Temo akceptita";
 ["Issue canceled"] = "Temo nuligita";
 ["Issue delegation"] = "Temodelegacio";
@@ -309,6 +314,7 @@ return {
 ["Issue finished"] = "Temo finita";
 ["Issue finished without voting"] = "Temo finita sen voĉdono";
 ["Issue frozen"] = "Temo ĝelita";
+["Issue has been canceled"] = false;
 ["Issue pad"] = false;
 ["Issue quorum"] = "Kvorumo por temo";
 ["Issue quorum denumerator"] = "Denominatoro de tema kvorumo";
@@ -477,6 +483,7 @@ return {
 ["Proceed with registration"] = false;
 ["Profession"] = "Profesio";
 ["Profile"] = "Profilo";
+["Public administrative notice:"] = false;
 ["Publish"] = "Publikigi";
 ["Published"] = "Publikigita";
 ["Quorum"] = "Kvorumo";
@@ -588,6 +595,7 @@ return {
 ["This initiative is already revoked"] = "Tiu iniciato estas jam nuligita";
 ["This initiative is revoked"] = "Tiu iniciato estas nuligita";
 ["This invite key is connected with the following information:"] = false;
+["This issue has been canceled by administrative intervention."] = false;
 ["This issue has been canceled."] = false;
 ["This issue has been canceled. It failed the quorum of #{quorum}."] = "Tiu temo estas abolita. Ĝi malsukcesis la kvorumon de #{quorum}.";
 ["This issue is already closed."] = "La temo estas jam fermita.";
