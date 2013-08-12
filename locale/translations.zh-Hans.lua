@@ -98,7 +98,7 @@ return {
 ["Can't remove last initiator"] = "无法移除最末位发起者";
 ["Can't send confirmation email"] = "无法寄送确认电邮";
 ["Cancel"] = "取消";
-["Cancel [nullify]"] = "取消 [nullify]";
+["Cancel [nullify]"] = "取消";
 ["Cancel issue"] = false;
 ["Cancel issue #{id}"] = false;
 ["Cancel issue now"] = false;
