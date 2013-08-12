@@ -99,6 +99,9 @@ return {
 ["Can't send confirmation email"] = "Δεν ήταν δυνατή η αποστολή email επιβεβαίωσης.";
 ["Cancel"] = "Άκυρο";
 ["Cancel [nullify]"] = "Ακύρωση";
+["Cancel issue"] = false;
+["Cancel issue #{id}"] = false;
+["Cancel issue now"] = false;
 ["Cancel refuse of invitation"] = "Ακύρωση απόρριψης της πρόσκλησης";
 ["Cancel registration"] = "Ακύρωση εγγραφής";
 ["Canceled"] = false;
@@ -107,6 +110,7 @@ return {
 ["Canceled (during verification due to revocation)"] = false;
 ["Canceled (issue not accepted)"] = false;
 ["Canceled (no initiative admitted)"] = false;
+["Canceled by administrative intervention"] = false;
 ["Change area delegation"] = "Αλλαγή ανάθεσης για τον τομέα";
 ["Change email"] = "Αλλαγή email";
 ["Change email address"] = "Αλλαγή διεύθυνσης email";
@@ -302,6 +306,7 @@ return {
 ["Invited"] = "Προσκεκλημένος";
 ["Issue"] = "Θέμα";
 ["Issue ##{id}"] = "Θέμα ##{id}";
+["Issue ID"] = false;
 ["Issue accepted"] = "Το θέμα έγινε αποδεκτό";
 ["Issue canceled"] = "Το θέμα ακυρώθηκε";
 ["Issue delegation"] = "Ανάθεση θέματος";
@@ -309,6 +314,7 @@ return {
 ["Issue finished"] = "Το θέμα ολοκληρώθηκε";
 ["Issue finished without voting"] = "Το θέμα ολοκληρώθηκε δίχως ψηφοφορία";
 ["Issue frozen"] = "Το θέμα πάγωσε";
+["Issue has been canceled"] = false;
 ["Issue pad"] = "Pad θέματος";
 ["Issue quorum"] = "Απαρτία θέματος";
 ["Issue quorum denumerator"] = "Παρονομαστής απαρτίας θέματος";
@@ -477,6 +483,7 @@ return {
 ["Proceed with registration"] = "Προχωρήστε με την εγγραφή";
 ["Profession"] = "Επάγγελμα";
 ["Profile"] = "Προφίλ";
+["Public administrative notice:"] = false;
 ["Publish"] = "Δημοσίευση";
 ["Published"] = "Δημοσιευμένο";
 ["Quorum"] = "Απαρτία";
@@ -588,6 +595,7 @@ return {
 ["This initiative is already revoked"] = "Αυτή η πρωτοβουλία έχει ήδη ανακληθεί";
 ["This initiative is revoked"] = "Αυτή η πρωτοβουλία έχει ανακληθεί";
 ["This invite key is connected with the following information:"] = "Αυτός ο κωδικός πρόσκλησης σχετίζεται με τα ακόλουθα στοιχεία:";
+["This issue has been canceled by administrative intervention."] = false;
 ["This issue has been canceled."] = false;
 ["This issue has been canceled. It failed the quorum of #{quorum}."] = false;
 ["This issue is already closed."] = "Αυτό το θέμα έχει ήδη κλείσει.";

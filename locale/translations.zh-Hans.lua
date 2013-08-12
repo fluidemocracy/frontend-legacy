@@ -99,6 +99,9 @@ return {
 ["Can't send confirmation email"] = "无法寄送确认电邮";
 ["Cancel"] = "取消";
 ["Cancel [nullify]"] = "取消 [nullify]";
+["Cancel issue"] = false;
+["Cancel issue #{id}"] = false;
+["Cancel issue now"] = false;
 ["Cancel refuse of invitation"] = "取消婉拒邀请";
 ["Cancel registration"] = "取消注册";
 ["Canceled"] = "已取消";
@@ -107,6 +110,7 @@ return {
 ["Canceled (during verification due to revocation)"] = "已取消 (在验证期撤销)";
 ["Canceled (issue not accepted)"] = "已取消 (议题不被接受)";
 ["Canceled (no initiative admitted)"] = "已取消 (无提案被递交)";
+["Canceled by administrative intervention"] = false;
 ["Change area delegation"] = "更改领域的委任";
 ["Change email"] = "更改电邮地址";
 ["Change email address"] = "更改电邮地址";
@@ -302,6 +306,7 @@ return {
 ["Invited"] = "已被邀请";
 ["Issue"] = "议题";
 ["Issue ##{id}"] = "议题 ##{id}";
+["Issue ID"] = false;
 ["Issue accepted"] = "议题被接受";
 ["Issue canceled"] = "议题被取消";
 ["Issue delegation"] = "议题委任";
@@ -309,6 +314,7 @@ return {
 ["Issue finished"] = "议题已结束";
 ["Issue finished without voting"] = "议题未经表决而结束";
 ["Issue frozen"] = "议题已底定";
+["Issue has been canceled"] = false;
 ["Issue pad"] = "议题讨论版";
 ["Issue quorum"] = "议题法定门槛";
 ["Issue quorum denumerator"] = "议题法定门槛分母";
@@ -477,6 +483,7 @@ return {
 ["Proceed with registration"] = "继续注册";
 ["Profession"] = "职業";
 ["Profile"] = "个人简介";
+["Public administrative notice:"] = false;
 ["Publish"] = "公开";
 ["Published"] = "已公开";
 ["Quorum"] = "法定门槛";
@@ -588,6 +595,7 @@ return {
 ["This initiative is already revoked"] = "此提案已撤销";
 ["This initiative is revoked"] = "此提案被撤销";
 ["This invite key is connected with the following information:"] = "此邀请码与下列资讯连结：";
+["This issue has been canceled by administrative intervention."] = false;
 ["This issue has been canceled."] = false;
 ["This issue has been canceled. It failed the quorum of #{quorum}."] = "此议题因未达 #{quorum} 的法定门槛而被取消。";
 ["This issue is already closed."] = "此议题已结案。";

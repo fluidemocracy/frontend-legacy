@@ -99,6 +99,9 @@ return {
 ["Can't send confirmation email"] = "Non posso inviare l'email di conferma";
 ["Cancel"] = "Annulla";
 ["Cancel [nullify]"] = false;
+["Cancel issue"] = false;
+["Cancel issue #{id}"] = false;
+["Cancel issue now"] = false;
 ["Cancel refuse of invitation"] = "Annulla il rifiuto all'invito";
 ["Cancel registration"] = "Annulla la registrazione";
 ["Canceled"] = "Annullato";
@@ -107,6 +110,7 @@ return {
 ["Canceled (during verification due to revocation)"] = "Annullato (revocato durante la verifica)";
 ["Canceled (issue not accepted)"] = "Annullato (tematica non approvata)";
 ["Canceled (no initiative admitted)"] = "Annullato (nessuna iniziativa ammessa)";
+["Canceled by administrative intervention"] = false;
 ["Change area delegation"] = "Cambia la delega per l'area";
 ["Change email"] = "Cambia email";
 ["Change email address"] = "Cambia email";
@@ -302,6 +306,7 @@ return {
 ["Invited"] = "Invitato";
 ["Issue"] = "Tematica";
 ["Issue ##{id}"] = "Tematica ##{id}";
+["Issue ID"] = false;
 ["Issue accepted"] = "Tematica accettata";
 ["Issue canceled"] = "Tematica cancellata";
 ["Issue delegation"] = "Delega della tematica";
@@ -309,6 +314,7 @@ return {
 ["Issue finished"] = "Tematica chiusa";
 ["Issue finished without voting"] = "Tematica chiusa senza voto";
 ["Issue frozen"] = "Tematica sospesa";
+["Issue has been canceled"] = false;
 ["Issue pad"] = "Stato della tematica";
 ["Issue quorum"] = "Quorum della tematica";
 ["Issue quorum denumerator"] = "Denominatore quorum tematica";
@@ -477,6 +483,7 @@ return {
 ["Proceed with registration"] = "Continua con la registrazione";
 ["Profession"] = "Professione";
 ["Profile"] = "Profilo";
+["Public administrative notice:"] = false;
 ["Publish"] = "Pubblica";
 ["Published"] = "Pubblicato";
 ["Quorum"] = "Quorum";
@@ -588,6 +595,7 @@ return {
 ["This initiative is already revoked"] = "Questa iniziativa e' gia' revocata";
 ["This initiative is revoked"] = "Questa iniziativa e' stata revocata";
 ["This invite key is connected with the following information:"] = "Questo codice invito e' associato alle seguenti informazioni:";
+["This issue has been canceled by administrative intervention."] = false;
 ["This issue has been canceled."] = false;
 ["This issue has been canceled. It failed the quorum of #{quorum}."] = "Questa tematica e' stata annullata. Non ha raggiunto il quorum di #{quorum}.";
 ["This issue is already closed."] = "Questa tematica e' stata chiusa.";

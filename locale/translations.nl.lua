@@ -99,6 +99,9 @@ return {
 ["Can't send confirmation email"] = "De bevestigingsemail kan niet verzonden worden.";
 ["Cancel"] = "Afbreken";
 ["Cancel [nullify]"] = false;
+["Cancel issue"] = false;
+["Cancel issue #{id}"] = false;
+["Cancel issue now"] = false;
 ["Cancel refuse of invitation"] = "Uitnodiging weigeren afbreken";
 ["Cancel registration"] = "Registratie afbreken";
 ["Canceled"] = "Afgebroken";
@@ -107,6 +110,7 @@ return {
 ["Canceled (during verification due to revocation)"] = "Afgebroken (tijdens de verificatie, wegens terugtrekking)";
 ["Canceled (issue not accepted)"] = "Afgebroken (onderwerp niet geaccepteerd)";
 ["Canceled (no initiative admitted)"] = "Afgebroken (geen initiatiefvoorstel is toegelaten)";
+["Canceled by administrative intervention"] = false;
 ["Change area delegation"] = "Verander delegatie themagebied";
 ["Change email"] = "Verander het emailadres";
 ["Change email address"] = "Verander het emailadres";
@@ -302,6 +306,7 @@ return {
 ["Invited"] = "Uitgenodigd";
 ["Issue"] = "Onderwerp";
 ["Issue ##{id}"] = "Onderwerp ##{id}";
+["Issue ID"] = false;
 ["Issue accepted"] = "Onderwerp geaccpeteerd";
 ["Issue canceled"] = "Onderwerp afgebroken";
 ["Issue delegation"] = "Onderwerp-delegatie";
@@ -309,6 +314,7 @@ return {
 ["Issue finished"] = "Onderwerp afgesloten";
 ["Issue finished without voting"] = "Onderwerp zonder stemming afgesloten";
 ["Issue frozen"] = "Onderwerp bevroren";
+["Issue has been canceled"] = false;
 ["Issue pad"] = "Pad voor een onderwerp";
 ["Issue quorum"] = "Quorum onderwerp";
 ["Issue quorum denumerator"] = "Onderwerp quorum noemer";
@@ -477,6 +483,7 @@ return {
 ["Proceed with registration"] = "Ga verder met registratie";
 ["Profession"] = "Beroep";
 ["Profile"] = "Profiel";
+["Public administrative notice:"] = false;
 ["Publish"] = "Publiceer";
 ["Published"] = "Gepubliceerd";
 ["Quorum"] = "Quorum";
@@ -588,6 +595,7 @@ return {
 ["This initiative is already revoked"] = "Dit initiatief is al teruggetrokken";
 ["This initiative is revoked"] = "Dit initiatief is teruggetrokken";
 ["This invite key is connected with the following information:"] = "Deze uitnodigingscode is gekoppeld aan de volgende informatie:";
+["This issue has been canceled by administrative intervention."] = false;
 ["This issue has been canceled."] = false;
 ["This issue has been canceled. It failed the quorum of #{quorum}."] = "Dit onderwerp is geannuleerd, het heeft het quorum #{quorum} niet gehaald.";
 ["This issue is already closed."] = "Dit onderwerp is al afgesloten.";
