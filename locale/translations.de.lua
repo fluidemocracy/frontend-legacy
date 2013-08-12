@@ -99,9 +99,9 @@ return {
 ["Can't send confirmation email"] = "Bestätigungs-E-Mail kann nicht versendet werden.";
 ["Cancel"] = "Abbrechen";
 ["Cancel [nullify]"] = "Aufheben";
-["Cancel issue"] = false;
-["Cancel issue #{id}"] = false;
-["Cancel issue now"] = false;
+["Cancel issue"] = "Thema abbrechen";
+["Cancel issue #{id}"] = "Thema #{id} abbrechen";
+["Cancel issue now"] = "Thema jetzt abbrechen";
 ["Cancel refuse of invitation"] = "Ablehnung der Einladung aufheben";
 ["Cancel registration"] = "Registrierung abbrechen";
 ["Canceled"] = "Abgebrochen";
@@ -110,7 +110,7 @@ return {
 ["Canceled (during verification due to revocation)"] = "Abgebrochen (während Eingefroren-Phase, wegen Rückzug)";
 ["Canceled (issue not accepted)"] = "Abgebrochen (Thema nicht akzeptiert)";
 ["Canceled (no initiative admitted)"] = "Abgebrochen (Keine Initiative zugelassen)";
-["Canceled by administrative intervention"] = false;
+["Canceled by administrative intervention"] = "Durch administrativen Eingriff abgebrochen";
 ["Change area delegation"] = "Delegation für Themenbereich ändern";
 ["Change email"] = "E-Mail-Adresse ändern";
 ["Change email address"] = "E-Mail-Adresse ändern";
@@ -306,7 +306,7 @@ return {
 ["Invited"] = "Eingeladen";
 ["Issue"] = "Thema";
 ["Issue ##{id}"] = "Thema ##{id}";
-["Issue ID"] = false;
+["Issue ID"] = "Thema #";
 ["Issue accepted"] = "Thema akzeptiert";
 ["Issue canceled"] = "Thema abgebrochen";
 ["Issue delegation"] = "Issue-Delegation";
@@ -314,7 +314,7 @@ return {
 ["Issue finished"] = "Thema abgeschlossen";
 ["Issue finished without voting"] = "Thema ohne Abstimmung abgeschlossen";
 ["Issue frozen"] = "Thema eingefroren";
-["Issue has been canceled"] = false;
+["Issue has been canceled"] = "Thema wurde abgebrochen";
 ["Issue pad"] = "Pad zum Thema";
 ["Issue quorum"] = "Quorum Thema";
 ["Issue quorum denumerator"] = "Themen-Quorum Nenner";
@@ -483,7 +483,7 @@ return {
 ["Proceed with registration"] = "Registrierung fortsetzen";
 ["Profession"] = "Beruf";
 ["Profile"] = "Profil";
-["Public administrative notice:"] = false;
+["Public administrative notice:"] = "Administrativer Hinweistext (�ffentlich)";
 ["Publish"] = "Veröffentlichen";
 ["Published"] = "veröffentlicht";
 ["Quorum"] = "Quorum";
@@ -595,7 +595,7 @@ return {
 ["This initiative is already revoked"] = "Diese Initiative ist schon zurückgezogen";
 ["This initiative is revoked"] = "Diese Initiative wurde zurückgezogen";
 ["This invite key is connected with the following information:"] = "Dieser Einladungscode ist mit den folgenden Daten verknüpft:";
-["This issue has been canceled by administrative intervention."] = false;
+["This issue has been canceled by administrative intervention."] = "Dieses Thema wurde durch administrativen Eingriff abgebrochen.";
 ["This issue has been canceled."] = "Dieses Thema wurde abgebrochen";
 ["This issue has been canceled. It failed the quorum of #{quorum}."] = "Dieses Thema wurde abgebrochen. Es hat das Quorum von #{quorum} nicht erfüllt.";
 ["This issue is already closed."] = "Das Thema ist schon geschlossen.";
