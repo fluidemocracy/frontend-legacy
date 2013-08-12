@@ -274,7 +274,10 @@ ui.container{ attr = { class = class }, content = function()
         attr = { class = "not_admitted_info" },
         content = _("This issue has been canceled. It failed the quorum of #{quorum}.", { quorum = format.percentage(policy.issue_quorum_num / policy.issue_quorum_den) })
       }
-    elseif issue.state:sub(1, #("canceled_")) == "canceled_" and issue.state ~= "canceled_by_admin" then
+    elseif
+      issue.state:sub(1, #("canceled_")) == "canceled_" and 
+      issue.state ~= "canceled_by_admin"
+    then
       ui.container{
         attr = { class = "not_admitted_info" },
         content = _("This issue has been canceled.")
