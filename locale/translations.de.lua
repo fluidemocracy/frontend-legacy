@@ -483,7 +483,7 @@ return {
 ["Proceed with registration"] = "Registrierung fortsetzen";
 ["Profession"] = "Beruf";
 ["Profile"] = "Profil";
-["Public administrative notice:"] = "Administrativer Hinweistext (�ffentlich)";
+["Public administrative notice:"] = "Administrativer Hinweistext (öffentlich)";
 ["Publish"] = "Veröffentlichen";
 ["Published"] = "veröffentlicht";
 ["Quorum"] = "Quorum";
