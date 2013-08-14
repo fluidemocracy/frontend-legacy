@@ -233,6 +233,7 @@ function Issue:get_search_selector(search_string)
     :add_group_by('"issue"."discussion_time"')
     :add_group_by('"issue"."verification_time"')
     :add_group_by('"issue"."voting_time"')
+    :add_group_by('"issue"."admin_notice"')
     --:set_distinct()
 end
 
