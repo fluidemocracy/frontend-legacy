@@ -483,7 +483,7 @@ return {
 ["Proceed with registration"] = "Προχώρησε με την εγγραφή";
 ["Profession"] = "Επάγγελμα";
 ["Profile"] = "Προφίλ";
-["Public administrative notice:"] = "Δημόσια διαχειριστική ανακοίνωση":;
+["Public administrative notice:"] = "Δημόσια διαχειριστική ανακοίνωση:";
 ["Publish"] = "Δημοσίευση";
 ["Published"] = "Δημοσιευμένο";
 ["Quorum"] = "Απαρτία";
