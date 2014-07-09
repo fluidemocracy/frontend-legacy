@@ -124,7 +124,7 @@ Member:add_reference{
   that_key      = 'truster_id',
   ref           = 'outgoing_delegations',
   back_ref      = 'truster',
-  default_order = '"id"'
+--  default_order = '"id"'
 }
 
 Member:add_reference{
@@ -134,7 +134,7 @@ Member:add_reference{
   that_key      = 'trustee_id',
   ref           = 'incoming_delegations',
   back_ref      = 'trustee',
-  default_order = '"id"'
+--  default_order = '"id"'
 }
 
 Member:add_reference{
