@@ -139,6 +139,10 @@ input[type=submit] {
   border-radius: 4px;
 }
 
+.btn-default {
+  
+}
+
 /*************************************************************************
  * Notices, warnings and errors
  */
@@ -815,6 +819,11 @@ div.notifications {
   display: inline;
   margin-bottom: 0;
 }
+
+.vertical .actions {
+  margin-left: 33%;
+}
+
 
 #voting_form input[type=submit],
 .login input[type=submit],

@@ -5,8 +5,7 @@ local action = request.get_action()
 local auth_needed = not (
   module == 'index'
   and (
-       view   == "index"
-    or view   == "login"
+view   == "login"
     or action == "login"
     or view   == "register"
     or action == "register"
@@ -26,16 +25,17 @@ local auth_needed = not (
 if app.session:has_access("anonymous") then
 
   if
-    module == "area" and view == "show"
+    module == "index" and view == "index"
+    or module == "area" and view == "show"
     or module == "unit" and view == "show"
     or module == "policy" and view == "show"
     or module == "policy" and view == "list"
     or module == "issue" and view == "show"
     or module == "initiative" and view == "show"
+    or module == "initiative" and view == "history"
     or module == "suggestion" and view == "show"
     or module == "draft" and view == "diff"
     or module == "draft" and view == "show"
-    or module == "draft" and view == "list"
     or module == "index" and view == "search"
     or module == "index" and view == "usage_terms"
   then
@@ -44,11 +44,16 @@ if app.session:has_access("anonymous") then
 
 end
 
+if app.session:has_access("authors_pseudonymous") then
+  if module == "member_image" and view == "show" then
+    auth_needed = false
+  end
+end
+
 if app.session:has_access("all_pseudonymous") then
-  if module == "member_image" and view == "show"
-   or module == "vote" and view == "show_incoming"
+  if module == "vote" and view == "show_incoming"
+   or module == "member" and view == "list"
    or module == "interest" and view == "show_incoming"
-   or module == "supporter" and view == "show_incoming" 
    or module == "vote" and view == "list" then
     auth_needed = false
   end
