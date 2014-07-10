@@ -21,6 +21,7 @@ installed:
   * libghc6-parsec3-dev
   * imagemagick
   * exim4
+  * markdown2 (install with Python's pip)
 
 If you're using any other Linux distribution or BSD system, install the
 necessary software components accordingly.
@@ -108,43 +109,7 @@ distibution:
     cp -RL framework/* /opt/webmcp/
 
 
-5. Install RocketWiki LqFb-Edition
-----------------------------------
-
-    # Download and unpack "RocketWiki LqFb-Edition"
-    # from http://www.public-software-group.org/pub/projects/rocketwiki/liquid_feedback_edition/
-    make
-    mkdir /opt/rocketwiki-lqfb
-    cp rocketwiki-lqfb rocketwiki-lqfb-compat /opt/rocketwiki-lqfb/
-
-If you experience problems with multi-byte encoding (UTF-8) later, then apply
-the following patch to both `rocketwiki-lqfb.hs` and
-`rocketwiki-lqfb-compat.hs` prior compilation:
-
-    --- rocketwiki-lqfb.hs
-    +++ rocketwiki-lqfb.hs
-    @@ -1,4 +1,6 @@
- 
-    +import System.IO (hSetEncoding, stdin, stdout, utf8)
-    +
-     import Text.ParserCombinators.Parsec
-     import Control.Applicative ((<$>), (<*>))
-     import Data.List (intercalate)
-    @@ -405,7 +407,10 @@
-           return htmlEntity
-     
-     
-    -main = interact wikiParse
-    +main = do
-    +  hSetEncoding stdin utf8
-    +  hSetEncoding stdout utf8
-    +  interact wikiParse
- 
-     wikiParse str
-       | success parseResult = html
-
-
-6. Install the LiquidFeedback-Frontend
+5. Install the LiquidFeedback-Frontend
 --------------------------------------
 
 Unpack source tree into appropriate directory, e.g. `/opt/liquid_feedback_frontend`:
@@ -169,14 +134,14 @@ Compile binary for fast delivery of member images:
     make
 
 
-7. Configure mail system
+6. Configure mail system
 ------------------------
 
 It may be necessary to configure your server's mail system, e.g. running
 `dpkg-reconfigure exim4-config` on a Debian system.
 
 
-8. Configure the Webserver for LiquidFeedback:
+7. Configure the Webserver for LiquidFeedback:
 ----------------------------------------------
 
 A sample configuration for `lighttpd` is given below (assuming `mod_alias` has
@@ -220,7 +185,7 @@ If you're using Debian, you may want to create a file with the name
 `/etc/lighttpd/conf-enabled/`.
 
 
-9. Configure the LiquidFeedback-Frontend:
+8. Configure the LiquidFeedback-Frontend:
 -----------------------------------------
 
     cd /opt/liquid_feedback_frontend/config
@@ -235,7 +200,7 @@ loading:
     end
 
 
-10. Setup regular execution of `lf_update` and `lf_update_suggestion_order`
+9. Setup regular execution of `lf_update` and `lf_update_suggestion_order`
 ---------------------------------------------------------------------------
 
 The executables `lf_update` and `lf_update_suggestion_order` must be executed
@@ -267,7 +232,7 @@ This file must be marked as executable:
 And this file should be started automatically at system boot.
 
 
-11. Setup notification loop in background
+10. Setup notification loop in background
 -----------------------------------------
 
 In addition to regular execution of `lf_update` and
@@ -279,7 +244,7 @@ background:
     echo "Event:send_notifications_loop()" | ../webmcp/bin/webmcp_shell myconfig
 
 
-12. Start the sytem
+11. Start the sytem
 -------------------
 
 After `lf_update` has been executed at least once, and the webserver has been
