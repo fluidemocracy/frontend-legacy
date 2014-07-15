@@ -95,7 +95,7 @@ if initiative.revoked then
           content = initiative.revoked_by_member.name
         }
       else
-        ui.tag{ content = _"[Not displayed public]" }
+        ui.tag{ content = _"[Not public]" }
       end
       local suggested_initiative = initiative.suggested_initiative
       if suggested_initiative then
