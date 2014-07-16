@@ -246,25 +246,25 @@ form.inline div {
 img {
   vertical-align: middle;
 }
-.icon16 {
-  width: 16px;
-  height: 16px;
-}
-.icon24 {
-  width: 24px;
-  height: 24px;
-}
-.icon32 {
-  width: 32px;
-  height: 32px;
-}
-.icon48 {
-  width: 48px;
-  height: 48px;
-}
 img.star {
   width: 24px;
   height: 24px;
+}
+img.icon16 {
+  width: 16px;
+  height: 16px;
+}
+img.icon24 {
+  width: 24px;
+  height: 24px;
+}
+img.icon32 {
+  width: 32px;
+  height: 32px;
+}
+img.icon48 {
+  width: 48px;
+  height: 48px;
 }
 /*
  * Avatars
@@ -387,6 +387,9 @@ img.micro_avatar.highlighted {
 .head .nav input[name=q]:focus {
   outline: 2px solid #397ab6;
 }
+.head .nav #member_menu a span {
+  margin-left: 5px;
+}
 /*
  * title
  */
@@ -468,6 +471,10 @@ img.micro_avatar.highlighted {
 .sidebarSection .sidebarRow.moreLink {
   min-height: 0;
 }
+.sidebarSection a.sidebarRow {
+  text-decoration: none;
+  color: #000000;
+}
 .sidebarSection h1,
 .sidebarSection h1 a,
 .sidebarSection h2,
@@ -507,6 +514,9 @@ img.micro_avatar.highlighted {
 }
 .sidebarSection ul.initiatives .revoked .initiative_name {
   text-decoration: line-through;
+}
+.sidebarSection ul.initiatives .rank1 .initiative_name {
+  font-weight: bold;
 }
 .sidebarSection ul.initiatives li.highlighted {
   background-color: #e7f0ff;
@@ -553,7 +563,7 @@ img.micro_avatar.highlighted {
   font: normal 12pt / 125% sans-serif;
 }
 .sidebarSection a.area {
-  margin-left: 25px;
+  margin-left: 20px;
   display: block;
 }
 .sidebarSection .star {
@@ -714,6 +724,7 @@ img.micro_avatar.highlighted {
 }
 .main ul.initiatives li .rank1 .initiative_name {
   margin-left: 0;
+  font-weight: bold;
 }
 .main ul.initiatives li .revoked .initiative_name {
   text-decoration: line-through;
@@ -1009,6 +1020,9 @@ img.micro_avatar.highlighted {
   position: relative;
   z-index: 10;
 }
+.suggestions .suggestion .suggestion-details {
+  float: right;
+}
 .suggestions .suggestion .suggestion-more {
   display: none;
 }
@@ -1051,6 +1065,10 @@ img.micro_avatar.highlighted {
 .suggestions .suggestion.rateable.unfolded .rating {
   border-top: 3px solid #397ab6;
 }
+.suggestions .suggestion.folded .suggestion-text {
+  height: 150px;
+  overflow: hidden;
+}
 .suggestions .suggestion.folded .suggestion-more {
   display: block;
   position: absolute;
@@ -1059,6 +1077,11 @@ img.micro_avatar.highlighted {
   width: 100%;
   box-shadow: inset 0 -12ex 10ex -5ex #ffffff;
   padding-top: 5ex;
+}
+.suggestions .suggestion.folded .suggestion-details {
+  position: absolute;
+  bottom: 0;
+  right: 0;
 }
 .suggestions .suggestion.unfolded .suggestion-more {
   display: none;
