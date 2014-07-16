@@ -1066,7 +1066,7 @@ img.micro_avatar.highlighted {
   border-top: 3px solid #397ab6;
 }
 .suggestions .suggestion.folded .suggestion-text {
-  height: 150px;
+  max-height: 150px;
   overflow: hidden;
 }
 .suggestions .suggestion.folded .suggestion-more {
