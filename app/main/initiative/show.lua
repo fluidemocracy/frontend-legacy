@@ -329,6 +329,7 @@ ui.container {
                 attr = { class = "suggestion-text" },
                 content = function ()
                   slot.put ( suggestion:get_content( "html" ) )
+                  
 
               if direct_supporter then
                 
@@ -490,6 +491,12 @@ ui.container {
                   text = _"Show more and rate this"
                 end
                   
+                ui.link{
+                  attr = { class = "suggestion-details" },
+                  content = _"Details",
+                  module = "suggestion", view = "show", id = suggestion.id
+                }
+
                 ui.link { 
                   attr = { 
                     class = "suggestion-more",
