@@ -60,7 +60,7 @@ ui.sidebar ( "tab-whatcanido", function ()
           end
         
           if area.subscribed then
-            ui.image { attr = { class = "icon24 star" }, static = "icons/48/star.png" }
+            ui.image { attr = { class = "icon16 star" }, static = "icons/48/star.png" }
           end
           
           ui.link {

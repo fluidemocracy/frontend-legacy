@@ -89,7 +89,7 @@ for i, unit in ipairs(units) do
             
             if area.subscribed then
               local text = _"subscribed"
-              ui.image { attr = { class = "icon24 star", alt = text, title = text }, static = "icons/48/star.png" }
+              ui.image { attr = { class = "icon16 star", alt = text, title = text }, static = "icons/48/star.png" }
               any_subscribed = true
               subscribed_count = subscribed_count +1
             end
