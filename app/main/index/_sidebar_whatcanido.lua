@@ -49,6 +49,19 @@ ui.sidebar ( "tab-whatcanido", function ()
         end }
       end } 
     end )
+    if config.download_dir then
+      ui.sidebarSection( function()
+        ui.heading { level = 3, content = _"I want to download all data" }
+        ui.tag { tag = "ul", attr = { class = "ul" }, content = function ()
+          ui.tag { tag = "li", content = function ()
+            ui.link{
+              module = "index", view = "download",
+              text = _"download database"
+            }
+          end }
+        end } 
+      end )
+    end
     ui.sidebarSection( function()
       ui.heading { level = 3, content = _"I want to learn more about LiquidFeedback" }
       ui.tag { tag = "ul", attr = { class = "ul" }, content = function ()

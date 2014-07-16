@@ -2,27 +2,6 @@ if not config.download_dir then
   error("feature not enabled")
 end
 
-slot.put_into("title", _"Download database export")
-
-slot.select("actions", function()
-  ui.link{
-    content = function()
-        ui.image{ static = "icons/16/cancel.png" }
-        slot.put(_"Cancel")
-    end,
-    module = "index",
-    view = "index"
-  }
-end)
-
-ui.container{
-  attr = { class = "wiki use_terms" },
-  content = function()
-    slot.put(config.download_use_terms)
-  end
-}
-
-
 local file_list = extos.listdir(config.download_dir)
 
 local tmp = {}
@@ -36,23 +15,47 @@ local file_list = tmp
 
 table.sort(file_list, function(a, b) return a > b end)
 
-ui.list{
-  records = file_list,
-  columns = {
-    {
-      content = function(filename)
-        slot.put(encode.html(filename))
-      end
-    },
-    {
-      content = function(filename)
-        ui.link{
-          content = _"Download",
-          module = "index",
-          view = "download_file",
-          params = { filename = filename }
+
+ui.title(_"Download database export")
+
+ui.section( function()
+
+  ui.sectionHead( function()
+    ui.heading { level = 1, content = _"Download database export" }
+  end )
+  
+  if config.download_use_terms then
+    ui.sectionRow( function()
+      ui.container{
+        attr = { class = "wiki use_terms" },
+        content = function()
+          slot.put(config.download_use_terms)
+        end
+      }
+    end )
+  end
+  
+  ui.sectionRow( function()
+
+    ui.list{
+      records = file_list,
+      columns = {
+        {
+          content = function(filename)
+            ui.tag{ content = filename }
+          end
+        },
+        {
+          content = function(filename)
+            ui.link{
+              content = _"Download",
+              module = "index",
+              view = "download_file",
+              params = { filename = filename }
+            }
+          end
         }
-      end
+      }
     }
-  }
-}
+  end)
+end)
