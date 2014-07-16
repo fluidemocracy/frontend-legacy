@@ -8,9 +8,6 @@ function util.initiative_pie(initiative, d, gap)
   end
   
   local first_preference_votes = initiative.first_preference_votes
-  if first_preference_votes == nil then
-    first_preference_votes = 0
-  end
     
   local d = d or 100
   local gap = gap or d / 20
