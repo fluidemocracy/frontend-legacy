@@ -42,7 +42,10 @@ ui.sidebar( "tab-whatcanido", function()
     )
     
     if not failed then
-      ui.sidebarSection( "sidebarRowNarrow" .. (current and " highlightedx" or ""), function()
+      ui.link{ attr = {
+        onclick = "$('#phase-help-" .. state .. "').toggle();return false;",
+        class = "sidebarRow sidebarRowNarrow",
+      }, content = function()
       
         local state_names = {
           admission = _"Admission",
@@ -65,8 +68,12 @@ ui.sidebar( "tab-whatcanido", function()
             den = policy.initiative_quorum_den
           end
           
-          if den == 100 then
-            return _("#{percentage}%", { percentage = num })
+          if num == nil or den == nil then
+            return 0
+          end
+          
+          if den == 100 or den == 10 then
+            return _("#{percentage}%", { percentage = num * 100 / den })
           else
             return num .. "/" .. den
           end
@@ -104,7 +111,9 @@ ui.sidebar( "tab-whatcanido", function()
             text = _("failed #{quorum}", { quorum = quorum })
           end
           if phase_success then
-            if quorum then
+            if quorum == 0 then
+              text = _"without quorum"
+            elseif quorum then
               text = _("reached #{quorum}", { quorum = quorum })
             else
               text = _"finished"
@@ -136,19 +145,16 @@ ui.sidebar( "tab-whatcanido", function()
           slot.put(" ")
           ui.tag{ content = state_name }
         end }
-        
+
         local help_texts = {
-          admission = _"As soon as one initiative of this issue reaches #{quorum} support, the issue will go into discussion phase.",
+          admission = _("As soon as one initiative of this issue reaches #{quorum} support, the issue will go into discussion phase.", { quorum = quorum_text(issue.policy, 1) }),
           discussion = _"During the discussion phase the issue is debated between initiators while the initiatives are improved by suggestions from the supporters.",
-          verification = _"During the verification phase the initiative drafts cannot be changed anymore.",
+          verification = _("During the verification phase the initiative drafts cannot be changed anymore. Initiatives needs to reach a quorum of #{quorum} to become admitted for voting.", { quorum = quorum_text(issue.policy, 2) }),
           voting = _"On this issue can be voted now."
         }
-        if current then
-        --  ui.container { content = help_texts[state] }
-        end
-          
+        ui.container { attr = { id = "phase-help-" .. state, style = "display: none;" }, content = help_texts[state] }
 
-      end )
+      end }
     end
     
     if not phase_success and not current and not current_occured then
