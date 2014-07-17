@@ -9,7 +9,7 @@ execute.view {
 local setting_key = "liquidfeedback_frontend_developer_features"
 local setting = Setting:by_pk(app.session.member.id, setting_key)
 
-if true or setting then
+if setting then
   ui.section( function()
     ui.sectionHead( function ()
       ui.heading{ content = "CSS development settings" }
