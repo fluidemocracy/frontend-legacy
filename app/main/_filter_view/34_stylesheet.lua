@@ -8,7 +8,7 @@ end
 if value then
   slot.put_into("stylesheet_url", value)
 else
-  slot.put_into("stylesheet_url", request.get_relative_baseurl() .. "static/style.css")
+  slot.put_into("stylesheet_url", request.get_relative_baseurl() .. "static/lf3.css")
 end
 
 execute.inner()
