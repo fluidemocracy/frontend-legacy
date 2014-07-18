@@ -114,8 +114,6 @@ ui.form{
         end
       }
     end
-    slot.put("<br style=\"clear: both;\" /><br />")
   end
 }
 
-slot.put("<br />")
