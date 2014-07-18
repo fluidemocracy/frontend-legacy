@@ -28,6 +28,7 @@ end
 function Session:by_ident(ident)
   local selector = self:new_selector()
   selector:add_where{ 'ident = ?', ident }
+  selector:add_field{ '"authority_data" -> \'uid\' as authority_data_uid' }
   selector:optional_object_mode()
   return selector:exec()
 end

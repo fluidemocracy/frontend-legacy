@@ -96,6 +96,14 @@ config.public_access = "none"
 -- Remove leading -- to use a option
 -- ========================================================================
 
+-- Disable registration
+-- ------------------------------------------------------------------------
+-- Available options:
+-- false: registration is enabled (default)
+-- true: registration is disabled
+-- ------------------------------------------------------------------------
+-- config.disable_registration = true
+
 -- List of enabled languages, defaults to available languages
 -- ------------------------------------------------------------------------
 -- config.enabled_languages = { 'en', 'de', 'eo', 'el', 'hu', 'it', 'nl', 'zh-Hans', 'zh-TW' }

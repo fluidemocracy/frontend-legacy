@@ -1,6 +1,6 @@
 local resend = param.get("resend", atom.boolean)
 
-if not resend and config.locked_profile_fields.notify_email then
+if not resend and util.is_profile_field_locked(app.session.member, "notify_email") then
   error("access denied")
 end
 

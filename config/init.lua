@@ -3,7 +3,7 @@
 -- (except when you really know what you are doing!)
 -- ========================================================================
 
-config.app_version = "3.0.2"
+config.app_version = "3.0.2+ldap"
 
 if not config.password_hash_algorithm then
   config.password_hash_algorithm = "crypt_sha512"
@@ -46,6 +46,10 @@ end
 
 if config.check_delegations_default == nil then
   config.check_delegations_default = "confirm"
+end
+
+if config.ldap == nil then
+  config.ldap = {}
 end
 
 if not config.database then

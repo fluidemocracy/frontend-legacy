@@ -24,3 +24,9 @@ function Privilege:by_pk(unit_id, member_id)
     :optional_object_mode()
     :exec()
 end
+
+function Privilege:by_member_id(member_id)
+  return self:new_selector()
+    :add_where{ "member_id = ?", member_id }
+    :exec()
+end

@@ -1,12 +1,26 @@
 local code = util.trim(param.get("code"))
 
-local member = Member:new_selector()
-  :add_where{ "invite_code = ?", code }
-  :add_where{ "activated ISNULL" }
-  :add_where{ "NOT locked" }
-  :optional_object_mode()
-  :for_update()
-  :exec()
+local member
+
+if app.session.authority == "ldap" then
+  if not config.ldap.member or not config.ldap.member.registration == "manual" then
+    error("access denied")
+  end
+  member = ldap.create_member(app.session.authority_data_uid, true)
+  
+else
+  if config.registration_disabled then
+    error("registration disabled")
+  end
+  member = Member:new_selector()
+    :add_where{ "invite_code = ?", code }
+    :add_where{ "activated ISNULL" }
+    :add_where{ "NOT locked" }
+    :optional_object_mode()
+    :for_update()
+    :exec()
+end
+
   
 if not member then
   slot.put_into("error", _"The code you've entered is invalid")
@@ -20,7 +34,7 @@ end
 
 local notify_email = param.get("notify_email")
 
-if not config.locked_profile_fields.notify_email and notify_email then
+if not util.is_profile_field_locked(member, "notify_email") and notify_email then
   if #notify_email < 5 then
     slot.put_into("error", _"Email address too short!")
     request.redirect{
@@ -33,7 +47,7 @@ if not config.locked_profile_fields.notify_email and notify_email then
   end
 end
 
-if member and not notify_email then
+if member and not util.is_profile_field_locked(member, "notify_email") and not notify_email then
   request.redirect{
     mode   = "redirect",
     module = "index",
@@ -46,7 +60,7 @@ end
 
 local name = util.trim(param.get("name"))
 
-if not config.locked_profile_fields.name and name then
+if not util.is_profile_field_locked(member, "name") and name then
 
   if #name < 3 then
     slot.put_into("error", _"This screen name is too short!")
@@ -83,7 +97,7 @@ if not config.locked_profile_fields.name and name then
 
 end
 
-if notify_email and not member.name then
+if notify_email and not util.is_profile_field_locked(member, "name") and not member.name then
   request.redirect{
     mode   = "redirect",
     module = "index",
@@ -97,10 +111,9 @@ if notify_email and not member.name then
   return false
 end
 
-
 local login = util.trim(param.get("login"))
 
-if not config.locked_profile_fields.login and login then
+if not util.is_profile_field_locked(member, "login") and login then
   if #login < 3 then 
     slot.put_into("error", _"This login is too short!")
     request.redirect{
@@ -136,7 +149,7 @@ if not config.locked_profile_fields.login and login then
   member.login = login
 end
 
-if member.name and not member.login then
+if member.name and not util.is_profile_field_locked(member, "login") and not member.login then
   request.redirect{
     mode   = "redirect",
     module = "index",
@@ -163,40 +176,43 @@ if step > 2 then
     end
   end  
 
-  local password1 = param.get("password1")
-  local password2 = param.get("password2")
+  if not member.authority == "ldap" then
+  
+    local password1 = param.get("password1")
+    local password2 = param.get("password2")
 
-  if login and not password1 then
-    request.redirect{
-      mode   = "redirect",
-      module = "index",
-      view   = "register",
-      params = { 
-        code = member.invite_code,
-        notify_email = notify_email,
-        name = member.name,
-        login = member.login
+    if login and not password1 then
+      request.redirect{
+        mode   = "redirect",
+        module = "index",
+        view   = "register",
+        params = { 
+          code = member.invite_code,
+          notify_email = notify_email,
+          name = member.name,
+          login = member.login
+        }
       }
-    }
-  --]]
-    return false
+    --]]
+      return false
+    end
+
+    if password1 ~= password2 then
+      slot.put_into("error", _"Passwords don't match!")
+      return false
+    end
+
+    if #password1 < 8 then
+      slot.put_into("error", _"Passwords must consist of at least 8 characters!")
+      return false
+    end
   end
 
-  if password1 ~= password2 then
-    slot.put_into("error", _"Passwords don't match!")
-    return false
-  end
-
-  if #password1 < 8 then
-    slot.put_into("error", _"Passwords must consist of at least 8 characters!")
-    return false
-  end
-
-  if not config.locked_profile_fields.login then
+  if not util.is_profile_field_locked(member, "login") then
     member.login = login
   end
 
-  if not config.locked_profile_fields.name then
+  if not util.is_profile_field_locked(member, "name") then
     member.name = name
   end
 
@@ -208,7 +224,9 @@ if step > 2 then
     end
   end
   
-  member:set_password(password1)
+  if not member.authority == "ldap" then
+    member:set_password(password1)
+  end
 
   local now = db:query("SELECT now() AS now", "object").now
 
@@ -221,7 +239,7 @@ if step > 2 then
   member.active = true
   member.last_activity = 'now'
   member:save()
-
+  
   slot.put_into("notice", _"You've successfully registered and you can login now with your login and password!")
 
   request.redirect{
