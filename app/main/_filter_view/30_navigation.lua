@@ -46,6 +46,9 @@ slot.select ( 'navigation_right', function ()
     }
     
     slot.put ( " " )
+  end
+  
+  if app.session.member == nil and not config.registration_disabled then
     
     ui.link {
       text   = _"Registration",

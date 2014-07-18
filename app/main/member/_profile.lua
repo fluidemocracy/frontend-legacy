@@ -104,7 +104,7 @@ ui.form{
     if member.last_activity then
       ui.field.text{ label = _"Last activity (updated daily)", value = format.date(member.last_activity) or _"not yet" }
     end
-    if member.statement and #member.statement > 0 then
+    if member.id and member.statement and #member.statement > 0 then
       slot.put("<br />")
       slot.put("<br />")
       ui.container{

@@ -69,16 +69,18 @@ ui.sidebar( "tab-whatcanido", function()
       local pages = {}
 
       pages[#pages+1] = { view = "settings_notification", text = _"notification settings" }
-      if not config.locked_profile_fields.notify_email then
+      if not util.is_profile_field_locked(app.session.member, "notify_email") then
         pages[#pages+1] = { view = "settings_email",          text = _"change your notification email address" }
       end
-      if not config.locked_profile_fields.name then
+      if not util.is_profile_field_locked(app.session.member, "name") then
         pages[#pages+1] = { view = "settings_name",           text = _"change your screen name" }
       end
-      if not config.locked_profile_fields.login then
+      if not util.is_profile_field_locked(app.session.member, "login") then
         pages[#pages+1] = { view = "settings_login",          text = _"change your login" }
       end
-      pages[#pages+1] = { view = "settings_password",       text = _"change your password" }
+      if not util.is_profile_field_locked(app.session.member, "password") then
+        pages[#pages+1] = { view = "settings_password",       text = _"change your password" }
+      end
       pages[#pages+1] = { view = "developer_settings",      text = _"developer settings" }
 
       if config.download_dir then

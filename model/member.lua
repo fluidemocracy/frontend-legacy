@@ -273,6 +273,17 @@ function Member:lockForReference()
   self.get_db_conn().query("LOCK TABLE " .. self:get_qualified_table() .. " IN ROW SHARE MODE")
 end
 
+
+function Member:get_all_by_authority(authority)
+  
+  local members = Member:new_selector()
+    :add_where{ "authority = ?", authority }
+    :add_field("authority_data->'uid' as authority_data_uid")
+    :exec()
+    
+  return members
+end
+
 function Member.object:set_password(password)
   trace.disable()
   
@@ -372,17 +383,144 @@ function Member.object_get:published_contacts()
 end
 
 function Member:by_login_and_password(login, password)
-  local selector = self:new_selector()
-  selector:add_field({ "now() > COALESCE(last_delegation_check, activated) + ?::interval", config.check_delegations_interval_hard }, "needs_delegation_check_hard")
-  selector:add_where{'"login" = ?', login }
-  selector:add_where('NOT "locked"')
-  selector:optional_object_mode()
-  local member = selector:exec()
-  if member and member:check_password(password) then
-    return member
-  else
-    return nil
+ 
+  local function prepare_login_selector()
+    local selector = self:new_selector()
+    selector:add_field({ "now() > COALESCE(last_delegation_check, activated) + ?::interval", config.check_delegations_interval_hard }, "needs_delegation_check_hard")
+    selector:add_where('NOT "locked"')
+    selector:optional_object_mode()
+    return selector
   end
+  
+  local function do_local_login()
+    local selector = prepare_login_selector()
+    selector:add_where{'"login" = ?', login }
+    local member = selector:exec()
+    if member and member:check_password(password) then
+      return member
+    else
+      return nil
+    end
+  end
+  
+  if config.ldap.member then
+
+    -- Let's check the users credentials against the LDAP      
+    local ldap_entry, ldap_err = ldap.check_credentials(login, password)
+
+    -- Is the user already registered as member?
+    local uid
+    local selector = prepare_login_selector()
+
+    -- Get login name from LDAP entry
+    if ldap_entry then
+      uid = config.ldap.member.uid_map(ldap_entry)
+      selector:add_where{'"authority" = ? AND "authority_data"->\'uid\' = ?', "ldap", uid }
+
+    -- or build it from the login
+    else
+      login = config.ldap.member.login_normalizer(login)
+      selector:add_where{'"authority" = ? AND "authority_data"->\'login\' = ?', "ldap", login }
+    end
+    
+    local member = selector:exec()
+    -- The member is already registered
+    if member then
+
+      -- The credentials entered by the user are invalid
+      if ldap_err == "invalid_credentials" then
+        
+        -- Check if the user tried a cached password (which is invalid now)
+        if config.ldap.member.cache_passwords and member:check_password(password) then
+          member.password = nil
+          member:save()
+        end
+        
+        -- Try a regular login
+        return do_local_login()
+
+      end
+      
+      -- The credentials were accepted by the LDAP server and no error occured
+      if ldap_entry and not ldap_err then
+        
+        -- Cache the password (if feature enabled)
+        if config.ldap.member.cache_passwords and not member:check_password(password) then
+          member:set_password(password)
+        end
+
+        -- update the member attributes and privileges from LDAP
+        local ldap_conn, ldap_err, err, err2 = ldap.update_member_attr(member, nil, uid)
+        if not err then
+          local err = member:try_save()
+          if err then
+            return nil, "member_save_error", err
+          end
+          local succes, err, err2 = ldap.update_member_privileges(member, ldap_entry)
+          if err then
+            return nil, "update_member_privileges_error", err, err2
+          end
+          return member
+        end
+
+      end
+
+      -- Some kind of LDAP error happened, if cached password are enabled,
+      -- check user credentials against the cache
+      if config.ldap.member.cache_passwords and member:check_password(password) then
+
+        -- return the successfully logged in member
+        return member
+
+      end
+      
+    -- The member is not registered
+    elseif config.ldap.member.registration and ldap_entry and not ldap_err then
+      -- Automatic registration ("auto")
+      if config.ldap.member.registration == "auto" then
+        member = Member:new()
+        member.authority = "ldap"
+        local ldap_login
+        if config.ldap.member.cache_passwords then 
+          if config.ldap.member.login_normalizer then
+            ldap_login = config.ldap.member.login_normalizer(login)
+          else
+            ldap_login = login
+          end
+        end
+        -- TODO change this when SQL layers supports hstore
+        member.authority_data = encode.pg_hstore{
+          uid = uid,
+          login = ldap_login
+        }
+        member.activated = "now"
+        member.last_activity = "now"
+        if config.ldap.member.cache_passwords then
+          member:set_password(password)
+        end
+        local ldap_conn, ldap_err, err, err2 = ldap.update_member_attr(member, nil, uid)
+        if not err then
+          local err = member:try_save()
+          if err then
+            return nil, "member_save_error", err
+          end
+          local success, err, err2 = ldap.update_member_privileges(member, ldap_entry)
+          if err then
+            return nil, "update_member_privileges_error", err, err2
+          end
+          return member
+        end
+
+      -- No automatic registration
+      else
+        return nil, "ldap_credentials_valid_but_no_member", uid
+      end
+    end
+    
+  end
+
+  return do_local_login()
+  
 end
 
 function Member:by_login(login)

@@ -1,4 +1,4 @@
-if config.locked_profile_fields.login then
+if util.is_profile_field_locked(app.session.member, "login") then
   error("access denied")
 end
 

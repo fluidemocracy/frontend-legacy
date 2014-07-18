@@ -1,3 +1,13 @@
+local ldap_uid
+
+if config.ldap.member and app.session.authority == "ldap" then
+  ldap_uid = app.session.authority_data_uid
+end
+
+if config.registration_disabled and not ldap_uid then
+  error("registration disabled")
+end
+
 execute.view{ module = "index", view = "_lang_chooser" }
 
 local step = param.get("step", atom.integer)
@@ -5,6 +15,7 @@ local code = param.get("code")
 local notify_email = param.get("notify_email")
 local name = param.get("name")
 local login = param.get("login")
+
 
 ui.form{
   attr = { class = "section vertical" },
@@ -18,7 +29,7 @@ ui.form{
   },
   content = function()
 
-    if not code then
+    if not code and not ldap_uid then
       ui.field.hidden{ name = "step", value = 1 }
       ui.title(_"Registration (step 1 of 3: Invite code)")
       ui.sectionHead( function()
@@ -37,17 +48,32 @@ ui.form{
         ui.link{
           content = _"cancel registration",
           module = "index",
-          view = "index"
+          action = "cancel_register",
+          routing = { default = {
+            mode = "redirect", module = "index", view = "index"
+          } }
         }
       end )
     else
-      local member = Member:new_selector()
-        :add_where{ "invite_code = ?", code }
-        :add_where{ "activated ISNULL" }
-        :optional_object_mode()
-        :exec()
+      local member
+      
+      if ldap_uid then
+        member, err = ldap.create_member(ldap_uid, true)
+        if err then
+          error(err)
+        end
+      else
+        member = Member:new_selector()
+          :add_where{ "invite_code = ?", code }
+          :add_where{ "activated ISNULL" }
+          :optional_object_mode()
+          :exec()
+      end
 
-      if not member.notify_email and not notify_email or not member.name and not name or not member.login and not login or step == 1 then
+      if    (not member.notify_email and not notify_email)
+         or (not member.name and not name)
+         or (not member.login and not login and not member.authority)
+         or step == 1 then
         ui.title(_"Registration (step 2 of 3: Personal information)")
         ui.field.hidden{ name = "step", value = 2 }
 
@@ -62,7 +88,7 @@ ui.form{
           
           execute.view{ module = "member", view = "_profile", params = { member = member, for_registration = true } }
 
-          if not config.locked_profile_fields.notify_email then
+          if not util.is_profile_field_locked(member, "notify_email") then
             ui.tag{
               tag = "p",
               content = _"Please enter your email address. This address will be used for automatic notifications (if you request them) and in case you've lost your password. This address will not be published. After registration you will receive an email with a confirmation link."
@@ -73,7 +99,7 @@ ui.form{
               value     = param.get("notify_email") or member.notify_email
             }
           end
-          if not config.locked_profile_fields.name then
+          if not util.is_profile_field_locked(member, "name") then
             ui.tag{
               tag = "p",
               content = _"Please choose a name, i.e. your real name or your nick name. This name will be shown to others to identify you."
@@ -84,7 +110,7 @@ ui.form{
               value     = param.get("name") or member.name
             }
           end
-          if not config.locked_profile_fields.login then
+          if not util.is_profile_field_locked(member, "login") then
             ui.tag{
               tag = "p",
               content = _"Please choose a login name. This name will not be shown to others and is used only by you to login into the system. The login name is case sensitive."
@@ -111,7 +137,10 @@ ui.form{
           ui.link{
             content = _"cancel registration",
             module = "index",
-            view = "index"
+            action = "cancel_register",
+            routing = { default = {
+              mode = "redirect", module = "index", view = "index"
+            } }
           }
         end )
       else
@@ -165,24 +194,27 @@ ui.form{
 
           slot.put("<br />")
 
-          ui.tag{
-            tag = "p",
-            content = _"Please choose a password and enter it twice. The password is case sensitive."
-          }
-          ui.field.text{
-            readonly  = true,
-            label     = _'Login name',
-            name      = 'login',
-            value     = member.login
-          }
-          ui.field.password{
-            label     = _'Password',
-            name      = 'password1',
-          }
-          ui.field.password{
-            label     = _'Password (repeat)',
-            name      = 'password2',
-          }
+          if not member.authority == "ldap" then
+            ui.tag{
+              tag = "p",
+              content = _"Please choose a password and enter it twice. The password is case sensitive."
+            }
+            ui.field.text{
+              readonly  = true,
+              label     = _'Login name',
+              name      = 'login',
+              value     = member.login
+            }
+            ui.field.password{
+              label     = _'Password',
+              name      = 'password1',
+            }
+            ui.field.password{
+              label     = _'Password (repeat)',
+              name      = 'password2',
+            }
+          end
+          
           ui.submit{
             text = _'activate account'
           }
@@ -203,7 +235,10 @@ ui.form{
           ui.link{
             content = _"cancel registration",
             module = "index",
-            view = "index"
+            action = "cancel_register",
+            routing = { default = {
+              mode = "redirect", module = "index", view = "index"
+            } }
           }
         end )
       end
