@@ -2,8 +2,13 @@ if not app.session:has_access("all_pseudonymous") then
   return
 end
 
+local member_count = MemberCount:get()
+
+if not member_count then
+  return
+end
+
 ui.sidebar ( "tab-members", function ()
-  local member_count = MemberCount:get()
   ui.sidebarHead( function()
     ui.heading {
       level = 2,
