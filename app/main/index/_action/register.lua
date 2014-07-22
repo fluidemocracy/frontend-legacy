@@ -6,7 +6,7 @@ if app.session.authority == "ldap" then
   if not config.ldap.member or not config.ldap.member.registration == "manual" then
     error("access denied")
   end
-  member = ldap.create_member(app.session.authority_data_uid, true)
+  member = ldap.create_member(app.session.authority_uid, true)
   
 else
   if config.registration_disabled then

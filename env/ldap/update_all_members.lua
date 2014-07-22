@@ -18,13 +18,13 @@ function ldap.update_all_members()
 
     local function failure (err, err2)
       Member.get_db_conn():query("ROLLBACK")
-      io.stdout:write("ERROR: ", err, " (", err2, ") id=", tostring(member.id), " uid=", tostring(member.authority_data_uid), "\n")
+      io.stdout:write("ERROR: ", err, " (", err2, ") id=", tostring(member.id), " uid=", tostring(member.authority_uid), "\n")
       some_error_occured = true
     end
     
     local function success ()
       Member.get_db_conn():query("COMMIT")
-      io.stdout:write("ok: id=", tostring(member.id), " uid=", tostring(member.authority_data_uid), "\n")
+      io.stdout:write("ok: id=", tostring(member.id), " uid=", tostring(member.authority_uid), "\n")
     end
 
     Member.get_db_conn():query("BEGIN")

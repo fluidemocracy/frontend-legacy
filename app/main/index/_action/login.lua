@@ -5,10 +5,8 @@ local member, err, uid = Member:by_login_and_password(login, password)
 
 if err == "ldap_credentials_valid_but_no_member" then
   app.session.authority = "ldap"
-  app.session.authority_data = encode.pg_hstore{
-    login = login,
-    uid = uid
-  }
+  app.session.authority_uid = uid
+  app.session.authority_login = login
   app.session:save()
   request.redirect{
     module = "index", view = "register", params = {

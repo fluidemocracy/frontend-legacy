@@ -21,7 +21,7 @@ function ldap.update_member_attr(member, ldap_conn, uid)
     return nil, nil, "member_is_not_authenticated_by_ldap"
   end
   
-  local filter = config.ldap.member.uid_filter_map(member.authority_data_uid or uid)
+  local filter = config.ldap.member.uid_filter_map(member.authority_uid or uid)
   local ldap_entry, err, err2 = ldap.get_member_entry(filter, ldap_conn)
 
   if err then
@@ -38,10 +38,8 @@ function ldap.update_member_attr(member, ldap_conn, uid)
   -- If exactly one corresponding entry found, update the attributes
   local err = config.ldap.member.attr_map(ldap_entry, member)
   
-  member.authority_data = encode.pg_hstore{
-    uid = member.authority_data_uid or uid,
-    login = config.ldap.member.login_map(ldap_entry)
-  }
+  member.authority_uid = member.authority_uid or uid
+  member.authority_login = config.ldap.member.login_map(ldap_entry)
   
   if err then
     return ldap_conn, ldap_entry, "attr_map_error", err

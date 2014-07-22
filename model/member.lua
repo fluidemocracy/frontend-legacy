@@ -278,7 +278,7 @@ function Member:get_all_by_authority(authority)
   
   local members = Member:new_selector()
     :add_where{ "authority = ?", authority }
-    :add_field("authority_data->'uid' as authority_data_uid")
+    :add_field("authority_uid")
     :exec()
     
   return members
@@ -415,12 +415,12 @@ function Member:by_login_and_password(login, password)
     -- Get login name from LDAP entry
     if ldap_entry then
       uid = config.ldap.member.uid_map(ldap_entry)
-      selector:add_where{'"authority" = ? AND "authority_data"->\'uid\' = ?', "ldap", uid }
+      selector:add_where{'"authority" = ? AND "authority_uid" = ?', "ldap", uid }
 
     -- or build it from the login
     else
       login = config.ldap.member.login_normalizer(login)
-      selector:add_where{'"authority" = ? AND "authority_data"->\'login\' = ?', "ldap", login }
+      selector:add_where{'"authority" = ? AND "authority_uid" = ?', "ldap", login }
     end
     
     local member = selector:exec()
@@ -489,10 +489,8 @@ function Member:by_login_and_password(login, password)
           end
         end
         -- TODO change this when SQL layers supports hstore
-        member.authority_data = encode.pg_hstore{
-          uid = uid,
-          login = ldap_login
-        }
+        member.authority_uid = uid
+        member.authority_login = ldap_login
         member.activated = "now"
         member.last_activity = "now"
         if config.ldap.member.cache_passwords then
