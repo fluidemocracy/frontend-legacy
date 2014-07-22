@@ -3,7 +3,7 @@
 -- (except when you really know what you are doing!)
 -- ========================================================================
 
-config.app_version = "3.0.2+ldap"
+config.app_version = "3.0.2"
 
 if not config.password_hash_algorithm then
   config.password_hash_algorithm = "crypt_sha512"
