@@ -15,9 +15,7 @@ function ldap.create_member(uid)
 
   member.authority = "ldap"
 
-  member.authority_data = encode.pg_hstore{
-    uid = uid
-  }
+  member.authority_uid = uid
   
   local ldap_conn, ldap_entry, err, err2 = ldap.update_member_attr(member, nil, uid)
   
@@ -25,10 +23,8 @@ function ldap.create_member(uid)
     ldap_conn:unbind()
   end
   
-  member.authority_data = encode.pg_hstore{
-    uid = uid,
-    login = config.ldap.member.login_map(ldap_entry)
-  }
+  member.authority_uid = uid
+  member.authority_login = config.ldap.member.login_map(ldap_entry)
   
   if not err then
     return member

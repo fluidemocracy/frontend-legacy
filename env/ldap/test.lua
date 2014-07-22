@@ -37,8 +37,8 @@ function ldap.test()
     end
     
     local members = Member:new_selector()
-      :add_field{ "authority_data->'login' as authority_data_login" }
-      :add_where{ "authority = ? AND authority_data->'uid' = ?", "ldap", uid }
+      :add_field{ "authority_login" }
+      :add_where{ "authority = ? AND authority_uid = ?", "ldap", uid }
       :exec()
 
     if #members < 1 then
@@ -62,7 +62,7 @@ function ldap.test()
       return
     end
       
-    test("login", login, member.authority_data_login)
+    test("login", login, member.authority_login)
     test("name", name, member.name)
     
     for i, unit_id in ipairs(units_with_voting_priv) do

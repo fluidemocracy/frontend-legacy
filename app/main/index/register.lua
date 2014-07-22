@@ -1,7 +1,7 @@
 local ldap_uid
 
 if config.ldap.member and app.session.authority == "ldap" then
-  ldap_uid = app.session.authority_data_uid
+  ldap_uid = app.session.authority_uid
 end
 
 if config.registration_disabled and not ldap_uid then
