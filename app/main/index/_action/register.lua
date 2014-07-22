@@ -3,7 +3,7 @@ local code = util.trim(param.get("code"))
 local member
 
 if app.session.authority == "ldap" then
-  if not config.ldap.member or not config.ldap.member.registration == "manual" then
+  if not config.ldap.member or config.ldap.member.registration ~= "manual" then
     error("access denied")
   end
   member = ldap.create_member(app.session.authority_uid, true)
@@ -176,7 +176,7 @@ if step > 2 then
     end
   end  
 
-  if not member.authority == "ldap" then
+  if member.authority ~= "ldap" then
   
     local password1 = param.get("password1")
     local password2 = param.get("password2")
@@ -206,6 +206,9 @@ if step > 2 then
       slot.put_into("error", _"Passwords must consist of at least 8 characters!")
       return false
     end
+
+    member:set_password(password1)
+
   end
 
   if not util.is_profile_field_locked(member, "login") then
@@ -224,10 +227,6 @@ if step > 2 then
     end
   end
   
-  if not member.authority == "ldap" then
-    member:set_password(password1)
-  end
-
   local now = db:query("SELECT now() AS now", "object").now
 
   for i, checkbox in ipairs(config.use_terms_checkboxes) do
