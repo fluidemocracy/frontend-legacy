@@ -455,17 +455,23 @@ img.micro_avatar.highlighted {
 .sidebarSection .sidebarHead .icon24 {
   margin-top: -3.6px;
 }
-.sidebarSection .sidebarRow {
+.sidebarSection .sidebarRow,
+.sidebarSection .ui_filter_head,
+.sidebarSection .ui_paginate_foot {
   clear: right;
   display: block;
-  border-top: 1px solid #aaaaaa;
   padding: 4.5px 9px;
   min-height: 20px;
+}
+.sidebarSection .sidebarRow {
+  border-top: 1px solid #aaaaaa;
 }
 .sidebarSection .sidebarRow.highlighted {
   background-color: #e7f0ff;
 }
-.sidebarSection .sidebarRow.sidebarRowNarrow {
+.sidebarSection .sidebarRow.sidebarRowNarrow,
+.sidebarSection .ui_filter_head,
+.sidebarSection .ui_paginate_foot {
   padding: 2.25px 9px;
 }
 .sidebarSection .sidebarRow.moreLink {
@@ -1066,7 +1072,7 @@ img.micro_avatar.highlighted {
   border-top: 3px solid #397ab6;
 }
 .suggestions .suggestion.folded .suggestion-text {
-  max-height: 150px;
+  height: 150px;
   overflow: hidden;
 }
 .suggestions .suggestion.folded .suggestion-more {

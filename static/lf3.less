@@ -559,18 +559,22 @@ img.micro_avatar.highlighted {
     }
   }
 
-  .sidebarRow {
+  .sidebarRow, .ui_filter_head, .ui_paginate_foot {
     clear: right;
     display: block;
-    border-top: 1px solid @main-seperator-color;
     padding: @pad/2 @pad;
     min-height: 20px;
   }
+
+  .sidebarRow {
+    border-top: 1px solid @main-seperator-color;
+  }
+  
   .sidebarRow.highlighted {
     background-color: @main-highlight-bg-color;
   }
 
-  .sidebarRow.sidebarRowNarrow {
+  .sidebarRow.sidebarRowNarrow, .ui_filter_head, .ui_paginate_foot{
     padding: @pad / 4 @pad;
   }
 

@@ -25,43 +25,52 @@ end
 
 ui.add_partial_param_names{ "member_list" }
 
-local filter = { name = "member_list" }
+local filter = { name = "member_filter" }
 
-filter[#filter+1] = {
-  name = "last_activity",
-  label = _"Latest activity",
-  selector_modifier = function(selector) selector:add_order_by("last_login DESC NULLS LAST, id DESC") end
-}
-filter[#filter+1] = {
-  name = "newest",
-  label = _"Newest",
-  selector_modifier = function(selector) selector:add_order_by("activated DESC, id DESC") end
-}
-filter[#filter+1] = {
-  name = "oldest",
-  label = _"Oldest",
-  selector_modifier = function(selector) selector:add_order_by("activated, id") end
-}
+if issue or initiative then
+  filter[#filter+1] = {
+    name = "weight",
+    label = _"ordered by delegation count",
+    selector_modifier = function(members_selector) 
+      if for_votes then
+          members_selector:add_order_by("voter_weight DESC")
+      else
+          members_selector:add_order_by("weight DESC")
+      end
+      -- pseudo random ordering of members with same weight
+      -- (using 45th and 47th fibonacci number)
+      members_selector:add_order_by("(issue.id # member.id) * 1134903170::INT8 % 2971215073")
+      members_selector:add_order_by("member.id")
+    end
+  }
+else
+  filter[#filter+1] = {
+    name = "last_activity",
+    label = _"by latest activity",
+    selector_modifier = function(selector) selector:add_order_by("last_login DESC NULLS LAST, id DESC") end
+  }
+  filter[#filter+1] = {
+    name = "newest",
+    label = _"newest first",
+    selector_modifier = function(selector) selector:add_order_by("activated DESC, id DESC") end
+  }
+  filter[#filter+1] = {
+    name = "oldest",
+    label = _"oldest first",
+    selector_modifier = function(selector) selector:add_order_by("activated, id") end
+  }
+end
 
 filter[#filter+1] = {
   name = "name",
-  label = _"A-Z",
+  label = _"by A-Z",
   selector_modifier = function(selector) selector:add_order_by("name") end
 }
 filter[#filter+1] = {
   name = "name_desc",
-  label = _"Z-A",
+  label = _"by Z-A",
   selector_modifier = function(selector) selector:add_order_by("name DESC") end
 }
-
-if issue or initiative then
-  no_filter = true
-  if for_votes then
-      members_selector:add_order_by("voter_weight DESC, name, id")
-  else
-      members_selector:add_order_by("weight DESC, name, id")
-  end
-end
 
 
 function list_members()
