@@ -4,6 +4,7 @@ local initiative = param.get("initiative", "table")
 if app.session:has_access("all_pseudonymous") then
   ui.sidebar ( "tab-members", function ()
 
+    ui.tag { tag = "a", attr = { name = "members" }, content = "" }
     local text = _"Interested members"
     if issue.state == "finished_with_winner" or issue.state == "finished_without_winner" then
       text = _"Voters"
@@ -53,7 +54,7 @@ if app.session:has_access("all_pseudonymous") then
         issue = issue,
         initiative = initiative,
         members_selector = interested_members_selector,
-        no_filter = true,
+        paginator_name = "members",
         member_class = "sidebarRow sidebarRowNarrow",
         for_votes = issue.state == "finished_with_winner" or issue.state == "finished_without_winner"
       }
