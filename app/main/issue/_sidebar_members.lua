@@ -34,7 +34,7 @@ if app.session:has_access("all_pseudonymous") then
           :add_field("direct_voter.comment", "voter_comment")
       end
     else
-      interested_members_selector= issue:get_reference_selector("interested_members_snapshot")
+      interested_members_selector = issue:get_reference_selector("interested_members_snapshot")
         :join("issue", nil, "issue.id = direct_interest_snapshot.issue_id")
         :add_field("direct_interest_snapshot.weight")
         :add_where("direct_interest_snapshot.event = issue.latest_snapshot_event")
