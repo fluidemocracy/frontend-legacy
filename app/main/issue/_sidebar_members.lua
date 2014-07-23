@@ -38,7 +38,6 @@ if app.session:has_access("all_pseudonymous") then
         :join("issue", nil, "issue.id = direct_interest_snapshot.issue_id")
         :add_field("direct_interest_snapshot.weight")
         :add_where("direct_interest_snapshot.event = issue.latest_snapshot_event")
-        :limit(25)
 
       if initiative then
         interested_members_selector:left_join("direct_supporter_snapshot", nil, { "direct_supporter_snapshot.initiative_id = ? AND direct_interest_snapshot.issue_id = direct_supporter_snapshot.issue_id AND direct_supporter_snapshot.member_id = direct_interest_snapshot.member_id AND direct_supporter_snapshot.event = issue.latest_snapshot_event", initiative.id })
@@ -54,7 +53,7 @@ if app.session:has_access("all_pseudonymous") then
         issue = issue,
         initiative = initiative,
         members_selector = interested_members_selector,
-        no_filter = true, no_paginate = true,
+        no_filter = true,
         member_class = "sidebarRow sidebarRowNarrow",
         for_votes = issue.state == "finished_with_winner" or issue.state == "finished_without_winner"
       }

@@ -73,7 +73,7 @@ function list_members()
     name = paginator_name,
     anchor = paginator_name,
     selector = members_selector,
-    per_page = 50,
+    per_page = 25,
     content = function() 
       ui.container{
         attr = { class = "member_list" },
