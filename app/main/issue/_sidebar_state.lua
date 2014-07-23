@@ -147,10 +147,10 @@ ui.sidebar( "tab-whatcanido", function()
         end }
 
         local help_texts = {
-          admission = _("As soon as one initiative of this issue reaches #{quorum} support, the issue will go into discussion phase.", { quorum = quorum_text(issue.policy, 1) }),
-          discussion = _"During the discussion phase the issue is debated between initiators while the initiatives are improved by suggestions from the supporters.",
-          verification = _("During the verification phase the initiative drafts cannot be changed anymore. Initiatives needs to reach a quorum of #{quorum} to become admitted for voting.", { quorum = quorum_text(issue.policy, 2) }),
-          voting = _"On this issue can be voted now."
+          admission = _("As soon as one initiative of this issue reaches the 1st quorum of #{quorum} support, the issue will proceed to discussion phase.", { quorum = quorum_text(issue.policy, 1) }),
+          discussion = _"During the discussion phase, the issue is debated on while the initiators improve the proposals and reasons in their initiatives. Supporters of initiatives can write and rate suggestions for improvement.",
+          verification = _("During the verification phase, existing initiatives cannot be changed anymore. Initiatives need to pass the 2nd quorum of #{quorum} at end of verification phase to become admitted for voting.", { quorum = quorum_text(issue.policy, 2) }),
+          voting = _"During the voting phase, votes for all admitted initiatives in this issue can be cast. The final result will be calculated as soon as this phase ends."
         }
         ui.container { attr = { id = "phase-help-" .. state, style = "display: none;" }, content = help_texts[state] }
 

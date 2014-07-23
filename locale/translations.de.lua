@@ -100,7 +100,7 @@ return {
 ["Area delegation"] = "Delegation für Themenbereich";
 ["Area list of '#{unit_name}'"] = "Themenbereiche in '#{unit_name}'";
 ["As long as you are interested in this issue yourself, the delegation is suspended for this issue, but it will be applied again in the voting phase unless you vote yourself."] = "Solange du selber am Thema interessiert bist, wird die Delegation für dieses Thema ausgesetzt, jedoch während der Abstimmung erneut aktiv, es sei denn du stimmst selber ab.";
-["As soon as one initiative of this issue reaches #{quorum} support, the issue will go into discussion phase."] = "Sobald eine Initiative des Themas das 1. Quorum von #{quorum} Unterstützern erreicht, geht das Thema in die Diskussionsphase über.";
+["As soon as one initiative of this issue reaches the 1st quorum of #{quorum} support, the issue will proceed to discussion phase."] = "Sobald eine Initiative des Themas das 1. Quorum von #{quorum} Unterstützern erreicht, geht das Thema in die Diskussionsphase über.";
 ["Author"] = "Autor";
 ["Available policies"] = "Verfügbare Regelwerke";
 ["Avatar"] = "Avatar";
@@ -202,8 +202,9 @@ return {
 ["Download documents"] = "Dokumente herunterladen";
 ["Draft history"] = "Entwurfshistorie";
 ["Draft revision #{id}"] = "Entwurf Revision #{id}";
-["During the discussion phase the issue is debated between initiators while the initiatives are improved by suggestions from the supporters."] = "Während der Diskussionsphase wird das Thema zwischen den Initiatoren debattiert, während die Entwurfstext der Initiativen durch Verbesserungsvorschläge der Unterstützer weiterentwickelt wird.";
-["During the verification phase the initiative drafts cannot be changed anymore."] = "Während der Überprüfungsphase kann der Text der Initiative nicht mehr geändert werden.";
+["During the discussion phase, the issue is debated on while the initiators improve the proposals and reasons in their initiatives. Supporters of initiatives can write and rate suggestions for improvement."] = "Während der Diskussionsphase wird das Thema debattiert während die Initiatoren die Anträge und Begründungen in ihren Initiativen verbessern. Unterstützer der Initiativen können Verbesserungsvorschläge machen und bewerten.";
+["During the verification phase, existing initiatives cannot be changed anymore. Initiatives need to pass the 2nd quorum of #{quorum} at end of verification phase to become admitted for voting."] = "Während der Überprüfungsphase kann der Text existierender Initiativen nicht mehr geändert werden. Initiativen müssen am Ende der Überprüfungsphase das 2. Quorum von #{quorum} erreichen, um für die Abstimmung zugelassen zu werden.";
+["During the voting phase, votes for all admitted initiatives in this issue can be cast. The final result will be calculated as soon as this phase ends."] = "Während der Abstimmungsphase können Stimmen für alle zugelassenen Initiativen abgegeben werden. Das Endergebnis wird nach Abschluss der Phase berechnet.";
 ["Edit"] = "Bearbeiten";
 ["Edit again"] = "Nochmal bearbeiten";
 ["Edit areas"] = "Themenbereiche bearbeiten";
