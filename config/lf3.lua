@@ -210,7 +210,7 @@ config.mail_from = { name = "LiquidFeedback", address = "lqfb-maintainers@public
 -- ------------------------------------------------------------------------
 config.tell_others = {
   initiative = function (initiative)
-    local text = "i" .. initiative.id .. ": " .. initiative.name .. " " .. request.get_absolute_baseurl() .. "initiative/" .. initiative.id .. ".html"
+    local text = "i" .. initiative.id .. ": " .. initiative.name .. " " .. request.get_absolute_baseurl() .. "initiative/show/" .. initiative.id .. ".html"
     return {
       { content = "Tweet this initiative", external = "https://twitter.com/intent/tweet?text=" .. encode.url_part(text) },
       { content = "Send an eMail", external = "mailto:?subject=" .. encode.url_part(initiative.display_name) .. "&body=" .. encode.url_part(text) }
