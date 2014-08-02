@@ -52,7 +52,9 @@ ui.sidebar( "tab-members", function()
   --end )
     
     
-  if member.id == app.session.member.id and private_contacts_selector:count() > 0 then
+  if app.session.member_id and app.session.member_id == member.id 
+    and private_contacts_selector:count() > 0
+  then
 
     ui.sidebarHead( function()
       ui.heading { level = 2, content = _"Private contacts" }
