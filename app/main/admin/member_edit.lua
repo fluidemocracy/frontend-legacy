@@ -2,7 +2,9 @@ local id = param.get_id()
 
 local member = Member:by_id(id)
 
-ui.title(_"member")
+local deactivated = member and member.locked and member.login == nil and member.authority_login == nil
+
+ui.title(_"Member")
 
 local units_selector = Unit:new_selector()
   
@@ -31,7 +33,7 @@ ui.form{
   content = function()
 
     ui.sectionHead( function()
-      ui.heading { level = 1, content = member and member.name or _"New member" }
+      ui.heading { level = 1, content = member and (member.name or member.id) or _"New member" }
       if member and member.identification then
         ui.heading { level = 3, content = member.identification }
       end
@@ -42,9 +44,12 @@ ui.form{
       ui.field.text{     label = _"Notification email", name = "notify_email" }
       if member and member.activated then
         ui.field.text{     label = _"Screen name",        name = "name" }
-        ui.field.text{     label = _"Login name",        name = "login" }
       end
       
+      if member and member.activated and not deactivated then
+        ui.field.text{     label = _"Login name",        name = "login" }
+      end
+
       for i, unit in ipairs(units) do
         ui.field.boolean{
           name = "unit_" .. unit.id,
@@ -54,25 +59,40 @@ ui.form{
       end
       slot.put("<br /><br />")
 
+      if member then
+        ui.field.text{  label = _"Activated",       name = "activated", readonly = true }
+      end
+         
       if not member or not member.activated then
         ui.field.boolean{  label = _"Send invite?",       name = "invite_member" }
       end
       
-      if member and member.activated then
-        ui.field.boolean{  label = _"Lock member?",       name = "locked" }
+      if member then
+        ui.field.boolean{ 
+          label = _"Member inactive?", name = "deactivate",
+          readonly = true, 
+          value = member and member.active == false
+        }
       end
       
-      ui.field.boolean{ 
-        label = _"Member inactive?", name = "deactivate",
-        readonly = member and member.active, value = member and member.active == false
-      }
+      if member then
+        ui.field.boolean{
+          label = _"Lock member?", name = "locked",
+          readonly = deactivated
+        }
+      end
       
       slot.put("<br />")
-      ui.field.boolean{  label = _"Admin?",       name = "admin" }
+      ui.field.boolean{  label = _"Admin?",       name = "admin", readonly = deactivated }
       slot.put("<br />")
       ui.submit{         text  = _"update member" }
       slot.put(" ")
+      if member then
+        ui.link { module = "admin", view = "member_deactivate", content = _"Deactivate member", id = member.id }
+        slot.put(" ")
+      end
       ui.link { module = "admin", view = "index", content = _"cancel" }
     end )
   end
 }
+
