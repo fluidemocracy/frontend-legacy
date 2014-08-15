@@ -32,6 +32,7 @@ if app.session:has_access("anonymous") then
     or module == "policy" and view == "show"
     or module == "policy" and view == "list"
     or module == "issue" and view == "show"
+    or module == "issue" and view == "history"
     or module == "initiative" and view == "show"
     or module == "initiative" and view == "history"
     or module == "suggestion" and view == "show"
