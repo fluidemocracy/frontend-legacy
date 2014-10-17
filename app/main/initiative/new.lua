@@ -75,12 +75,16 @@ ui.form{
           if not issue then
             ui.container { content = policy.name }
           end
+	  if param.get("free_timing") then
+	    ui.container { content = param.get("free_timing") }
+	  end
           slot.put("<br />")
 
           ui.field.hidden{ name = "formatting_engine", value = param.get("formatting_engine") }
           ui.field.hidden{ name = "policy_id", value = param.get("policy_id") }
           ui.field.hidden{ name = "name", value = param.get("name") }
           ui.field.hidden{ name = "draft", value = param.get("draft") }
+          ui.field.hidden{ name = "free_timing", value = param.get("free_timing") }
           local formatting_engine
           if config.enforce_formatting_engine then
             formatting_engine = config.enforce_formatting_engine
@@ -165,30 +169,28 @@ ui.form{
               value = param.get("policy_id", atom.integer) or area.default_policy and area.default_policy.id
             }
             if policy and policy.free_timeable then
-              ui.sectionRow( function()
-                local available_timings
-                if config.free_timing and config.free_timing.available_func then
-                  available_timings = config.free_timing.available_func(policy)
-                  if available_timings == false then
-                    error("error in free timing config")
-                  end
-                end
-                ui.heading{ level = 4, content = _"Free timing:" }
-                if available_timings then
-                  ui.field.select{
-                    name = "free_timing",
-                    foreign_records = available_timings,
-                    foreign_id = "id",
-                    foreign_name = "name",
-                    value = param.get("free_timing")
-                  }
-                else
-                  ui.field.text{
-                    name = "free_timing",
-                    value = param.get("free_timing")
-                  }
-                end
-              end )
+	      local available_timings
+	      if config.free_timing and config.free_timing.available_func then
+		available_timings = config.free_timing.available_func(policy)
+		if available_timings == false then
+		  error("error in free timing config")
+		end
+	      end
+	      ui.heading{ level = 4, content = _"Free timing:" }
+	      if available_timings then
+		ui.field.select{
+		  name = "free_timing",
+		  foreign_records = available_timings,
+		  foreign_id = "id",
+		  foreign_name = "name",
+		  value = param.get("free_timing")
+		}
+	      else
+		ui.field.text{
+		  name = "free_timing",
+		  value = param.get("free_timing")
+		}
+	      end
             end
           end
 

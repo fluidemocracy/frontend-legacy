@@ -98,10 +98,41 @@ else
   end
 end
 
+local timing
+if policy.free_timeable then
+  local free_timing_string = util.trim(param.get("free_timing"))
+  if not free_timing_string or #free_timing_string < 1 then
+    slot.put_into("error", _"Choose timing")
+    return false
+  end
+  local available_timings
+  if config.free_timing and config.free_timing.available_func then
+    available_timings = config.free_timing.available_func(policy)
+    if available_timings == false then
+      error("error in free timing config")
+    end
+  end
+  if available_timings then
+    local timing_available = false
+    for i, available_timing in ipairs(available_timings) do
+      if available_timing.id == free_timing_string then
+	timing_available = true
+      end
+    end
+    if not timing_available then
+      slot.put_into("error", _"Invalid timing")
+      return false
+    end
+  end
+  timing = config.free_timing.calculate_func(policy, free_timing_string)
+  if not timing then
+    error("error in free timing config")
+  end
+end
+
 if param.get("preview") or param.get("edit") then
   return
 end
-
 
 local initiative = Initiative:new()
 
@@ -116,29 +147,6 @@ if not issue then
     initiative.polling = true
     
     if policy.free_timeable then
-      local free_timing_string = util.trim(param.get("free_timing"))
-      local available_timings
-      if config.free_timing and config.free_timing.available_func then
-        available_timings = config.free_timing.available_func(policy)
-        if available_timings == false then
-          error("error in free timing config")
-        end
-      end
-      if available_timings then
-        local timing_available = false
-        for i, available_timing in ipairs(available_timings) do
-          if available_timing.id == free_timing_string then
-            timing_available = true
-          end
-        end
-        if not timing_available then
-          error('Invalid timing')
-        end
-      end
-      local timing = config.free_timing.calculate_func(policy, free_timing_string)
-      if not timing then
-        error("error in free timing config")
-      end
       issue.discussion_time = timing.discussion
       issue.verification_time = timing.verification
       issue.voting_time = timing.voting
