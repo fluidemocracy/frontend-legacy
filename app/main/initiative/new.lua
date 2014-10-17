@@ -58,32 +58,6 @@ else
   }
 end
 
-
-
-
-
-if not preview and not issue_id and app.session.member:has_polling_right_for_unit_id(area.unit_id) then
-  ui.actions(function()
-    ui.link{ 
-      text = _"Standard policies",
-      module = "initiative", view = "new", params = {
-        area_id = area.id
-      }
-    }
-    for i, policy in ipairs(area.allowed_policies) do
-      if policy.polling  then
-        slot.put(" &middot; ")
-        ui.link{ 
-          text = policy.name,
-          module = "initiative", view = "new", params = {
-            area_id = area.id, policy_id = policy.id        
-          }
-        }
-      end
-    end
-  end)
-end
-
 ui.form{
   module = "initiative",
   action = "create",
@@ -178,7 +152,7 @@ ui.form{
           if not issue_id then
             tmp = { { id = -1, name = "" } }
             for i, allowed_policy in ipairs(area.allowed_policies) do
-              if not allowed_policy.polling then
+              if not allowed_policy.polling or app.session.member:has_polling_right_for_unit_id(area.unit_id) then
                 tmp[#tmp+1] = allowed_policy
               end
             end
