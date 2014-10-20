@@ -804,6 +804,7 @@ img.micro_avatar.highlighted {
   list-style: square;
   padding-left: 1em;
 }
+.main .draft ol,
 .main .draft_content ol {
   margin-left: 1em;
   margin-bottom: 1.5ex;
