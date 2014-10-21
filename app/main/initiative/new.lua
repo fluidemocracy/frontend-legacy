@@ -85,6 +85,7 @@ ui.form{
           ui.field.hidden{ name = "name", value = param.get("name") }
           ui.field.hidden{ name = "draft", value = param.get("draft") }
           ui.field.hidden{ name = "free_timing", value = param.get("free_timing") }
+          ui.field.hidden{ name = "polling", value = param.get("polling", atom.boolean) }
           local formatting_engine
           if config.enforce_formatting_engine then
             formatting_engine = config.enforce_formatting_engine

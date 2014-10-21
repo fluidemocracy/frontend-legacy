@@ -99,7 +99,7 @@ else
 end
 
 local timing
-if policy.free_timeable then
+if not issue and policy.free_timeable then
   local free_timing_string = util.trim(param.get("free_timing"))
   if not free_timing_string or #free_timing_string < 1 then
     slot.put_into("error", _"Choose timing")
