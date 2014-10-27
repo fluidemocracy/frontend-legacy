@@ -55,11 +55,11 @@ for i, policy in ipairs(policies) do
           if policy.polling then
             ui.field.text{ label = _"New" .. ":", value = _"without" }
           else
-            ui.field.text{ label = _"New" .. ":", value = "≤ " .. policy.admission_time }
+            ui.field.text{ label = _"New" .. ":", value = "≤ " .. format.interval_text(policy.admission_time) }
           end
-          ui.field.text{ label = _"Discussion" .. ":", value = policy.discussion_time or _"variable" }
-          ui.field.text{ label = _"Frozen" .. ":", value = policy.verification_time or _"variable" }
-          ui.field.text{ label = _"Voting" .. ":", value = policy.voting_time or _"variable" }
+          ui.field.text{ label = _"Discussion" .. ":", value = format.interval_text(policy.discussion_time) or _"variable" }
+          ui.field.text{ label = _"Frozen" .. ":", value = format.interval_text(policy.verification_time) or _"variable" }
+          ui.field.text{ label = _"Voting" .. ":", value = format.interval_text(policy.voting_time) or _"variable" }
 
           ui.heading { level = 4, content = _"Quorums" }
           
