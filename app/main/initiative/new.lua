@@ -93,7 +93,7 @@ ui.form{
             formatting_engine = param.get("formatting_engine")
           end
           ui.container{
-            attr = { class = "draft_content wiki" },
+            attr = { class = "draft" },
             content = function()
               slot.put(format.wiki_text(param.get("draft"), formatting_engine))
             end
