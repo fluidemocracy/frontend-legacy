@@ -1,4 +1,7 @@
 function format.interval_text(value, options)
+  if not value then
+    return nil
+  end
   
   local options = options or {}
   
