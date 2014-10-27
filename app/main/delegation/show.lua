@@ -149,7 +149,7 @@ ui.section( function ()
       local record
       if issue then
         local delegate_name = ""
-        local scope = "no delegation set"
+        local scope = _"no delegation set"
         local area_delegation = Delegation:by_pk(app.session.member_id, nil, issue.area_id)
         if area_delegation then
           delegate_name = area_delegation.trustee and area_delegation.trustee.name or _"abandoned"
@@ -177,7 +177,7 @@ ui.section( function ()
         }
       elseif area then
         local delegate_name = ""
-        local scope = "no delegation set"
+        local scope = _"no delegation set"
         local unit_delegation = Delegation:by_pk(app.session.member_id, area.unit_id)
         if unit_delegation then
           delegate_name = unit_delegation.trustee.name
