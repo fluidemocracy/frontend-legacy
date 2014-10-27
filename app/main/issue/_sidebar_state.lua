@@ -166,12 +166,12 @@ ui.sidebar( "tab-whatcanido", function()
     ui.sidebarSection( function()
       ui.heading { level = 1, content = issue.state_name }
     end )
-    if issue.admin_notice then
-      ui.sidebarSection( function()
-        ui.heading { level = 3, content = _"Administrative notice:" }
-        slot.put(encode.html_newlines(issue.admin_notice)) 
-      end )
-    end
   end
       
+  if issue.admin_notice then
+    ui.sidebarSection( function()
+      ui.heading { level = 3, content = _"Administrative notice:" }
+      slot.put(encode.html_newlines(issue.admin_notice)) 
+    end )
+  end
 end )
