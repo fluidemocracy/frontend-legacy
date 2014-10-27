@@ -184,7 +184,7 @@ h1:last-child {
   margin-bottom: 0;
 }
 h2 {
-  font: normal 12pt / 125% sans-serif;
+  font: bold 12pt / 125% sans-serif;
 }
 h3 {
   font: bold 10pt / 125% sans-serif;
@@ -566,7 +566,7 @@ img.micro_avatar.highlighted {
   border-radius: 2px;
 }
 .sidebarSection a.unit {
-  font: normal 12pt / 125% sans-serif;
+  font: bold 12pt / 125% sans-serif;
 }
 .sidebarSection a.area {
   margin-left: 20px;
@@ -798,15 +798,13 @@ img.micro_avatar.highlighted {
 .main .draft {
   font: normal 10pt / 125% sans-serif;
 }
-.main .draft ul,
-.main .draft_content ul {
+.main .draft ul {
   margin-left: 1em;
   margin-bottom: 1.5ex;
   list-style: square;
   padding-left: 1em;
 }
-.main .draft ol,
-.main .draft_content ol {
+.main .draft ol {
   margin-left: 1em;
   margin-bottom: 1.5ex;
   list-style: decimal;
@@ -1313,7 +1311,7 @@ li.raw {
     display: none;
   }
   html body .slot_title {
-    font: normal 12pt / 125% sans-serif;
+    font: bold 12pt / 125% sans-serif;
     padding: 0;
     margin: 0 6pt;
   }
