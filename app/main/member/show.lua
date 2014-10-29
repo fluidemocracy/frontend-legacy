@@ -11,7 +11,6 @@ local limit = 25
 local initiated_initiatives = Initiative:new_selector()
   :join("initiator", nil, { "initiator.initiative_id = initiative.id and initiator.member_id = ?", member.id })
   :join("issue", nil, "issue.id = initiative.issue_id")
-  :add_where("issue.closed ISNULL")
   :add_order_by("initiative.id DESC")
   :limit(limit+1)
   :exec()
