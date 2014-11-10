@@ -238,6 +238,24 @@ config.free_timing = {
   end
 }
 
+-- Admin logger
+-- ------------------------------------------------------------------------
+-- Logging administrative activities
+-- disabled by default
+
+--[[
+config.admin_logger = function(params)
+
+  local adminid = app.session.member_id
+  local adminname = app.session.member.name
+  local url = data._webmcp_path
+  
+  -- do something (e.g. calling 'logger' via extos.pfilter)
+
+end
+--]]
+
+
 -- WebMCP accelerator
 -- uncomment the following two lines to use C implementations of chosen
 -- functions and to disable garbage collection during the request, to
