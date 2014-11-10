@@ -248,7 +248,7 @@ config.admin_logger = function(params)
 
   local adminid = app.session.member_id
   local adminname = app.session.member.name
-  local url = data._webmcp_path
+  local url = params._webmcp_path
   
   -- do something (e.g. calling 'logger' via extos.pfilter)
 
