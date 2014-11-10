@@ -71,7 +71,16 @@ function Event.object:send_notification()
     locale.do_with(
       { lang = member.lang or config.default_lang or 'en' },
       function()
-        subject = config.mail_subject_prefix .. " " .. self.event_name
+
+	local suggestion
+        if self.suggestion_id then
+	  suggestion = Suggestion:by_id(self.suggestion_id)
+	  if not suggestion then
+	    return
+	  end
+	end
+
+	subject = config.mail_subject_prefix .. " " .. self.event_name
         body = body .. _("[event mail]      Unit: #{name}", { name = self.issue.area.unit.name }) .. "\n"
         body = body .. _("[event mail]      Area: #{name}", { name = self.issue.area.name }) .. "\n"
         body = body .. _("[event mail]     Issue: ##{id}", { id = self.issue_id }) .. "\n\n"
@@ -110,8 +119,7 @@ function Event.object:send_notification()
           body = body .. "\n"
         end
         
-        if self.suggestion_id then
-          local suggestion = Suggestion:by_id(self.suggestion_id)
+        if suggestion then
           body = body .. _("#{name}\n\n", { name = suggestion.name })
         end
   
