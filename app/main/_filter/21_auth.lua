@@ -44,9 +44,20 @@ if app.session:has_access("anonymous") then
 
 end
 
+if app.session:has_access("authors_pseudonymous") then
+  if module == "member_image" and view == "show" and param.get("image_type") == "avatar" then
+    auth_needed = false
+  end
+end
+
+if app.session:has_access("everything") then
+  if module == "member_image" and view == "show" then
+    auth_needed = false
+  end
+end
+
 if app.session:has_access("all_pseudonymous") then
-  if module == "member_image" and view == "show"
-   or module == "vote" and view == "show_incoming"
+  if module == "vote" and view == "show_incoming"
    or module == "interest" and view == "show_incoming"
    or module == "supporter" and view == "show_incoming" 
    or module == "vote" and view == "list" then
