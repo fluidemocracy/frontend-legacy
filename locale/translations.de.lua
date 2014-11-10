@@ -128,6 +128,7 @@ return {
 ["Choose a member to invite"] = "Wer soll eingeladen werden?";
 ["Choose an initiator to remove"] = "Wer soll entfernt werden?";
 ["Choose member"] = "Mitglied auswählen";
+["Choose timing"] = false;
 ["Choose your delegatee"] = "Delegierten ausw\0hlen";
 ["Closed"] = "geschlossen";
 ["Closed issues"] = "Geschlossene Themen";
@@ -340,6 +341,7 @@ return {
 ["Interval format:"] = "Intervall-Format";
 ["Introduction"] = "Einführung";
 ["Invalid login name or password!"] = "Anmeldename oder Kennwort ungültig";
+["Invalid timing"] = false;
 ["Invitation has been refused"] = "Einladung wurde widerrufen";
 ["Invitation to LiquidFeedback"] = "Einladung zu LiquidFeedback";
 ["Invite an initiator to initiative"] = "Initiator zur Initiative einladen";
@@ -582,7 +584,6 @@ return {
 ["Sorry, you have reached your personal flood limit. Please be slower..."] = "Sorry, Du hast Dein persönliches Flood-Limit erreicht. Bitte sei langsamer...";
 ["Sorry, your contingent for creating initiatives has been used up. Please try again later."] = "Sorry, Dein Antragskontingent ist zur Zeit ausgeschöpft. Bitte versuche es später erneut!";
 ["Source"] = "Quelltext";
-["Standard policies"] = "Standardverfahren";
 ["Statement"] = "Statement";
 ["Status"] = "Status";
 ["Status quo: #{rank}"] = "Status quo: #{rank}";
@@ -881,6 +882,7 @@ return {
 ["my issues"] = "meine Themen";
 ["neutral"] = "neutral";
 ["newest first"] = "neueste zuerst";
+["no delegation set"] = "nicht delegiert";
 ["no reverse beat path to status quo (including ties)"] = "Kein rückwärtsgerichteter Schlagpfad zum Status Quo (Gleichstände eingeschlossen)";
 ["none"] = "kein";
 ["not admitted"] = "nicht zugelassen";
@@ -988,5 +990,4 @@ return {
 ["you have #{count} incoming delegations"] = "#{count} eingehende Delegationen";
 ["you restricted your support by rating suggestions as must or must not"] = "deine Untersützung ist aufgrund von 'muss'- oder 'darf nicht'-Verbesserungsvorschlägen beschränkt";
 ["you voted"] = "du hast abgestimmt";
-["no delegation set"] = "nicht delegiert";
 }
