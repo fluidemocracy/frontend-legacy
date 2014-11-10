@@ -24,7 +24,7 @@ ui.sidebar ( "tab-members", function ()
       member_class = "sidebarRow sidebarRowNarrow"
    }
   }
-  if area.direct_member_count > members_selector:count() then
+  if (area.direct_member_count or 0) > members_selector:count() then
     ui.link {
       text = _"Show all members",
       module = "member", view = "list"
