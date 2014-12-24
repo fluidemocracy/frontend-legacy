@@ -228,8 +228,7 @@ ui.form{
             name = "draft",
             multiline = true, 
             attr = { style = "height: 50ex; width: 100%;" },
-            value = param.get("draft") or
-                [[
+            value = param.get("draft") or config.draft_template or [[
 Proposal
 ======
 
