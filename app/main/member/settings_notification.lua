@@ -1,6 +1,6 @@
 local return_to = param.get("return_to")
 
-ui.titleMember("notification settings")
+ui.titleMember(_"notification settings")
 
 execute.view {
   module = "member", view = "_sidebar_whatcanido", params = {
