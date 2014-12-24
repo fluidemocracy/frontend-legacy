@@ -40,6 +40,7 @@ if app.session:has_access("anonymous") then
     or module == "draft" and view == "show"
     or module == "index" and view == "search"
     or module == "index" and view == "usage_terms"
+    or module == "help" and view == "introduction"
   then
     auth_needed = false
   end
