@@ -534,9 +534,9 @@ ui.container {
       
       local text
       if initiative.issue.closed then
-        text = "No suggestions"
+        text = _"No suggestions"
       else
-        text = "No suggestions (yet)"
+        text = _"No suggestions yet"
       end
       ui.sectionHead( function()
         ui.heading { level = 1, content = text }
