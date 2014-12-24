@@ -111,7 +111,7 @@ ui.sectionHead( "initiativeInfo", function ()
                 mode = "redirect", module = "initiative", view = "show", id = initiative.id
               } },
               id = initiative.id,
-              text = "remove my support"
+              text = _"remove my support"
             }
             
           else
