@@ -18,7 +18,7 @@ if not config.password_hash_max_rounds then
 end
 
 if config.enabled_languages == nil then
-  config.enabled_languages = { 'en', 'de' } --, 'eo', 'el', 'hu', 'it', 'nl', 'zh-Hans', 'zh-TW' }
+  config.enabled_languages = { 'en', 'de', 'ka' } --, 'eo', 'el', 'hu', 'it', 'nl', 'zh-Hans', 'zh-TW' }
 end
 
 if config.default_lang == nil then
