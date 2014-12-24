@@ -105,7 +105,7 @@ slot.select ("footer", function ()
   slot.put(" &middot; ")
   ui.link{
     text   = _"LiquidFeedback",
-    external = "http://www.public-software-group.org/liquid_feedback"
+    external = "http://www.liquidfeedback.org/"
   }
 end)
 
