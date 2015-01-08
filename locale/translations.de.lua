@@ -129,7 +129,7 @@ return {
 ["Choose an initiator to remove"] = "Wer soll entfernt werden?";
 ["Choose member"] = "Mitglied auswählen";
 ["Choose timing"] = false;
-["Choose your delegatee"] = "Delegierten ausw\0hlen";
+["Choose your delegatee"] = "Delegierten auswählen";
 ["Closed"] = "geschlossen";
 ["Closed issues"] = "Geschlossene Themen";
 ["Closed user group"] = "Geschlossene Benutzergruppe";
@@ -714,7 +714,7 @@ return {
 ["You blocked this member (i.e. you will not be notified about this members actions)"] = "Du hast dieses Mitglied geblockt (d.h. du wirst nicht mehr über dessen Aktivitäten informiert)";
 ["You can change your email address only once per hour. Please try again later."] = "Du kannst die E-Mail-Adresse nur einmal in der Stunde ändern, bitte versuche es später erneut.";
 ["You can change your text again anytime during admission and discussion phase"] = "Du kannst den Text während der Zulassungs- und Diskussionsphase jederzeit wieder ändern";
-["You can choose only members which you have been saved as contact before."] = "Du kannst nur Mitglieder ausählen, die du zuvor als Kontakt gespeichert hast.";
+["You can choose only members which you have been saved as contact before."] = "Du kannst nur Mitglieder auswählen, die du zuvor als Kontakt gespeichert hast.";
 ["You can't suggest the initiative you are revoking"] = "Du kannst nicht die Initiative empfehlen, die Du löschen möchtest";
 ["You cannot change your text again later, because this issue is already in verfication phase!"] = "Du kannst den Text später nicht mehr ändern, da das Thema bereits in der Überprüfungsphase ist!";
 ["You delegated this issue"] = "Du hast dieses Thema delegiert";
