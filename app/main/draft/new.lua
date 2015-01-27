@@ -2,6 +2,20 @@ local initiative = Initiative:by_id(param.get("initiative_id"))
 initiative:load_everything_for_member_id(app.session.member_id)
 initiative.issue:load_everything_for_member_id(app.session.member_id)
 
+if issue.closed then
+  slot.put_into("error", _"This issue is already closed.")
+  request.redirect{ module = "initiative", view = "show", id = initiative.id }
+  return
+elseif issue.half_frozen then 
+  slot.put_into("error", _"This issue is already frozen.")
+  request.redirect{ module = "initiative", view = "show", id = initiative.id }
+  return
+elseif issue.phase_finished then
+  slot.put_into("error", _"Current phase is already closed.")
+  request.redirect{ module = "initiative", view = "show", id = initiative.id }
+  return
+end
+
 
 execute.view{
   module = "issue", view = "_head", params = {

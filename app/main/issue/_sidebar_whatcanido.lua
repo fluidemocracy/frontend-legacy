@@ -76,36 +76,40 @@ ui.sidebar ( "tab-whatcanido", function ()
         ui.tag { content = _"You are initiator of this initiative" }
       end }
       ui.tag { tag = "ul", attr = { class = "ul" }, content = function ()
-        ui.tag { tag = "li", content = function ()
-          ui.link{
-            module = "draft", view = "new",
-            params = { initiative_id = initiative.id },
-            content = _"edit proposal and/or reasons"
-          }
-        end }
-        ui.tag { tag = "li", content = function ()
-          ui.link{
-            attr = { class = "action" },
-            module = "initiative", view = "add_initiator",
-            params = { initiative_id = initiative.id },
-            content = _"invite another initiator"
-          }
-        end }
-        if #initiative.initiators > 1 then
+        if issue.half_frozen then
+          ui.tag { tag = "li", content = _"this issue is in verification phase, therefore the initiative text cannot be updated anymore" }
+        else
           ui.tag { tag = "li", content = function ()
             ui.link{
-              module = "initiative", view = "remove_initiator",
+              module = "draft", view = "new",
               params = { initiative_id = initiative.id },
-              content = _"remove an initiator"
+              content = _"edit proposal and/or reasons"
+            }
+          end }
+          ui.tag { tag = "li", content = function ()
+            ui.link{
+              attr = { class = "action" },
+              module = "initiative", view = "add_initiator",
+              params = { initiative_id = initiative.id },
+              content = _"invite another initiator"
+            }
+          end }
+          if #initiative.initiators > 1 then
+            ui.tag { tag = "li", content = function ()
+              ui.link{
+                module = "initiative", view = "remove_initiator",
+                params = { initiative_id = initiative.id },
+                content = _"remove an initiator"
+              }
+            end }
+          end
+          ui.tag { tag = "li", content = function ()
+            ui.link{
+              module = "initiative", view = "revoke", id = initiative.id,
+              content = _"revoke initiative"
             }
           end }
         end
-        ui.tag { tag = "li", content = function ()
-          ui.link{
-            module = "initiative", view = "revoke", id = initiative.id,
-            content = _"revoke initiative"
-          }
-        end }
       end }
     end }
   end
