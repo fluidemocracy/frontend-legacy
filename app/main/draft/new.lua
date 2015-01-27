@@ -4,15 +4,12 @@ initiative.issue:load_everything_for_member_id(app.session.member_id)
 
 if initiative.issue.closed then
   slot.put_into("error", _"This issue is already closed.")
-  request.redirect{ module = "initiative", view = "show", id = initiative.id }
   return
 elseif initiative.issue.half_frozen then 
   slot.put_into("error", _"This issue is already frozen.")
-  request.redirect{ module = "initiative", view = "show", id = initiative.id }
   return
 elseif initiative.issue.phase_finished then
   slot.put_into("error", _"Current phase is already closed.")
-  request.redirect{ module = "initiative", view = "show", id = initiative.id }
   return
 end
 
