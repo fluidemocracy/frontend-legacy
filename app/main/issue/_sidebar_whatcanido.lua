@@ -431,6 +431,10 @@ ui.sidebar ( "tab-whatcanido", function ()
       end )
     end 
     
+  end
+  
+  if privileged_to_vote and not issue.closed then
+
     if not issue.member_info.first_trustee_id then
       ui.sidebarSection( function ()
         ui.heading{ level = 3, content = _"I want to delegate this issue" }
