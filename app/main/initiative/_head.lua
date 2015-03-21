@@ -129,7 +129,7 @@ ui.sectionHead( "initiativeInfo", function ()
           slot.put(" ")
       
 
-        else
+        elseif not initiative.issue.closed then
           ui.link {
             attr = { class = "btn btn-default" },
             module = "initiative", action = "add_support", 
