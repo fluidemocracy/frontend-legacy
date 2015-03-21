@@ -46,12 +46,6 @@ if issue then
   head_text = _"Set issue delegation"
 end
 
-if param.get("initiative_id", atom.integer) then
-  issue_id = initiative.issue_id
-  scope = "issue"
-end
-
-
 local delegation
 local unit_id
 local area_id
@@ -146,7 +140,7 @@ ui.section( function ()
       }
     },
     content = function()
-      local record
+      local records
       if issue then
         local delegate_name = ""
         local scope = _"no delegation set"
@@ -232,7 +226,7 @@ ui.section( function ()
         end
       end
 
-      disabled_records = {}
+      local disabled_records = {}
       disabled_records["_"] = true
       disabled_records[app.session.member_id] = true
 

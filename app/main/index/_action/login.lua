@@ -16,7 +16,7 @@ if err == "ldap_credentials_valid_but_no_member" then
   return
 end
 
-function do_etherpad_auth(member)
+local function do_etherpad_auth(member)
   local result = net.curl(
     config.etherpad.api_base
     .. "api/1/createAuthorIfNotExistsFor?apikey=" .. config.etherpad.api_key

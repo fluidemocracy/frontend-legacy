@@ -16,7 +16,7 @@ ui.sectionHead(function()
   ui.heading{ level = 1, content = _"Login" }
   ui.container { attr = { class = "right" }, content = function()
     for i, lang in ipairs(config.enabled_languages) do
-
+      local langcode
       locale.do_with({ lang = lang }, function()
         langcode = _("[Name of Language]")
       end)
@@ -37,8 +37,8 @@ ui.sectionHead(function()
             mode = "redirect",
             module = request.get_module(),
             view = request.get_view(),
-            id = param.get_id_cgi(),
-            params = param.get_all_cgi()
+            id = request.get_id_string(),
+            params = request.get_param_strings()
           }
         }
       }

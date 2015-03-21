@@ -23,8 +23,6 @@ if initiative or issue then
   end
 end
 
-ui.add_partial_param_names{ "member_list" }
-
 local filter = { name = "member_filter" }
 
 if issue or initiative then
@@ -73,7 +71,7 @@ filter[#filter+1] = {
 }
 
 
-function list_members()
+local function list_members()
   local ui_paginate = ui.paginate
   if no_paginate then
     ui_paginate = function (args) args.content() end

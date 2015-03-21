@@ -24,6 +24,8 @@ execute.view {
   }
 }
 
+local direct_supporter
+
 if app.session.member_id then
   direct_supporter = initiative.issue.member_info.own_participation and initiative.member_info.supported
 end

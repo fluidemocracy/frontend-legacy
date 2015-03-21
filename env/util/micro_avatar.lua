@@ -6,7 +6,7 @@ function util.micro_avatar(member, member_name)
     }
   end
   
-  function doit()
+  local function doit()
     if config.fastpath_url_func then
       ui.image{
         attr = {

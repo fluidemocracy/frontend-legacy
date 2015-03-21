@@ -234,6 +234,7 @@ ui.section( function()
           attr = { id = "voting" },
           content = function()
             local approval_index, disapproval_index = 0, 0
+            local approval_used, disapproval_used
             for grade = max_grade, min_grade, -1 do 
               local entries = sections[grade]
               local class

@@ -76,7 +76,7 @@ end
 
 
 
-function recursive_add_child_units(units, parent_unit)
+local function recursive_add_child_units(units, parent_unit)
   parent_unit.childs = {}
   for i, unit in ipairs(units) do
     if unit.parent_id == parent_unit.id then
@@ -86,7 +86,7 @@ function recursive_add_child_units(units, parent_unit)
   end
 end  
 
-function recursive_get_child_units(units, parent_unit, depth)
+local function recursive_get_child_units(units, parent_unit, depth)
   for i, unit in ipairs(parent_unit.childs) do
     unit.depth = depth
     units[#units+1] = unit

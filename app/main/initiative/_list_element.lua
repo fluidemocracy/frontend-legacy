@@ -65,7 +65,7 @@ if initiative.rank == 1
   and initiative.negative_votes ~= nil 
   and not for_event
 then
-  function percent(p, q)
+  local function percent(p, q)
     if q > 0 then
       return math.floor(p / q * 100) .. "%"
     else

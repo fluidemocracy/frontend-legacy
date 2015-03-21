@@ -9,7 +9,7 @@ local search =     param.get ( "search" )
 
 local limit = 25
 
-local mode = param.get_all_cgi()["mode"] or "issue"
+local mode = request.get_param{ name = "mode" } or "issue"
 
 if for_initiative or for_issue or for_member then
   mode = "timeline"
@@ -24,7 +24,7 @@ if search then
   
 elseif mode == "timeline" then
 
-  local event_max_id = param.get_all_cgi()["event_max_id"]
+  local event_max_id = request.get_param_strings()["event_max_id"]
 
   selector = Event:new_selector()
     :add_order_by("event.id DESC")
@@ -76,7 +76,7 @@ if not search and app.session.member_id then
     :add_field("array_length(_delegating_interest.delegate_member_ids, 1)", "delegation_chain_length")
 end
 
-function doit()
+local function doit()
 
   local last_event_id
 
@@ -316,6 +316,7 @@ function doit()
         end }
       elseif #items > limit then
         ui.container { attr = { class = row_class }, content = function ()
+          local params = request.get_param_strings()
           ui.link{
             attr = { class = "moreLink" },
             text = _"Show older events",
@@ -325,9 +326,9 @@ function doit()
             params = {
               mode = "timeline",
               event_max_id = last_event_id,
-              tab = param.get_all_cgi()["tab"],
-              phase = param.get_all_cgi()["phase"],
-              closed = param.get_all_cgi()["closed"]
+              tab = params["tab"],
+              phase = params["phase"],
+              closed = params["closed"]
             }
           }
         end }
