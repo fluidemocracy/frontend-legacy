@@ -54,6 +54,7 @@ ui.form{
       ui.sectionRow( function()
         ui.field.hidden{ name = "formatting_engine", value = param.get("formatting_engine") }
         ui.field.hidden{ name = "content", value = param.get("content") }
+        local formatting_engine
         if config.enforce_formatting_engine then
           formatting_engine = config.enforce_formatting_engine
         else

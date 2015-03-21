@@ -1,4 +1,4 @@
-local params = param.get_all_cgi()
+local params = request.get_param_strings() -- TODO replace with request.get_param() calls?
 
 local for_unit = param.get("for_unit", atom.boolean)
 local for_area = param.get("for_area", atom.boolean)

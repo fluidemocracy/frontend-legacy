@@ -5,7 +5,7 @@ function ui.filters(args)
     content = function()
       for idx, filter in ipairs(args) do
         local filter_name = filter.name or "filter"
-        local current_option = atom.string:load(cgi.params[filter_name])
+        local current_option = atom.string:load(request.get_param{ name = filter_name })
         if not current_option then
           current_option = param.get(filter_name)
         end
@@ -18,8 +18,8 @@ function ui.filters(args)
         if not current_option or #current_option == 0 or not current_option_valid then
           current_option = filter[1].name
         end
-        local id     = param.get_id_cgi()
-        local params = param.get_all_cgi()
+        local id     = request.get_id_string()
+        local params = request.get_param_strings()
         local class = "ui_filter_head"
         if filter.class then
           class = class .. " " .. filter.class

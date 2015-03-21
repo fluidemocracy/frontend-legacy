@@ -4,13 +4,13 @@ function ui.tabs(tabs)
   ui.container{
     attr = attr,
     content = function()
-      local params = param.get_all_cgi()
+      local params = request.get_param_strings()
       local current_tab = params["tab"]
       ui.container{
         attr = { class = "ui_tabs_links" },
         content = function()
           for i, tab in ipairs(tabs) do
-            local params = param.get_all_cgi()
+            local params = request.get_param_strings()
             if tab.link_params then
               for key, value in pairs(tab.link_params) do
                 params[key] = value
@@ -27,7 +27,7 @@ function ui.tabs(tabs)
               },
               module  = request.get_module(),
               view    = request.get_view(),
-              id      = param.get_id_cgi(),
+              id      = request.get_id_string(),
               content = tab.label,
               params  = params
             }

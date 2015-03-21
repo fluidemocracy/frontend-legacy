@@ -1,5 +1,7 @@
-if cgi.cookies.liquid_feedback_session then
-  app.session = Session:by_ident(cgi.cookies.liquid_feedback_session)
+local cookie = request.get_cookie{ name = "liquid_feedback_session" }
+
+if cookie then
+  app.session = Session:by_ident(cookie)
 end
 if not app.session then
   app.session = Session:new()

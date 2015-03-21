@@ -96,7 +96,7 @@ for i, initiative in ipairs(initiator_invites) do
   }
 end
 
-updated_drafts = Initiative:selector_for_updated_drafts(app.session.member_id):exec()
+local updated_drafts = Initiative:selector_for_updated_drafts(app.session.member_id):exec()
 
 for i, initiative in ipairs(updated_drafts) do
   notification_links[#notification_links+1] = {

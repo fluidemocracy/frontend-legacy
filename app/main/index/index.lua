@@ -1,4 +1,4 @@
-function getIssuesSelector()
+local function getIssuesSelector()
   return Issue:new_selector()
     :add_order_by([[
       coalesce(

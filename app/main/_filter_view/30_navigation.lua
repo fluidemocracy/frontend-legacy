@@ -109,4 +109,11 @@ slot.select ("footer", function ()
   }
 end)
 
+if not config.enable_debug_trace then
+  trace.disable()
+else
+  slot.put_into('trace_button', '<div id="trace_show" onclick="document.getElementById(\'trace_content\').style.display=\'block\';this.style.display=\'none\';">TRACE</div>')
+end
+
+
 execute.inner()

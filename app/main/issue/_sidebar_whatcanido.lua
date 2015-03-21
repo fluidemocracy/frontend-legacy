@@ -132,8 +132,8 @@ ui.sidebar ( "tab-whatcanido", function ()
                 mode = "redirect",
                 module = request.get_module(),
                 view = request.get_view(),
-                id = param.get_id_cgi(),
-                params = param.get_all_cgi()
+                id = request.get_id_string(),
+                params = request.get_param_strings()
               }
             }
           }
@@ -153,8 +153,8 @@ ui.sidebar ( "tab-whatcanido", function ()
                 mode = "redirect",
                 module = request.get_module(),
                 view = request.get_view(),
-                id = param.get_id_cgi(),
-                params = param.get_all_cgi()
+                id = request.get_id_string(),
+                params = request.get_param_strings()
               }
             }
           }
@@ -532,8 +532,8 @@ ui.sidebar ( "tab-whatcanido", function ()
                       mode = "redirect",
                       module = request.get_module(),
                       view = request.get_view(),
-                      id = param.get_id_cgi(),
-                      params = param.get_all_cgi()
+                      id = request.get_id_string(),
+                      params = request.get_param_strings()
                     }
                   }
                 }
@@ -554,8 +554,8 @@ ui.sidebar ( "tab-whatcanido", function ()
                       mode = "redirect",
                       module = request.get_module(),
                       view = request.get_view(),
-                      id = param.get_id_cgi(),
-                      params = param.get_all_cgi()
+                      id = request.get_id_string(),
+                      params = request.get_param_strings()
                     }
                   }
                 }
