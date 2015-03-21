@@ -904,7 +904,7 @@ return {
 ["notifications settings"] = "Benachrichtigungseinstellungen";
 ["oldest first"] = "älteste zuerst";
 ["one step back"] = "einen Schritt zurück";
-["open the appropriate subject area for your issue and follow the instruction on that page."] = "öffne das passende Themenbereich für dein Thema und folge dort den Anweisungen";
+["open the appropriate subject area for your issue and follow the instruction on that page."] = "öffne den passenden Themenbereich für dein Thema und folge dort den Anweisungen";
 ["open the organizational unit, subject area or issue you like to delegate and follow the instruction on that page."] = "öffne die Gliederung, den Themenbereich oder das Thema, das du delegieren möchtest und folge dort den Anweisungen";
 ["or swipe"] = "oder swipen";
 ["ordered by delegation count"] = "nach Delegationsanzahl";
@@ -946,7 +946,7 @@ return {
 ["start an initiative in a new issue"] = "eine Initiative in einem neuen Thema starten";
 ["structured discussion"] = "strukturierte Diskussion";
 ["subscribe"] = "Interesse anmelden";
-["subscribe subject areas or add your interested to issues and you will be notified about changes (follow the instruction on the area or issue page)"] = "Melde dich für Themenbereiche an oder interessiere dich für Themen, damit du benachrichtigst wird (folge den Anweisungen auf der Themenbereichs- bzw. Themenseite)";
+["subscribe subject areas or add your interested to issues and you will be notified about changes (follow the instruction on the area or issue page)"] = "Melde dich für Themenbereiche an oder interessiere dich für Themen, damit du benachrichtigt wirst (folge den Anweisungen auf der Themenbereichs- bzw. Themenseite)";
 ["subscribed"] = "am Themenbereich angemeldet";
 ["suggestions (#{count}) ↓"] = "Verbesserungsvorschläge (#{count}) ↓";
 ["supporter"] = "Unterstützer";
