@@ -35,13 +35,12 @@ config.use_terms_checkboxes = {
   
 -- Absolute base url of application
 -- ------------------------------------------------------------------------
-config.absolute_base_url = "http://192.168.1.34/lf3/"
+config.absolute_base_url = "http://127.0.0.1:8080/"
 
 
 -- Connection information for the LiquidFeedback database
 -- ------------------------------------------------------------------------
-config.database = { engine='postgresql', dbname='liquid_feedback' }
-config.database = { engine='postgresql', dbname='lftest' }
+config.database = { engine='postgresql', dbname='lf3' }
 
 
 -- Location of the rocketwiki binaries
