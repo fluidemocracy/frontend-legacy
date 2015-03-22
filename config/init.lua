@@ -112,7 +112,10 @@ if not listen then
     end
   end
 
-  
+  function request.allow_caching()
+    request.add_header("Cache-Control", "max-age=3600");
+  end
+
   return
 end
 
