@@ -1578,6 +1578,22 @@ a.initiative:hover {
   background-color: #fe0;
   color: #000;
 }
+#trace_content .trace_action_success > ul {
+  background-color: #afa;
+  border: 1px solid #fe0;
+}
+#trace_content .trace_action_success > .trace_head {
+  background-color: #fe0;
+  color: #000;
+}
+#trace_content .trace_action_softfail > ul {
+  background-color: #faa;
+  border: 1px solid #fe0;
+}
+#trace_content .trace_action_softfail > .trace_head {
+  background-color: #fe0;
+  color: #000;
+}
 #trace_content .trace_sql {
   background-color: #fff;
   padding: 2px 4px;
