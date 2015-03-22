@@ -83,7 +83,8 @@ ui.section( function()
         member = member,
         image_type = "avatar",
         show_dummy = true,
-        class = "left"
+        class = "left",
+        force_update = true
       }
     }
     ui.heading{ level = 1, content = member.name }
@@ -182,3 +183,20 @@ ui.section( function()
   end )
   
 end )
+
+
+if app.session.member.id == member.id then
+  ui.script{ script = [[
+    var url = $(".microAvatar")[0].src;
+    var onload = function() {
+      this.contentWindow.location.reload(true);
+      this.removeEventListener("load", onload, false);
+      this.parentElement.removeChild(this);
+    }
+    var iframeEl = document.createElement("iframe");
+    iframeEl.style.display = "none";
+    iframeEl.src = url;
+    iframeEl.addEventListener("load", onload, false);
+    document.body.appendChild(iframeEl);
+  ]] }
+end

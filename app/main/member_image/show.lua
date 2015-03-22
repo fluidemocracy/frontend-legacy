@@ -1,6 +1,8 @@
 local image_type = param.get("image_type")
 local record = MemberImage:by_pk(param.get_id(), image_type, true)
 
+local dynamic = param.get("dynamic")
+
 local data, content_type
 
 if record then
@@ -24,7 +26,9 @@ else
 
 end
 
-request.allow_caching()
+if not dynamic then
+  request.allow_caching()
+end
 
 slot.set_layout(nil, content_type)
 slot.put_into("data", data)
