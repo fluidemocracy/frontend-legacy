@@ -345,7 +345,9 @@ end
 local filters = {}
 
 if not for_initiative and not for_issue and not no_filter then
-  filters = execute.load_chunk{module="issue", chunk="_filters.lua", params = {
+  
+  filters = execute.chunk{
+    module = "issue", chunk = "_filters", params = {
     for_events = mode == "timeline" and true or false,
     member = app.session.member, 
     for_member = for_member, 
