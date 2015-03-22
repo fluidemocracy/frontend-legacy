@@ -22,7 +22,8 @@ ui.form{
           view = "_show",
           params = {
             member = member,
-            image_type = "photo"
+            image_type = "photo",
+            force_update = true
           }
         }
       end }

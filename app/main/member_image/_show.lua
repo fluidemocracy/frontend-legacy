@@ -5,6 +5,8 @@ local image_type = param.get("image_type")
 local class = param.get("class")
 local popup_text = param.get("popup_text")
 
+local force_update = param.get("force_update", atom.boolean)
+
 if class then
   class = " " .. class
 else
@@ -25,7 +27,8 @@ else
     extension = "jpg",
     id = member_id,
     params = {
-      image_type = image_type
+      image_type = image_type,
+      dynamic = force_update and os.time() or nil
     }
   }
 end
