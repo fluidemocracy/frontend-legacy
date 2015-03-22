@@ -35,7 +35,7 @@ ui.section( function()
       {
         name = "WebMCP",
         url = "http://www.public-software-group.org/webmcp",
-        version = _WEBMCP_VERSION,
+        version = WEBMCP_VERSION or _WEBMCP_VERSION,
         license = "MIT/X11",
         license_url = "http://www.public-software-group.org/licenses"
       },
