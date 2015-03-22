@@ -1,4 +1,3 @@
-#!/usr/bin/env lua
 return {
 ["#{closed_ago} ago"] = "vor #{closed_ago}";
 ["#{count} Neutral"] = "#{count} Enthaltung";
