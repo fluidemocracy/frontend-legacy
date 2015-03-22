@@ -141,7 +141,7 @@ body {
   background-attachment: fixed;
 }
 .page {
-  background-image: url("back50.png");
+  background-color: #255078;
   max-width: 1240px;
   border-radius: 0 0 2px 2px;
   margin: 0 auto;
