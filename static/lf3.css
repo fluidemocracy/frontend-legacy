@@ -1583,6 +1583,10 @@ a.initiative:hover {
   padding: 2px 4px;
   margin-top: 8px;
 }
+#trace_content .trace_sql_time {
+  float: right;
+  font-weight: bold;
+}
 #trace_content .trace_error {
   background-color: #faa;
   color: #000;
