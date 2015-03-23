@@ -11,14 +11,12 @@ LiquidFeedback system.
 If you're using a Debian system, make sure that the following packages are
 installed:
 
-  * lua5.1
-  * postgresql
   * build-essential
+  * lua5.2
+  * liblua5.2-dev
+  * postgresql
   * libpq-dev
-  * liblua5.1-0-dev
-  * lighttpd
-  * ghc
-  * libghc6-parsec3-dev
+  * lighttpd (only for WebMCP 1.2.x support)
   * imagemagick
   * exim4
   * markdown2 (install with Python's pip)
@@ -30,10 +28,10 @@ necessary software components accordingly.
 2. Ensure that the user account of your webserver has access to the database
 ----------------------------------------------------------------------------
 
-Whichever useraccount is used by the webserver (usually `www-data`) needs to
-have access to your PostgreSQL installation. This is done by executing
-PostgreSQL's shell command `createuser` as database superuser (usually `pgsql`,
-or `postgres` for Debian installations):
+The useraccount of the webserver (usually `www-data`) or the Moonbridge server
+process needs to have access to your PostgreSQL installation. This is done by
+executing PostgreSQL's shell command `createuser` as database superuser
+(usually `pgsql`, or `postgres` for Debian installations):
 
     su - postgres
     createuser
@@ -94,22 +92,33 @@ And don't forget to quit the `www-data` shell:
     exit
 
 
-4. Install WebMCP
+4. Install Moonbridge (only for WebMCP 2.x)
+-------------------------------------------
+
+    # Download and unpack Moonbridge
+    # from http://www.public-software-group.org/pub/projects/moonbridge/
+    pmake MOONBR_LUA_PATH=/opt/moonbridge/?.lua
+    mkdir /opt/moonbridge
+    cp moonbridge /opt/moonbridge/
+    cp moonbridge_http.lua /opt/moonbridge/
+
+
+5. Install WebMCP
 -----------------
 
-Note: Using Debian, it may be necessary to append `-I /usr/include/lua5.1` at
+Note: Using Debian, it may be necessary to append `-I /usr/include/lua5.2` at
 the end of the CFLAGS line in `Makefile.options` of the WebMCP source
 distibution:
 
     # Download and unpack WebMCP
     # from http://www.public-software-group.org/pub/projects/webmcp/
-    vi Makefile.options  # Debian requires  -I /usr/include/lua5.1  at end of CFLAGS line
+    vi Makefile.options  # Debian requires  -I /usr/include/lua5.2  at end of CFLAGS line
     make
     mkdir /opt/webmcp
     cp -RL framework/* /opt/webmcp/
 
 
-5. Install the LiquidFeedback-Frontend
+6. Install the LiquidFeedback-Frontend
 --------------------------------------
 
 Unpack source tree into appropriate directory, e.g. `/opt/liquid_feedback_frontend`:
@@ -118,31 +127,26 @@ Unpack source tree into appropriate directory, e.g. `/opt/liquid_feedback_fronte
     # from http://www.public-software-group.org/pub/projects/liquid_feedback/frontend/
     mv liquid_feedback_frontend-vX.X.X /opt/liquid_feedback_frontend
 
-Create HTML code for help texts:
-
-    cd /opt/liquid_feedback_frontend/locale
-    PATH=/opt/rocketwiki-lqfb:$PATH make
-
 Make `tmp/` directory of LiquidFeedback-Frontend writable for webserver:
 
     chown www-data /opt/liquid_feedback_frontend/tmp
 
-Compile binary for fast delivery of member images:
+Compile binary for fast delivery of member images (only necessary for WebMCP 1.2.x):
 
     cd /opt/liquid_feedback_frontend/fastpath
     vi getpic.c  # check and modify #define commands as necessary
     make
 
 
-6. Configure mail system
+7. Configure mail system
 ------------------------
 
 It may be necessary to configure your server's mail system, e.g. running
 `dpkg-reconfigure exim4-config` on a Debian system.
 
 
-7. Configure the Webserver for LiquidFeedback:
-----------------------------------------------
+8. Configure the Webserver for LiquidFeedback (only for WebMCP 1.2.x)
+---------------------------------------------------------------------
 
 A sample configuration for `lighttpd` is given below (assuming `mod_alias` has
 been included elsewhere):
@@ -185,23 +189,23 @@ If you're using Debian, you may want to create a file with the name
 `/etc/lighttpd/conf-enabled/`.
 
 
-8. Configure the LiquidFeedback-Frontend:
------------------------------------------
+9. Configure the LiquidFeedback-Frontend
+----------------------------------------
 
     cd /opt/liquid_feedback_frontend/config
     cp example.lua myconfig.lua
     # edit myconfig.lua according to your needs
 
 Use the following option in your configuration file to enable fast image
-loading:
+loading (only for WebMCP 1.2.x):
 
     config.fastpath_url_func = function(member_id, image_type)
       return request.get_absolute_baseurl() .. "fastpath/getpic?" .. tostring(member_id) .. "+" .. tostring(image_type)
     end
 
 
-9. Setup regular execution of `lf_update` and related commands 
---------------------------------------------------------------
+10. Setup regular execution of `lf_update` and related commands 
+---------------------------------------------------------------
 
 The executables `lf_update`, `lf_update_issue_order`, and
 `lf_update_suggestion_order` must be executed regularly. This may be achieved
@@ -234,8 +238,8 @@ This file must be marked as executable:
 And this file should be started automatically at system boot.
 
 
-10. Setup notification loop in background
------------------------------------------
+11. Setup notification loop in background (only for WebMCP 1.2.x)
+-----------------------------------------------------------------
 
 In addition to regular execution of `lf_update` and
 `lf_update_suggestion_order`, the following commands should be executed in
@@ -246,11 +250,14 @@ background:
     echo "Event:send_notifications_loop()" | ../webmcp/bin/webmcp_shell myconfig
 
 
-11. Start the sytem
+12. Start the sytem
 -------------------
 
 After `lf_update` has been executed at least once, and the webserver has been
 restarted (using the configuration above), you should be able to access your
 LiquidFeedback system.
 
+If you use WebMCP 2.x, the server is started by calling:
+
+    /opt/moonbridge/moonbridge /opt/webmcp/bin/mcp.lua /opt/webmcp/ /opt/liquid_feedback_frontend/ main myconfig
 
