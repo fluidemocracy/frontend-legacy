@@ -155,7 +155,7 @@ ui.form{
             slot.put("<br />")
           end
           if not issue_id then
-            tmp = { { id = -1, name = "" } }
+            local tmp = { { id = -1, name = "" } }
             for i, allowed_policy in ipairs(area.allowed_policies) do
               if not allowed_policy.polling or app.session.member:has_polling_right_for_unit_id(area.unit_id) then
                 tmp[#tmp+1] = allowed_policy
