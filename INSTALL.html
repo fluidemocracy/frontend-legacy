@@ -252,13 +252,19 @@ echo "Event:send_notifications_loop()" | ../webmcp/bin/webmcp_shell myconfig
 
 <h2>12. Start the sytem</h2>
 
-<p>After <code>lf_update</code> has been executed at least once, and the webserver has been
-restarted (using the configuration above), you should be able to access your
-LiquidFeedback system.</p>
+<p>After <code>lf_update</code> has been executed at least once and (in case of WebMCP 1.2.x)
+the webserver has been restarted (using the configuration above), you should be
+able to access your LiquidFeedback system.</p>
 
 <p>If you use WebMCP 2.x, the server is started by calling:</p>
 
 <pre><code>/opt/moonbridge/moonbridge /opt/webmcp/bin/mcp.lua /opt/webmcp/ /opt/liquid_feedback_frontend/ main myconfig
 </code></pre>
+
+<p>In the latter case, the Moonbridge server will open a TCP port according to
+your configuration. Directly accessing this TCP port through your webbrowser
+is helpful for development purposes. For real-life deployment, however, it is
+recommended to further proxy the application (e.g. using nginx). The proxy can
+also add HTTPS support (which is not supported by Moonbridge itself).</p>
 </body>
 </html>
