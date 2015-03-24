@@ -2,18 +2,6 @@ if not config.fork then
   config.fork = {}
 end
 
-if not config.fork.pre then
-  config.fork.pre = 4
-end
-
-if not config.fork.max then
-  config.fork.max = 8
-end
-
-if not config.fork.delay then
-  config.fork.delay = 1
-end
-
 if not config.port then
   config.port = 8080
 end
