@@ -53,21 +53,20 @@ config.formatting_engines = {
     args = {'-s', 'escape', '-x', 'nofollow,wiki-tables'},
     remove_images = true
   },
-  { id = "markdown_py",
-    name = "Python Markdown",
-    executable = "markdown_py",
-    args = {'-s', 'escape', '-x', 'extra', '-x', 'nl2br', '-x', 'sane_lists'},
-    remove_images = true
-  },
-  { id = "rocketwiki",
-    name = "RocketWiki",
-    executable = "/opt/rocketwiki-lqfb/rocketwiki-lqfb"
-  },
-  { id = "compat",
-    name = "Traditional WIKI syntax",
-    executable = "/opt/rocketwiki-lqfb/rocketwiki-lqfb-compat"
-  },
-
+--  { id = "markdown_py",
+--    name = "Python Markdown",
+--    executable = "markdown_py",
+--    args = {'-s', 'escape', '-x', 'extra', '-x', 'nl2br', '-x', 'sane_lists'},
+--    remove_images = true
+--  },
+--  { id = "rocketwiki",
+--    name = "RocketWiki",
+--    executable = "/opt/rocketwiki-lqfb/rocketwiki-lqfb"
+--  },
+--  { id = "compat",
+--    name = "Traditional WIKI syntax",
+--    executable = "/opt/rocketwiki-lqfb/rocketwiki-lqfb-compat"
+--  },
 }
 
 
@@ -104,18 +103,22 @@ config.public_access = "none"
 -- ------------------------------------------------------------------------
 -- config.disable_registration = true
 
+
 -- List of enabled languages, defaults to available languages
 -- ------------------------------------------------------------------------
 -- config.enabled_languages = { 'en', 'de', 'eo', 'el', 'hu', 'it', 'ka', 'nl', 'zh-Hans', 'zh-TW' }
+
 
 -- Default language, defaults to "en"
 -- ------------------------------------------------------------------------
 -- config.default_lang = "en"
 
+
 -- after how long is a user considered inactive and the trustee will see warning,
 -- notation is according to postgresql intervals, default: no warning at all
 -- ------------------------------------------------------------------------
 -- config.delegation_warning_time = '6 months'
+
 
 -- after which time a user is advised (_soft) or forced (_hard) to check
 -- unit and area delegations. default: no check at all
@@ -123,14 +126,17 @@ config.public_access = "none"
 -- config.check_delegations_interval_hard = "6 months"
 -- config.check_delegations_interval_soft = "3 months"
 
+
 -- default option when checking delegations
 -- available options: "confirm", "revoke" and "none", default: "confirm"
 -- ------------------------------------------------------------------------
 -- config.check_delegations_default = "confirm"
 
+
 -- Prefix of all automatic mails, defaults to "[Liquid Feedback] "
 -- ------------------------------------------------------------------------
 -- config.mail_subject_prefix = "[LiquidFeedback] "
+
 
 -- Sender of all automatic mails, defaults to system defaults
 -- ------------------------------------------------------------------------
@@ -138,11 +144,13 @@ config.public_access = "none"
 -- config.mail_from = { name = "LiquidFeedback", address = "liquidfeedback@example.com" }
 -- config.mail_reply_to = { name = "Support", address = "support@example.com" }
 
+
 -- Configuration of password hashing algorithm (defaults to "crypt_sha512")
 -- ------------------------------------------------------------------------
 -- config.password_hash_algorithm = "crypt_sha512"
 -- config.password_hash_algorithm = "crypt_sha256"
 -- config.password_hash_algorithm = "crypt_md5"
+
 
 -- Number of rounds for crypt_sha* algorithms, minimum and maximum
 -- (defaults to minimum 10000 and maximum 20000)
@@ -155,13 +163,16 @@ config.public_access = "none"
 -- ------------------------------------------------------------------------
 -- config.fastpath_url_func = nil
 
+
 -- Local directory for database dumps offered for download
 -- ------------------------------------------------------------------------
 -- config.download_dir = nil
 
+
 -- Special use terms for database dump download
 -- ------------------------------------------------------------------------
 -- config.download_use_terms = "=== Download use terms ===\n"
+
 
 -- Use custom image conversion, defaults to ImageMagick's convert
 -- ------------------------------------------------------------------------
@@ -171,19 +182,23 @@ config.public_access = "none"
 --  photo =  function(data) return extos.pfilter(data, "convert", "jpeg:-", "-thumbnail", "240x240", "jpeg:-") end
 --}
 
+
 -- Display a html formatted public message of the day
 -- ------------------------------------------------------------------------
 -- config.motd_public = "<h1>Message of the day (public)</h1><p>The MOTD is formatted with HTML</p>"
 
+
 -- Display a html formatted internal message of the day
 -- ------------------------------------------------------------------------
 -- config.motd_intern = "<h1>Message of the day (intern)</h1><p>The MOTD is formatted with HTML</p>"
+
 
 -- Automatic issue related discussion URL
 -- ------------------------------------------------------------------------
 -- config.issue_discussion_url_func = function(issue)
 --   return "http://example.com/discussion/issue_" .. tostring(issue.id)
 -- end
+
 
 -- Integration of Etherpad, disabled by default
 -- ------------------------------------------------------------------------
@@ -194,6 +209,7 @@ config.public_access = "none"
 --  group_id = "mygroupname",
 --  cookie_path = "/"
 --}
+
 
 -- Free timings
 -- ------------------------------------------------------------------------
@@ -238,6 +254,7 @@ config.free_timing = {
   end
 }
 
+
 -- Admin logger
 -- ------------------------------------------------------------------------
 -- Logging administrative activities
@@ -254,6 +271,58 @@ config.admin_logger = function(params)
 
 end
 --]]
+
+
+-- Network interface to bind to
+-- ------------------------------------------------------------------------
+-- Available options:
+-- true: bind to localhost (default)
+-- false: bind to all interface
+-- ------------------------------------------------------------------------
+-- config.localhost = true
+
+
+-- Network port to bind to
+-- ------------------------------------------------------------------------
+-- config.port = 8080
+
+
+-- Serving content via IPV6
+-- ------------------------------------------------------------------------
+-- Available options:
+-- nil or false: do not serve via IPv6 (default)
+-- true: serve via IPv6
+-- ------------------------------------------------------------------------
+-- config.ipv6 = false
+
+
+-- Application server fork configuration
+-- ------------------------------------------------------------------------
+-- config.fork = {
+--   pre = 2,            -- desired number of spare (idle) processes
+--   min = 4,            -- minimum number of processes
+--   max = 128,          -- maximum number of processes (hard limit)
+--   delay = 0.125,      -- delay (seconds) between creation of spare processes
+--   error_delay = 2,    -- delay (seconds) before retry of failed process creation
+--   exit_delay = 2,     -- delay (seconds) between destruction of excessive spare processes
+--   idle_timeout = 900, -- idle time (seconds) after a fork gets terminated (0 for no timeout)
+--   memory_limit = 0,   -- maximum memory consumption (bytes) before process gets terminated
+--   min_requests = 50,  -- minimum count of requests handled before fork is terminated
+--   max_requests = 100  -- maximum count of requests handled before fork is terminated
+-- }
+
+
+-- HTTP server options
+-- ------------------------------------------------------------------------
+-- http_options = {
+--   static_headers            = {}            -- string or table of static headers to be returned with every request
+--   request_header_size_limit = 1024*1024,    -- maximum size of request body sent by client
+--   request_body_size_limit   = 64*1024*1024, -- maximum size of request body sent by client
+--   request_header_timeout    = 360,          -- time after which request headers must have been received and processed
+--   timeout                   = 1800,         -- time in which request body and response must be sent
+--   maximum_input_chunk_size  = 16384         -- tweaks behavior of request-body parser
+--   minimum_output_chunk_size = 1024          -- chunk size for chunked-transfer-encoding
+-- }
 
 
 -- WebMCP accelerator
