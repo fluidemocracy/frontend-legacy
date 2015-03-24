@@ -72,6 +72,13 @@ end
 -- compatibility for WebMCP 1.2.6
 if not listen then
   
+  WEBMCP_BASE_PATH = request.get_app_basepath()
+
+  -- workaround bug in WebMCP 1.2.6
+  if not string.find(WEBMCP_BASE_PATH, "/$") then
+    WEBMCP_BASE_PATH = WEBMCP_BASE_PATH .. "/"
+  end
+  
   -- open and set default database handle
   _G.db = assert(mondelefant.connect(config.database))
 
@@ -108,32 +115,4 @@ if not listen then
     request.add_header("Cache-Control", "max-age=3600");
   end
 
-  return
 end
-
-if not config.fork then
-  config.fork = {}
-end
-
-if not config.fork.pre then
-  config.fork.pre = 4
-end
-
-if not config.fork.max then
-  config.fork.max = 8
-end
-
-if not config.fork.delay then
-  config.fork.delay = 1
-end
-
-if not config.port then
-  config.port = 8080
-end
-
-listen{
-  { proto = "tcp4", port = config.port, localhost = true },
-  pre_fork = config.fork.pre,
-  max_fork = config.fork.max,
-  fork_delay = config.fork.delay
-}

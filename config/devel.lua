@@ -271,6 +271,9 @@ config.free_timing = {
 
 config.enable_debug_trace = true
 
+config.fork = { pre = 64, max = 256, delay = 0.01 }
+
+
 -- WebMCP accelerator
 -- uncomment the following two lines to use C implementations of chosen
 -- functions and to disable garbage collection during the request, to
