@@ -235,7 +235,7 @@ config.tell_others = {
 
 config.free_timing = {
   calculate_func = function(policy, timing_string)
-    function interval_by_seconds(secs)
+    local function interval_by_seconds(secs)
       local secs_per_day = 60 * 60 * 24
       local days
       days = math.floor(secs / secs_per_day)
