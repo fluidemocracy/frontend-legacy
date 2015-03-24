@@ -59,8 +59,7 @@ function Event.object:send_notification()
     :add_where("event_seen_by_member.member_id ISNULL OR event_seen_by_member.member_id != member.id")
     :exec()
     
-  print (_("Event #{id} -> #{num} members", { id = self.id, num = #members_to_notify }))
-
+  io.stderr:write("Sending notifications for event #{id} to #{num} members", { id = self.id, num = #members_to_notify })
 
   local url
 
@@ -167,10 +166,22 @@ function Event:send_next_notification()
     
     event:send_notification()
     
+    if config.notification_handler_func then
+      config.notification_handler_func(event)
+    end
+    
     return true
 
   end
 
+end
+
+function Event:send_pending_notifications()
+  while true do
+    if not Event:send_next_notification() then
+      break 
+    end
+  end
 end
 
 function Event:send_notifications_loop()
@@ -178,8 +189,8 @@ function Event:send_notifications_loop()
   while true do
     local did_work = Event:send_next_notification()
     if not did_work then
-      print "Sleeping 1 second"
-      os.execute("sleep 1")
+      print "Sleeping 5 second"
+      os.execute("sleep 5")
     end
   end
   
