@@ -73,6 +73,11 @@ end
 if not listen then
   
   WEBMCP_BASE_PATH = request.get_app_basepath()
+
+  -- workaround bug in WebMCP 1.2.6
+  if not string.find(WEBMCP_BASE_PATH, "/$") then
+    WEBMCP_BASE_PATH = WEBMCP_BASE_PATH .. "/"
+  end
   
   -- open and set default database handle
   _G.db = assert(mondelefant.connect(config.database))
