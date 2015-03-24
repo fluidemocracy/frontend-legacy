@@ -59,7 +59,7 @@ function Event.object:send_notification()
     :add_where("event_seen_by_member.member_id ISNULL OR event_seen_by_member.member_id != member.id")
     :exec()
     
-  io.stderr:write("Sending notifications for event #{id} to #{num} members", { id = self.id, num = #members_to_notify })
+  io.stderr:write("Sending notifications for event " .. self.id .. " to " .. (#members_to_notify) .. " members\n")
 
   local url
 
