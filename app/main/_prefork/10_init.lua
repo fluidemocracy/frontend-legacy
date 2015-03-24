@@ -11,7 +11,7 @@ if config.fork.min == nil then
 end
 
 if config.fork.max == nil then
-  config.fork.max = 8
+  config.fork.max = 128
 end
 
 if config.fork.delay == nil then
@@ -46,6 +46,7 @@ local listen_options = {
   fork_error_delay      = config.fork.error_delay,
   exit_delay            = config.fork.exit_delay,
   idle_timeout          = config.fork.idle_timeout,
+  memory_limit          = config.fork.memory_limit,
   min_requests_per_fork = config.fork.min_requests,
   max_requests_per_fork = config.fork.max_requests,
   http_options          = config.http_options
