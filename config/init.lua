@@ -72,6 +72,8 @@ end
 -- compatibility for WebMCP 1.2.6
 if not listen then
   
+  WEBMCP_BASE_PATH = request.get_app_basepath()
+  
   -- open and set default database handle
   _G.db = assert(mondelefant.connect(config.database))
 
