@@ -25,7 +25,7 @@ ui.form{
   },
   id = id,
   content = function()
-    policies = Policy:build_selector{ active = true }:exec()
+    local policies = Policy:build_selector{ active = true }:exec()
     local def_policy = {
       {
         id = "-1",
