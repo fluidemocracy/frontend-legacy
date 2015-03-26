@@ -28,11 +28,12 @@ for i, image_type in ipairs{"avatar", "photo"} do
       end
 
       if not member_image then
+        local meta = request.get_param{ name = image_type, meta = true }
         member_image = MemberImage:new()
         member_image.member_id = member_id
         member_image.image_type = image_type
         member_image.scaled = false
-        member_image.content_type = cgi.post_types[image_type] or nil
+        member_image.content_type = meta.content_type
         member_image.data = ""
         member_image:save()
       end
