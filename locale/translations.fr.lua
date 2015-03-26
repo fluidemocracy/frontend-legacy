@@ -1,3 +1,4 @@
+#!/usr/bin/env lua
 return {
 ["#{closed_ago} ago"] = false;
 ["#{count} Neutral"] = false;
@@ -45,7 +46,6 @@ return {
 ["(invited)"] = false;
 ["(new window)"] = false;
 ["+ #{weight}"] = false;
-["+ add new organizational unit"] = false;
 ["+ add new subject area"] = false;
 ["+getElementById("] = false;
 ["1 matching issue found"] = false;
@@ -97,7 +97,6 @@ return {
 ["Are you aware that revoking an initiative is irrevocable?"] = false;
 ["Area"] = false;
 ["Area delegation"] = false;
-["Area list of '#{unit_name}'"] = false;
 ["As long as you are interested in this issue yourself, the delegation is suspended for this issue, but it will be applied again in the voting phase unless you vote yourself."] = false;
 ["As soon as one initiative of this issue reaches the 1st quorum of #{quorum} support, the issue will proceed to discussion phase."] = false;
 ["Author"] = false;
@@ -113,7 +112,6 @@ return {
 ["Can't remove last initiator"] = false;
 ["Can't send confirmation email"] = false;
 ["Cancel"] = false;
-["Cancel [nullify]"] = false;
 ["Cancel issue"] = false;
 ["Cancel issue ##{id}"] = false;
 ["Canceled by administrative intervention"] = false;
@@ -148,7 +146,6 @@ return {
 ["Confirmation code invalid!"] = false;
 ["Contacts"] = false;
 ["Create a new issue"] = false;
-["Create new area"] = false;
 ["Create new policy"] = false;
 ["Create new unit"] = false;
 ["Created at"] = false;
@@ -207,11 +204,8 @@ return {
 ["During the discussion phase, the issue is debated on while the initiators improve the proposals and reasons in their initiatives. Supporters of initiatives can write and rate suggestions for improvement."] = false;
 ["During the verification phase, existing initiatives cannot be changed anymore. Initiatives need to pass the 2nd quorum of #{quorum} at end of verification phase to become admitted for voting."] = false;
 ["During the voting phase, votes for all admitted initiatives in this issue can be cast. The final result will be calculated as soon as this phase ends."] = false;
-["Edit"] = false;
 ["Edit again"] = false;
-["Edit areas"] = false;
 ["Edit initiative"] = false;
-["Edit profile"] = false;
 ["Edit voting comment"] = false;
 ["Edit your profile data"] = false;
 ["Eligible as winner"] = false;
@@ -236,7 +230,6 @@ return {
 ["Error while converting image. Please note, that only JPG files are supported!"] = false;
 ["Error while updating member, database reported:<br /><br /> (#{errormessage})"] = false;
 ["Etherpad authentication failed"] = false;
-["Event #{id} -> #{num} members"] = false;
 ["External memberships"] = false;
 ["External posts"] = false;
 ["Failed  #{sign}#{num}/#{den}"] = false;
@@ -262,7 +255,7 @@ return {
 ["Hello,\n\n"] = false;
 ["Help #{id}"] = false;
 ["Hide"] = false;
-["Hide active units"] = false;
+["Hide inactive"] = false;
 ["Hint"] = false;
 ["History"] = false;
 ["Home"] = false;
@@ -304,7 +297,6 @@ return {
 ["Identification"] = false;
 ["If this link is not working, please open following url in your web browser:\n\n"] = false;
 ["If you cannot find any appropriate existing issue, "] = false;
-["Ignore initiative"] = false;
 ["Implicitly admitted"] = false;
 ["Incoming delegations"] = false;
 ["Incoming delegations for '#{member_name}'"] = false;
@@ -377,10 +369,8 @@ return {
 ["Login name"] = false;
 ["Login name request"] = false;
 ["Login-Name: "] = false;
-["Logout"] = false;
 ["Logout successful"] = false;
 ["Make your choice by placing the initiatives"] = false;
-["Manage system settings"] = false;
 ["Member"] = false;
 ["Member has been removed from initiators"] = false;
 ["Member has been removed from your contacts"] = false;
@@ -391,7 +381,6 @@ return {
 ["Member is not participating in the only area of the unit"] = false;
 ["Member is now invited to be initiator"] = false;
 ["Member list"] = false;
-["Member menu"] = false;
 ["Member name"] = false;
 ["Member successfully deactivated"] = false;
 ["Member successfully registered"] = false;
@@ -560,15 +549,12 @@ return {
 ["Set area delegation"] = false;
 ["Set issue delegation"] = false;
 ["Set unit delegation"] = false;
-["Settings"] = false;
 ["Should the initiator implement this suggestion?"] = false;
 ["Show"] = false;
 ["Show all members"] = false;
-["Show areas in use"] = false;
-["Show areas not in use"] = false;
 ["Show full history"] = false;
 ["Show full member list"] = false;
-["Show inactive units"] = false;
+["Show inactive"] = false;
 ["Show less"] = false;
 ["Show member"] = false;
 ["Show more and rate this"] = false;
@@ -576,7 +562,6 @@ return {
 ["Show older events"] = false;
 ["Show policies in use"] = false;
 ["Show policies not in use"] = false;
-["Show profile"] = false;
 ["Show voting ballot"] = false;
 ["Sorry, but there is not confirmed email address for your account. Please contact the administrator or support."] = false;
 ["Sorry, but you are currently not invited"] = false;
@@ -603,7 +588,6 @@ return {
 ["Suggestion for improvement #{id}"] = false;
 ["Suggestions"] = false;
 ["Suggestions for improvement (#{count})"] = false;
-["Support this initiative"] = false;
 ["Syntax help"] = false;
 ["System administration"] = false;
 ["System settings"] = false;
@@ -685,7 +669,6 @@ return {
 ["What this member is currently supporting"] = false;
 ["Wiki engine"] = false;
 ["Wiki engine for statement"] = false;
-["Withdraw"] = false;
 ["Withdraw membership"] = false;
 ["Yes"] = false;
 ["Yes, it's implemented"] = false;
@@ -706,7 +689,6 @@ return {
 ["You are not participating in any of the #{count} areas in this unit"] = false;
 ["You are not participating in the only area of the unit"] = false;
 ["You are now initiator of this initiative"] = false;
-["You are potential supporter"] = false;
 ["You are subscribed for this subject area"] = false;
 ["You are supporter"] = false;
 ["You are supporting this initiative"] = false;
@@ -735,8 +717,6 @@ return {
 ["You refused to become initiator of this initiative"] = false;
 ["You saved this member as contact (i.e. to use as delegatee)"] = false;
 ["You saved this member as contact (i.e. to use as delegatee) and others can see it"] = false;
-["You were potential supporter"] = false;
-["You were supporter"] = false;
 ["You've successfully registered and you can login now with your login and password!"] = false;
 ["Your avatar is a small photo, which will be shown always next to your name."] = false;
 ["Your choice"] = false;
@@ -762,6 +742,16 @@ return {
 ["[event mail]     Issue: ##{id}"] = false;
 ["[event mail]     Phase: #{phase}"] = false;
 ["[event mail]    Policy: #{policy}"] = false;
+["[introduction] iniatives and issues"] = false;
+["[introduction] organizational units"] = false;
+["[introduction] phase 1 admission"] = false;
+["[introduction] phase 2 discussion"] = false;
+["[introduction] phase 3 verification"] = false;
+["[introduction] phase 4 voting"] = false;
+["[introduction] preference voting"] = false;
+["[introduction] rules of procedure"] = false;
+["[introduction] subject areas"] = false;
+["[introduction] vote delegation"] = false;
 ["[not displayed public]"] = false;
 ["abandoned"] = false;
 ["accept invitation"] = false;

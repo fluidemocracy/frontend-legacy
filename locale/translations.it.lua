@@ -1,3 +1,4 @@
+#!/usr/bin/env lua
 return {
 ["#{closed_ago} ago"] = false;
 ["#{count} Neutral"] = false;
@@ -45,7 +46,6 @@ return {
 ["(invited)"] = false;
 ["(new window)"] = "(nuova finestra)";
 ["+ #{weight}"] = "+ #{weight}";
-["+ add new organizational unit"] = false;
 ["+ add new subject area"] = false;
 ["+getElementById("] = "+getElementById(";
 ["1 matching issue found"] = false;
@@ -97,7 +97,6 @@ return {
 ["Are you aware that revoking an initiative is irrevocable?"] = false;
 ["Area"] = "Area";
 ["Area delegation"] = "Delega di area";
-["Area list of '#{unit_name}'"] = "Elenco delle aree di '#{unit_name}'";
 ["As long as you are interested in this issue yourself, the delegation is suspended for this issue, but it will be applied again in the voting phase unless you vote yourself."] = false;
 ["As soon as one initiative of this issue reaches the 1st quorum of #{quorum} support, the issue will proceed to discussion phase."] = false;
 ["Author"] = "Autore";
@@ -113,7 +112,6 @@ return {
 ["Can't remove last initiator"] = "Non posso eliminare l'ultimo promotore";
 ["Can't send confirmation email"] = "Non posso inviare l'email di conferma";
 ["Cancel"] = "Annulla";
-["Cancel [nullify]"] = false;
 ["Cancel issue"] = false;
 ["Cancel issue ##{id}"] = false;
 ["Canceled by administrative intervention"] = false;
@@ -148,7 +146,6 @@ return {
 ["Confirmation code invalid!"] = "Il codice di conferma non e' valido";
 ["Contacts"] = "Contatti";
 ["Create a new issue"] = false;
-["Create new area"] = "Crea una nuova area";
 ["Create new policy"] = "Crea una nuova policy";
 ["Create new unit"] = "Crea una nuova sezione";
 ["Created at"] = "Creazione";
@@ -207,11 +204,8 @@ return {
 ["During the discussion phase, the issue is debated on while the initiators improve the proposals and reasons in their initiatives. Supporters of initiatives can write and rate suggestions for improvement."] = false;
 ["During the verification phase, existing initiatives cannot be changed anymore. Initiatives need to pass the 2nd quorum of #{quorum} at end of verification phase to become admitted for voting."] = false;
 ["During the voting phase, votes for all admitted initiatives in this issue can be cast. The final result will be calculated as soon as this phase ends."] = false;
-["Edit"] = "Modifica";
 ["Edit again"] = false;
-["Edit areas"] = "Modifica le aree";
 ["Edit initiative"] = "Modifica l'iniziativa";
-["Edit profile"] = "Modifica il profilo";
 ["Edit voting comment"] = false;
 ["Edit your profile data"] = false;
 ["Eligible as winner"] = "Candidato all'approvazione";
@@ -236,7 +230,6 @@ return {
 ["Error while converting image. Please note, that only JPG files are supported!"] = "Errore nella conversione dell'immagine. Solo i file JPG sono supportati!";
 ["Error while updating member, database reported:<br /><br /> (#{errormessage})"] = "Errore nell'aggiornamento utente, messaggio dal database:<br /><br /> (#{errormessage})";
 ["Etherpad authentication failed"] = "Autenticazione etherpad fallita";
-["Event #{id} -> #{num} members"] = "Evento #{id} -> #{num} utenti";
 ["External memberships"] = "Utenti esterni";
 ["External posts"] = "Post esterni";
 ["Failed  #{sign}#{num}/#{den}"] = false;
@@ -262,7 +255,7 @@ return {
 ["Hello,\n\n"] = false;
 ["Help #{id}"] = "Aiuto #{id}";
 ["Hide"] = "Nascondi";
-["Hide active units"] = false;
+["Hide inactive"] = false;
 ["Hint"] = "Suggerimento";
 ["History"] = "Storia";
 ["Home"] = "Home";
@@ -304,7 +297,6 @@ return {
 ["Identification"] = "Identificativo";
 ["If this link is not working, please open following url in your web browser:\n\n"] = "Se questo link non funziona, puoi aprire l'indirizzo seguente nel tuo browser:\n\n";
 ["If you cannot find any appropriate existing issue, "] = false;
-["Ignore initiative"] = "Ignora l'iniziativa";
 ["Implicitly admitted"] = false;
 ["Incoming delegations"] = "Deleghe ricevute";
 ["Incoming delegations for '#{member_name}'"] = false;
@@ -377,10 +369,8 @@ return {
 ["Login name"] = "Nome utente";
 ["Login name request"] = false;
 ["Login-Name: "] = false;
-["Logout"] = "Logout";
 ["Logout successful"] = "Logout effettuato";
 ["Make your choice by placing the initiatives"] = false;
-["Manage system settings"] = false;
 ["Member"] = "Utente";
 ["Member has been removed from initiators"] = "L'utente e' stato rimosso dai promotori";
 ["Member has been removed from your contacts"] = "L'utente e' stato rimosso dai tuoi contatti";
@@ -391,7 +381,6 @@ return {
 ["Member is not participating in the only area of the unit"] = "L'utente non partecipa all'unica area di questa sezione";
 ["Member is now invited to be initiator"] = "L'utente e' stato invitato ad essere promotore";
 ["Member list"] = "Elenco utenti";
-["Member menu"] = "Menu utente";
 ["Member name"] = "Nome utente";
 ["Member successfully deactivated"] = false;
 ["Member successfully registered"] = "L'utente registrato con successo";
@@ -560,15 +549,12 @@ return {
 ["Set area delegation"] = false;
 ["Set issue delegation"] = false;
 ["Set unit delegation"] = "Imposta la delega di sezione";
-["Settings"] = "Impostazioni";
 ["Should the initiator implement this suggestion?"] = false;
 ["Show"] = "Mostra";
 ["Show all members"] = false;
-["Show areas in use"] = "Mostra le aree in uso";
-["Show areas not in use"] = "Mostra le aree non in uso";
 ["Show full history"] = false;
 ["Show full member list"] = false;
-["Show inactive units"] = false;
+["Show inactive"] = false;
 ["Show less"] = false;
 ["Show member"] = "Mostra l'utente";
 ["Show more and rate this"] = false;
@@ -576,7 +562,6 @@ return {
 ["Show older events"] = "Mostra gli eventi piu' vecchi";
 ["Show policies in use"] = "Mostra le policy in uso";
 ["Show policies not in use"] = "Mostra le policy non usate";
-["Show profile"] = "Mostra il profilo";
 ["Show voting ballot"] = false;
 ["Sorry, but there is not confirmed email address for your account. Please contact the administrator or support."] = "Purtroppo non c'e' un indirizzo email confermato per il tuo account. Si consiglia di contattare l'amministratore o il supporto.";
 ["Sorry, but you are currently not invited"] = "Purtroppo al momento non hai l'invito.";
@@ -603,7 +588,6 @@ return {
 ["Suggestion for improvement #{id}"] = false;
 ["Suggestions"] = "Suggerimenti";
 ["Suggestions for improvement (#{count})"] = false;
-["Support this initiative"] = "Sostieni questa iniziativa";
 ["Syntax help"] = "Manuale sintassi";
 ["System administration"] = false;
 ["System settings"] = false;
@@ -685,7 +669,6 @@ return {
 ["What this member is currently supporting"] = false;
 ["Wiki engine"] = "Tipo di wiki";
 ["Wiki engine for statement"] = "Tipo di wiki per il testo";
-["Withdraw"] = "Ritirati";
 ["Withdraw membership"] = "Ritira l'iscrizione";
 ["Yes"] = "Si";
 ["Yes, it's implemented"] = false;
@@ -706,7 +689,6 @@ return {
 ["You are not participating in any of the #{count} areas in this unit"] = "Non stai partecipando a nessuna delle #{count} aree in questa sezione";
 ["You are not participating in the only area of the unit"] = "Non stai partecipando all'unica area di questa sezione";
 ["You are now initiator of this initiative"] = "Sei promotore di questa iniziativa";
-["You are potential supporter"] = "Sei un potenziale sostenitore";
 ["You are subscribed for this subject area"] = false;
 ["You are supporter"] = "Sei un sostenitore";
 ["You are supporting this initiative"] = false;
@@ -735,8 +717,6 @@ return {
 ["You refused to become initiator of this initiative"] = false;
 ["You saved this member as contact (i.e. to use as delegatee)"] = false;
 ["You saved this member as contact (i.e. to use as delegatee) and others can see it"] = false;
-["You were potential supporter"] = "Eri un potenziale sostenitore";
-["You were supporter"] = "Eri un sostenitore";
 ["You've successfully registered and you can login now with your login and password!"] = "La registrazione e' terminata correttamente, adesso puoi entrare con nome utente e password!";
 ["Your avatar is a small photo, which will be shown always next to your name."] = false;
 ["Your choice"] = false;
@@ -762,6 +742,16 @@ return {
 ["[event mail]     Issue: ##{id}"] = "[event mail]  Tematica: ##{id}";
 ["[event mail]     Phase: #{phase}"] = "[event mail]      Fase: #{phase}";
 ["[event mail]    Policy: #{policy}"] = "[event mail]    Policy: #{policy}";
+["[introduction] iniatives and issues"] = false;
+["[introduction] organizational units"] = false;
+["[introduction] phase 1 admission"] = false;
+["[introduction] phase 2 discussion"] = false;
+["[introduction] phase 3 verification"] = false;
+["[introduction] phase 4 voting"] = false;
+["[introduction] preference voting"] = false;
+["[introduction] rules of procedure"] = false;
+["[introduction] subject areas"] = false;
+["[introduction] vote delegation"] = false;
 ["[not displayed public]"] = "[non visibile pubblicamente]";
 ["abandoned"] = "abbandonato";
 ["accept invitation"] = false;

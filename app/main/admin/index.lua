@@ -137,7 +137,7 @@ ui.section( function()
     end
     
     slot.put("<br />")
-    ui.link { module = "admin", view = "unit_edit", content = _"+ add new organizational unit" }
+    ui.link { module = "admin", view = "unit_edit", content = _"Create new unit" }
     slot.put("<br />")
     slot.put("<br />")
     
