@@ -2,9 +2,7 @@ local id = param.get_id()
 
 local unit = Unit:by_id(id)
 
-if unit then
-  ui.titleAdmin(_"Organizational unit")
-end
+ui.titleAdmin(_"Organizational unit")
 
 local units = {
   { id = nil, name = "" }
