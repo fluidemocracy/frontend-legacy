@@ -2,12 +2,12 @@ local policy = Policy:by_id(param.get_id()) or Policy:new()
 
 local hint = not policy.id
 
-ui.titleAdmin(policy.name or _"New policy")
+ui.titleAdmin(_"Policy")
 
 ui.section( function()
 
   ui.sectionHead( function()
-    ui.heading { level = 1, content = _"Policy" }
+    ui.heading { level = 1, content = policy and policy.name or _"New policy" }
   end )
   ui.sectionRow( function()
     ui.form{

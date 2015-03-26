@@ -4,7 +4,7 @@ local member = Member:by_id(id)
 
 local deactivated = member and member.locked and member.login == nil and member.authority_login == nil
 
-ui.title(_"Member")
+ui.titleAdmin(_"Member")
 
 local units_selector = Unit:new_selector()
   

@@ -1,7 +1,10 @@
-local units = Unit:get_flattened_tree{ active = true }
+local inactive = param.get("inactive", atom.boolean)
+
+local units = Unit:get_flattened_tree{ include_inactive = inactive }
+
 local policies = Policy:build_selector{}:add_order_by("index"):exec()
 
-slot.put_into("title", _"Manage system settings")
+ui.titleAdmin()
 
 ui.sidebar( "tab-members", function()
   ui.sidebarHead( function()
@@ -102,12 +105,26 @@ ui.section( function()
         attr = { style = "margin-left: " .. ((unit.depth - 1)* 2) .. "em;" },
         content = function ()
           ui.heading { level = 1, content = function ()
-            ui.link{ text = unit.name, module = "admin", view = "unit_edit", id = unit.id }
+            local class
+            if unit.active == false then
+              class = "inactive"
+            end
+            ui.link{ attr = { class = class }, text = unit.name, module = "admin", view = "unit_edit", id = unit.id }
           end }
           ui.tag { tag = "ul", attr = { class = "ul" }, content = function ()
-            for i, area in ipairs(unit:get_reference_selector("areas"):add_order_by("name"):exec()) do
+            local areas
+            if not inactive then
+              areas = unit:get_reference_selector("areas"):add_order_by("name"):add_where("active"):exec()
+            else
+              areas = unit:get_reference_selector("areas"):add_order_by("name"):exec()
+            end
+            for i, area in ipairs(areas) do
               ui.tag { tag = "li", content = function ()
-                ui.link{ text = area.name, module = "admin", view = "area_show", id = area.id }
+                local class
+                if area.active == false then
+                  class = "inactive"
+                end
+                ui.link{ attr = { class = class }, text = area.name, module = "admin", view = "area_show", id = area.id }
               end }
             end
             ui.tag { tag = "li", content = function ()
@@ -121,6 +138,14 @@ ui.section( function()
     
     slot.put("<br />")
     ui.link { module = "admin", view = "unit_edit", content = _"+ add new organizational unit" }
+    slot.put("<br />")
+    slot.put("<br />")
+    
+    if (not inactive) then
+      ui.link { module = "admin", view = "index", params = { inactive = true }, content = _"Show inactive" }
+    else
+      ui.link { module = "admin", view = "index", content = _"Hide inactive" }
+    end
       
   end)
 end)
