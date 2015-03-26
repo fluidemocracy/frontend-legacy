@@ -1,3 +1,4 @@
+#!/usr/bin/env lua
 return {
 ["#{closed_ago} ago"] = false;
 ["#{count} Neutral"] = false;
@@ -45,7 +46,6 @@ return {
 ["(invited)"] = false;
 ["(new window)"] = "(νέο παράθυρο)";
 ["+ #{weight}"] = "+ #{weight}";
-["+ add new organizational unit"] = false;
 ["+ add new subject area"] = false;
 ["+getElementById("] = "+getElementById(";
 ["1 matching issue found"] = false;
@@ -97,7 +97,6 @@ return {
 ["Are you aware that revoking an initiative is irrevocable?"] = false;
 ["Area"] = "Τομέας";
 ["Area delegation"] = "Ανάθεση τομέα";
-["Area list of '#{unit_name}'"] = "Τομείς ενότητας '#{unit_name}'";
 ["As long as you are interested in this issue yourself, the delegation is suspended for this issue, but it will be applied again in the voting phase unless you vote yourself."] = false;
 ["As soon as one initiative of this issue reaches the 1st quorum of #{quorum} support, the issue will proceed to discussion phase."] = false;
 ["Author"] = "Συντάκτης";
@@ -113,7 +112,6 @@ return {
 ["Can't remove last initiator"] = "Δεν μπορεί να αφαιρεθεί ο τελευταίος εισηγητής";
 ["Can't send confirmation email"] = "Δεν ήταν δυνατή η αποστολή email επιβεβαίωσης.";
 ["Cancel"] = "Άκυρο";
-["Cancel [nullify]"] = "Ακύρωση";
 ["Cancel issue"] = "Ακύρωση θέματος";
 ["Cancel issue ##{id}"] = false;
 ["Canceled by administrative intervention"] = "Ακυρωμένο με παρέμβαση διαχειριστή";
@@ -148,7 +146,6 @@ return {
 ["Confirmation code invalid!"] = "Άκυρος κωδικός επιβεβαίωσης!";
 ["Contacts"] = "Επαφές";
 ["Create a new issue"] = false;
-["Create new area"] = "Δημιουργία νέου τομέα";
 ["Create new policy"] = "Δημιουργία νέου κανονισμού";
 ["Create new unit"] = "Δημιουργία νέας ενότητας";
 ["Created at"] = "Δημιουργήθηκε στις";
@@ -207,11 +204,8 @@ return {
 ["During the discussion phase, the issue is debated on while the initiators improve the proposals and reasons in their initiatives. Supporters of initiatives can write and rate suggestions for improvement."] = false;
 ["During the verification phase, existing initiatives cannot be changed anymore. Initiatives need to pass the 2nd quorum of #{quorum} at end of verification phase to become admitted for voting."] = false;
 ["During the voting phase, votes for all admitted initiatives in this issue can be cast. The final result will be calculated as soon as this phase ends."] = false;
-["Edit"] = "Επεξεργασία";
 ["Edit again"] = false;
-["Edit areas"] = "Επεξεργασία τομέων";
 ["Edit initiative"] = "Επεξεργασία πρωτοβουλίας";
-["Edit profile"] = "Επεξεργασία προφίλ";
 ["Edit voting comment"] = false;
 ["Edit your profile data"] = false;
 ["Eligible as winner"] = "Επιλέξιμο ως νικητής";
@@ -236,7 +230,6 @@ return {
 ["Error while converting image. Please note, that only JPG files are supported!"] = "Σφάλμα κατά την μετατροπή της εικόνας. Έχετε υπόψη ότι υποστηρίζονται μόνο αρχεία JPG.";
 ["Error while updating member, database reported:<br /><br /> (#{errormessage})"] = "Σφάλμα κατά την ενημέρωση του μέλους. Αναφορά βάσης δεδομένων:<br /><br /> (#{errormessage})";
 ["Etherpad authentication failed"] = "Η πιστοποίηση μέσω Etherpad απέτυχε";
-["Event #{id} -> #{num} members"] = "Συμβάν #{id} -> #{num} μέλη";
 ["External memberships"] = "Εξωτερικές συμμετοχές";
 ["External posts"] = "Εξωτερικές θέσεις";
 ["Failed  #{sign}#{num}/#{den}"] = false;
@@ -262,7 +255,7 @@ return {
 ["Hello,\n\n"] = "Γειά σου,\n\n";
 ["Help #{id}"] = "Βοήθεια #{id}";
 ["Hide"] = "Απόκρυψη";
-["Hide active units"] = "Απόκρυψη ενεργών ενότητων";
+["Hide inactive"] = false;
 ["Hint"] = "Συμβουλή";
 ["History"] = "Ιστορικό";
 ["Home"] = "Κεντρική Σελίδα";
@@ -304,7 +297,6 @@ return {
 ["Identification"] = "Αναγνωριστικό";
 ["If this link is not working, please open following url in your web browser:\n\n"] = "Εάν δεν λειτουργεί αυτός ο σύνδεσμος, παρακαλώ άνοιξε την παρακάτω διεύθυνση με το πρόγραμμα περιήγησης στον ιστό:\n\n";
 ["If you cannot find any appropriate existing issue, "] = false;
-["Ignore initiative"] = "Αγνόηση πρωτοβουλίας";
 ["Implicitly admitted"] = "Εισήχθη εμμέσως";
 ["Incoming delegations"] = "Εισερχόμενες αναθέσεις";
 ["Incoming delegations for '#{member_name}'"] = false;
@@ -377,10 +369,8 @@ return {
 ["Login name"] = "Όνομα σύνδεσης";
 ["Login name request"] = "Αίτηση ονόματος σύνδεσης";
 ["Login-Name: "] = "Όνομα Σύνδεσης";
-["Logout"] = "Αποσύνδεση";
 ["Logout successful"] = "Επιτυχής αποσύνδεση";
 ["Make your choice by placing the initiatives"] = false;
-["Manage system settings"] = false;
 ["Member"] = "Μέλος";
 ["Member has been removed from initiators"] = "Το μέλος αφαιρέθηκε από τους εισηγητές";
 ["Member has been removed from your contacts"] = "Το μέλος αφαιρέθηκε από τις επαφές σου";
@@ -391,7 +381,6 @@ return {
 ["Member is not participating in the only area of the unit"] = "Το μέλος συμμετέχει στον μοναδικό τομέα αυτής της ενότητας";
 ["Member is now invited to be initiator"] = "Το μέλος έχει προσκληθεί ως εισηγητής";
 ["Member list"] = "Κατάλογος μελών";
-["Member menu"] = "Μενού μέλους";
 ["Member name"] = "Όνομα μέλους";
 ["Member successfully deactivated"] = false;
 ["Member successfully registered"] = "Το μέλος έχει εγγραφεί επιτυχώς";
@@ -560,15 +549,12 @@ return {
 ["Set area delegation"] = false;
 ["Set issue delegation"] = false;
 ["Set unit delegation"] = "Ανάθεση ενότητας";
-["Settings"] = "Επιλογές";
 ["Should the initiator implement this suggestion?"] = false;
 ["Show"] = "Προβολή";
 ["Show all members"] = false;
-["Show areas in use"] = "Προβολή τομέων σε χρήση";
-["Show areas not in use"] = "Προβολή τομέων που δεν χρησιμοποιούνται";
 ["Show full history"] = false;
 ["Show full member list"] = false;
-["Show inactive units"] = "Προβολή ανενεργών ενοτήτων";
+["Show inactive"] = false;
 ["Show less"] = false;
 ["Show member"] = "Προβολή μέλους";
 ["Show more and rate this"] = false;
@@ -576,7 +562,6 @@ return {
 ["Show older events"] = "Προβολή παλαιοτέρων συμβάντων";
 ["Show policies in use"] = "Προβολή κανονισμών σε χρήση";
 ["Show policies not in use"] = "Προβολή κανονισμών που δεν χρησιμοποιούνται";
-["Show profile"] = "Προβολή προφίλ";
 ["Show voting ballot"] = false;
 ["Sorry, but there is not confirmed email address for your account. Please contact the administrator or support."] = "Λυπούμαστε, αλλά δεν υπάρχει καμία επιβεβαιωμένη διεύθυνση email για τον λογαριασμό σου. Παρακαλούμε επικοινώνησε με τον διαχειριστή ή την υποστήριξη.";
 ["Sorry, but you are currently not invited"] = "Λυπούμαστε, αλλά δεν έχεις προσκληθεί αυτή τη στιγμή";
@@ -603,7 +588,6 @@ return {
 ["Suggestion for improvement #{id}"] = false;
 ["Suggestions"] = "Προτάσεις";
 ["Suggestions for improvement (#{count})"] = false;
-["Support this initiative"] = "Στήριξη αυτής της πρωτοβουλίας";
 ["Syntax help"] = "Βοήθεια σύνταξης";
 ["System administration"] = false;
 ["System settings"] = false;
@@ -685,7 +669,6 @@ return {
 ["What this member is currently supporting"] = false;
 ["Wiki engine"] = "Μηχανισμός wiki";
 ["Wiki engine for statement"] = "Μηχανισμός wiki για την δήλωση";
-["Withdraw"] = "Απόσυρση";
 ["Withdraw membership"] = "Απόσυρση συμμετοχής";
 ["Yes"] = "Ναι";
 ["Yes, it's implemented"] = false;
@@ -706,7 +689,6 @@ return {
 ["You are not participating in any of the #{count} areas in this unit"] = "Δεν συμμετέχεις σε κανέναν από τους #{count} τομείς αυτής της ενότητας";
 ["You are not participating in the only area of the unit"] = "Δεν συμμετέχεις στον μοναδικό τομέα αυτής της ενότητας";
 ["You are now initiator of this initiative"] = "Είσαι τώρα εισηγητής αυτής της πρωτοβουλίας";
-["You are potential supporter"] = "Είσαι δυνητικός υποστηρικτής";
 ["You are subscribed for this subject area"] = false;
 ["You are supporter"] = "Είσαι υποστηρικτής";
 ["You are supporting this initiative"] = false;
@@ -735,8 +717,6 @@ return {
 ["You refused to become initiator of this initiative"] = false;
 ["You saved this member as contact (i.e. to use as delegatee)"] = false;
 ["You saved this member as contact (i.e. to use as delegatee) and others can see it"] = false;
-["You were potential supporter"] = "Hσουν δυνητικός υποστηρικτής";
-["You were supporter"] = "Το υποστήριζες";
 ["You've successfully registered and you can login now with your login and password!"] = "Η εγγραφή σου ήταν επιτυχής. Μπορείς πλέον να συνδεθείς με το όνομα σύνδεσης και τον κωδικό πρόσβασής σου!";
 ["Your avatar is a small photo, which will be shown always next to your name."] = false;
 ["Your choice"] = false;
@@ -762,6 +742,16 @@ return {
 ["[event mail]     Issue: ##{id}"] = "        Θέμα: ##{id}";
 ["[event mail]     Phase: #{phase}"] = "      Στάδιο: #{phase}";
 ["[event mail]    Policy: #{policy}"] = "  Κανονισμός: #{policy}";
+["[introduction] iniatives and issues"] = false;
+["[introduction] organizational units"] = false;
+["[introduction] phase 1 admission"] = false;
+["[introduction] phase 2 discussion"] = false;
+["[introduction] phase 3 verification"] = false;
+["[introduction] phase 4 voting"] = false;
+["[introduction] preference voting"] = false;
+["[introduction] rules of procedure"] = false;
+["[introduction] subject areas"] = false;
+["[introduction] vote delegation"] = false;
 ["[not displayed public]"] = "[δεν εμφανίζεται δημόσια]";
 ["abandoned"] = "ακυρωμένο";
 ["accept invitation"] = false;

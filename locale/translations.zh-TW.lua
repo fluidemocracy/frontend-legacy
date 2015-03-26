@@ -1,3 +1,4 @@
+#!/usr/bin/env lua
 return {
 ["#{closed_ago} ago"] = false;
 ["#{count} Neutral"] = false;
@@ -45,7 +46,6 @@ return {
 ["(invited)"] = false;
 ["(new window)"] = "(新視窗)";
 ["+ #{weight}"] = "+ #{weight}";
-["+ add new organizational unit"] = false;
 ["+ add new subject area"] = false;
 ["+getElementById("] = false;
 ["1 matching issue found"] = false;
@@ -97,7 +97,6 @@ return {
 ["Are you aware that revoking an initiative is irrevocable?"] = false;
 ["Area"] = "領域";
 ["Area delegation"] = "領域委任";
-["Area list of '#{unit_name}'"] = "在'#{unit_name}' 之中的領域清單";
 ["As long as you are interested in this issue yourself, the delegation is suspended for this issue, but it will be applied again in the voting phase unless you vote yourself."] = false;
 ["As soon as one initiative of this issue reaches the 1st quorum of #{quorum} support, the issue will proceed to discussion phase."] = false;
 ["Author"] = "作者";
@@ -113,7 +112,6 @@ return {
 ["Can't remove last initiator"] = "無法移除最末位發起者";
 ["Can't send confirmation email"] = "無法寄送確認電郵";
 ["Cancel"] = "取消";
-["Cancel [nullify]"] = "取消";
 ["Cancel issue"] = false;
 ["Cancel issue ##{id}"] = false;
 ["Canceled by administrative intervention"] = false;
@@ -148,7 +146,6 @@ return {
 ["Confirmation code invalid!"] = "確認碼無效！";
 ["Contacts"] = "通訊錄";
 ["Create a new issue"] = false;
-["Create new area"] = "新增新的領域";
 ["Create new policy"] = "新增新的規則";
 ["Create new unit"] = "新增新的單位";
 ["Created at"] = "新增於";
@@ -207,11 +204,8 @@ return {
 ["During the discussion phase, the issue is debated on while the initiators improve the proposals and reasons in their initiatives. Supporters of initiatives can write and rate suggestions for improvement."] = false;
 ["During the verification phase, existing initiatives cannot be changed anymore. Initiatives need to pass the 2nd quorum of #{quorum} at end of verification phase to become admitted for voting."] = false;
 ["During the voting phase, votes for all admitted initiatives in this issue can be cast. The final result will be calculated as soon as this phase ends."] = false;
-["Edit"] = "編輯";
 ["Edit again"] = false;
-["Edit areas"] = "編輯領域";
 ["Edit initiative"] = "編輯提案";
-["Edit profile"] = "編輯個人簡介";
 ["Edit voting comment"] = false;
 ["Edit your profile data"] = false;
 ["Eligible as winner"] = "有獲選者資格";
@@ -236,7 +230,6 @@ return {
 ["Error while converting image. Please note, that only JPG files are supported!"] = "轉換圖片錯誤。請注意，只支援 JPG 檔案！";
 ["Error while updating member, database reported:<br /><br /> (#{errormessage})"] = "更新成員錯誤，系統通報錯誤訊息：<br /><br /> (#{errormessage})";
 ["Etherpad authentication failed"] = "Etherpad 認證失敗";
-["Event #{id} -> #{num} members"] = "項目 #{id} -> #{num} 位成員";
 ["External memberships"] = "外部成員";
 ["External posts"] = "外部職位";
 ["Failed  #{sign}#{num}/#{den}"] = false;
@@ -262,7 +255,7 @@ return {
 ["Hello,\n\n"] = false;
 ["Help #{id}"] = "說明文件 #{id}";
 ["Hide"] = "隱藏";
-["Hide active units"] = "隱藏活躍的單位";
+["Hide inactive"] = false;
 ["Hint"] = "提示";
 ["History"] = "紀錄";
 ["Home"] = "首頁";
@@ -304,7 +297,6 @@ return {
 ["Identification"] = "身分";
 ["If this link is not working, please open following url in your web browser:\n\n"] = "若此連結失效，請於您的瀏覽器開啟下列網址：\n\n";
 ["If you cannot find any appropriate existing issue, "] = false;
-["Ignore initiative"] = "忽略提案";
 ["Implicitly admitted"] = "被默許遞交";
 ["Incoming delegations"] = "受委任的表決";
 ["Incoming delegations for '#{member_name}'"] = false;
@@ -377,10 +369,8 @@ return {
 ["Login name"] = "帳號";
 ["Login name request"] = false;
 ["Login-Name: "] = false;
-["Logout"] = "登出";
 ["Logout successful"] = "成功登出";
 ["Make your choice by placing the initiatives"] = false;
-["Manage system settings"] = false;
 ["Member"] = "成員";
 ["Member has been removed from initiators"] = "該成員不再是發起者";
 ["Member has been removed from your contacts"] = "該成員不再是您的聯絡人";
@@ -391,7 +381,6 @@ return {
 ["Member is not participating in the only area of the unit"] = "該成員不參與此單位中的唯一領域";
 ["Member is now invited to be initiator"] = "該成員現被邀請為發起者";
 ["Member list"] = "成員列表";
-["Member menu"] = "使用者目錄";
 ["Member name"] = "成員代號";
 ["Member successfully deactivated"] = false;
 ["Member successfully registered"] = "成員註冊成功";
@@ -560,15 +549,12 @@ return {
 ["Set area delegation"] = false;
 ["Set issue delegation"] = false;
 ["Set unit delegation"] = "設定單位委任";
-["Settings"] = "設定";
 ["Should the initiator implement this suggestion?"] = false;
 ["Show"] = "顯示";
 ["Show all members"] = false;
-["Show areas in use"] = "顯示所使用的領域";
-["Show areas not in use"] = "顯示未使用的領域";
 ["Show full history"] = false;
 ["Show full member list"] = false;
-["Show inactive units"] = "顯示不活躍的單位";
+["Show inactive"] = false;
 ["Show less"] = false;
 ["Show member"] = "顯示成員";
 ["Show more and rate this"] = false;
@@ -576,7 +562,6 @@ return {
 ["Show older events"] = "顯示較早動態";
 ["Show policies in use"] = "顯示所使用的規則";
 ["Show policies not in use"] = "顯示停用規則";
-["Show profile"] = "顯示個人簡介";
 ["Show voting ballot"] = false;
 ["Sorry, but there is not confirmed email address for your account. Please contact the administrator or support."] = "抱歉，您的帳號並無經認證的電郵地址。請聯絡管理員或支援。";
 ["Sorry, but you are currently not invited"] = "抱歉，您目前未受邀請。";
@@ -603,7 +588,6 @@ return {
 ["Suggestion for improvement #{id}"] = false;
 ["Suggestions"] = "建議";
 ["Suggestions for improvement (#{count})"] = false;
-["Support this initiative"] = "支持提案";
 ["Syntax help"] = "Syntax 說明";
 ["System administration"] = false;
 ["System settings"] = false;
@@ -685,7 +669,6 @@ return {
 ["What this member is currently supporting"] = false;
 ["Wiki engine"] = "Wiki 軟體";
 ["Wiki engine for statement"] = "編輯自述的 Wiki 軟體";
-["Withdraw"] = "退出";
 ["Withdraw membership"] = "退出成員身分";
 ["Yes"] = "肯定";
 ["Yes, it's implemented"] = false;
@@ -706,7 +689,6 @@ return {
 ["You are not participating in any of the #{count} areas in this unit"] = "您並未參與此單位中 #{count} 個領域的任何一個";
 ["You are not participating in the only area of the unit"] = "您並未參與此單位中的唯一領域";
 ["You are now initiator of this initiative"] = "您現在是此提案的";
-["You are potential supporter"] = "您是可能支持者";
 ["You are subscribed for this subject area"] = false;
 ["You are supporter"] = "您是支持者";
 ["You are supporting this initiative"] = false;
@@ -735,8 +717,6 @@ return {
 ["You refused to become initiator of this initiative"] = false;
 ["You saved this member as contact (i.e. to use as delegatee)"] = false;
 ["You saved this member as contact (i.e. to use as delegatee) and others can see it"] = false;
-["You were potential supporter"] = "您曾是可能支持者";
-["You were supporter"] = "您曾是支持者";
 ["You've successfully registered and you can login now with your login and password!"] = "您已成功註冊並可使用帳號及密碼登入！";
 ["Your avatar is a small photo, which will be shown always next to your name."] = false;
 ["Your choice"] = false;
@@ -762,6 +742,16 @@ return {
 ["[event mail]     Issue: ##{id}"] = "        議題: ##{id}";
 ["[event mail]     Phase: #{phase}"] = "        階段: #{phase}";
 ["[event mail]    Policy: #{policy}"] = "        規則: #{policy}";
+["[introduction] iniatives and issues"] = false;
+["[introduction] organizational units"] = false;
+["[introduction] phase 1 admission"] = false;
+["[introduction] phase 2 discussion"] = false;
+["[introduction] phase 3 verification"] = false;
+["[introduction] phase 4 voting"] = false;
+["[introduction] preference voting"] = false;
+["[introduction] rules of procedure"] = false;
+["[introduction] subject areas"] = false;
+["[introduction] vote delegation"] = false;
 ["[not displayed public]"] = "[不公開顯示]";
 ["abandoned"] = "被停用";
 ["accept invitation"] = false;

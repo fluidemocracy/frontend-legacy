@@ -1,3 +1,4 @@
+#!/usr/bin/env lua
 return {
 ["#{closed_ago} ago"] = "vor #{closed_ago}";
 ["#{count} Neutral"] = "#{count} Enthaltung";
@@ -45,7 +46,6 @@ return {
 ["(invited)"] = "(eingeladen)";
 ["(new window)"] = "(neues Fenster)";
 ["+ #{weight}"] = "+ #{weight}";
-["+ add new organizational unit"] = "+ neue Gliederung hinzufügen";
 ["+ add new subject area"] = "neuen Themenbereich hinzufügen";
 ["+getElementById("] = false;
 ["1 matching issue found"] = "1 passendes Thema gefunden";
@@ -97,7 +97,6 @@ return {
 ["Are you aware that revoking an initiative is irrevocable?"] = "Bist du dir bewusst, dass das Zurückziehen unwiderrufbar ist?";
 ["Area"] = "Themenbereich";
 ["Area delegation"] = "Delegation für Themenbereich";
-["Area list of '#{unit_name}'"] = "Themenbereiche in '#{unit_name}'";
 ["As long as you are interested in this issue yourself, the delegation is suspended for this issue, but it will be applied again in the voting phase unless you vote yourself."] = "Solange du selber am Thema interessiert bist, wird die Delegation für dieses Thema ausgesetzt, jedoch während der Abstimmung erneut aktiv, es sei denn du stimmst selber ab.";
 ["As soon as one initiative of this issue reaches the 1st quorum of #{quorum} support, the issue will proceed to discussion phase."] = "Sobald eine Initiative des Themas das 1. Quorum von #{quorum} Unterstützern erreicht, geht das Thema in die Diskussionsphase über.";
 ["Author"] = "Autor";
@@ -113,7 +112,6 @@ return {
 ["Can't remove last initiator"] = "Der letzte Initiator kann nicht entfernt werden";
 ["Can't send confirmation email"] = "Bestätigungs-E-Mail kann nicht versendet werden.";
 ["Cancel"] = "Abbrechen";
-["Cancel [nullify]"] = "Aufheben";
 ["Cancel issue"] = "Thema abbrechen";
 ["Cancel issue ##{id}"] = "Thema ##{id} abbrechen";
 ["Canceled by administrative intervention"] = "Durch administrativen Eingriff abgebrochen";
@@ -148,7 +146,6 @@ return {
 ["Confirmation code invalid!"] = "Bestätigungscode ist ungültig!";
 ["Contacts"] = "Kontakte";
 ["Create a new issue"] = "Neues Thema erstellen";
-["Create new area"] = "Neuen Themenbereich anlegen";
 ["Create new policy"] = "Neues Regelwerk anlegen";
 ["Create new unit"] = "Neue Gliederung anlegen";
 ["Created at"] = "Erzeugt am/um";
@@ -207,11 +204,8 @@ return {
 ["During the discussion phase, the issue is debated on while the initiators improve the proposals and reasons in their initiatives. Supporters of initiatives can write and rate suggestions for improvement."] = "Während der Diskussionsphase wird das Thema debattiert während die Initiatoren die Anträge und Begründungen in ihren Initiativen verbessern. Unterstützer der Initiativen können Verbesserungsvorschläge machen und bewerten.";
 ["During the verification phase, existing initiatives cannot be changed anymore. Initiatives need to pass the 2nd quorum of #{quorum} at end of verification phase to become admitted for voting."] = "Während der Überprüfungsphase kann der Text existierender Initiativen nicht mehr geändert werden. Initiativen müssen am Ende der Überprüfungsphase das 2. Quorum von #{quorum} erreichen, um für die Abstimmung zugelassen zu werden.";
 ["During the voting phase, votes for all admitted initiatives in this issue can be cast. The final result will be calculated as soon as this phase ends."] = "Während der Abstimmungsphase können Stimmen für alle zugelassenen Initiativen abgegeben werden. Das Endergebnis wird nach Abschluss der Phase berechnet.";
-["Edit"] = "Bearbeiten";
 ["Edit again"] = "Nochmal bearbeiten";
-["Edit areas"] = "Themenbereiche bearbeiten";
 ["Edit initiative"] = "Initiative bearbeiten";
-["Edit profile"] = "Profil bearbeiten";
 ["Edit voting comment"] = "Abstimmungskommentar bearbeiten";
 ["Edit your profile data"] = "Profildaten bearbeiten";
 ["Eligible as winner"] = "Als Gewinner qualifiziert";
@@ -236,7 +230,6 @@ return {
 ["Error while converting image. Please note, that only JPG files are supported!"] = "Fehler beim Konvertieren des Bilds. Bitte beachte, dass nur JPG-Dateien unterstützt werden.";
 ["Error while updating member, database reported:<br /><br /> (#{errormessage})"] = "Fehler beim aktualisieren des Mitglieds, die Datenbank berichtet folgenden Fehler:<br /><br /> (#{errormessage})";
 ["Etherpad authentication failed"] = "Etherpad-Anmeldung fehlgeschlagen";
-["Event #{id} -> #{num} members"] = false;
 ["External memberships"] = "Externe Mitgliedschaften";
 ["External posts"] = "Externe Ämter";
 ["Failed  #{sign}#{num}/#{den}"] = "Gescheitert #{sign}#{num}/#{den}";
@@ -262,7 +255,7 @@ return {
 ["Hello,\n\n"] = "Hallo, ";
 ["Help #{id}"] = "Hilfe #{id}";
 ["Hide"] = "Verstecken";
-["Hide active units"] = "Aktive units ausblenden";
+["Hide inactive"] = false;
 ["Hint"] = "Hinweis";
 ["History"] = "Zeitlicher Verlauf";
 ["Home"] = "Startseite";
@@ -304,7 +297,6 @@ return {
 ["Identification"] = "Identifikation";
 ["If this link is not working, please open following url in your web browser:\n\n"] = "Sollte der Link nicht funktionieren, öffne bitte die folgenden URL in Deinem Web-Browser:\n\n";
 ["If you cannot find any appropriate existing issue, "] = "Wenn kein passendes Thema existiert, ";
-["Ignore initiative"] = "Initiative ignorieren";
 ["Implicitly admitted"] = "Implizit zugelassen";
 ["Incoming delegations"] = "Eingehende Delegationen";
 ["Incoming delegations for '#{member_name}'"] = "Eingehende Delegationen für '#{member_name}'";
@@ -377,10 +369,8 @@ return {
 ["Login name"] = "Anmeldename";
 ["Login name request"] = "Anmeldename anfordern";
 ["Login-Name: "] = "Anmeldename: ";
-["Logout"] = "Abmelden";
 ["Logout successful"] = "Abmeldung erfolgreich";
 ["Make your choice by placing the initiatives"] = "Treffe eine Wahl indem du die Initiativen verschiebst";
-["Manage system settings"] = "Systemeinstellungen verwalten";
 ["Member"] = "Mitglied";
 ["Member has been removed from initiators"] = "Mitglied wurde von den Initiatoren entfernt";
 ["Member has been removed from your contacts"] = "Mitglied wurde aus Deinen Kontakten entfernt";
@@ -391,7 +381,6 @@ return {
 ["Member is not participating in the only area of the unit"] = "Mitglied nimmt am einzigen Themenbereich der Gliederung nicht teil";
 ["Member is now invited to be initiator"] = "Mitglied ist jetzt als Initiator eingeladen";
 ["Member list"] = "Mitgliederliste";
-["Member menu"] = "Mitglieds-Menü";
 ["Member name"] = "Mitglied Name";
 ["Member successfully deactivated"] = "Mitglied erfolgreich deaktiviert";
 ["Member successfully registered"] = "Mitglied erfolgreich registriert";
@@ -560,15 +549,12 @@ return {
 ["Set area delegation"] = "Themenbereich delegieren";
 ["Set issue delegation"] = "Thema delegieren";
 ["Set unit delegation"] = "Delegation für Gliederung setzen";
-["Settings"] = "Einstellungen";
 ["Should the initiator implement this suggestion?"] = "Soll der Initiator diesen Verbesserungsvorschlag umsetzen?";
 ["Show"] = "Zeige";
 ["Show all members"] = "Alle Mitglieder anzeigen";
-["Show areas in use"] = "Zeige verwendete Themenbereiche";
-["Show areas not in use"] = "Zeige nicht verwendete Themenbereiche";
 ["Show full history"] = "Komlette Historie anzeigen";
 ["Show full member list"] = "Komplette Mitgliederliste anzeigen";
-["Show inactive units"] = "Zeige deaktivierte Gliederungen";
+["Show inactive"] = false;
 ["Show less"] = "Weniger anzeigen";
 ["Show member"] = "Mitglied anzeigen";
 ["Show more and rate this"] = "Mehr zeigen und bewerten";
@@ -576,7 +562,6 @@ return {
 ["Show older events"] = "Zeige ältere Ereignisse";
 ["Show policies in use"] = "Zeige Regelwerke in Verwendung";
 ["Show policies not in use"] = "Zeige deaktivierte Regelwerke";
-["Show profile"] = "Profil anzeigen";
 ["Show voting ballot"] = "Stimmzettel anzeigen";
 ["Sorry, but there is not confirmed email address for your account. Please contact the administrator or support."] = "Sorry, aber für diesen Account ist keine bestätigte E-Mail-Adresse hinterlegt. Bitte wende Dich an den Administrator oder den Support.";
 ["Sorry, but you are currently not invited"] = "Sorry, aber Du bist zur Zeit nicht eingeladen";
@@ -603,7 +588,6 @@ return {
 ["Suggestion for improvement #{id}"] = "Verbesserungsvorschlag #{id}";
 ["Suggestions"] = "Verbesserungsvorschläge";
 ["Suggestions for improvement (#{count})"] = "Verbesserungsvorschläge (#{count})";
-["Support this initiative"] = "Diese Initiative unterstützen";
 ["Syntax help"] = "Syntax-Hilfe";
 ["System administration"] = "Systemadministration";
 ["System settings"] = "Systemeinstellungen";
@@ -685,7 +669,6 @@ return {
 ["What this member is currently supporting"] = "Was dieses Mitglied zur Zeit unterstützt";
 ["Wiki engine"] = "Wiki engine";
 ["Wiki engine for statement"] = "Wiki engine für das Statement";
-["Withdraw"] = "Zurückziehen";
 ["Withdraw membership"] = "Mitgliedschaft aufgeben";
 ["Yes"] = "Ja";
 ["Yes, it's implemented"] = "Ja, ist umgesetzt";
@@ -706,7 +689,6 @@ return {
 ["You are not participating in any of the #{count} areas in this unit"] = "Du nimmst an keinem der #{count} Themenbereiche dieser Gliederung teil";
 ["You are not participating in the only area of the unit"] = "Du nimmst am einzigen Themenbereich der Gliederung nicht teil";
 ["You are now initiator of this initiative"] = "Du bist jetzt Initiator dieser Initiative";
-["You are potential supporter"] = "Du bist potentieller Unterstützer";
 ["You are subscribed for this subject area"] = "Du bist für diesen Themenbereich angemeldet";
 ["You are supporter"] = "Du bist Unterstützer";
 ["You are supporting this initiative"] = "Du unterstützt diese Initiative";
@@ -735,8 +717,6 @@ return {
 ["You refused to become initiator of this initiative"] = "Du hast abgelehnt Initiator dieser Initiative zu werden";
 ["You saved this member as contact (i.e. to use as delegatee)"] = "Du hast dieses Mitglied gespeichert (z.B. um es als Delegierten zu verwenden)";
 ["You saved this member as contact (i.e. to use as delegatee) and others can see it"] = "Du hast dieses Mitglied gespeichert (z.B. um es als Delegierten zu verwenden) und andere können das sehen";
-["You were potential supporter"] = "Du bist potentieller Unterstützer";
-["You were supporter"] = "Du bist Unterstützer";
 ["You've successfully registered and you can login now with your login and password!"] = "Du hast Dich erfolgreich registriert und kannst Dich jetzt mit Deinen Anmeldenamen und Kennwort anmelden!";
 ["Your avatar is a small photo, which will be shown always next to your name."] = "Dein Avatar ist ein kleines Bild, das überall neben deinem Namen angezeigt wird.";
 ["Your choice"] = "Deine Auswahl";

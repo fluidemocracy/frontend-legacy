@@ -1,3 +1,4 @@
+#!/usr/bin/env lua
 return {
 ["#{closed_ago} ago"] = false;
 ["#{count} Neutral"] = false;
@@ -45,7 +46,6 @@ return {
 ["(invited)"] = false;
 ["(new window)"] = "(új ablak)";
 ["+ #{weight}"] = "+ #{weight}";
-["+ add new organizational unit"] = false;
 ["+ add new subject area"] = false;
 ["+getElementById("] = "+getElementById(";
 ["1 matching issue found"] = false;
@@ -97,7 +97,6 @@ return {
 ["Are you aware that revoking an initiative is irrevocable?"] = false;
 ["Area"] = "Témakör";
 ["Area delegation"] = "Témakör delegálása";
-["Area list of '#{unit_name}'"] = "'#{unit_name}' témakörei";
 ["As long as you are interested in this issue yourself, the delegation is suspended for this issue, but it will be applied again in the voting phase unless you vote yourself."] = false;
 ["As soon as one initiative of this issue reaches the 1st quorum of #{quorum} support, the issue will proceed to discussion phase."] = false;
 ["Author"] = "Szerzõ";
@@ -113,7 +112,6 @@ return {
 ["Can't remove last initiator"] = "Nem távolítható el az utolsó kezdeményezõ";
 ["Can't send confirmation email"] = "Nem lehet elküldeni a megerõsítõ emailt";
 ["Cancel"] = "Megszakítás";
-["Cancel [nullify]"] = false;
 ["Cancel issue"] = false;
 ["Cancel issue ##{id}"] = false;
 ["Canceled by administrative intervention"] = false;
@@ -148,7 +146,6 @@ return {
 ["Confirmation code invalid!"] = "Érvénytelen megerõsítõ kód!";
 ["Contacts"] = "Kapcsolatok";
 ["Create a new issue"] = false;
-["Create new area"] = "Új témakör létrehozása";
 ["Create new policy"] = "Új irányelv létrehozása";
 ["Create new unit"] = "Új egység létrehozása";
 ["Created at"] = "Létrehozás idõpontja:";
@@ -207,11 +204,8 @@ return {
 ["During the discussion phase, the issue is debated on while the initiators improve the proposals and reasons in their initiatives. Supporters of initiatives can write and rate suggestions for improvement."] = false;
 ["During the verification phase, existing initiatives cannot be changed anymore. Initiatives need to pass the 2nd quorum of #{quorum} at end of verification phase to become admitted for voting."] = false;
 ["During the voting phase, votes for all admitted initiatives in this issue can be cast. The final result will be calculated as soon as this phase ends."] = false;
-["Edit"] = "Szerkesztés";
 ["Edit again"] = false;
-["Edit areas"] = "Témakörök szerkesztése";
 ["Edit initiative"] = "Kezdeményezés szerkesztése";
-["Edit profile"] = false;
 ["Edit voting comment"] = false;
 ["Edit your profile data"] = false;
 ["Eligible as winner"] = "Gyõztesként választható";
@@ -236,7 +230,6 @@ return {
 ["Error while converting image. Please note, that only JPG files are supported!"] = "Hiba a kép konvertálása során. Ne feledd, hogy csak a JPG-fájlok támogatottak.";
 ["Error while updating member, database reported:<br /><br /> (#{errormessage})"] = "Hiba a tag frissítése során. Adatbázis hibaüzenete:<br /><br /> (#{errormessage})";
 ["Etherpad authentication failed"] = "Hiba az etherpad-bejelentkezés során";
-["Event #{id} -> #{num} members"] = "#{id} esemény -> #{num} tag";
 ["External memberships"] = "Külsõ tagságok";
 ["External posts"] = "Külsõ tisztségek";
 ["Failed  #{sign}#{num}/#{den}"] = false;
@@ -262,7 +255,7 @@ return {
 ["Hello,\n\n"] = false;
 ["Help #{id}"] = "Súgó: #{id}";
 ["Hide"] = "Elrejtés";
-["Hide active units"] = false;
+["Hide inactive"] = false;
 ["Hint"] = "Tipp";
 ["History"] = "Történet";
 ["Home"] = "Kezdõlap";
@@ -304,7 +297,6 @@ return {
 ["Identification"] = "Azonosítás";
 ["If this link is not working, please open following url in your web browser:\n\n"] = "Ha a link nem mûködik, úgy nyisd meg a következõ URL-t a böngészõdbõl:\n\n";
 ["If you cannot find any appropriate existing issue, "] = false;
-["Ignore initiative"] = "Kezdeményezés ignorálása";
 ["Implicitly admitted"] = false;
 ["Incoming delegations"] = "Bejövõ delegációk";
 ["Incoming delegations for '#{member_name}'"] = false;
@@ -377,10 +369,8 @@ return {
 ["Login name"] = "Bejelentkezési név";
 ["Login name request"] = false;
 ["Login-Name: "] = false;
-["Logout"] = "Kijelentkezés";
 ["Logout successful"] = "Sikeres kijelentkezés";
 ["Make your choice by placing the initiatives"] = false;
-["Manage system settings"] = false;
 ["Member"] = "Tag";
 ["Member has been removed from initiators"] = "Tag eltávolítva a kezdeményezõk közül";
 ["Member has been removed from your contacts"] = "Tag eltávolítva a kapcsolataid közül";
@@ -391,7 +381,6 @@ return {
 ["Member is not participating in the only area of the unit"] = false;
 ["Member is now invited to be initiator"] = "Tag meghívva kezdeményezõnek";
 ["Member list"] = "Taglista";
-["Member menu"] = false;
 ["Member name"] = "Tagnév";
 ["Member successfully deactivated"] = false;
 ["Member successfully registered"] = "Tag regisztrálva";
@@ -560,15 +549,12 @@ return {
 ["Set area delegation"] = false;
 ["Set issue delegation"] = false;
 ["Set unit delegation"] = "Egységdelegáció beállítása";
-["Settings"] = "Beállítások";
 ["Should the initiator implement this suggestion?"] = false;
 ["Show"] = "Mutasd";
 ["Show all members"] = false;
-["Show areas in use"] = "Használt témakörök mutatása";
-["Show areas not in use"] = "Nem használt témakörök mutatása";
 ["Show full history"] = false;
 ["Show full member list"] = false;
-["Show inactive units"] = false;
+["Show inactive"] = false;
 ["Show less"] = false;
 ["Show member"] = "Tag mutatása";
 ["Show more and rate this"] = false;
@@ -576,7 +562,6 @@ return {
 ["Show older events"] = "Régebbi események mutatása";
 ["Show policies in use"] = "Aktív irányelvek mutatása";
 ["Show policies not in use"] = "Deaktivált irányelvek mutatása";
-["Show profile"] = false;
 ["Show voting ballot"] = false;
 ["Sorry, but there is not confirmed email address for your account. Please contact the administrator or support."] = "A fiókodhoz nem tartozik megerõsített email-cím. Lépj kapcsolatba az adminnal vagy a támogatókkal.";
 ["Sorry, but you are currently not invited"] = "Sajnos jelenleg nem vagy meghívva";
@@ -603,7 +588,6 @@ return {
 ["Suggestion for improvement #{id}"] = false;
 ["Suggestions"] = "Javaslatok";
 ["Suggestions for improvement (#{count})"] = false;
-["Support this initiative"] = "Kezdeményezés támogatása";
 ["Syntax help"] = "Szintaxis-súgó";
 ["System administration"] = false;
 ["System settings"] = false;
@@ -685,7 +669,6 @@ return {
 ["What this member is currently supporting"] = false;
 ["Wiki engine"] = "Wiki-motor";
 ["Wiki engine for statement"] = "Állítás wiki-motorja";
-["Withdraw"] = false;
 ["Withdraw membership"] = "Tagság feladása";
 ["Yes"] = "Igen";
 ["Yes, it's implemented"] = false;
@@ -706,7 +689,6 @@ return {
 ["You are not participating in any of the #{count} areas in this unit"] = false;
 ["You are not participating in the only area of the unit"] = false;
 ["You are now initiator of this initiative"] = "Most te vagy a kezdeményezõje ennek a kezdeményezésnek";
-["You are potential supporter"] = false;
 ["You are subscribed for this subject area"] = false;
 ["You are supporter"] = false;
 ["You are supporting this initiative"] = false;
@@ -735,8 +717,6 @@ return {
 ["You refused to become initiator of this initiative"] = false;
 ["You saved this member as contact (i.e. to use as delegatee)"] = false;
 ["You saved this member as contact (i.e. to use as delegatee) and others can see it"] = false;
-["You were potential supporter"] = false;
-["You were supporter"] = false;
 ["You've successfully registered and you can login now with your login and password!"] = "Sikeresen regisztráltál. Most már bejelentkezhetsz a neveddel és a jelszavaddal!";
 ["Your avatar is a small photo, which will be shown always next to your name."] = false;
 ["Your choice"] = false;
@@ -762,6 +742,16 @@ return {
 ["[event mail]     Issue: ##{id}"] = false;
 ["[event mail]     Phase: #{phase}"] = false;
 ["[event mail]    Policy: #{policy}"] = false;
+["[introduction] iniatives and issues"] = false;
+["[introduction] organizational units"] = false;
+["[introduction] phase 1 admission"] = false;
+["[introduction] phase 2 discussion"] = false;
+["[introduction] phase 3 verification"] = false;
+["[introduction] phase 4 voting"] = false;
+["[introduction] preference voting"] = false;
+["[introduction] rules of procedure"] = false;
+["[introduction] subject areas"] = false;
+["[introduction] vote delegation"] = false;
 ["[not displayed public]"] = "[nem nyilvános]";
 ["abandoned"] = "mellõzve";
 ["accept invitation"] = false;

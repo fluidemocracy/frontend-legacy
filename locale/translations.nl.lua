@@ -1,3 +1,4 @@
+#!/usr/bin/env lua
 return {
 ["#{closed_ago} ago"] = false;
 ["#{count} Neutral"] = false;
@@ -45,7 +46,6 @@ return {
 ["(invited)"] = false;
 ["(new window)"] = "(nieuw venster)";
 ["+ #{weight}"] = "+ #{weight}";
-["+ add new organizational unit"] = false;
 ["+ add new subject area"] = false;
 ["+getElementById("] = false;
 ["1 matching issue found"] = false;
@@ -97,7 +97,6 @@ return {
 ["Are you aware that revoking an initiative is irrevocable?"] = false;
 ["Area"] = "Themagebied";
 ["Area delegation"] = "Delegatie voor themagebied";
-["Area list of '#{unit_name}'"] = "Themagebieden in '#{unit_name}'";
 ["As long as you are interested in this issue yourself, the delegation is suspended for this issue, but it will be applied again in the voting phase unless you vote yourself."] = false;
 ["As soon as one initiative of this issue reaches the 1st quorum of #{quorum} support, the issue will proceed to discussion phase."] = false;
 ["Author"] = "Auteur";
@@ -113,7 +112,6 @@ return {
 ["Can't remove last initiator"] = "De laatste initiatiefnemer kan niet verwijderd worden";
 ["Can't send confirmation email"] = "De bevestigingsemail kan niet verzonden worden.";
 ["Cancel"] = "Afbreken";
-["Cancel [nullify]"] = false;
 ["Cancel issue"] = false;
 ["Cancel issue ##{id}"] = false;
 ["Canceled by administrative intervention"] = false;
@@ -148,7 +146,6 @@ return {
 ["Confirmation code invalid!"] = "De bevestigingscode is niet juist!";
 ["Contacts"] = "Contacten";
 ["Create a new issue"] = false;
-["Create new area"] = "Een nieuw themagebied creëren";
 ["Create new policy"] = "Nieuwe procedure creëren";
 ["Create new unit"] = "Nieuwe dossier creëren";
 ["Created at"] = "Gecreëerd op";
@@ -207,11 +204,8 @@ return {
 ["During the discussion phase, the issue is debated on while the initiators improve the proposals and reasons in their initiatives. Supporters of initiatives can write and rate suggestions for improvement."] = false;
 ["During the verification phase, existing initiatives cannot be changed anymore. Initiatives need to pass the 2nd quorum of #{quorum} at end of verification phase to become admitted for voting."] = false;
 ["During the voting phase, votes for all admitted initiatives in this issue can be cast. The final result will be calculated as soon as this phase ends."] = false;
-["Edit"] = "Edit";
 ["Edit again"] = false;
-["Edit areas"] = "Edit themagebieden";
 ["Edit initiative"] = "Edit initiatieven";
-["Edit profile"] = "Edit profiel";
 ["Edit voting comment"] = false;
 ["Edit your profile data"] = false;
 ["Eligible as winner"] = "Als winnaar aangewezen";
@@ -236,7 +230,6 @@ return {
 ["Error while converting image. Please note, that only JPG files are supported!"] = "Fout bij het omzetten van de plaatjes. Let op dat alleen JPG bestanden worden ondersteund.";
 ["Error while updating member, database reported:<br /><br /> (#{errormessage})"] = "Fout bij het actualiseren van de leden, de database heeft het volgende gerapporteerd:<br /><br /> (#{errormessage})";
 ["Etherpad authentication failed"] = "Etherpad-authenticatie mislukt";
-["Event #{id} -> #{num} members"] = "Event #{id} -> #{num} deelnemers";
 ["External memberships"] = "Externe lidmaatschappen";
 ["External posts"] = "Externe posts";
 ["Failed  #{sign}#{num}/#{den}"] = false;
@@ -262,7 +255,7 @@ return {
 ["Hello,\n\n"] = false;
 ["Help #{id}"] = "Help #{id}";
 ["Hide"] = "Verbergen";
-["Hide active units"] = false;
+["Hide inactive"] = false;
 ["Hint"] = "Hint";
 ["History"] = "Historie";
 ["Home"] = "Home";
@@ -304,7 +297,6 @@ return {
 ["Identification"] = "Identificatie";
 ["If this link is not working, please open following url in your web browser:\n\n"] = "Wanneer deze link niet werkt, open dan de volgende link in uw webbrowser:\n\n";
 ["If you cannot find any appropriate existing issue, "] = false;
-["Ignore initiative"] = "Negeer initiatieven";
 ["Implicitly admitted"] = false;
 ["Incoming delegations"] = "Binnenkomende delegaties";
 ["Incoming delegations for '#{member_name}'"] = false;
@@ -377,10 +369,8 @@ return {
 ["Login name"] = "Login naam";
 ["Login name request"] = false;
 ["Login-Name: "] = false;
-["Logout"] = "Logout";
 ["Logout successful"] = "Succesvol afgemeld";
 ["Make your choice by placing the initiatives"] = false;
-["Manage system settings"] = false;
 ["Member"] = "Deelnemer";
 ["Member has been removed from initiators"] = "Deelnemer is verwijderd uit de initiatiefnemers";
 ["Member has been removed from your contacts"] = "Deelnemer is verwijderd uit uw contacten";
@@ -391,7 +381,6 @@ return {
 ["Member is not participating in the only area of the unit"] = "Deelnemer participeerd niet in het enige themagebied in dit dossier";
 ["Member is now invited to be initiator"] = "De deelnemer is nu als initiatiefnemer uitgenodigd";
 ["Member list"] = "Deelnemerslijst";
-["Member menu"] = "Deelnemersmenu";
 ["Member name"] = "Naam deelnemer";
 ["Member successfully deactivated"] = false;
 ["Member successfully registered"] = "Deelnemer is succesvol geregistreerd";
@@ -560,15 +549,12 @@ return {
 ["Set area delegation"] = false;
 ["Set issue delegation"] = false;
 ["Set unit delegation"] = "Bepaal dossier delegatie";
-["Settings"] = "Instellingen";
 ["Should the initiator implement this suggestion?"] = false;
 ["Show"] = "Toon";
 ["Show all members"] = false;
-["Show areas in use"] = "Toon actieve themagebieden";
-["Show areas not in use"] = "Toon niet-actieve themagebieden";
 ["Show full history"] = false;
 ["Show full member list"] = false;
-["Show inactive units"] = false;
+["Show inactive"] = false;
 ["Show less"] = false;
 ["Show member"] = "Toon deelnemer";
 ["Show more and rate this"] = false;
@@ -576,7 +562,6 @@ return {
 ["Show older events"] = "Toon oudere evenementen";
 ["Show policies in use"] = "Laat geactiveerde procedures zien";
 ["Show policies not in use"] = "Laat gedeactiveerde procedures zien";
-["Show profile"] = "Toon profiel";
 ["Show voting ballot"] = false;
 ["Sorry, but there is not confirmed email address for your account. Please contact the administrator or support."] = "Sorry, maar we beschikken niet over een bevestigd emailadres van uw account. Neemt u alstublieft contact op met de administrator.";
 ["Sorry, but you are currently not invited"] = "Sorry, maar u bent op dit moment niet uitgenodigd";
@@ -603,7 +588,6 @@ return {
 ["Suggestion for improvement #{id}"] = false;
 ["Suggestions"] = "Suggesties";
 ["Suggestions for improvement (#{count})"] = false;
-["Support this initiative"] = "Ondersteun dit initiatief";
 ["Syntax help"] = "syntax-hulp";
 ["System administration"] = false;
 ["System settings"] = false;
@@ -685,7 +669,6 @@ return {
 ["What this member is currently supporting"] = false;
 ["Wiki engine"] = "Wiki engine";
 ["Wiki engine for statement"] = "Wiki engine voor verklaring";
-["Withdraw"] = "Trek terug";
 ["Withdraw membership"] = "Lidmaatschap terugtrekken";
 ["Yes"] = "Ja";
 ["Yes, it's implemented"] = false;
@@ -706,7 +689,6 @@ return {
 ["You are not participating in any of the #{count} areas in this unit"] = "U neemt niet deel aan enige van de #{count} themagebieden in dit dossier";
 ["You are not participating in the only area of the unit"] = "U neemt niet deel aan het themagebied in dit dossier";
 ["You are now initiator of this initiative"] = "U ondersteunt dit initiatief";
-["You are potential supporter"] = "U bent een potentiële ondersteuner";
 ["You are subscribed for this subject area"] = false;
 ["You are supporter"] = "U bent een ondersteuner";
 ["You are supporting this initiative"] = false;
@@ -735,8 +717,6 @@ return {
 ["You refused to become initiator of this initiative"] = false;
 ["You saved this member as contact (i.e. to use as delegatee)"] = false;
 ["You saved this member as contact (i.e. to use as delegatee) and others can see it"] = false;
-["You were potential supporter"] = "U was een potentiële ondersteuner";
-["You were supporter"] = "U was een ondersteuner";
 ["You've successfully registered and you can login now with your login and password!"] = "U bent succesvol geregistreerd en kunt nu inloggen met uw loginnaam en wachtwoord. !";
 ["Your avatar is a small photo, which will be shown always next to your name."] = false;
 ["Your choice"] = false;
@@ -762,6 +742,16 @@ return {
 ["[event mail]     Issue: ##{id}"] = "  Onderwerp: ##{id}";
 ["[event mail]     Phase: #{phase}"] = "       Fase: #{phase}";
 ["[event mail]    Policy: #{policy}"] = "  Procedure: #{policy}";
+["[introduction] iniatives and issues"] = false;
+["[introduction] organizational units"] = false;
+["[introduction] phase 1 admission"] = false;
+["[introduction] phase 2 discussion"] = false;
+["[introduction] phase 3 verification"] = false;
+["[introduction] phase 4 voting"] = false;
+["[introduction] preference voting"] = false;
+["[introduction] rules of procedure"] = false;
+["[introduction] subject areas"] = false;
+["[introduction] vote delegation"] = false;
 ["[not displayed public]"] = "[niet publiekelijk weergegeven]";
 ["abandoned"] = "verlaten";
 ["accept invitation"] = false;
