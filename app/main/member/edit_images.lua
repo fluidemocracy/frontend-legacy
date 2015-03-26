@@ -33,7 +33,8 @@ ui.form{
         params = {
           class = "right",
           member = app.session.member, 
-          image_type = "avatar"
+          image_type = "avatar",
+          force_update = true
         }
       }
       ui.heading { level = 2, content = _"Avatar"}
@@ -47,7 +48,8 @@ ui.form{
         params = {
           class = "right",
           member = app.session.member, 
-          image_type = "photo"
+          image_type = "photo",
+          force_update = true
         }
       }
       ui.heading { level = 2, content = _"Photo"}
