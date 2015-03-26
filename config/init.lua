@@ -94,7 +94,12 @@ if not listen then
   end
   
   function request.get_param(args)
-    return request.get_param_strings()[args.name]
+    if args.meta then
+      return { content_type = cgi.post_types[image_type] }
+    else
+      return request.get_param_strings()[args.name]
+    end
+    
   end
   
   function request.add_header(key, value)
