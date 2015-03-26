@@ -23,7 +23,7 @@ ui.form{
           params = {
             member = member,
             image_type = "photo",
-            force_update = true
+            force_update = app.session.member_id == member.id
           }
         }
       end }
