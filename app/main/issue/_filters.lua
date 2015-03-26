@@ -1,11 +1,9 @@
-local params = request.get_param_strings() -- TODO replace with request.get_param() calls?
-
 local for_unit = param.get("for_unit", atom.boolean)
 local for_area = param.get("for_area", atom.boolean)
 local for_events = param.get("for_events", atom.boolean)
 local for_member = param.get("for_member", "table")
 local member = param.get("member", "table")
-local phase = params["phase"]
+local phase = request.get_param{ name = "phase" }
 
 local filters = {}
 
@@ -171,9 +169,9 @@ if not for_issue and not for_member then
   
   -- my issues
 
-  if params["filter"] == "my_issues" then
+  if request.get_param{ name = "filter" } == "my_issues" then
     
-    local delegation = params["delegation"]
+    local delegation = request.get_param{ name = "delegation" }
 
     local filter = { class = "filter_interest subfilter", name = "interest" }
     
