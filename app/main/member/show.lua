@@ -84,7 +84,7 @@ ui.section( function()
         image_type = "avatar",
         show_dummy = true,
         class = "left",
-        force_update = true
+        force_update = app.session.member_id == member.id
       }
     }
     ui.heading{ level = 1, content = member.name }
