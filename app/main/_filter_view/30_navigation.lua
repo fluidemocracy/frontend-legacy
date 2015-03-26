@@ -14,7 +14,7 @@ slot.select ( 'navigation_right', function ()
       content = function ()
         
         ui.field.text {
-          attr = { placeholder = "search" },
+          attr = { placeholder = _"search" },
           name = "q"
         }
         
