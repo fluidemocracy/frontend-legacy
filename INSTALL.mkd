@@ -17,6 +17,7 @@ installed:
   * postgresql
   * libpq-dev
   * lighttpd (only for WebMCP 1.2.x support)
+  * pmake or bmake (only for WebMCP 2.x with Moonbridge)
   * imagemagick
   * exim4
   * markdown2 (install with Python's pip)
