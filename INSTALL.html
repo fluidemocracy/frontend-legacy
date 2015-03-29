@@ -251,7 +251,7 @@ cd /opt/liquid_feedback_frontend/
 echo "Event:send_notifications_loop()" | ../webmcp/bin/webmcp_shell myconfig
 </code></pre>
 
-<h2>12. Start the sytem</h2>
+<h2>12. Start the system</h2>
 
 <p>After <code>lf_update</code> has been executed at least once and (in case of WebMCP 1.2.x)
 the webserver has been restarted (using the configuration above), you should be
@@ -266,6 +266,22 @@ able to access your LiquidFeedback system.</p>
 your configuration. Directly accessing this TCP port through your webbrowser
 is helpful for development purposes. For real-life deployment, however, it is
 recommended to further proxy the application (e.g. using nginx). The proxy can
-also add HTTPS support (which is not supported by Moonbridge itself).</p>
+also add HTTPS and/or HTTP/2 support (which is not supported by Moonbridge
+itself).</p>
+
+<p>To start the Moonbridge as a background process, please refer to the Moonbridge
+command line options:</p>
+
+<pre><code>Get this help message: moonbridge {-h|--help}
+Usage: moonbridge \
+           [-b|--background] \
+           [-d|--debug] \
+           [-f|--logfacility {DAEMON|USER|0|1|...|7}] \
+           [-i|--logident &lt;syslog ident&gt; \
+           [-l|--logfile &lt;logfile&gt;] \
+           [-p|--pidfile &lt;pidfile&gt;] \
+           [-s|--stats] \
+           -- &lt;Lua script&gt; [&lt;cmdline options for Lua script&gt;]
+</code></pre>
 </body>
 </html>
