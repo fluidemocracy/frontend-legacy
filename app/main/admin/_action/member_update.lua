@@ -53,7 +53,7 @@ local units = Unit:new_selector()
 for i, unit in ipairs(units) do
   local value = param.get("unit_" .. unit.id, atom.boolean)
   if value and not unit.privilege_exists then
-    privilege = Privilege:new()
+    local privilege = Privilege:new()
     privilege.unit_id = unit.id
     privilege.member_id = member.id
     privilege.voting_right = true
