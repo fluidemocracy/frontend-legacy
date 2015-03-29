@@ -251,8 +251,8 @@ background:
     echo "Event:send_notifications_loop()" | ../webmcp/bin/webmcp_shell myconfig
 
 
-12. Start the sytem
--------------------
+12. Start the system
+--------------------
 
 After `lf_update` has been executed at least once and (in case of WebMCP 1.2.x)
 the webserver has been restarted (using the configuration above), you should be
@@ -266,6 +266,21 @@ In the latter case, the Moonbridge server will open a TCP port according to
 your configuration. Directly accessing this TCP port through your webbrowser
 is helpful for development purposes. For real-life deployment, however, it is
 recommended to further proxy the application (e.g. using nginx). The proxy can
-also add HTTPS support (which is not supported by Moonbridge itself).
+also add HTTPS and/or HTTP/2 support (which is not supported by Moonbridge
+itself).
+
+To start the Moonbridge as a background process, please refer to the Moonbridge
+command line options:
+
+    Get this help message: moonbridge {-h|--help}
+    Usage: moonbridge \
+               [-b|--background] \
+               [-d|--debug] \
+               [-f|--logfacility {DAEMON|USER|0|1|...|7}] \
+               [-i|--logident <syslog ident> \
+               [-l|--logfile <logfile>] \
+               [-p|--pidfile <pidfile>] \
+               [-s|--stats] \
+               -- <Lua script> [<cmdline options for Lua script>]
 
 
