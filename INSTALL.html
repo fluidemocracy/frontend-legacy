@@ -23,7 +23,7 @@ installed:</p>
 <li>pmake or bmake (only for WebMCP 2.x with Moonbridge)</li>
 <li>imagemagick</li>
 <li>exim4</li>
-<li>markdown2 (install with Python's pip)</li>
+<li>markdown2 (<code>apt-get install python-pip; pip install markdown2</code>)</li>
 </ul>
 
 <p>If you're using any other Linux distribution or BSD system, install the
@@ -36,14 +36,8 @@ process needs to have access to your PostgreSQL installation. This is done by
 executing PostgreSQL's shell command <code>createuser</code> as database superuser
 (usually <code>pgsql</code>, or <code>postgres</code> for Debian installations):</p>
 
-<pre><code>su - postgres
-createuser
-
-Enter name of role to add: www-data
-Shall the new role be a superuser? (y/n) n
-Shall the new role be allowed to create databases? (y/n) y
-Shall the new role be allowed to create more new roles? (y/n) n
-
+<pre><code>su postgres -s $SHELL
+createuser --no-superuser --createdb --no-createrole www-data
 exit
 </code></pre>
 
@@ -61,7 +55,7 @@ executables <code>lf_update</code> and <code>lf_update_issue_order</code> in the
 make
 mkdir /opt/liquid_feedback_core
 cp core.sql lf_update lf_update_issue_order /opt/liquid_feedback_core
-su - www-data
+su www-data -s $SHELL
 cd /opt/liquid_feedback_core
 createdb liquid_feedback
 createlang plpgsql liquid_feedback  # command may be omitted, depending on PostgreSQL version
@@ -226,9 +220,9 @@ fi
 echo "${PID}" &gt; "${PIDFILE}"
 
 while true; do
-  su - www-data -c 'nice /opt/liquid_feedback_core/lf_update dbname=liquid_feedback 2&gt;&amp;1 | logger -t "lf_updated"'
-  su - www-data -c 'nice /opt/liquid_feedback_core/lf_update_issue_order dbname=liquid_feedback 2&gt;&amp;1 | logger -t "lf_updated"'
-  su - www-data -c 'nice /opt/liquid_feedback_core/lf_update_suggestion_order dbname=liquid_feedback 2&gt;&amp;1 | logger -t "lf_updated"'
+  su - www-data -s /bin/sh -c 'nice /opt/liquid_feedback_core/lf_update dbname=liquid_feedback 2&gt;&amp;1 | logger -t "lf_updated"'
+  su - www-data -s /bin/sh -c 'nice /opt/liquid_feedback_core/lf_update_issue_order dbname=liquid_feedback 2&gt;&amp;1 | logger -t "lf_updated"'
+  su - www-data -s /bin/sh -c 'nice /opt/liquid_feedback_core/lf_update_suggestion_order dbname=liquid_feedback 2&gt;&amp;1 | logger -t "lf_updated"'
   sleep 5
 done
 </code></pre>
@@ -246,7 +240,7 @@ done
 <code>lf_update_suggestion_order</code>, the following commands should be executed in
 background:</p>
 
-<pre><code>su - www-data
+<pre><code>su www-data -s $SHELL
 cd /opt/liquid_feedback_frontend/
 echo "Event:send_notifications_loop()" | ../webmcp/bin/webmcp_shell myconfig
 </code></pre>
