@@ -253,7 +253,8 @@ able to access your LiquidFeedback system.</p>
 
 <p>If you use WebMCP 2.x, the server is started by calling:</p>
 
-<pre><code>/opt/moonbridge/moonbridge /opt/webmcp/bin/mcp.lua /opt/webmcp/ /opt/liquid_feedback_frontend/ main myconfig
+<pre><code>su www-data -s $SHELL
+/opt/moonbridge/moonbridge /opt/webmcp/bin/mcp.lua /opt/webmcp/ /opt/liquid_feedback_frontend/ main myconfig
 </code></pre>
 
 <p>In the latter case, the Moonbridge server will open a TCP port according to
