@@ -17,9 +17,10 @@ installed:
   * postgresql
   * libpq-dev
   * lighttpd (only for WebMCP 1.2.x support)
+  * pmake or bmake (only for WebMCP 2.x with Moonbridge)
   * imagemagick
   * exim4
-  * markdown2 (install with Python's pip)
+  * markdown2 (``apt-get install python-pip; pip install markdown2``)
 
 If you're using any other Linux distribution or BSD system, install the
 necessary software components accordingly.
@@ -33,14 +34,8 @@ process needs to have access to your PostgreSQL installation. This is done by
 executing PostgreSQL's shell command `createuser` as database superuser
 (usually `pgsql`, or `postgres` for Debian installations):
 
-    su - postgres
-    createuser
-
-    Enter name of role to add: www-data
-    Shall the new role be a superuser? (y/n) n
-    Shall the new role be allowed to create databases? (y/n) y
-    Shall the new role be allowed to create more new roles? (y/n) n
-
+    su postgres -s $SHELL
+    createuser --no-superuser --createdb --no-createrole www-data
     exit
 
 
@@ -59,7 +54,7 @@ executables `lf_update` and `lf_update_issue_order` in the directory
     make
     mkdir /opt/liquid_feedback_core
     cp core.sql lf_update lf_update_issue_order /opt/liquid_feedback_core
-    su - www-data
+    su www-data -s $SHELL
     cd /opt/liquid_feedback_core
     createdb liquid_feedback
     createlang plpgsql liquid_feedback  # command may be omitted, depending on PostgreSQL version
@@ -225,9 +220,9 @@ following contents:
     echo "${PID}" > "${PIDFILE}"
 
     while true; do
-      su - www-data -c 'nice /opt/liquid_feedback_core/lf_update dbname=liquid_feedback 2>&1 | logger -t "lf_updated"'
-      su - www-data -c 'nice /opt/liquid_feedback_core/lf_update_issue_order dbname=liquid_feedback 2>&1 | logger -t "lf_updated"'
-      su - www-data -c 'nice /opt/liquid_feedback_core/lf_update_suggestion_order dbname=liquid_feedback 2>&1 | logger -t "lf_updated"'
+      su - www-data -s /bin/sh -c 'nice /opt/liquid_feedback_core/lf_update dbname=liquid_feedback 2>&1 | logger -t "lf_updated"'
+      su - www-data -s /bin/sh -c 'nice /opt/liquid_feedback_core/lf_update_issue_order dbname=liquid_feedback 2>&1 | logger -t "lf_updated"'
+      su - www-data -s /bin/sh -c 'nice /opt/liquid_feedback_core/lf_update_suggestion_order dbname=liquid_feedback 2>&1 | logger -t "lf_updated"'
       sleep 5
     done
 
@@ -245,13 +240,13 @@ In addition to regular execution of `lf_update` and
 `lf_update_suggestion_order`, the following commands should be executed in
 background:
 
-    su - www-data
+    su www-data -s $SHELL
     cd /opt/liquid_feedback_frontend/
     echo "Event:send_notifications_loop()" | ../webmcp/bin/webmcp_shell myconfig
 
 
-12. Start the sytem
--------------------
+12. Start the system
+--------------------
 
 After `lf_update` has been executed at least once and (in case of WebMCP 1.2.x)
 the webserver has been restarted (using the configuration above), you should be
@@ -259,12 +254,28 @@ able to access your LiquidFeedback system.
 
 If you use WebMCP 2.x, the server is started by calling:
 
+    su www-data -s $SHELL
     /opt/moonbridge/moonbridge /opt/webmcp/bin/mcp.lua /opt/webmcp/ /opt/liquid_feedback_frontend/ main myconfig
 
 In the latter case, the Moonbridge server will open a TCP port according to
 your configuration. Directly accessing this TCP port through your webbrowser
 is helpful for development purposes. For real-life deployment, however, it is
 recommended to further proxy the application (e.g. using nginx). The proxy can
-also add HTTPS support (which is not supported by Moonbridge itself).
+also add HTTPS and/or HTTP/2 support (which is not supported by Moonbridge
+itself).
+
+To start the Moonbridge as a background process, please refer to the Moonbridge
+command line options:
+
+    Get this help message: moonbridge {-h|--help}
+    Usage: moonbridge \
+               [-b|--background] \
+               [-d|--debug] \
+               [-f|--logfacility {DAEMON|USER|0|1|...|7}] \
+               [-i|--logident <syslog ident> \
+               [-l|--logfile <logfile>] \
+               [-p|--pidfile <pidfile>] \
+               [-s|--stats] \
+               -- <Lua script> [<cmdline options for Lua script>]
 
 
