@@ -78,12 +78,11 @@ ui.form{
       if member then
         ui.field.boolean{
           label = _"Lock member?", name = "locked",
-          readonly = deactivated
         }
       end
       
       slot.put("<br />")
-      ui.field.boolean{  label = _"Admin?",       name = "admin", readonly = deactivated }
+      ui.field.boolean{  label = _"Admin?", name = "admin" }
       slot.put("<br />")
       ui.submit{         text  = _"update member" }
       slot.put(" ")
