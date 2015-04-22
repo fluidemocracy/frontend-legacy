@@ -41,6 +41,7 @@ local broken_delegations = Delegation:selector_for_broken(app.session.member_id)
 for i, delegation in ipairs(broken_delegations) do
   local scope
   local context
+  local id
   if delegation.scope == "unit" then
     scope = _"unit"
     id = delegation.unit_id
