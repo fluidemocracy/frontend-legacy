@@ -54,7 +54,7 @@ executables <code>lf_update</code> and <code>lf_update_issue_order</code> in the
 # from http://www.public-software-group.org/pub/projects/liquid_feedback/backend/
 make
 mkdir /opt/liquid_feedback_core
-cp core.sql lf_update lf_update_issue_order /opt/liquid_feedback_core
+cp core.sql lf_update lf_update_issue_order lf_update_suggestion_order /opt/liquid_feedback_core
 su www-data -s $SHELL
 cd /opt/liquid_feedback_core
 createdb liquid_feedback
