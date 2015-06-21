@@ -318,9 +318,10 @@ end
 --   static_headers            = {}            -- string or table of static headers to be returned with every request
 --   request_header_size_limit = 1024*1024,    -- maximum size of request body sent by client
 --   request_body_size_limit   = 64*1024*1024, -- maximum size of request body sent by client
---   request_idle_timeout      = 65,           -- maximum time until receiving the first byte of the request header
---   request_header_timeout    = 30,           -- maximum time until receiving the remaining bytes of the request header
---   response_timeout          = 1800,         -- time in which request body and response must be sent
+--   idle_timeout              = 65,           -- maximum time until receiving the first byte of the request headera
+--   stall_timeout             = 60,           -- maximum time a client connection may be stalled
+--   request_header_timeout    = 120,          -- maximum time until receiving the remaining bytes of the request header
+--   response_timeout          = 3600,         -- time in which request body and response must be sent
 --   maximum_input_chunk_size  = 16384         -- tweaks behavior of request-body parser
 --   minimum_output_chunk_size = 1024          -- chunk size for chunked-transfer-encoding
 -- }
