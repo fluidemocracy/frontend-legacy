@@ -53,10 +53,12 @@ local listen_options = {
 }
 
 if config.ipv6 then
-  listen_options[#listen_options+1] = { proto = "tcp6", port = config.port, localhost = config.localhost }
+  local host = config.localhost and "::1" or "::"
+  listen_options[#listen_options+1] = { proto = "tcp", host = host, port = config.port }
 end
 if config.ipv6 ~= "only" then
-  listen_options[#listen_options+1] = { proto = "tcp4", port = config.port, localhost = config.localhost }
+  local host = config.localhost and "127.0.0.1" or "::"
+  listen_options[#listen_options+1] = { proto = "tcp", host = host, port = config.port }
 end
 
 listen(listen_options)
