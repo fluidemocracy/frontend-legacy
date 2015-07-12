@@ -148,7 +148,7 @@ config.public_access = "none"
 -- Configuration of password hashing algorithm (defaults to "crypt_sha512")
 -- ------------------------------------------------------------------------
 -- config.password_hash_algorithm = "crypt_sha512"
-config.password_hash_algorithm = "crypt_sha256"
+-- config.password_hash_algorithm = "crypt_sha256"
 -- config.password_hash_algorithm = "crypt_md5"
 
 
