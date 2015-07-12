@@ -35,7 +35,8 @@ config.use_terms_checkboxes = {
   
 -- Absolute base url of application
 -- ------------------------------------------------------------------------
-config.absolute_base_url = "http://127.0.0.1:8080/"
+config.absolute_base_url = "http://10.1.11.5:8080/"
+config.localhost = false
 
 
 -- Connection information for the LiquidFeedback database
