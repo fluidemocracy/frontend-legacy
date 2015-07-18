@@ -137,8 +137,13 @@ ui.section( function ()
       end
     end
   end
-  
 
+  if config.render_external_reference and config.render_external_reference.initiative then
+    config.render_external_reference.initiative(initiative, function (callback)
+      ui.sectionRow(callback)
+    end)
+  end
+  
   ui.sectionRow( function ()
     ui.container {
       attr = { class = "draft" },

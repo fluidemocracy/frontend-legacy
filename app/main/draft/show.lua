@@ -41,6 +41,12 @@ ui.section( function()
     ui.heading { level = 2, content = _("Draft revision #{id}", { id = draft.id } ) }
   end)
   
+  if config.render_external_reference and config.render_external_reference.draft then
+    config.render_external_reference.draft(draft, function (callback)
+      ui.sectionRow(callback)
+    end)
+  end
+  
   ui.sectionRow( function()
   
     execute.view{
