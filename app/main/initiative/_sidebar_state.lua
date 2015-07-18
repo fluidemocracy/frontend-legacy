@@ -14,10 +14,6 @@ if initiative.issue.fully_frozen and initiative.issue.closed and initiative.admi
       local abstention_votes = max_value - 
               negative_votes - 
               positive_votes
-      local function perc(votes, sum)
-        if sum > 0 then return string.format( "%.f", votes * 100 / sum ) .. "%" end
-        return ""
-      end
       local head_text
       if initiative.winner then
         head_text = _"Approved"
@@ -38,7 +34,7 @@ if initiative.issue.fully_frozen and initiative.issue.closed and initiative.admi
           }
           ui.tag { tag = "th", content = _"Yes" }
           ui.tag { tag = "td", content = 
-            perc(positive_votes, max_value) 
+            format.percent_floor(positive_votes, max_value) 
           }
           ui.tag { tag = "th", content = _"Yes" }
         end }
@@ -48,7 +44,7 @@ if initiative.issue.fully_frozen and initiative.issue.closed and initiative.admi
           }
           ui.tag { tag = "th", content = _"Abstention" }
           ui.tag { tag = "td", content =
-            perc(abstention_votes, max_value) 
+            format.percent_floor(abstention_votes, max_value) 
           }
           ui.tag { tag = "th", content = _"Abstention" }
         end }
@@ -58,7 +54,7 @@ if initiative.issue.fully_frozen and initiative.issue.closed and initiative.admi
           }
           ui.tag { tag = "th", content = _"No" }
           ui.tag { tag = "td", content =
-            perc(negative_votes, max_value) 
+            format.percent_floor(negative_votes, max_value) 
           }
           ui.tag { tag = "th", content = _"No" }
         end }
