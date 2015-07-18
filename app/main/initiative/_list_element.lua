@@ -65,13 +65,6 @@ if initiative.rank == 1
   and initiative.negative_votes ~= nil 
   and not for_event
 then
-  local function percent(p, q)
-    if q > 0 then
-      return math.floor(p / q * 100) .. "%"
-    else
-      return "0%"
-    end
-  end
   local result = ""
   if initiative.eligible then
     result = _("Reached #{sign}#{num}/#{den}", {
@@ -94,11 +87,11 @@ then
     result_text = _("#{result}: #{yes_count} Yes (#{yes_percent}), #{no_count} No (#{no_percent}), #{neutral_count} Abstention (#{neutral_percent})", {
       result = result,
       yes_count = initiative.positive_votes,
-      yes_percent = percent(initiative.positive_votes, issue.voter_count),
+      yes_percent = format.percent_floor(initiative.positive_votes, issue.voter_count),
       neutral_count = neutral_count,
-      neutral_percent = percent(neutral_count, issue.voter_count),
+      neutral_percent = format.percent_floor(neutral_count, issue.voter_count),
       no_count = initiative.negative_votes,
-      no_percent = percent(initiative.negative_votes, issue.voter_count)
+      no_percent = format.percent_floor(initiative.negative_votes, issue.voter_count)
     })
   else
     result_text = _("#{result}: No votes (0)", { result = result })
