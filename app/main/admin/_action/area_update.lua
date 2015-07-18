@@ -1,6 +1,6 @@
 local area = Area:by_id(param.get_id()) or Area:new()
 
-param.update(area, "unit_id", "name", "description", "active")
+param.update(area, "unit_id", "name", "description", "external_reference", "active")
 
 if #area.name < 1 then
   slot.select("error", function()

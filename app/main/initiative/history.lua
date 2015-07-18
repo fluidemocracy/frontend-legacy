@@ -95,6 +95,17 @@ ui.form{
         }
       end
       
+      if config.render_external_reference and config.render_external_reference.draft then
+        columns[#columns+1] = {
+          label = _"external reference",
+          content = function(draft)
+            config.render_external_reference.draft(draft, function (callback)
+              callback()
+            end)
+          end
+        }
+      end
+      
       ui.list{
         records = initiative.drafts,
         columns = columns

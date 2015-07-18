@@ -255,6 +255,25 @@ config.free_timing = {
 }
 
 
+-- External references
+-- ------------------------------------------------------------------------
+-- Rendering of external references
+
+--[[
+config.render_external_reference = {
+  draft = function(draft, wrapper)
+    wrapper(function()
+      ui.tag{ content = draft.external_reference)
+    end)
+  end,
+  initiative = function(initiative, wrapper)
+    wrapper(function()
+      ui.tag{ content = initiative.external_reference)
+    end)
+  end
+end
+--]]
+
 -- Admin logger
 -- ------------------------------------------------------------------------
 -- Logging administrative activities
