@@ -1,7 +1,7 @@
 local member = param.get ( "member", "table" )
 local units
 if member then
-  units = member:get_reference_selector("units").add_order_by("name"):exec()
+  units = member:get_reference_selector("units"):add_order_by("name"):exec()
   units:load_delegation_info_once_for_member_id(member.id)
 else
   units = Unit:new_selector():add_where("active"):add_order_by("name"):exec()
