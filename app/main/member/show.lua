@@ -185,7 +185,7 @@ ui.section( function()
 end )
 
 
-if app.session.member.id == member.id then
+if app.session.member_id == member.id then
   ui.script{ script = [[
     var url = $(".microAvatar")[0].src;
     var onload = function() {
