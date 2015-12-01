@@ -184,46 +184,6 @@ function Initiative.object:load_everything_for_member_id(member_id)
   end
 end
 
-
-
-
-function Initiative:get_search_selector(search_string)
-  return self:new_selector()
-    :join("draft", nil, "draft.initiative_id = initiative.id")
-    :add_field( {'"highlight"("initiative"."name", ?)', search_string }, "name_highlighted")
-    :add_where{ '"initiative"."text_search_data" @@ "text_search_query"(?) OR "draft"."text_search_data" @@ "text_search_query"(?)', search_string, search_string }
-    :add_group_by('"initiative"."id"')
-    :add_group_by('"initiative"."issue_id"')
-    :add_group_by('"initiative"."name"')
-    :add_group_by('"initiative"."discussion_url"')
-    :add_group_by('"initiative"."created"')
-    :add_group_by('"initiative"."revoked"')
-    :add_group_by('"initiative"."revoked_by_member_id"')
-    :add_group_by('"initiative"."admitted"')
-    :add_group_by('"initiative"."supporter_count"')
-    :add_group_by('"initiative"."informed_supporter_count"')
-    :add_group_by('"initiative"."satisfied_supporter_count"')
-    :add_group_by('"initiative"."satisfied_informed_supporter_count"')
-    :add_group_by('"initiative"."positive_votes"')
-    :add_group_by('"initiative"."negative_votes"')
-    :add_group_by('"initiative"."direct_majority"')
-    :add_group_by('"initiative"."indirect_majority"')
-    :add_group_by('"initiative"."schulze_rank"')
-    :add_group_by('"initiative"."better_than_status_quo"')
-    :add_group_by('"initiative"."worse_than_status_quo"')
-    :add_group_by('"initiative"."reverse_beat_path"')
-    :add_group_by('"initiative"."multistage_majority"')
-    :add_group_by('"initiative"."eligible"')
-    :add_group_by('"initiative"."winner"')
-    :add_group_by('"initiative"."rank"')
-    :add_group_by('"initiative"."suggested_initiative_id"')
-    :add_group_by('"initiative"."text_search_data"')
-    :add_group_by('"issue"."population"')
-    :add_group_by("_initiator.member_id")
-    :add_group_by("_supporter.member_id")
-    :add_group_by("_direct_supporter_snapshot.member_id")
-end
-
 function Initiative:selector_for_updated_drafts(member_id)
   return Initiative:new_selector()
     :join("issue", "_issue_state", "_issue_state.id = initiative.issue_id AND _issue_state.closed ISNULL AND _issue_state.fully_frozen ISNULL")
