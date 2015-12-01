@@ -7,17 +7,25 @@ function lf4rcs.commit(issue)
     :add_where{ "issue_id = ?", issue.id }
     :exec()
   for i, initiative in ipairs(initiatives) do
+    local failure = false
     local function exec(...)
       local command, output, err_message, exit_code = lf4rcs.exec(...)
-      local log = "Executed: " .. command .. "\n"
-      if output then
-        log = log .. output .. "\n"
-      end
-      if err_message and #err_message > 0 then
-        log = log .. "ERROR: " .. err_message .. "\n"
-      end
-      if exit_code and exit_code ~= 0 then
-        log = log .. "Exit code: " .. tostring(exit_code) .. "\n"
+      local log
+      if failure then
+        log = "Skipped: " .. command .. "\n"
+      else
+        log = "Executed: " .. command .. "\n"
+        if output then
+          log = log .. output .. "\n"
+        end
+        if err_message and #err_message > 0 then
+          log = log .. "ERROR: " .. err_message .. "\n"
+          failure = true
+        end
+        if exit_code and exit_code ~= 0 then
+          log = log .. "Exit code: " .. tostring(exit_code) .. "\n"
+          failure = true
+        end
       end
       issue.admin_notice = (issue.admin_notice or "") .. log
       issue:save()
