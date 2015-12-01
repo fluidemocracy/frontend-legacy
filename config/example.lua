@@ -19,23 +19,25 @@ config.use_terms = "<h1>Terms of Use</h1><p>Insert terms here</p>"
 
 -- Checkbox(es) the user has to accept while registering
 -- ------------------------------------------------------------------------
+--[[
 config.use_terms_checkboxes = {
   {
     name = "terms_of_use_v1",
     html = "I accept the terms of use.",
     not_accepted_error = "You have to accept the terms of use to be able to register."
   },
---  {
---    name = "extra_terms_of_use_v1",
---    html = "I accept the extra terms of use.",
---    not_accepted_error = "You have to accept the extra terms of use to be able to register."
---  }
+  {
+    name = "extra_terms_of_use_v1",
+    html = "I accept the extra terms of use.",
+    not_accepted_error = "You have to accept the extra terms of use to be able to register."
+  }
 }
-
+--]]
   
 -- Absolute base url of application
 -- ------------------------------------------------------------------------
 config.absolute_base_url = "http://example.com/"
+config.localhost = false
 
 
 -- Connection information for the LiquidFeedback database
@@ -219,6 +221,7 @@ config.public_access = "none"
 -- Please note, polling policies never have an admission phase
 -- The available_func is optional, if not set any target date is allowed
 
+--[[
 config.free_timing = {
   calculate_func = function(policy, timing_string)
     local function interval_by_seconds(secs)
@@ -253,13 +256,14 @@ config.free_timing = {
     }
   end
 }
-
+--]]
 
 -- Configuration of lf4rcs
 -- ------------------------------------------------------------------------
-config.lf4rc = {}
+-- config.lf4rc = {}
 
 -- Example configuration for controlling a Git repository
+--[[
 config.lf4rcs.git = {
   
   render_draft_reference = function(url, draft)
@@ -364,7 +368,7 @@ config.lf4rcs.hg = {
 }
 
 lf4rcs.init()
-
+--]]
 
 -- External references
 -- ------------------------------------------------------------------------
@@ -466,11 +470,8 @@ end
 -- if cgi then collectgarbage("stop") end
 
 -- Trace debug
+-- ------------------------------------------------------------------------
 -- uncomment the following line to enable debug trace
 -- config.enable_debug_trace = true
 
--- ========================================================================
--- Do main initialisation (DO NOT REMOVE FOLLOWING SECTION)
--- ========================================================================
 
-execute.config("init")
