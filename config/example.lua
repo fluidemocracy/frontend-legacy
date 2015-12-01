@@ -290,8 +290,7 @@ config.lf4rcs.git = {
   
   commit = function(path, exec, branch, target_node_id, close_message, merge_message)
     if merge_message then
-      -- TODO reset on error
-      exec("git", "-C", path, "checkout", "master")
+      exec("git", "-C", path, "checkout", "-f", "master")
       exec("git", "-C", path, "merge", target_node_id, "-m", merge_message)
       exec("git", "-C", path, "push", "origin", "master")
     end
