@@ -1,6 +1,14 @@
 Member = mondelefant.new_class()
 Member.table = 'member'
 
+local function secret_token()
+  local parts = {}
+  for i = 1, 5 do
+    parts[#parts+1] = multirand.string(5, "23456789bcdfghjkmnpqrstvwxyz")
+  end
+  return (table.concat(parts, "-"))
+end
+
 Member:add_reference{
   mode          = "1m",
   to            = "MemberHistory",
@@ -549,7 +557,7 @@ function Member.object:send_password_reset_mail()
   if not self.notify_email then
     return false
   end
-  self.password_reset_secret = multirand.string( 24, "23456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz" )
+  self.password_reset_secret = secret_token()
   local expiry = db:query("SELECT now() + '1 days'::interval as expiry", "object").expiry
   self.password_reset_secret_expiry = expiry
   self:save()
@@ -576,7 +584,7 @@ end
 
 function Member.object:send_invitation(template_file, subject)
   trace.disable()
-  self.invite_code = multirand.string( 24, "23456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz" )
+  self.invite_code = secret_token()
   self:save()
   
   local subject = subject
@@ -615,7 +623,7 @@ function Member.object:set_notify_email(notify_email)
   trace.disable()
   local expiry = db:query("SELECT now() + '7 days'::interval as expiry", "object").expiry
   self.notify_email_unconfirmed = notify_email
-  self.notify_email_secret = multirand.string( 24, "23456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz" )
+  self.notify_email_secret = secret_token()
   self.notify_email_secret_expiry = expiry
   local content = slot.use_temporary(function()
     slot.put(_"Hello " .. self.name .. ",\n\n")
