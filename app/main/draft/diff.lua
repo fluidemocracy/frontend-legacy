@@ -19,9 +19,7 @@ then
 end
 
 if old_draft_id > new_draft_id then
-  local tmp = old_draft_id
-  old_draft_id = new_draft_id
-  new_draft_id = tmp
+  old_draft_id, new_draft_id = new_draft_id, old_draft_id
 end
 
 local old_draft = Draft:by_id(old_draft_id)
@@ -71,7 +69,7 @@ execute.view {
 local old_draft_content = string.gsub(string.gsub(old_draft.content, "\n", " ###ENTER###\n"), " ", "\n")
 local new_draft_content = string.gsub(string.gsub(new_draft.content, "\n", " ###ENTER###\n"), " ", "\n")
 
-local key = multirand.string(26, "123456789bcdfghjklmnpqrstvwxyz");
+local key = multirand.string(24, "0123456789abcdefghijklmnopqrstuvwxyz")
 
 local old_draft_filename = encode.file_path(request.get_app_basepath(), 'tmp', "diff-" .. key .. "-old.tmp")
 local new_draft_filename = encode.file_path(request.get_app_basepath(), 'tmp', "diff-" .. key .. "-new.tmp")
