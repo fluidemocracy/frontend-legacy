@@ -81,7 +81,6 @@ ui.sidebar( "tab-whatcanido", function()
       if not util.is_profile_field_locked(app.session.member, "password") then
         pages[#pages+1] = { view = "settings_password",       text = _"change your password" }
       end
-      pages[#pages+1] = { view = "developer_settings",      text = _"developer settings" }
 
       if config.download_dir then
         pages[#pages+1] = { module = "index", view = "download",      text = _"database download" }
