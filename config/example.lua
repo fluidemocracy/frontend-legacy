@@ -195,13 +195,6 @@ config.public_access = "none"
 -- config.motd_intern = "<h1>Message of the day (intern)</h1><p>The MOTD is formatted with HTML</p>"
 
 
--- Automatic issue related discussion URL
--- ------------------------------------------------------------------------
--- config.issue_discussion_url_func = function(issue)
---   return "http://example.com/discussion/issue_" .. tostring(issue.id)
--- end
-
-
 -- Integration of Etherpad, disabled by default
 -- ------------------------------------------------------------------------
 --config.etherpad = {
