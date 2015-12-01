@@ -462,16 +462,16 @@ end
 
 
 -- WebMCP accelerator
--- uncomment the following two lines to use C implementations of chosen
--- functions and to disable garbage collection during the request, to
--- increase speed:
+-- ------------------------------------------------------------------------
+-- uncomment the following line to use C implementations of chosen
+-- functions:
 -- ------------------------------------------------------------------------
 -- require 'webmcp_accelerator'
--- if cgi then collectgarbage("stop") end
+
 
 -- Trace debug
 -- ------------------------------------------------------------------------
 -- uncomment the following line to enable debug trace
+-- ------------------------------------------------------------------------
 -- config.enable_debug_trace = true
-
 
