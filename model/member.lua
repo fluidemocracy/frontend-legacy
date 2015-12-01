@@ -326,6 +326,8 @@ function Member.object:set_password(password)
   end
   
   self.password = hash
+  self.password_reset_secret = nil
+  self.password_reset_secret_expiry = nil
 end
 
 function Member.object:check_password(password)
@@ -540,6 +542,36 @@ function Member:get_search_selector(search_string)
     :add_field( {'"highlight"("member"."name", ?)', search_string }, "name_highlighted")
     :add_where{ '"member"."text_search_data" @@ "text_search_query"(?)', search_string }
     :add_where("activated NOTNULL AND active")
+end
+
+function Member.object:send_password_reset_mail()
+  trace.disable()
+  if not self.notify_email then
+    return false
+  end
+  self.password_reset_secret = multirand.string( 24, "23456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz" )
+  local expiry = db:query("SELECT now() + '1 days'::interval as expiry", "object").expiry
+  self.password_reset_secret_expiry = expiry
+  self:save()
+  local content = slot.use_temporary(function()
+    slot.put(_"Hello " .. self.name .. ",\n\n")
+    slot.put(_"to reset your password please click on the following link:\n\n")
+    slot.put(request.get_absolute_baseurl() .. "index/reset_password.html?secret=" .. self.password_reset_secret .. "\n\n")
+    slot.put(_"If this link is not working, please open following url in your web browser:\n\n")
+    slot.put(request.get_absolute_baseurl() .. "index/reset_password.html\n\n")
+    slot.put(_"On that page please enter the reset code:\n\n")
+    slot.put(self.password_reset_secret .. "\n\n")
+  end)
+  local success = net.send_mail{
+    envelope_from = config.mail_envelope_from,
+    from          = config.mail_from,
+    reply_to      = config.mail_reply_to,
+    to            = self.notify_email,
+    subject       = config.mail_subject_prefix .. _"Password reset request",
+    content_type  = "text/plain; charset=UTF-8",
+    content       = content
+  }
+  return success
 end
 
 function Member.object:send_invitation(template_file, subject)
