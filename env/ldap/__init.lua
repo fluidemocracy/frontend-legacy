@@ -1,2 +1,2 @@
 -- Lua library path for C modules for mldap
-package.cpath = request.get_app_basepath() .. "/lib/mldap/?.so" .. ";" .. package.cpath
+package.cpath = WEBMCP_BASE_PATH .. "lib/mldap/?.so" .. ";" .. package.cpath

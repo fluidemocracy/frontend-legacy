@@ -71,8 +71,8 @@ local new_draft_content = string.gsub(string.gsub(new_draft.content, "\n", " ###
 
 local key = multirand.string(24, "0123456789abcdefghijklmnopqrstuvwxyz")
 
-local old_draft_filename = encode.file_path(request.get_app_basepath(), 'tmp', "diff-" .. key .. "-old.tmp")
-local new_draft_filename = encode.file_path(request.get_app_basepath(), 'tmp', "diff-" .. key .. "-new.tmp")
+local old_draft_filename = encode.file_path(WEBMCP_BASE_PATH, 'tmp', "diff-" .. key .. "-old.tmp")
+local new_draft_filename = encode.file_path(WEBMCP_BASE_PATH, 'tmp', "diff-" .. key .. "-new.tmp")
 
 local old_draft_file = assert(io.open(old_draft_filename, "w"))
 old_draft_file:write(old_draft_content)
