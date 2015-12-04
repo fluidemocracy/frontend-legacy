@@ -31,7 +31,7 @@ execute.view {
 
 local function getOpenIssuesSelector()
   return area:get_reference_selector("issues")
-    :add_order_by("coalesce(issue.fully_frozen + issue.voting_time, issue.half_frozen + issue.verification_time, issue.accepted + issue.discussion_time, issue.created + issue.admission_time) - now()")
+    :add_order_by("coalesce(issue.fully_frozen + issue.voting_time, issue.half_frozen + issue.verification_time, issue.accepted + issue.discussion_time, issue.created + issue.max_admission_time) - now()")
 end
 
 local admission_selector = getOpenIssuesSelector()

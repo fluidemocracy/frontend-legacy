@@ -9,7 +9,8 @@ ui.form{
     if policy.polling then
       ui.field.text{ label = _"New" .. ":", value = _"without" }
     else
-      ui.field.text{ label = _"New" .. ":", value = "≤ " .. policy.admission_time }
+      ui.field.text{ label = _"New" .. ":", value = "≤ min " .. policy.min_admission_time }
+      ui.field.text{ label = _"New" .. ":", value = "≤ max " .. policy.max_admission_time }
     end
     ui.field.text{ label = _"Discussion" .. ":", value = policy.discussion_time or _"variable" }
     ui.field.text{ label = _"Frozen" .. ":", value = policy.verification_time or _"variable" }

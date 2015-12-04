@@ -82,7 +82,8 @@ ui.section(function()
       if policy.polling then
         ui.field.text{       label = _"Admission time",        value = _"Implicitly admitted" }
       else
-        ui.field.text{       label = _"Admission time",        value = format.interval_text(issue.admission_time_text) }
+        ui.field.text{       label = _"Minimum admission time",        value = format.interval_text(issue.min_admission_time_text) }
+        ui.field.text{       label = _"Maximum admission time",        value = format.interval_text(issue.max_admission_time_text) }
         ui.field.text{
           label = _"Issue quorum",
           value = format.percentage(policy.issue_quorum_num / policy.issue_quorum_den)

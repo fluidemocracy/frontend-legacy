@@ -32,7 +32,8 @@ ui.section( function()
         ui.field.text{ label = _"Hint",        readonly = true, 
                         value = _"Interval format:" .. " 3 mons 2 weeks 1 day 10:30:15" }
 
-        ui.field.text{ label = _"Admission time",     name = "admission_time", value = hint and "30 days" or nil }
+        ui.field.text{ label = _"Minimum admission time",     name = "min_admission_time", value = hint and "0" or nil }
+        ui.field.text{ label = _"Maximum admission time",     name = "min_admission_time", value = hint and "30 days" or nil }
         ui.field.text{ label = _"Discussion time",    name = "discussion_time", value = hint and "30 days" or nil }
         ui.field.text{ label = _"Verification time",  name = "verification_time", value = hint and "15 days" or nil }
         ui.field.text{ label = _"Voting time",        name = "voting_time", value = hint and "15 days" or nil }

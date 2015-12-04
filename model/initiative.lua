@@ -244,7 +244,7 @@ end
 function Initiative:getBestInAdmission( args )
   local selector = Initiative:getSpecialSelector( args )
   selector:add_where( "issue.state = 'admission'" )
-  selector:add_order_by( "issue.created + issue.admission_time DESC, id DESC" )
+  selector:add_order_by( "issue.created + issue.max_admission_time DESC, id DESC" )
   return selector:exec()
 end
 
