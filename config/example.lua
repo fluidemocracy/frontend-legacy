@@ -360,6 +360,10 @@ config.lf4rcs.hg = {
   
 }
 
+-- Grace period after creating an initiative for pushing changes during verification phase
+-- disabled by default (nil), use PostgreSQL interval notation
+-- config.lf4rcs.push_grace_period = nil
+
 lf4rcs.init()
 --]]
 
