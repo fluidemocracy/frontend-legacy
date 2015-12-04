@@ -69,7 +69,23 @@ function lf4rcs.update_references(repository, path, unit_id)
         abort("initiative belongs to another unit (unit ID " .. initiative.issue.area.unit_id .. ")")
       end
       if initiative.issue.state ~= "admission" and initiative.issue.state ~= "discussion" then
-        abort("issue is already frozen or closed (" .. initiative.issue.state .. ")")
+        if initiative.issue.state == "verification" then
+          if config.lf4rcs.push_grace_period
+            local in_push_grace_period = Initiative:new_selector()
+              :reset_fields()
+              :add_field({ "now() - initiative.created_at <= ?", config.lf4rcs.push_grace_period }, "in_push_grace_period")
+              :add_where{ "id = ?", initiative.id }
+              :single_object_mode()
+              :exec()).in_push_grace_period
+            if not in_push_period then
+              abort("issue is already frozen and the push grace period is expired")
+            end
+          else
+            abort("issue is already frozen")
+          end
+        else
+          abort("issue is already closed (" .. initiative.issue.state .. ")")
+        end
       end
       if initiative.revoked then
         abort("initiative has been revoked")
