@@ -14,7 +14,8 @@ local new_selector = Policy.new_selector
 
 function Policy:new_selector()
   local selector = new_selector(self)
-  selector:add_field("justify_interval(admission_time)::text", "admission_time_text")
+  selector:add_field("justify_interval(min_admission_time)::text", "min_admission_time_text")
+  selector:add_field("justify_interval(max_admission_time)::text", "max_admission_time_text")
   selector:add_field("justify_interval(discussion_time)::text", "discussion_time_text")
   selector:add_field("justify_interval(verification_time)::text", "verification_time_text")
   selector:add_field("justify_interval(voting_time)::text", "voting_time_text")

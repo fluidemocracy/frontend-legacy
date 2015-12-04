@@ -30,7 +30,7 @@ local open_issues_selector = Issue:new_selector()
   :join("area", nil, "area.id = issue.area_id")
   :add_where{ "area.unit_id = ?", unit.id }
   :add_where("issue.closed ISNULL")
-  :add_order_by("coalesce(issue.fully_frozen + issue.voting_time, issue.half_frozen + issue.verification_time, issue.accepted + issue.discussion_time, issue.created + issue.admission_time) - now()")
+  :add_order_by("coalesce(issue.fully_frozen + issue.voting_time, issue.half_frozen + issue.verification_time, issue.accepted + issue.discussion_time, issue.created + issue.max_admission_time) - now()")
 
 local closed_issues_selector = Issue:new_selector()
   :join("area", nil, "area.id = issue.area_id")

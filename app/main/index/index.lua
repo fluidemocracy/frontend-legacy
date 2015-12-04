@@ -5,7 +5,7 @@ local function getIssuesSelector()
         issue.fully_frozen + issue.voting_time, 
         issue.half_frozen + issue.verification_time, 
         issue.accepted + issue.discussion_time, 
-        issue.created + issue.admission_time
+        issue.created + issue.max_admission_time
       ) - now()
     ]])
 end

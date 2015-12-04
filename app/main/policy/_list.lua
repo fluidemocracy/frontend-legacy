@@ -55,7 +55,8 @@ for i, policy in ipairs(policies) do
           if policy.polling then
             ui.field.text{ label = _"New" .. ":", value = _"without" }
           else
-            ui.field.text{ label = _"New" .. ":", value = "≤ " .. format.interval_text(policy.admission_time) }
+            ui.field.text{ label = _"New" .. ":", value = "≤ min " .. format.interval_text(policy.max_admission_time) }
+            ui.field.text{ label = _"New" .. ":", value = "≤ max " .. format.interval_text(policy.max_admission_time) }
           end
           ui.field.text{ label = _"Discussion" .. ":", value = format.interval_text(policy.discussion_time) or _"variable" }
           ui.field.text{ label = _"Frozen" .. ":", value = format.interval_text(policy.verification_time) or _"variable" }

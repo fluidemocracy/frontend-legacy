@@ -97,7 +97,7 @@ if not for_issue and not for_member then
         selector:left_join ( "issue_order_in_admission_state", "filter_issue_order",    "filter_issue_order.id = issue.id" )
         selector:add_order_by ( "issue.closed DESC NULLS FIRST" )
         selector:add_order_by ( "issue.accepted ISNULL" )
-        selector:add_order_by ( "CASE WHEN issue.accepted ISNULL THEN NULL ELSE justify_interval(coalesce(issue.fully_frozen + issue.voting_time, issue.half_frozen + issue.verification_time, issue.accepted + issue.discussion_time, issue.created + issue.admission_time) - now()) END" )
+        selector:add_order_by ( "CASE WHEN issue.accepted ISNULL THEN NULL ELSE justify_interval(coalesce(issue.fully_frozen + issue.voting_time, issue.half_frozen + issue.verification_time, issue.accepted + issue.discussion_time, issue.created + issue.max_admission_time) - now()) END" )
         selector:add_order_by ( "CASE WHEN issue.accepted ISNULL THEN " .. admission_order_field .. " ELSE NULL END" )
         selector:add_order_by ( "id" )
       end
