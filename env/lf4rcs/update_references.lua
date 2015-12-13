@@ -77,7 +77,7 @@ function lf4rcs.update_references(repository, path, unit_id)
               :add_where{ "id = ?", initiative.id }
               :single_object_mode()
               :exec()).in_push_grace_period
-            if not in_push_period then
+            if not in_push_grace_period then
               abort("issue is already frozen and the push grace period is expired")
             end
           else
