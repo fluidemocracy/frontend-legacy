@@ -70,7 +70,7 @@ function lf4rcs.update_references(repository, path, unit_id)
       end
       if initiative.issue.state ~= "admission" and initiative.issue.state ~= "discussion" then
         if initiative.issue.state == "verification" then
-          if config.lf4rcs.push_grace_period
+          if config.lf4rcs.push_grace_period then
             local in_push_grace_period = Initiative:new_selector()
               :reset_fields()
               :add_field({ "now() - initiative.created_at <= ?", config.lf4rcs.push_grace_period }, "in_push_grace_period")
