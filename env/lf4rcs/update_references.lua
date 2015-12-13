@@ -73,7 +73,7 @@ function lf4rcs.update_references(repository, path, unit_id)
           if config.lf4rcs.push_grace_period then
             local in_push_grace_period = (Initiative:new_selector()
               :reset_fields()
-              :add_field({ "now() - initiative.created_at <= ?", config.lf4rcs.push_grace_period }, "in_push_grace_period")
+              :add_field({ "now() - initiative.created <= ?", config.lf4rcs.push_grace_period }, "in_push_grace_period")
               :add_where{ "id = ?", initiative.id }
               :single_object_mode()
               :exec()).in_push_grace_period
