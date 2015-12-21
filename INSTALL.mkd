@@ -16,8 +16,7 @@ installed:
   * liblua5.2-dev
   * postgresql
   * libpq-dev
-  * lighttpd (only for WebMCP 1.2.x support)
-  * pmake or bmake (only for WebMCP 2.x with Moonbridge)
+  * pmake or bmake
   * imagemagick
   * exim4
   * markdown2 (``apt-get install python-pip; pip install markdown2``)
@@ -87,8 +86,8 @@ And don't forget to quit the `www-data` shell:
     exit
 
 
-4. Install Moonbridge (only for WebMCP 2.x)
--------------------------------------------
+4. Install Moonbridge
+---------------------
 
     # Download and unpack Moonbridge
     # from http://www.public-software-group.org/pub/projects/moonbridge/
@@ -126,12 +125,6 @@ Make `tmp/` directory of LiquidFeedback-Frontend writable for webserver:
 
     chown www-data /opt/liquid_feedback_frontend/tmp
 
-Compile binary for fast delivery of member images (only necessary for WebMCP 1.2.x):
-
-    cd /opt/liquid_feedback_frontend/fastpath
-    vi getpic.c  # check and modify #define commands as necessary
-    make
-
 
 7. Configure mail system
 ------------------------
@@ -140,67 +133,16 @@ It may be necessary to configure your server's mail system, e.g. running
 `dpkg-reconfigure exim4-config` on a Debian system.
 
 
-8. Configure the Webserver for LiquidFeedback (only for WebMCP 1.2.x)
----------------------------------------------------------------------
-
-A sample configuration for `lighttpd` is given below (assuming `mod_alias` has
-been included elsewhere):
-
-    server.modules += ("mod_cgi", "mod_rewrite", "mod_redirect", "mod_setenv")
-
-    # Enable CGI-Execution of *.lua files through lua binary
-    cgi.assign += ( ".lua" => "/usr/bin/lua5.1" )
-
-    alias.url += ( "/lf/fastpath/" => "/opt/liquid_feedback_frontend/fastpath/",
-                   "/lf/static"    => "/opt/liquid_feedback_frontend/static",
-                   "/lf"           => "/opt/webmcp/cgi-bin" )
-
-    # Configure environment for demo application
-    $HTTP["url"] =~ "^/lf" {
-      setenv.add-environment += (
-        "LANG" => "en_US.UTF-8",
-        "WEBMCP_APP_BASEPATH" => "/opt/liquid_feedback_frontend/",
-        "WEBMCP_CONFIG_NAME"  => "myconfig")
-    }
-
-    # URL beautification
-    url.rewrite-once += (
-      # do not rewrite static URLs
-          "^/lf/fastpath/(.*)$" => "/lf/fastpath/$1",
-          "^/lf/static/(.*)$"   => "/lf/static/$1",
-
-      # dynamic URLs
-          "^/lf/([^\?]*)(\?(.*))?$" => "/lf/webmcp-wrapper.lua?_webmcp_path=$1&$3",
-
-    )
-
-    $HTTP["url"] =~ "^/lf/fastpath/" {
-      cgi.assign = ( "" => "" )
-      setenv.add-response-header = ( "Cache-Control" => "private; max-age=86400" )
-    }
-
-If you're using Debian, you may want to create a file with the name
-`/etc/lighttpd/conf-available/60-liquidfeedback.conf` and create a softlink in
-`/etc/lighttpd/conf-enabled/`.
-
-
-9. Configure the LiquidFeedback-Frontend
+8. Configure the LiquidFeedback-Frontend
 ----------------------------------------
 
     cd /opt/liquid_feedback_frontend/config
     cp example.lua myconfig.lua
     # edit myconfig.lua according to your needs
 
-Use the following option in your configuration file to enable fast image
-loading (only for WebMCP 1.2.x):
 
-    config.fastpath_url_func = function(member_id, image_type)
-      return request.get_absolute_baseurl() .. "fastpath/getpic?" .. tostring(member_id) .. "+" .. tostring(image_type)
-    end
-
-
-10. Setup regular execution of `lf_update` and related commands 
----------------------------------------------------------------
+9. Setup regular execution of `lf_update` and related commands 
+--------------------------------------------------------------
 
 The executables `lf_update`, `lf_update_issue_order`, and
 `lf_update_suggestion_order` must be executed regularly. This may be achieved
@@ -233,26 +175,13 @@ This file must be marked as executable:
 And this file should be started automatically at system boot.
 
 
-11. Setup notification loop in background (only for WebMCP 1.2.x)
------------------------------------------------------------------
-
-In addition to regular execution of `lf_update` and
-`lf_update_suggestion_order`, the following commands should be executed in
-background:
-
-    su www-data -s $SHELL
-    cd /opt/liquid_feedback_frontend/
-    echo "Event:send_notifications_loop()" | ../webmcp/bin/webmcp_shell myconfig
-
-
-12. Start the system
+10. Start the system
 --------------------
 
-After `lf_update` has been executed at least once and (in case of WebMCP 1.2.x)
-the webserver has been restarted (using the configuration above), you should be
-able to access your LiquidFeedback system.
+After `lf_update` has been executed at least once, you should be able to use
+your LiquidFeedback system.
 
-If you use WebMCP 2.x, the server is started by calling:
+The server is started by calling:
 
     su www-data -s $SHELL
     /opt/moonbridge/moonbridge /opt/webmcp/bin/mcp.lua /opt/webmcp/ /opt/liquid_feedback_frontend/ main myconfig
