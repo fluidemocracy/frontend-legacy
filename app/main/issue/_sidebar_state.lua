@@ -99,7 +99,7 @@ ui.sidebar( "tab-whatcanido", function()
             content = time_left
           }
         elseif current_occured then
-          local phase_duration = issue[state .. "_time"]
+          local phase_duration = issue[state .. "_time_text"]
           ui.tag{ attr = { class = "right" },
             content = _("#{duration}", {
               duration = format.interval_text(phase_duration)
