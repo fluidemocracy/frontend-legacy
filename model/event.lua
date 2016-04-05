@@ -51,12 +51,12 @@ end
 function Event.object:send_notification()
   
   local members_to_notify = Member:new_selector()
-    :join("event_seen_by_member", nil, { "event_seen_by_member.seen_by_member_id = member.id AND event_seen_by_member.notify_level <= member.notify_level AND event_seen_by_member.id = ?", self.id } )
-    :add_where("member.activated NOTNULL AND member.notify_email NOTNULL")
+    :join("event_for_notification", nil, { "event_for_notification.recipient_id = member.id AND event_for_notification.id = ?", self.id } )
+    --:add_where("member.activated NOTNULL AND member.notify_email NOTNULL")
     -- SAFETY FIRST, NEVER send notifications for events more then 3 days in past or future
-    :add_where("now() - event_seen_by_member.occurrence BETWEEN '-3 days'::interval AND '3 days'::interval")
+    :add_where("now() - event_for_notification.occurrence BETWEEN '-3 days'::interval AND '3 days'::interval")
     -- do not notify a member about the events caused by the member
-    :add_where("event_seen_by_member.member_id ISNULL OR event_seen_by_member.member_id != member.id")
+    :add_where("event_for_notification.member_id ISNULL OR event_for_notification.member_id != member.id")
     :exec()
     
   io.stderr:write("Sending notifications for event " .. self.id .. " to " .. (#members_to_notify) .. " members\n")
@@ -71,31 +71,21 @@ function Event.object:send_notification()
       { lang = member.lang or config.default_lang or 'en' },
       function()
 
-	local suggestion
-        if self.suggestion_id then
-	  suggestion = Suggestion:by_id(self.suggestion_id)
-	  if not suggestion then
-	    return
-	  end
-	end
-
-	subject = config.mail_subject_prefix .. " " .. self.event_name
         body = body .. _("[event mail]      Unit: #{name}", { name = self.issue.area.unit.name }) .. "\n"
         body = body .. _("[event mail]      Area: #{name}", { name = self.issue.area.name }) .. "\n"
         body = body .. _("[event mail]     Issue: ##{id}", { id = self.issue_id }) .. "\n\n"
         body = body .. _("[event mail]    Policy: #{policy}", { policy = self.issue.policy.name }) .. "\n\n"
-        body = body .. _("[event mail]     Event: #{event}", { event = self.event_name }) .. "\n\n"
         body = body .. _("[event mail]     Phase: #{phase}", { phase = self.state_name }) .. "\n\n"
 
         if self.initiative_id then
           url = request.get_absolute_baseurl() .. "initiative/show/" .. self.initiative_id .. ".html"
-        elseif self.suggestion_id then
-          url = request.get_absolute_baseurl() .. "suggestion/show/" .. self.suggestion_id .. ".html"
         else
           url = request.get_absolute_baseurl() .. "issue/show/" .. self.issue_id .. ".html"
         end
         
         body = body .. _("[event mail]       URL: #{url}", { url = url }) .. "\n\n"
+        
+        local leading_initiative
         
         if self.initiative_id then
           local initiative = Initiative:by_id(self.initiative_id)
@@ -110,6 +100,9 @@ function Event.object:send_notification()
             :limit(3)
             :exec()
           for i, initiative in ipairs(initiatives) do
+            if i == 1 then
+              leading_initiative = initiative
+            end
             body = body .. _("i#{id}: #{name}", { id = initiative.id, name = initiative.name }) .. "\n"
           end
           if initiative_count - 3 > 0 then
@@ -118,10 +111,14 @@ function Event.object:send_notification()
           body = body .. "\n"
         end
         
-        if suggestion then
-          body = body .. _("#{name}\n\n", { name = suggestion.name })
+        subject = config.mail_subject_prefix
+        
+        if self.event == "issue_state_changed" then
+          subject = subject .. _("State of #{issue} changed to #{state} / Leading: #{initiative}", { issue = self.issue.name, state = Issue:get_state_name_for_state(self.state), initiative = leading_initiative.display_name })
+        elseif self.event == "initiative_revoked" then
+          subject = subject .. _("Initiative revoked: #{initiative_name}", { initiative_name = self.initiative.display_name })
         end
-  
+      
         local success = net.send_mail{
           envelope_from = config.mail_envelope_from,
           from          = config.mail_from,
@@ -174,24 +171,4 @@ function Event:send_next_notification()
 
   end
 
-end
-
-function Event:send_pending_notifications()
-  while true do
-    if not Event:send_next_notification() then
-      break 
-    end
-  end
-end
-
-function Event:send_notifications_loop()
-
-  while true do
-    local did_work = Event:send_next_notification()
-    if not did_work then
-      print "Sleeping 5 second"
-      os.execute("sleep 5")
-    end
-  end
-  
 end
