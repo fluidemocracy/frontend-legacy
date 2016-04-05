@@ -134,8 +134,20 @@ listen{
     proto = "interval",
     name  = "send_pending_notifications",
     delay = 5,
-    handler = function() 
-      Event:send_pending_notifications()
+    handler = function()
+      while true do
+        local did_work = false
+        local tmp
+        tmp = Newsletter:send_next_newsletter()
+        if tmp then did_work = true end
+        tmp = Event:send_next_notification()
+        if tmp then did_work = true end
+        tmp = InitiativeForNotification:notify_next_member()
+        if tmp then did_work = true end
+        if not did_work then
+          break
+        end
+      end
     end
   },
   min_fork = 1,

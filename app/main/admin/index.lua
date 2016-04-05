@@ -38,6 +38,27 @@ end )
 
 ui.sidebar( "tab-whatcanido", function()
   ui.sidebarHead( function()
+    ui.heading { level = 2, content = _"Newsletter" }
+  end )
+  
+  ui.sidebarSection( "moreLink", function()
+    ui.link{
+      text = _"Create a newsletter",
+      module = "admin",
+      view = "newsletter_edit"
+    }
+  end )
+  ui.sidebarSection( "moreLink", function()
+    ui.link{
+      text = _"Manage newsletters",
+      module = "admin",
+      view = "newsletter_list"
+    }
+  end )
+end )
+
+ui.sidebar( "tab-whatcanido", function()
+  ui.sidebarHead( function()
     ui.heading { level = 2, content = _"Cancel issue" }
   end )
   

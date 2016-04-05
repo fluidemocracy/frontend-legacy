@@ -7,13 +7,6 @@ if app.session.member.notify_email_unconfirmed then
   }
 end
 
-if app.session.member.notify_level == nil then
-  notification_links[#notification_links+1] = {
-    module = "member", view = "settings_notification",
-    text = _"Select a notification level"
-  }
-end
-
 if config.check_delegations_interval_soft then
   local member = Member:new_selector()
     :add_where({ "id = ?", app.session.member_id })

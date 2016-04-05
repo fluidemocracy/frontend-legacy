@@ -36,8 +36,8 @@ ui.form{
             tag = "input", 
             attr = {
               id = "notify_level_all",
-              type = "radio", name = "notify_level", value = "all",
-              checked = app.session.member.notify_level == 'all' and "checked" or nil
+              type = "radio", name = "disable_notifications", value = "false",
+              checked = not app.session.member.disable_notifications and "checked" or nil
             }
           }
           ui.tag{
@@ -52,60 +52,9 @@ ui.form{
           ui.tag{
             tag = "input", 
             attr = {
-              id = "notify_level_discussion",
-              type = "radio", name = "notify_level", value = "discussion",
-              checked = app.session.member.notify_level == 'discussion' and "checked" or nil
-            }
-          }
-          ui.tag{
-            tag = "label", attr = { ['for'] = "notify_level_discussion" },
-            content = _"Only for issues reaching the discussion phase"
-          }
-        end }
-
-        slot.put("<br />")
-
-        ui.container{ content = function()
-          ui.tag{
-            tag = "input", 
-            attr = {
-              id = "notify_level_verification",
-              type = "radio", name = "notify_level", value = "verification",
-              checked = app.session.member.notify_level == 'verification' and "checked" or nil
-            }
-          }
-          ui.tag{
-            tag = "label", attr = { ['for'] = "notify_level_verification" },
-            content = _"Only for issues reaching the verification phase"
-          }
-        end }
-        
-        slot.put("<br />")
-
-        ui.container{ content = function()
-          ui.tag{
-            tag = "input", 
-            attr = {
-              id = "notify_level_voting",
-              type = "radio", name = "notify_level", value = "voting",
-              checked = app.session.member.notify_level == 'voting' and "checked" or nil
-            }
-          }
-          ui.tag{
-            tag = "label", attr = { ['for'] = "notify_level_voting" },
-            content = _"Only for issues reaching the voting phase"
-          }
-        end }
-
-        slot.put("<br />")
-
-        ui.container{ content = function()
-          ui.tag{
-            tag = "input", 
-            attr = {
               id = "notify_level_none",
-              type = "radio", name = "notify_level", value = "none",
-              checked = app.session.member.notify_level == 'none' and "checked" or nil
+              type = "radio", name = "disable_notifications", value = "true",
+              checked = app.session.member.disable_notifications and "checked" or nil
             }
           }
           ui.tag{
@@ -116,11 +65,6 @@ ui.form{
         
         slot.put("<br />")
       
-        ui.container { content = _"Notifications are only send to you about events in the subject areas you subscribed, the issues you are interested in and the initiatives you are supporting." }
-
-
-        slot.put("<br />")
-        
         ui.tag{
           tag = "input",
           attr = {

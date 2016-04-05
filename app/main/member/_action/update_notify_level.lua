@@ -1,2 +1,2 @@
-app.session.member.notify_level = param.get("notify_level")
+app.session.member.disable_notifications = param.get("disable_notifications") == "true" and true or false
 app.session.member:save()
