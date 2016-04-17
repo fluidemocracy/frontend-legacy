@@ -132,7 +132,7 @@ function InitiativeForNotification:notify_member_id(member_id)
     if suggestion_count == 1 then
       info[#info+1] = _"new suggestion for " .. initiatives_for_notification[1].initiative.display_name
     else
-      info[#info+1] = _("#{suggestion_count} suggestions added", { suggestion_count = suggestion_count })
+      info[#info+1] = _("#{count} suggestions added", { count = suggestion_count })
     end
   end
   

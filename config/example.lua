@@ -147,6 +147,19 @@ config.public_access = "none"
 -- config.mail_reply_to = { name = "Support", address = "support@example.com" }
 
 
+-- Template for digest emails
+-- #{name} will be replaced by member screen name
+-- #{digest} will be replaced with the digest content
+-- ------------------------------------------------------------------------
+-- config.notification_digest_template = [[
+-- Hello #{name},
+-- 
+-- this is your personal digest.
+-- 
+-- #{digest}
+-- ]]
+
+
 -- Configuration of password hashing algorithm (defaults to "crypt_sha512")
 -- ------------------------------------------------------------------------
 -- config.password_hash_algorithm = "crypt_sha512"

@@ -137,14 +137,14 @@ end
 
 function Event:send_next_notification()
   
-  local notification_sent = NotificationSent:new_selector()
+  local notification_event_sent = NotificationEventSent:new_selector()
     :optional_object_mode()
     :for_update()
     :exec()
     
   local last_event_id = 0
-  if notification_sent then
-    last_event_id = notification_sent.event_id
+  if notification_event_sent then
+    last_event_id = notification_event_sent.event_id
   end
   
   local event = Event:new_selector()
@@ -156,9 +156,9 @@ function Event:send_next_notification()
 
   if event then
     if last_event_id == 0 then
-      db:query{ "INSERT INTO notification_sent (event_id) VALUES (?)", event.id }
+      db:query{ "INSERT INTO notification_event_sent (event_id) VALUES (?)", event.id }
     else
-      db:query{ "UPDATE notification_sent SET event_id = ?", event.id }
+      db:query{ "UPDATE notification_event_sent SET event_id = ?", event.id }
     end
     
     event:send_notification()
