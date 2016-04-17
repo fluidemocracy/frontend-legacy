@@ -23,6 +23,106 @@ ui.sidebar ( "tab-whatcanido", function ()
   end
   
   if member and app.session.member:has_voting_right_for_unit_id(area.unit_id) then
+    
+    if not app.session.member.disable_notifications then
+      
+      local ignored_area = IgnoredArea:by_pk(app.session.member_id, area.id)
+
+      if not ignored_area then
+        ui.sidebarSection ( function ()
+        
+          ui.heading {
+            level = 3, 
+            content = _"You are receiving updates by email for this subject area"
+          }
+          ui.tag { tag = "ul", attr = { class = "ul" }, content = function ()
+            ui.tag { tag = "li", content = function ()
+              ui.tag { content = function ()
+                ui.link {
+                  module = "area", action = "update_ignore",
+                  params = { area_id = area.id },
+                  routing = { default = {
+                    mode = "redirect", module = "area", view = "show", id = area.id
+                  } },
+                  text = _"unsubscribe from update emails about this area"
+                }
+              end }
+            end }
+          end }
+        end )
+      end
+      
+      if ignored_area then
+        ui.sidebarSection ( function ()
+        
+          ui.heading {
+            level = 3, 
+            content = _"I want to stay informed"
+          }
+          ui.tag { tag = "ul", attr = { class = "ul" }, content = function ()
+            ui.tag { tag = "li", content = function ()
+              ui.tag { content = function ()
+                ui.link {
+                  module = "area", action = "update_ignore",
+                  params = { area_id = area.id, delete = true },
+                  routing = { default = {
+                    mode = "redirect", module = "area", view = "show", id = area.id
+                  } },
+                  text = _"subscribe for update emails about this area"
+                }
+              end }
+            end }
+          end }
+        end )
+      end
+    
+    else
+      ui.sidebarSection ( function ()
+      
+        ui.heading {
+          level = 3, 
+          content = _"I want to stay informed about this subject area"
+        }
+        ui.tag { tag = "ul", attr = { class = "ul" }, content = function ()
+          ui.tag { tag = "li", content = function ()
+            ui.tag { content = function ()
+              ui.tag{ content = _"Edit your global " }
+              ui.link {
+                module = "member", view = "settings_notification",
+                params = { return_to = "area", return_to_area_id = area.id },
+                text = _"notification settings"
+              }
+              ui.tag{ content = _" to receive updates by email" }
+            end }
+          end }
+        end }
+      end )
+    end
+    
+    if area.delegation_info.own_participation then
+      ui.sidebarSection ( function ()
+        ui.image{ attr = { class = "right" }, static = "icons/48/star.png" }
+        ui.heading {
+          level = 3, 
+          content = _"You are subscribed for this subject area" 
+        }
+        ui.tag { tag = "ul", attr = { class = "ul" }, content = function ()
+          ui.tag { tag = "li", content = function ()
+            ui.tag { content = function ()
+              ui.link {
+                module = "membership", action = "update",
+                routing = { default = {
+                  mode = "redirect", module = "area", view = "show", id = area.id
+                } },
+                params = { area_id = area.id, delete = true },
+                text = _"unsubscribe"
+              }
+            end }
+          end }
+        end }
+      end )
+    end
+
     if not area.delegation_info.own_participation then
       ui.sidebarSection ( function ()
       
@@ -47,29 +147,6 @@ ui.sidebar ( "tab-whatcanido", function ()
       end )
     end
       
-    if area.delegation_info.own_participation then
-      ui.sidebarSection ( function ()
-        ui.image{ attr = { class = "right" }, static = "icons/48/star.png" }
-        ui.heading {
-          level = 3, 
-          content = _"You are subscribed for this subject area" 
-        }
-        ui.tag { tag = "ul", attr = { class = "ul" }, content = function ()
-          ui.tag { tag = "li", content = function ()
-            ui.tag { content = function ()
-              ui.link {
-                module = "membership", action = "update",
-                routing = { default = {
-                  mode = "redirect", module = "area", view = "show", id = area.id
-                } },
-                params = { area_id = area.id, delete = true },
-                text = _"unsubscribe"
-              }
-            end }
-          end }
-        end }
-      end )
-    end
     
     
     ui.sidebarSection ( function ()

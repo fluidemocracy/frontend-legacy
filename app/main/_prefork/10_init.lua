@@ -33,6 +33,10 @@ if config.mail_subject_prefix == nil then
   config.mail_subject_prefix = "[LiquidFeedback] "
 end
 
+if config.notification_digest_template == nil then
+  config.notification_digest_template = "Hello #{name},\n\nthis is your personal digest.\n\n#{digest}\n"
+end
+
 if config.member_image_content_type == nil then
   config.member_image_content_type = "image/jpeg"
 end
@@ -136,15 +140,17 @@ listen{
     delay = 5,
     handler = function()
       while true do
-        local did_work = false
-        local tmp
-        tmp = Newsletter:send_next_newsletter()
-        if tmp then did_work = true end
-        tmp = Event:send_next_notification()
-        if tmp then did_work = true end
-        tmp = InitiativeForNotification:notify_next_member()
-        if tmp then did_work = true end
-        if not did_work then
+        if not Newsletter:send_next_newsletter() then
+          break
+        end
+      end
+      while true do
+        if not Event:send_next_notification() then
+          break
+        end
+      end
+      while true do
+        if not InitiativeForNotification:notify_next_member() then
           break
         end
       end

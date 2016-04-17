@@ -1,4 +1,5 @@
 slot.select ( 'instance_name', function ()
+  slot.put(" @ ")
   slot.put ( encode.html ( config.instance_name ) )
 end)
 

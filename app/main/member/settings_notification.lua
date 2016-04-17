@@ -1,4 +1,5 @@
 local return_to = param.get("return_to")
+local return_to_area_id param.get("return_to_area_id", atom.integer)
 
 ui.titleMember(_"notification settings")
 
@@ -15,9 +16,9 @@ ui.form{
   routing = {
     ok = {
       mode = "redirect",
-      module = return_to == "home" and "index" or "member",
-      view = return_to == "home" and "index" or "show",
-      id = return_to ~= "home" and app.session.member_id or nil
+      module = return_to == "area" and "area" or return_to == "home" and "index" or "member",
+      view = return_to == "area" and "show" or return_to == "home" and "index" or "show",
+      id = return_to == "area" and return_to_area_id or return_to ~= "home" and app.session.member_id or nil
     }
   },
   content = function()
@@ -25,7 +26,7 @@ ui.form{
     ui.section( function()
 
       ui.sectionHead( function()
-        ui.heading { level = 1, content = _"For which issue phases do you like to receive notification emails?" }
+        ui.heading { level = 1, content = _"Do you like to receive updates by email?" }
       end )
 
     
