@@ -102,7 +102,7 @@ ui.form{
               name = "notification_hour",
               foreign_records = foreign_records,
               foreign_id = "id",
-              foreign_name = "name"
+              foreign_name = "name",
             }
           end }
           
