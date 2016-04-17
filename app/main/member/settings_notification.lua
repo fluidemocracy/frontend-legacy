@@ -57,7 +57,7 @@ ui.form{
               attr = {
                 id = "digest_on",
                 type = "radio", name = "digest", value = "true",
-                checked = not app.session.member.digest_dow and "checked" or nil
+                checked = app.session.member.notification_hour ~= nil and "checked" or nil
               }
             }
             ui.tag{
@@ -66,7 +66,7 @@ ui.form{
             }
           end }
             
-          ui.container{ attr = { style = "margin-left: 2em;" }, content = function()
+          ui.container{ attr = { style = "margin-left: 4em;" }, content = function()
             ui.tag{ content = _"Day:" }
             slot.put(" ")
             ui.field.select{
@@ -112,7 +112,7 @@ ui.form{
               attr = {
                 id = "digest_off",
                 type = "radio", name = "digest", value = "false",
-                checked = not app.session.member.digest_dow and "checked" or nil
+                checked = app.session.member.notification_dow == nil and app.session.member.hotification_hour == nil and "checked" or nil
               }
             }
             ui.tag{
