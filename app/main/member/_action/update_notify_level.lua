@@ -8,14 +8,14 @@ end
 if param.get("digest", atom.boolean) then
   local dow = param.get("digest_dow")
   if dow == "daily" then
-    app.session.member.digest_dow = nil
+    app.session.member.notification_dow = nil
   else
-    app.session.member.digest_dow = tonumber(dow)
+    app.session.member.notification_dow = tonumber(dow)
   end
-  app.session.member.digest_hour = param.get("digest_hour", atom.number)
+  app.session.member.notification_hour = param.get("digest_hour", atom.number)
 else
-  app.session.member.digest_dow = nil
-  app.session.member.digest_hour = nil
+  app.session.member.notification_dow = nil
+  app.session.member.notification_hour = nil
 end
 
 app.session.member:save()
