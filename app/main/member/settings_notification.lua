@@ -66,7 +66,7 @@ ui.form{
             }
           end }
             
-          ui.container{ content = function()
+          ui.container{ attr = { style = "margin-left: 2em;" }, content = function()
             ui.tag{ content = _"Day:" }
             slot.put(" ")
             ui.field.select{
@@ -122,6 +122,7 @@ ui.form{
           end }
         end }
         
+        slot.put("<br />")
         
         ui.container{ content = function()
           ui.tag{
