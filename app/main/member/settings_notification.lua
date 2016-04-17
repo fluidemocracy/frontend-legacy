@@ -83,7 +83,8 @@ ui.form{
                 { id = 6, name = _"Saturday" }
               },
               foreign_id = "id",
-              foreign_name = "name"
+              foreign_name = "name",
+              value = app.session.member.notification_dow
             }
             
             slot.put(" ")
@@ -103,6 +104,7 @@ ui.form{
               foreign_records = foreign_records,
               foreign_id = "id",
               foreign_name = "name",
+              value = app.session.member.notification_hour
             }
           end }
           
