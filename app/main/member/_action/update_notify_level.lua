@@ -5,7 +5,7 @@ if app.session.member.disable_notifications ~= disable_notifications then
   app.session.member.disable_notifications = disable_notifications
 end
 
-if param.get("digest", atom.boolean) the
+if param.get("digest", atom.boolean) then
   local dow = param.get("digest_dow")
   if dow == "daily" then
     app.session.member.digest_dow = nil
