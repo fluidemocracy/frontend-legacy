@@ -89,7 +89,7 @@ ui.form{
           for i = 0, 23 do
             foreign_records[#foreign_records+1] = {
               id = i,
-              name = printf("%02d", i),
+              name = string.format("%02d", i),
             }
           end
           ui.field.select{
