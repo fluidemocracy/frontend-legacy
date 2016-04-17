@@ -68,7 +68,7 @@ ui.form{
           ui.field.select{
             name = "notification_dow",
             foreign_records = {
-              "daily" = _"daily",
+              daily = _"daily",
               0 = _"Sunday",
               1 = _"Monday",
               2 = _"Tuesday",
