@@ -74,13 +74,13 @@ ui.form{
               name = "notification_dow",
               foreign_records = {
                 { id = "daily", name = _"daily" },
-                { id = "0", name = _"Sunday" },
-                { id = "1", name = _"Monday" },
-                { id = "2", name = _"Tuesday" },
-                { id = "3", name = _"Wednesday" },
-                { id = "4", name = _"Thursday" },
-                { id = "5", name = _"Friday" },
-                { id = "6", name = _"Saturday" }
+                { id = 0, name = _"Sunday" },
+                { id = 1, name = _"Monday" },
+                { id = 2, name = _"Tuesday" },
+                { id = 3, name = _"Wednesday" },
+                { id = 4, name = _"Thursday" },
+                { id = 5, name = _"Friday" },
+                { id = 6, name = _"Saturday" }
               },
               foreign_id = "id",
               foreign_name = "name"
