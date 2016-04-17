@@ -15,14 +15,9 @@ function InitiativeForNotification:notify_member_id(member_id)
   db:query("BEGIN TRANSACTION ISOLATION LEVEL REPEATABLE READ")
   
   local member = Member:by_id(member_id)
+
   locale.set{ lang = member.lang or config.default_lang }
  
-  io.stderr:write("Sending digest #" .. member.notification_counter .. " to " .. member.notify_email .. "\n")
-  
-  if not member.notify_email then
-    return
-  end
-  
   local selector = db:new_selector()
     :add_field("*")
     :from({ "get_initiatives_for_notification(?)", member_id }, "initiative_for_notification")
@@ -31,13 +26,22 @@ function InitiativeForNotification:notify_member_id(member_id)
     :join("member", nil, "member.id = initiative_for_notification.recipient_id")
     :add_order_by("md5(initiative_for_notification.recipient_id || '-' || member.notification_counter || '-' || issue.area_id)")
     :add_order_by("md5(initiative_for_notification.recipient_id || '-' || member.notification_counter || '-' || issue.id)")
+
   selector._class = self
 
   local initiatives_for_notification = selector:exec()
 
-  if #initiatives_for_notification < 1 then
+  db:query("COMMIT")
+  
+  if not member.notify_email then
     return
   end
+  
+  if not #initiatives_for_notification > 0 then
+    return
+  end
+  
+  io.stderr:write("Sending digest #" .. member.notification_counter .. " to " .. member.notify_email .. "\n")
   
   local initiatives = initiatives_for_notification:load("initiative")
   local issues = initiatives:load("issue")
@@ -49,6 +53,9 @@ function InitiativeForNotification:notify_member_id(member_id)
   
   local draft_count = 0
   local suggestion_count = 0
+  
+  local draft_initiative
+  local suggestion_initiative
   
   local ms = {}
   
@@ -82,25 +89,23 @@ function InitiativeForNotification:notify_member_id(member_id)
     local source
     if entry.supported then
       source = _"has my support"
-      local draft_info
       if entry.new_draft then
-        draft_info = _"draft updated"
+        source = source .. ", " .. _"draft updated"
         draft_count = draft_count + 1
+        draft_initiative = initiative
       end
-      if draft_info then
-        source = source .. ", " .. draft_info
-      end
-      local info
       if entry.new_suggestion_count then
         if entry.new_suggestion_count == 1 then
-          info = _"new suggestion added"
+          source = source .. ", " .. _"new suggestion added"
         elseif entry.new_suggestion_count > 1 then
-          info = _("#{count} suggestions added", { count = entry.new_suggestion_count })
+          source = source .. ", " .. _("#{count} suggestions added", { count = entry.new_suggestion_count })
         end
         suggestion_count = suggestion_count + entry.new_suggestion_count
-      end
-      if info then
-        source = source .. ", " .. info
+        if suggestion_initiative and suggestion_initiative.id ~= initiative.id then
+          suggestion_initiative = false
+        elseif suggestion_initiative ~= false then
+          suggestion_initiative = initiative
+        end
       end
     elseif entry.featured then
       source = _"featured"
@@ -122,7 +127,7 @@ function InitiativeForNotification:notify_member_id(member_id)
     
   if draft_count > 0 then
     if draft_count == 1 then
-      info[#info+1] = _"draft updated for " .. initiatives_for_notification[1].initiative.display_name
+      info[#info+1] = _"draft updated for " .. draft_initiative.display_name
     else
       info[#info+1] = _("drafts of #{draft_count} initiatives updated", { draft_count = draft_count })
     end
@@ -130,7 +135,9 @@ function InitiativeForNotification:notify_member_id(member_id)
   
   if suggestion_count > 0 then
     if suggestion_count == 1 then
-      info[#info+1] = _"new suggestion for " .. initiatives_for_notification[1].initiative.display_name
+      info[#info+1] = _"new suggestion for " .. suggestion_initiative.display_name
+    elseif suggestion_initiative then
+      info[#info+1] = _("#{count} suggestions added for #{initiative}", { count = suggestion_count, suggestion_initiative.display_name })
     else
       info[#info+1] = _("#{count} suggestions added", { count = suggestion_count })
     end
@@ -143,7 +150,6 @@ function InitiativeForNotification:notify_member_id(member_id)
   local subject = _("Digest #{id}: #{info}", {
     id = member.notification_counter, info = table.concat(info, ", ")
   })
-
   
   local template = config.notification_digest_template
   
@@ -162,8 +168,6 @@ function InitiativeForNotification:notify_member_id(member_id)
     content       = message
   }
 
-  db:query("COMMIT")
-  
 end
 
 function InitiativeForNotification:notify_next_member()

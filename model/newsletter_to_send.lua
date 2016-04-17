@@ -20,6 +20,9 @@ NewsletterToSend:add_reference{
 function NewsletterToSend:get_next()
   return NewsletterToSend:new_selector()
     :set_distinct("newsletter_id")
+    -- SAFETY FIRST, NEVER send newsletter more then 21 days in past or future
+    :add_where("now() - published BETWEEN '-21 days'::interval AND '21 days'::interval")
+    :add_order_by("published")
     :add_order_by("newsletter_id")
     :limit(1)
     :optional_object_mode()
