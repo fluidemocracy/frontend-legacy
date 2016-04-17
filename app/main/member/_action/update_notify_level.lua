@@ -6,13 +6,13 @@ if app.session.member.disable_notifications ~= disable_notifications then
 end
 
 if param.get("digest") == "true" then
-  local dow = param.get("digest_dow")
+  local dow = param.get("notification_dow")
   if dow == "daily" then
     app.session.member.notification_dow = nil
   else
     app.session.member.notification_dow = tonumber(dow)
   end
-  app.session.member.notification_hour = tonumber(param.get("digest_hour"))
+  app.session.member.notification_hour = tonumber(param.get("notification_hour"))
 else
   app.session.member.notification_dow = nil
   app.session.member.notification_hour = nil
