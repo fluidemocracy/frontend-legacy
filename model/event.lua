@@ -52,7 +52,6 @@ function Event.object:send_notification()
   
   local members_to_notify = Member:new_selector()
     :join("event_for_notification", nil, { "event_for_notification.recipient_id = member.id AND event_for_notification.id = ?", self.id } )
-    --:add_where("member.activated NOTNULL AND member.notify_email NOTNULL")
     -- SAFETY FIRST, NEVER send notifications for events more then 3 days in past or future
     :add_where("now() - event_for_notification.occurrence BETWEEN '-3 days'::interval AND '3 days'::interval")
     -- do not notify a member about the events caused by the member
@@ -61,14 +60,12 @@ function Event.object:send_notification()
     
   io.stderr:write("Sending notifications for event " .. self.id .. " to " .. (#members_to_notify) .. " members\n")
 
-  local url
-
   for i, member in ipairs(members_to_notify) do
     local subject
     local body = ""
     
     locale.do_with(
-      { lang = member.lang or config.default_lang or 'en' },
+      { lang = member.lang or config.default_lang },
       function()
 
         body = body .. _("[event mail]      Unit: #{name}", { name = self.issue.area.unit.name }) .. "\n"
@@ -76,6 +73,8 @@ function Event.object:send_notification()
         body = body .. _("[event mail]     Issue: ##{id}", { id = self.issue_id }) .. "\n\n"
         body = body .. _("[event mail]    Policy: #{policy}", { policy = self.issue.policy.name }) .. "\n\n"
         body = body .. _("[event mail]     Phase: #{phase}", { phase = self.state_name }) .. "\n\n"
+
+        local url
 
         if self.initiative_id then
           url = request.get_absolute_baseurl() .. "initiative/show/" .. self.initiative_id .. ".html"
@@ -96,7 +95,7 @@ function Event.object:send_notification()
             :count()
           local initiatives = Initiative:new_selector()
             :add_where{ "initiative.issue_id = ?", self.issue_id }
-            :add_order_by("initiative.supporter_count DESC")
+            :add_order_by("initiative.admitted DESC NULLS LAST, initiative.rank NULLS LAST, initiative.harmonic_weight DESC NULLS LAST, id")
             :limit(3)
             :exec()
           for i, initiative in ipairs(initiatives) do
@@ -114,7 +113,7 @@ function Event.object:send_notification()
         subject = config.mail_subject_prefix
         
         if self.event == "issue_state_changed" then
-          subject = subject .. _("State of #{issue} changed to #{state} / Leading: #{initiative}", { issue = self.issue.name, state = Issue:get_state_name_for_state(self.state), initiative = leading_initiative.display_name })
+          subject = subject .. _("State of #{issue} changed to #{state} / #{initiative}", { issue = self.issue.name, state = Issue:get_state_name_for_state(self.state), initiative = leading_initiative.display_name })
         elseif self.event == "initiative_revoked" then
           subject = subject .. _("Initiative revoked: #{initiative_name}", { initiative_name = self.initiative.display_name })
         end
