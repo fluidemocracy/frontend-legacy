@@ -68,36 +68,36 @@ ui.form{
           ui.field.select{
             name = "notification_dow",
             foreign_records = {
-              daily = _"daily",
-              ["0"] = _"Sunday",
-              ["1"] = _"Monday",
-              ["2"] = _"Tuesday",
-              ["3"] = _"Wednesday",
-              ["4"] = _"Thursday",
-              ["5"] = _"Friday",
-              ["6"] = _"Saturday",
-              ["7"] = _"Sunday",
-            }
+              { id = "daily", name = _"daily" },
+              { id = "0", name = _"Sunday" },
+              { id = "1", name = _"Monday" },
+              { id = "2", name = _"Tuesday" },
+              { id = "3", name = _"Wednesday" },
+              { id = "4", name = _"Thursday" },
+              { id = "5", name = _"Friday" },
+              { id = "6", name = _"Saturday" }
+            },
+            foreign_id = "id",
+            foreign_name = "name"
           }
           
           slot.put(" ")
 
           ui.tag{ content = _"Hour:" }
-            slot.put(" ")
-            local foreign_records = {}
-            for i = 0, 23 do
-              foreign_records[#foreign_records+1] = {
-                id = i,
-                name = printf("%02d", i),
-              }
-            end
-            ui.field.select{
-              name = "notification_hour",
-              foreign_records = foreign_records,
-              foreign_id = "id",
-              foreign_name = "name"
+          slot.put(" ")
+          local foreign_records = {}
+          for i = 0, 23 do
+            foreign_records[#foreign_records+1] = {
+              id = i,
+              name = printf("%02d", i),
             }
-          end }
+          end
+          ui.field.select{
+            name = "notification_hour",
+            foreign_records = foreign_records,
+            foreign_id = "id",
+            foreign_name = "name"
+          }
         end }
         
         ui.container{ content = function()
