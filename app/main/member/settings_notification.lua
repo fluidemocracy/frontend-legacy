@@ -116,7 +116,7 @@ ui.form{
               attr = {
                 id = "digest_off",
                 type = "radio", name = "digest", value = "false",
-                checked = app.session.member.notification_dow == nil and app.session.member.hotification_hour == nil and "checked" or nil
+                checked = app.session.member.notification_dow == nil and app.session.member.notification_hour == nil and "checked" or nil
               }
             }
             ui.tag{
