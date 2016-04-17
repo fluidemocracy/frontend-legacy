@@ -12,7 +12,7 @@ if param.get("digest") == "true" then
   else
     app.session.member.notification_dow = tonumber(dow)
   end
-  app.session.member.notification_hour = param.get("digest_hour", atom.number)
+  app.session.member.notification_hour = tonumber(param.get("digest_hour"))
 else
   app.session.member.notification_dow = nil
   app.session.member.notification_hour = nil
