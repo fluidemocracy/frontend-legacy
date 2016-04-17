@@ -48,7 +48,75 @@ ui.form{
         end }
         
         slot.put("<br />")
+        
+        ui.container{ content = function()
+          ui.tag{
+            tag = "input", 
+            attr = {
+              id = "digest_on",
+              type = "radio", name = "digest", value = "true",
+              checked = not app.session.member.digest_dow and "checked" or nil
+            }
+          }
+          ui.tag{
+            tag = "label", attr = { ['for'] = "digest_on" },
+            content = _"Send me updates on issue phase changes and a regular digest"
+          }
+          
+          ui.tag{ content = _"Day:" }
+          slot.put(" ")
+          ui.field.select{
+            name = "notification_dow",
+            foreign_records = {
+              "daily" = _"daily",
+              0 = _"Sunday",
+              1 = _"Monday",
+              2 = _"Tuesday",
+              3 = _"Wednesday",
+              4 = _"Thursday",
+              5 = _"Friday",
+              6 = _"Saturday",
+              7 = _"Sunday",
+            }
+          }
+          
+          slot.put(" ")
 
+          ui.tag{ content = _"Hour:" }
+            slot.put(" ")
+            local foreign_records = {}
+            for i = 0, 23 do
+              foreign_records[#foreign_records+1] = {
+                id = i,
+                name = printf("%02d", i),
+              }
+            end
+            ui.field.select{
+              name = "notification_hour",
+              foreign_records = foreign_records,
+              foreign_id = "id",
+              foreign_name = "name"
+            }
+          end }
+        end }
+        
+        ui.container{ content = function()
+          ui.tag{
+            tag = "input", 
+            attr = {
+              id = "digest_off",
+              type = "radio", name = "digest", value = "false",
+              checked = not app.session.member.digest_dow and "checked" or nil
+            }
+          }
+          ui.tag{
+            tag = "label", attr = { ['for'] = "digest_off" },
+            content = _"Send me only updates on issue phase changes"
+          }
+        end }
+        
+        
+        
         ui.container{ content = function()
           ui.tag{
             tag = "input", 
