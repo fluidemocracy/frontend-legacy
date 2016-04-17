@@ -70,7 +70,8 @@ ui.form{
             ui.tag{ content = _"Day:" }
             slot.put(" ")
             ui.field.select{
-              container_attr = { style = "display: inline-block; width: 10em; vertical-align: middle;" },
+              container_attr = { style = "display: inline-block; vertical-align: middle;" },
+              attr = { style = "width: 8em;" },
               name = "notification_dow",
               foreign_records = {
                 { id = "daily", name = _"daily" },
@@ -99,7 +100,8 @@ ui.form{
               }
             end
             ui.field.select{
-              container_attr = { style = "display: inline-block; width: 3em; vertical-align: middle;" },
+              container_attr = { style = "display: inline-block; vertical-align: middle;" },
+              attr = { style = "width: 4em;" },
               name = "notification_hour",
               foreign_records = foreign_records,
               foreign_id = "id",
