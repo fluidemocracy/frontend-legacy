@@ -94,7 +94,7 @@ ui.form{
             for i = 0, 23 do
               foreign_records[#foreign_records+1] = {
                 id = i,
-                name = string.format("%02d", i),
+                name = string.format("%02d - %02d", i, i+1),
               }
             end
             ui.field.select{
