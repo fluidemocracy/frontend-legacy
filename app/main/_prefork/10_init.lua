@@ -21,6 +21,10 @@ if not config.password_hash_max_rounds then
   config.password_hash_max_rounds = 20000
 end
 
+if config.use_terms_checkboxes == nil then
+  config.use_terms_checkboxes = {}
+end
+
 if config.enabled_languages == nil then
   config.enabled_languages = { 'en', 'de', 'ka' } --, 'eo', 'el', 'hu', 'it', 'nl', 'zh-Hans', 'zh-TW' }
 end
