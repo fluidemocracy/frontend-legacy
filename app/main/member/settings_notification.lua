@@ -49,74 +49,76 @@ ui.form{
         
         slot.put("<br />")
         
-        ui.container{ content = function()
-          ui.tag{
-            tag = "input", 
-            attr = {
-              id = "digest_on",
-              type = "radio", name = "digest", value = "true",
-              checked = not app.session.member.digest_dow and "checked" or nil
+        ui.container{ attr = { style = "margin-left: 3em;" }, content = function()
+          
+          ui.container{ content = function()
+            ui.tag{
+              tag = "input", 
+              attr = {
+                id = "digest_on",
+                type = "radio", name = "digest", value = "true",
+                checked = not app.session.member.digest_dow and "checked" or nil
+              }
             }
-          }
-          ui.tag{
-            tag = "label", attr = { ['for'] = "digest_on" },
-            content = _"Send me updates on issue phase changes and a regular digest"
-          }
-          
-          ui.tag{ content = _"Day:" }
-          slot.put(" ")
-          ui.field.select{
-            container_attr = { style = "display: inline-block; width: 10em;" },
-            name = "notification_dow",
-            foreign_records = {
-              { id = "daily", name = _"daily" },
-              { id = "0", name = _"Sunday" },
-              { id = "1", name = _"Monday" },
-              { id = "2", name = _"Tuesday" },
-              { id = "3", name = _"Wednesday" },
-              { id = "4", name = _"Thursday" },
-              { id = "5", name = _"Friday" },
-              { id = "6", name = _"Saturday" }
-            },
-            foreign_id = "id",
-            foreign_name = "name"
-          }
-          
-          slot.put(" ")
+            ui.tag{
+              tag = "label", attr = { ['for'] = "digest_on" },
+              content = _"Send me updates on issue phase changes and a regular digest"
+            }
+            
+            ui.tag{ content = _"Day:" }
+            slot.put(" ")
+            ui.field.select{
+              container_attr = { style = "display: inline-block; width: 10em; vertical-align: middle;" },
+              name = "notification_dow",
+              foreign_records = {
+                { id = "daily", name = _"daily" },
+                { id = "0", name = _"Sunday" },
+                { id = "1", name = _"Monday" },
+                { id = "2", name = _"Tuesday" },
+                { id = "3", name = _"Wednesday" },
+                { id = "4", name = _"Thursday" },
+                { id = "5", name = _"Friday" },
+                { id = "6", name = _"Saturday" }
+              },
+              foreign_id = "id",
+              foreign_name = "name"
+            }
+            
+            slot.put(" ")
 
-          ui.tag{ content = _"Hour:" }
-          slot.put(" ")
-          local foreign_records = {}
-          for i = 0, 23 do
-            foreign_records[#foreign_records+1] = {
-              id = i,
-              name = string.format("%02d", i),
+            ui.tag{ content = _"Hour:" }
+            slot.put(" ")
+            local foreign_records = {}
+            for i = 0, 23 do
+              foreign_records[#foreign_records+1] = {
+                id = i,
+                name = string.format("%02d", i),
+              }
+            end
+            ui.field.select{
+              container_attr = { style = "display: inline-block; width: 3em; vertical-align: middle;" },
+              name = "notification_hour",
+              foreign_records = foreign_records,
+              foreign_id = "id",
+              foreign_name = "name"
             }
-          end
-          ui.field.select{
-            container_attr = { style = "display: inline-block; width: 3em;" },
-            name = "notification_hour",
-            foreign_records = foreign_records,
-            foreign_id = "id",
-            foreign_name = "name"
-          }
-        end }
-        
-        ui.container{ content = function()
-          ui.tag{
-            tag = "input", 
-            attr = {
-              id = "digest_off",
-              type = "radio", name = "digest", value = "false",
-              checked = not app.session.member.digest_dow and "checked" or nil
+          end }
+          
+          ui.container{ content = function()
+            ui.tag{
+              tag = "input", 
+              attr = {
+                id = "digest_off",
+                type = "radio", name = "digest", value = "false",
+                checked = not app.session.member.digest_dow and "checked" or nil
+              }
             }
-          }
-          ui.tag{
-            tag = "label", attr = { ['for'] = "digest_off" },
-            content = _"Send me only updates on issue phase changes"
-          }
+            ui.tag{
+              tag = "label", attr = { ['for'] = "digest_off" },
+              content = _"Send me only updates on issue phase changes"
+            }
+          end }
         end }
-        
         
         
         ui.container{ content = function()
