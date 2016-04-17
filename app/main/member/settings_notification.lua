@@ -64,7 +64,9 @@ ui.form{
               tag = "label", attr = { ['for'] = "digest_on" },
               content = _"Send me updates on issue phase changes and a regular digest"
             }
+          end }
             
+          ui.container{ content = function()
             ui.tag{ content = _"Day:" }
             slot.put(" ")
             ui.field.select{
