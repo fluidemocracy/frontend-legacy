@@ -47,9 +47,9 @@ ui.form{
           }
         end }
         
-        slot.put("<br />")
         
         ui.container{ attr = { class = "view_on_notify_level_all_false", style = "margin-left: 3em;" }, content = function()
+          slot.put("<br />")
         
           ui.container{ content = _"You will receive status update notification on issue phase changes. Additionally you can subscribe for a regular digest including updates on initiative drafts and new suggestions." }
           slot.put("<br />")
