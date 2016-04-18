@@ -37,7 +37,7 @@ function InitiativeForNotification:notify_member_id(member_id)
     return
   end
   
-  if not #initiatives_for_notification > 0 then
+  if #initiatives_for_notification < 1 then
     return
   end
   
