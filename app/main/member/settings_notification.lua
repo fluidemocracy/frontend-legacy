@@ -29,7 +29,6 @@ ui.form{
         ui.heading { level = 1, content = _"Do you like to receive updates by email?" }
       end )
 
-    
       ui.sectionRow( function()
       
         ui.container{ content = function()
@@ -38,7 +37,7 @@ ui.form{
             attr = {
               id = "notify_level_all",
               type = "radio", name = "disable_notifications", value = "false",
-              checked = not app.session.member.disable_notifications and "checked" or nil
+              checked = not app.session.member.disable_notifications and "checked" or nil,
               onchange = [[ $(".view_on_notify_level_all_false")[this.checked ? "show" : "hide"](400) ]]
             }
           }
@@ -60,7 +59,7 @@ ui.form{
               attr = {
                 id = "digest_on",
                 type = "radio", name = "digest", value = "true",
-                checked = app.session.member.notification_hour ~= nil and "checked" or nil
+                checked = app.session.member.notification_hour ~= nil and "checked" or nil,
                 onchange = [[ $(".view_on_digest_true")[this.checked ? "show" : "hide"](400) ]]
               }
             }
@@ -120,7 +119,7 @@ ui.form{
               attr = {
                 id = "digest_off",
                 type = "radio", name = "digest", value = "false",
-                checked = app.session.member.notification_dow == nil and app.session.member.notification_hour == nil and "checked" or nil
+                checked = app.session.member.notification_dow == nil and app.session.member.notification_hour == nil and "checked" or nil,
                 onchange = [[ $(".view_on_digest_true")[this.checked ? "hide" : "show"](400) ]]
               }
             }
@@ -149,6 +148,14 @@ ui.form{
           }
         end }
         
+        if app.session.member.disable_notifications then
+          ui.script{ script = [[ $(".view_on_notify_level_all_false").hide() ]] }
+        end
+        
+        if app.session.member.notification_hour == nil  then
+          ui.script{ script = [[ $(".view_on_digest_true").hide() ]] }
+        end
+
         slot.put("<br />")
       
         ui.tag{
