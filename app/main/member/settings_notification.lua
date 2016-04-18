@@ -103,7 +103,7 @@ ui.form{
             end
             ui.field.select{
               container_attr = { style = "display: inline-block; vertical-align: middle;" },
-              attr = { style = "width: 6em;" },
+              attr = { style = "width: 10em;" },
               name = "notification_hour",
               foreign_records = foreign_records,
               foreign_id = "id",
