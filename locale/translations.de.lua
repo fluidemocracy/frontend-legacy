@@ -17,6 +17,7 @@ return {
 ["#{count} new"] = "#{count} neue";
 ["#{count} of them have an area delegation set"] = "bei #{count} davon ist eine Delegation für den Themenbereichs gesetzt";
 ["#{count} suggestions added"] = "#{count} neue Anregungen";
+["#{count} suggestions added for #{initiative}"] = "#{count} neue Anregungen für #{initiative}";
 ["#{count} supporter"] = "#{count} Unterstützer";
 ["#{duration}"] = false;
 ["#{interested_issues_to_vote_count} issue(s) you are interested in"] = "#{interested_issues_to_vote_count} Themen, die Dich interessieren";
@@ -244,6 +245,7 @@ return {
 ["Forgot password?"] = "Kennwort vergessen?";
 ["Formatting help"] = "Hilfe zur Formatierung";
 ["Free timing:"] = "Freie Zeitsteuerung:";
+["Friday"] = "Freitag";
 ["Frozen"] = "Eingefroren";
 ["Fully frozen at"] = "Ganz eingefroren am/um";
 ["Global delegation"] = "Globale Delegation";
@@ -261,7 +263,6 @@ return {
 ["How important is your suggestions for you?"] = "Wie wichtig ist dieser Verbesserungsvorschlag?";
 ["How this member voted"] = "Wie dieses Mitglied abgestimmt hat";
 ["I do not like to hear from this member"] = "Ich möchte nichts mehr von diesem Mitglied mitbekommen";
-["I do not like to receive notifications by email"] = "Ich möchte keine Benachrichtigungen per E-Mail erhalten";
 ["I don't like any of the initiative in this issue and I want to add my opinion or counter proposal"] = "Ich mag keine der Initiativen in diesem Thema und möchte meine Meinung oder Gegenvorschlag einbringen";
 ["I don't like this initiative and I want to add my opinion or counter proposal"] = "Ich mag diese Initiative nicht und möchte meine Meinung oder Gegenvorschlag einbringen";
 ["I don't like to vote this issue (myself):"] = "Ich möchte für dieses Thema nicht (selber) abstimmen:";
@@ -286,6 +287,7 @@ return {
 ["I want to manage my saved contacts"] = "Ich möchte meine gespeicherten Kontakte bearbeiten";
 ["I want to participate in this issue"] = "Ich möchte an diesem Thema teilnehmen";
 ["I want to participate in this subject area"] = "Ich möchte an diesem Themenbereich teilnehmen";
+["I want to receive a regular digest"] = "Ich möchte einen regelmäßige Zusammenfassung erhalten";
 ["I want to save this member as contact (i.e. to use as delegatee)"] = "Ich möchte dieses Mitglied als Kontakt speichern (z.B. als Delegationsempfänger)";
 ["I want to start a new initiative"] = "Ich möchte eine neue Initiative starten";
 ["I want to stay informed"] = "Ich möchte informiert bleiben";
@@ -390,6 +392,7 @@ return {
 ["Memberships"] = "Mitgliedschaften";
 ["Minimum admission time"] = "Minimale Zeit für die Zulassung";
 ["Mobile phone"] = "Mobiltelefon";
+["Monday"] = "Montag";
 ["Move down"] = "Runter schieben";
 ["Move up"] = "Hoch schieben";
 ["My areas"] = "Meine Themenbereiche";
@@ -531,6 +534,7 @@ return {
 ["Revoked (during verification)"] = "Zurückgezogen (während der Überprüfung)";
 ["Revoked at"] = "Zurückgezogen am/um";
 ["Rules of procedure"] = "Regelwerke";
+["Saturday"] = "Samstag";
 ["Save"] = "Speichern";
 ["Save new password"] = "Neues Kennwort speichern";
 ["Save voting comment"] = "Abstimmungskommentar speichern";
@@ -565,7 +569,7 @@ return {
 ["Sorry, you have reached your personal flood limit. Please be slower..."] = "Sorry, Du hast Dein persönliches Flood-Limit erreicht. Bitte sei langsamer...";
 ["Sorry, your contingent for creating initiatives has been used up. Please try again later."] = "Sorry, Dein Antragskontingent ist zur Zeit ausgeschöpft. Bitte versuche es später erneut!";
 ["Source"] = "Quelltext";
-["State of #{issue} changed to #{state} / Leading: #{initiative}"] = "Status von #{issue} ist jetzt #{state} / es führt: #{initiative}";
+["State of #{issue} changed to #{state} / #{initiative}"] = "Status von #{issue} ist jetzt #{state} / #{initiative}";
 ["Statement"] = "Statement";
 ["Status"] = "Status";
 ["Status quo: #{rank}"] = "Status quo: #{rank}";
@@ -586,6 +590,7 @@ return {
 ["Suggestion for improvement #{id}"] = "Verbesserungsvorschlag #{id}";
 ["Suggestions"] = "Verbesserungsvorschläge";
 ["Suggestions for improvement (#{count})"] = "Verbesserungsvorschläge (#{count})";
+["Sunday"] = "Sonntag";
 ["Syntax help"] = "Syntax-Hilfe";
 ["System administration"] = "Systemadministration";
 ["System settings"] = "Systemeinstellungen";
@@ -629,9 +634,11 @@ return {
 ["This suggestion has been meanwhile deleted"] = "Diese Verbesserungsvorschlag wurde zwischenzeitlich gelöscht";
 ["This title is really too short!"] = "Dieser Titel ist wirklich zu kurz!";
 ["This title is too long!"] = "Der Titel ist zu lang!";
+["Thursday"] = "Donnerstag";
 ["Title"] = "Titel";
 ["To create a competing initiative see below."] = "Um eine konkurrierende Initiative zu starten siehe unten.";
 ["Trustee has no voting right in this unit"] = "Bevollmächtigter hat kein Stimmrecht in dieser Gliederung";
+["Tuesday"] = "Dienstag";
 ["Underline main headlines with ==="] = "Haupt-Überschriften mit === unterstreichen";
 ["Underline sub headlines with ---"] = "Unter-Überschriften mit --- unterstreichen";
 ["Unit"] = "Gliederung";
@@ -663,6 +670,7 @@ return {
 ["We couldn't deliver a confirmation mail to this address. Please check entered email address."] = "Wir konnten keine Bestätigungs-E-Mail versenden. Bitte überprüfe die E-Mail-Adresse.";
 ["We have sent an email with activation link already in the last hour. Please try again later."] = "Wir haben bereits innerhalb der letzten Stunde eine E-Mail mit Bestätigungslink gesendet. Bitte versuche es später erneut.";
 ["Website"] = "Webseite";
+["Wednesday"] = "Mittwoch";
 ["What can I do here?"] = "Was kann ich hier machen?";
 ["What this member is currently supporting"] = "Was dieses Mitglied zur Zeit unterstützt";
 ["Wiki engine"] = "Wiki engine";
@@ -716,6 +724,7 @@ return {
 ["You saved this member as contact (i.e. to use as delegatee)"] = "Du hast dieses Mitglied gespeichert (z.B. um es als Delegierten zu verwenden)";
 ["You saved this member as contact (i.e. to use as delegatee) and others can see it"] = "Du hast dieses Mitglied gespeichert (z.B. um es als Delegierten zu verwenden) und andere können das sehen";
 ["You will no longer receive update emails about this subject area"] = "Es werden keine Aktualisierungen mehr per E-Mail für diesen Themenbereich versendet";
+["You will receive status update notification on issue phase changes. Additionally you can subscribe for a regular digest including updates on initiative drafts and new suggestions."] = false;
 ["You've successfully registered and you can login now with your login and password!"] = "Du hast Dich erfolgreich registriert und kannst Dich jetzt mit Deinen Anmeldenamen und Kennwort anmelden!";
 ["Your avatar is a small photo, which will be shown always next to your name."] = "Dein Avatar ist ein kleines Bild, das überall neben deinem Namen angezeigt wird.";
 ["Your choice"] = "Deine Auswahl";
@@ -770,6 +779,7 @@ return {
 ["at least #{count} approvals or abstentions"] = "mindestens #{count} Zustimmungen oder Enthaltungen";
 ["author"] = "Autor";
 ["avatar/photo"] = "Avatar/Foto";
+["between"] = "zwischen";
 ["block this member"] = "Dieses Mitglied blocken";
 ["browse through the competing initiatives"] = "durch die konkurrierenden Initiativen sehen";
 ["but"] = "aber";
@@ -808,6 +818,7 @@ return {
 ["confirmed address"] = "bestätigte Adresse";
 ["create newsletter"] = "Rundschreiben erstellen";
 ["database download"] = "Datenbank herunterladen";
+["day"] = "Tag";
 ["day [interval ago]"] = "Tag";
 ["day [interval time left]"] = "Tag";
 ["day [interval]"] = "Tag";
@@ -823,6 +834,8 @@ return {
 ["discard"] = "verwerfen";
 ["discard my vote"] = "Meine Stimme widerrufen";
 ["do not notify me about this voting anymore"] = "über diese Abstimmung nicht mehr benachrichtigen";
+["don't send me a digest"] = "keine Zusammenfassungen zusenden";
+["don't send me notifications by email"] = "keine Nachrichten per E-Mail zusenden";
 ["download database"] = "Datenbank herunterladen";
 ["draft ID"] = "Entwurf ID";
 ["draft history (#{count})"] = "Entwurfshistorie (#{count})";
@@ -834,6 +847,7 @@ return {
 ["email"] = "E-Mail";
 ["ends in #{state_time_left}"] = "endet in #{state_time_left}";
 ["ends soon"] = "endet bald";
+["every"] = "jeden";
 ["external reference"] = "externe Referenz";
 ["failed #{quorum}"] = "#{quorum} nicht erreicht";
 ["featured"] = "ausgewählt";
