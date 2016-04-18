@@ -65,12 +65,13 @@ ui.form{
             }
             ui.tag{
               tag = "label", attr = { ['for'] = "digest_on" },
-              content = _"I want to receive a regular digest. Send the digest at:"
+              content = _"I want to receive a regular digest."
             }
           end }
             
           ui.container{ attr = { class = "view_on_digest_true", style = "margin-left: 4em;" }, content = function()
-            ui.tag{ content = _"Day:" }
+ 
+            ui.tag{ content = _"Send the digest every" }
             slot.put(" ")
             ui.field.select{
               container_attr = { style = "display: inline-block; vertical-align: middle;" },
@@ -93,7 +94,7 @@ ui.form{
             
             slot.put(" ")
 
-            ui.tag{ content = _"Hour:" }
+            ui.tag{ content = _"between" }
             slot.put(" ")
             local foreign_records = {}
             for i = 0, 23 do
