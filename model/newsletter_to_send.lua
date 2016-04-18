@@ -32,6 +32,6 @@ end
 function NewsletterToSend:by_newsletter_id(id)
   return NewsletterToSend:new_selector()
     :add_where{ "newsletter_id = ?", id }
-    :optional_object_mode()
+    :add_order_by("random()")
     :exec()
 end
