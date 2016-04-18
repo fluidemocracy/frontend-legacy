@@ -153,7 +153,7 @@ ui.form{
           ui.script{ script = [[ $(".view_on_notify_level_all_false").hide() ]] }
         end
         
-        if app.session.member.notification_hour == nil  then
+        if not app.session.member.disable_notifications and app.session.member.notification_hour == nil  then
           ui.script{ script = [[ $(".view_on_digest_true").hide() ]] }
         end
 
