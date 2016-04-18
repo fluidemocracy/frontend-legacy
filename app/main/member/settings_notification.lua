@@ -50,6 +50,8 @@ ui.form{
         slot.put("<br />")
         
         ui.container{ attr = { style = "margin-left: 3em;" }, content = function()
+        
+          ui.container{ content = _"You will receive status update notification on issue phase changes. Additionally you can subscribe for a regular digest including updates on initiative drafts and new suggestions." }
           
           ui.container{ content = function()
             ui.tag{
@@ -62,7 +64,7 @@ ui.form{
             }
             ui.tag{
               tag = "label", attr = { ['for'] = "digest_on" },
-              content = _"Send me updates on issue phase changes and a regular digest"
+              content = _"I want to receive a regular digest. Send the digest at:"
             }
           end }
             
@@ -96,7 +98,7 @@ ui.form{
             for i = 0, 23 do
               foreign_records[#foreign_records+1] = {
                 id = i,
-                name = string.format("%02d - %02d", i, i+1),
+                name = string.format("%02d:00 - %02d:59", i, i),
               }
             end
             ui.field.select{
@@ -121,7 +123,7 @@ ui.form{
             }
             ui.tag{
               tag = "label", attr = { ['for'] = "digest_off" },
-              content = _"Send me only updates on issue phase changes"
+              content = _"Don't send me digest"
             }
           end }
         end }
@@ -139,7 +141,7 @@ ui.form{
           }
           ui.tag{
             tag = "label", attr = { ['for'] = "notify_level_none" },
-            content = _"I do not like to receive notifications by email"
+            content = _"Don't send me notification by email"
           }
         end }
         
