@@ -103,6 +103,10 @@ ui.form{
                 name = string.format("%02d:00 - %02d:59", i, i),
               }
             end
+            local random_hour
+            if app.session.member.disable_notifications then
+              random_hour = multirand.integer(0,23)
+            end
             ui.field.select{
               container_attr = { style = "display: inline-block; vertical-align: middle;" },
               attr = { style = "width: 10em;" },
@@ -110,7 +114,7 @@ ui.form{
               foreign_records = foreign_records,
               foreign_id = "id",
               foreign_name = "name",
-              value = app.session.member.notification_hour
+              value = random_hour or app.session.member.notification_hour
             }
           end }
           
