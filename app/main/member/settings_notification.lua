@@ -65,20 +65,20 @@ ui.form{
             }
             ui.tag{
               tag = "label", attr = { ['for'] = "digest_on" },
-              content = _"I want to receive a regular digest."
+              content = _"I want to receive a regular digest"
             }
           end }
             
           ui.container{ attr = { class = "view_on_digest_true", style = "margin-left: 4em;" }, content = function()
  
-            ui.tag{ content = _"Send the digest every" }
+            ui.tag{ content = _"every" }
             slot.put(" ")
             ui.field.select{
               container_attr = { style = "display: inline-block; vertical-align: middle;" },
               attr = { style = "width: 10em;" },
               name = "notification_dow",
               foreign_records = {
-                { id = "daily", name = _"daily" },
+                { id = "daily", name = _"day" },
                 { id = 0, name = _"Sunday" },
                 { id = 1, name = _"Monday" },
                 { id = 2, name = _"Tuesday" },
@@ -126,7 +126,7 @@ ui.form{
             }
             ui.tag{
               tag = "label", attr = { ['for'] = "digest_off" },
-              content = _"Don't send me a digest"
+              content = _"don't send me a digest"
             }
           end }
         end }
@@ -145,7 +145,7 @@ ui.form{
           }
           ui.tag{
             tag = "label", attr = { ['for'] = "notify_level_none" },
-            content = _"Don't send me notifications by email"
+            content = _"don't send me notifications by email"
           }
         end }
         
