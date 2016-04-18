@@ -63,7 +63,7 @@ ui.section( function()
       name = "PostgreSQL",
       url = "http://www.postgresql.org/",
       version = db:query("SELECT version();")[1].version:gsub("PostgreSQL ", ""):gsub("on.*", ""),
-      license = "BSD",
+      license = "PostgreSQL License",
       license_url = "http://www.postgresql.org/about/licence"
     }
 
