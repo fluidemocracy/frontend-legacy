@@ -19,7 +19,7 @@ function Newsletter:send_next_newsletter()
   
   for i, n in ipairs(newsletter_to_send) do
     
-    local member = newsletter_to_send.member
+    local member = n.member
     
     if member.notify_email then
       io.stderr:write("Sending newsletter " .. newsletter.id .. " to " .. member.notify_email .. "\n")
