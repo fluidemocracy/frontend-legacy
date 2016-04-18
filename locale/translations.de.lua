@@ -287,7 +287,7 @@ return {
 ["I want to manage my saved contacts"] = "Ich möchte meine gespeicherten Kontakte bearbeiten";
 ["I want to participate in this issue"] = "Ich möchte an diesem Thema teilnehmen";
 ["I want to participate in this subject area"] = "Ich möchte an diesem Themenbereich teilnehmen";
-["I want to receive a regular digest"] = "Ich möchte einen regelmäßige Zusammenfassung erhalten";
+["I want to receive a regular digest"] = "Ich möchte eine regelmäßige Zusammenfassung erhalten";
 ["I want to save this member as contact (i.e. to use as delegatee)"] = "Ich möchte dieses Mitglied als Kontakt speichern (z.B. als Delegationsempfänger)";
 ["I want to start a new initiative"] = "Ich möchte eine neue Initiative starten";
 ["I want to stay informed"] = "Ich möchte informiert bleiben";
