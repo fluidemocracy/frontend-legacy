@@ -104,7 +104,7 @@ ui.form{
               }
             end
             local random_hour
-            if app.session.member.disable_notifications then
+            if app.session.member.disable_notifications or app.session.member.notification_hour == nil then
               random_hour = multirand.integer(0,23)
             end
             ui.field.select{
