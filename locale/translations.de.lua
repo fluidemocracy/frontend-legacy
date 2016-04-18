@@ -724,7 +724,7 @@ return {
 ["You saved this member as contact (i.e. to use as delegatee)"] = "Du hast dieses Mitglied gespeichert (z.B. um es als Delegierten zu verwenden)";
 ["You saved this member as contact (i.e. to use as delegatee) and others can see it"] = "Du hast dieses Mitglied gespeichert (z.B. um es als Delegierten zu verwenden) und andere können das sehen";
 ["You will no longer receive update emails about this subject area"] = "Es werden keine Aktualisierungen mehr per E-Mail für diesen Themenbereich versendet";
-["You will receive status update notification on issue phase changes. Additionally you can subscribe for a regular digest including updates on initiative drafts and new suggestions."] = false;
+["You will receive status update notification on issue phase changes. Additionally you can subscribe for a regular digest including updates on initiative drafts and new suggestions."] = "Es werden Statusmitteilungen zum Phasenwechsel von Themen versendet. Zusätzlich kann eine regelmäßige Zusammenfassung abboniert werden, die über neue Entwürfe und Anregungen informiert.";
 ["You've successfully registered and you can login now with your login and password!"] = "Du hast Dich erfolgreich registriert und kannst Dich jetzt mit Deinen Anmeldenamen und Kennwort anmelden!";
 ["Your avatar is a small photo, which will be shown always next to your name."] = "Dein Avatar ist ein kleines Bild, das überall neben deinem Namen angezeigt wird.";
 ["Your choice"] = "Deine Auswahl";
