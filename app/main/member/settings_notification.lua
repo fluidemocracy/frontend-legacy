@@ -52,7 +52,7 @@ ui.form{
         ui.container{ attr = { style = "margin-left: 3em;" }, content = function()
         
           ui.container{ content = _"You will receive status update notification on issue phase changes. Additionally you can subscribe for a regular digest including updates on initiative drafts and new suggestions." }
-          
+          slot.put("<br />")
           ui.container{ content = function()
             ui.tag{
               tag = "input", 
@@ -123,7 +123,7 @@ ui.form{
             }
             ui.tag{
               tag = "label", attr = { ['for'] = "digest_off" },
-              content = _"Don't send me digest"
+              content = _"Don't send me a digest"
             }
           end }
         end }
@@ -141,7 +141,7 @@ ui.form{
           }
           ui.tag{
             tag = "label", attr = { ['for'] = "notify_level_none" },
-            content = _"Don't send me notification by email"
+            content = _"Don't send me notifications by email"
           }
         end }
         
