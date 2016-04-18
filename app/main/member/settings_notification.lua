@@ -39,6 +39,7 @@ ui.form{
               id = "notify_level_all",
               type = "radio", name = "disable_notifications", value = "false",
               checked = not app.session.member.disable_notifications and "checked" or nil
+              onchange = [[ $(".view_on_notify_level_all_false")[this.checked ? "show" : "hide"](400) ]]
             }
           }
           ui.tag{
@@ -49,7 +50,7 @@ ui.form{
         
         slot.put("<br />")
         
-        ui.container{ attr = { style = "margin-left: 3em;" }, content = function()
+        ui.container{ attr = { class = "view_on_notify_level_all_false", style = "margin-left: 3em;" }, content = function()
         
           ui.container{ content = _"You will receive status update notification on issue phase changes. Additionally you can subscribe for a regular digest including updates on initiative drafts and new suggestions." }
           slot.put("<br />")
@@ -60,6 +61,7 @@ ui.form{
                 id = "digest_on",
                 type = "radio", name = "digest", value = "true",
                 checked = app.session.member.notification_hour ~= nil and "checked" or nil
+                onchange = [[ $(".view_on_digest_true")[this.checked ? "show" : "hide"](400) ]]
               }
             }
             ui.tag{
@@ -68,7 +70,7 @@ ui.form{
             }
           end }
             
-          ui.container{ attr = { style = "margin-left: 4em;" }, content = function()
+          ui.container{ attr = { class = "view_on_digest_true", style = "margin-left: 4em;" }, content = function()
             ui.tag{ content = _"Day:" }
             slot.put(" ")
             ui.field.select{
@@ -119,6 +121,7 @@ ui.form{
                 id = "digest_off",
                 type = "radio", name = "digest", value = "false",
                 checked = app.session.member.notification_dow == nil and app.session.member.notification_hour == nil and "checked" or nil
+                onchange = [[ $(".view_on_digest_true")[this.checked ? "hide" : "show"](400) ]]
               }
             }
             ui.tag{
@@ -136,7 +139,8 @@ ui.form{
             attr = {
               id = "notify_level_none",
               type = "radio", name = "disable_notifications", value = "true",
-              checked = app.session.member.disable_notifications and "checked" or nil
+              checked = app.session.member.disable_notifications and "checked" or nil,
+              onchange = [[ $(".view_on_notify_level_all_false")[this.checked ? "hide" : "show"](400) ]]
             }
           }
           ui.tag{
