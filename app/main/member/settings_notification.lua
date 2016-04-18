@@ -59,7 +59,7 @@ ui.form{
               attr = {
                 id = "digest_on",
                 type = "radio", name = "digest", value = "true",
-                checked = app.session.member.notification_hour ~= nil and "checked" or nil,
+                checked = app.session.member.disable_notifications or app.session.member.notification_hour ~= nil and "checked" or nil,
                 onchange = [[ $(".view_on_digest_true")[this.checked ? "show" : "hide"](400) ]]
               }
             }
@@ -120,7 +120,7 @@ ui.form{
               attr = {
                 id = "digest_off",
                 type = "radio", name = "digest", value = "false",
-                checked = app.session.member.notification_dow == nil and app.session.member.notification_hour == nil and "checked" or nil,
+                checked = not app.session.member.disable_notifications and app.session.member.notification_dow == nil and app.session.member.notification_hour == nil and "checked" or nil,
                 onchange = [[ $(".view_on_digest_true")[this.checked ? "hide" : "show"](400) ]]
               }
             }
