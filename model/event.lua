@@ -56,6 +56,9 @@ function Event.object:send_notification()
     :add_where("now() - event_for_notification.occurrence BETWEEN '-3 days'::interval AND '3 days'::interval")
     -- do not notify a member about the events caused by the member
     :add_where("event_for_notification.member_id ISNULL OR event_for_notification.member_id != member.id")
+    :add_where("member.notify_email NOTNULL")
+    :add_where("NOT member.locked")
+    :add_where("NOT member.disable_notifications")
     :exec()
     
   io.stderr:write("Sending notifications for event " .. self.id .. " to " .. (#members_to_notify) .. " members\n")
