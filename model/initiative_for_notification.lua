@@ -179,4 +179,3 @@ function InitiativeForNotification:notify_next_member()
   return true
 end
 
-ScheduledNotificationToSend:get_next()
