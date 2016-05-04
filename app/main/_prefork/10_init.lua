@@ -1,4 +1,4 @@
-config.app_version = "3.2.0"
+config.app_version = "3.2.1"
 
 -- TODO abstraction
 -- get record by id
