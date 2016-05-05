@@ -51,14 +51,13 @@ end
 function Event.object:send_notification()
   
   local members_to_notify = Member:new_selector()
+    :join("member_to_notify", nil, "member_to_notify.id = member.id")
     :join("event_for_notification", nil, { "event_for_notification.recipient_id = member.id AND event_for_notification.id = ?", self.id } )
     -- SAFETY FIRST, NEVER send notifications for events more then 3 days in past or future
     :add_where("now() - event_for_notification.occurrence BETWEEN '-3 days'::interval AND '3 days'::interval")
     -- do not notify a member about the events caused by the member
     :add_where("event_for_notification.member_id ISNULL OR event_for_notification.member_id != member.id")
     :add_where("member.notify_email NOTNULL")
-    :add_where("NOT member.locked")
-    :add_where("NOT member.disable_notifications")
     :exec()
     
   io.stderr:write("Sending notifications for event " .. self.id .. " to " .. (#members_to_notify) .. " members\n")
