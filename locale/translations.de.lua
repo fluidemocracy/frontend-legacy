@@ -174,7 +174,7 @@ return {
 ["Description"] = "Beschreibung";
 ["Details"] = "Details";
 ["Did the initiator implement this suggestion?"] = "Hat der Initiatior den Verbesserungsvorschlag umgesetzt?";
-["Digest #{id}: #{info}"] = "Auswahl #{id}: #{info}";
+["Digest #{id}: #{info}"] = "Digest #{id}: #{info}";
 ["Direct majority"] = "Direkte Mehrheit";
 ["Direct majority denominator"] = "Direkte Mehrheit Nenner";
 ["Direct majority non negative"] = "Direkte Mehrheit Nicht-Negative";
@@ -287,7 +287,7 @@ return {
 ["I want to manage my saved contacts"] = "Ich möchte meine gespeicherten Kontakte bearbeiten";
 ["I want to participate in this issue"] = "Ich möchte an diesem Thema teilnehmen";
 ["I want to participate in this subject area"] = "Ich möchte an diesem Themenbereich teilnehmen";
-["I want to receive a regular digest"] = "Ich möchte eine regelmäßige Zusammenfassung erhalten";
+["I want to receive a regular digest"] = "Ich möchte eine regelmäßige Zusammenfassung (Digest) erhalten";
 ["I want to save this member as contact (i.e. to use as delegatee)"] = "Ich möchte dieses Mitglied als Kontakt speichern (z.B. als Delegationsempfänger)";
 ["I want to start a new initiative"] = "Ich möchte eine neue Initiative starten";
 ["I want to stay informed"] = "Ich möchte informiert bleiben";
@@ -724,7 +724,7 @@ return {
 ["You saved this member as contact (i.e. to use as delegatee)"] = "Du hast dieses Mitglied gespeichert (z.B. um es als Delegierten zu verwenden)";
 ["You saved this member as contact (i.e. to use as delegatee) and others can see it"] = "Du hast dieses Mitglied gespeichert (z.B. um es als Delegierten zu verwenden) und andere können das sehen";
 ["You will no longer receive update emails about this subject area"] = "Es werden keine Aktualisierungen mehr per E-Mail für diesen Themenbereich versendet";
-["You will receive status update notification on issue phase changes. Additionally you can subscribe for a regular digest including updates on initiative drafts and new suggestions."] = "Es werden Statusmitteilungen zum Phasenwechsel von Themen versendet. Zusätzlich kann eine regelmäßige Zusammenfassung abboniert werden, die über neue Entwürfe und Anregungen informiert.";
+["You will receive status update notification on issue phase changes. Additionally you can subscribe for a regular digest including updates on initiative drafts and new suggestions."] = "Es werden Statusmitteilungen zum Phasenwechsel von Themen versendet. Zusätzlich kann eine regelmäßige Zusammenfassung (Digest) abboniert werden, die über neue Entwürfe und Anregungen informiert.";
 ["You've successfully registered and you can login now with your login and password!"] = "Du hast Dich erfolgreich registriert und kannst Dich jetzt mit Deinen Anmeldenamen und Kennwort anmelden!";
 ["Your avatar is a small photo, which will be shown always next to your name."] = "Dein Avatar ist ein kleines Bild, das überall neben deinem Namen angezeigt wird.";
 ["Your choice"] = "Deine Auswahl";
@@ -743,12 +743,12 @@ return {
 ["[Name of Language]"] = "Deutsch";
 ["[Not public]"] = "[Nicht öffentlich]";
 ["[calculating]"] = "[wird berechnet...]";
-["[event mail]       URL: #{url}"] = "         URL: #{url}";
-["[event mail]      Area: #{name}"] = "Themenbereich: #{name}";
-["[event mail]      Unit: #{name}"] = "  Gliederung: #{name}";
-["[event mail]     Issue: ##{id}"] = "       Thema: ##{id}";
-["[event mail]     Phase: #{phase}"] = "       Phase: #{phase}";
-["[event mail]    Policy: #{policy}"] = "   Regelwerk: #{policy}";
+["[event mail]       URL: #{url}"]    = "          URL: #{url}";
+["[event mail]      Area: #{name}"]   = "Themenbereich: #{name}";
+["[event mail]      Unit: #{name}"]   = "   Gliederung: #{name}";
+["[event mail]     Issue: ##{id}"]    = "        Thema: ##{id}";
+["[event mail]     Phase: #{phase}"]  = "        Phase: #{phase}";
+["[event mail]    Policy: #{policy}"] = "    Regelwerk: #{policy}";
 ["[introduction] iniatives and issues"] = "LiquidFeedback ist kein Umfragesystem, es werden keine bereits vorher feststehenden Fragen gestellt. Statt dessen kann jeder Teilnehmer neue Initiativen starten, die Vorschläge und/oder Argumente umfassen. Sobald eine Initiative eingestellt wurde, können alle Teilnehmer alternative Initiativen mit Gegenvorschlägen starten. Alle zueinander in Konkrurrenz stehenden Initiativen bilden zusammen ein Thema. Sowohl Themen als auch Initiativen werden nummeriert. Themen erhalten hierbei vor der Nummer ein #-Zeichen (z. B. #123), während Initiativen durch ein führendes i gekennzeichnet sind (z. B. i456). Ein Thema kann mehrere Initiativen enthalten. Nur eine Initiative kann gewinnen.";
 ["[introduction] organizational units"] = "Gliederungen ermöglichen Diskussionen und Entscheidungen auch für Teilmengen der Benutzer (z. B. Gliederungen einer Organisation). In jeder Gliederung können eigene Themenbereiche zur Verfügung stehen.";
 ["[introduction] phase 1 admission"] = "Nicht jedes neue Thema wird auf ein Mindestinteresse der Teilnehmer stoßen. Daher muss ein neues Thema von einer vorab festzulegenden Mindestanzahl Teilnehmer als diskussionswürdig betrachtet  werden, um für die Diskussionsphase zugelassen zu werden. Andernfalls wird das Thema am Ende der Zulassungsphase abgebrochen und nicht weiter behandelt.";
@@ -834,7 +834,7 @@ return {
 ["discard"] = "verwerfen";
 ["discard my vote"] = "Meine Stimme widerrufen";
 ["do not notify me about this voting anymore"] = "über diese Abstimmung nicht mehr benachrichtigen";
-["don't send me a digest"] = "keine Zusammenfassungen zusenden";
+["don't send me a digest"] = "keine Zusammenfassungen (Digest) zusenden";
 ["don't send me notifications by email"] = "keine Nachrichten per E-Mail zusenden";
 ["download database"] = "Datenbank herunterladen";
 ["draft ID"] = "Entwurf ID";
