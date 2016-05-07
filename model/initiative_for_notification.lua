@@ -76,9 +76,7 @@ function InitiativeForNotification:notify_member_id(member_id)
       if string.sub(issue.state_time_left, 1, 1) == "-" then
         state_time_text = _"Phase ends soon"
       else
-        state_time_text = _( "#{interval} left", {
-          interval = format.interval_text(issue.state_time_left)
-        })
+        state_time_text = format.interval_text(issue.state_time_left, { mode = "time_left" })
       end
       m[#m+1] = "---"
       m[#m+1] = policy.name .. " #" .. issue.id .. " - " .. issue.state_name .. " - " .. state_time_text
@@ -112,7 +110,7 @@ function InitiativeForNotification:notify_member_id(member_id)
     end
     if entry.leading then
       source = source and source .. ", " or ""
-      source = source .. "currently leading"
+      source = source .. _"currently leading"
     end
     m[#m+1] = "(" .. source .. ")"
     m[#m+1] = ""
@@ -162,7 +160,7 @@ function InitiativeForNotification:notify_member_id(member_id)
     envelope_from = config.mail_envelope_from,
     from          = config.mail_from,
     reply_to      = config.mail_reply_to,
-    to            = member.notify_email,
+    to            = { name = member.name, address = member.notify_email },
     subject       = subject,
     content_type  = "text/plain; charset=UTF-8",
     content       = message

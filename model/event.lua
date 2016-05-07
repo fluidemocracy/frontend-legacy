@@ -124,7 +124,7 @@ function Event.object:send_notification()
           envelope_from = config.mail_envelope_from,
           from          = config.mail_from,
           reply_to      = config.mail_reply_to,
-          to            = member.notify_email,
+          to            = { name = member.name, address = member.notify_email },
           subject       = subject,
           content_type  = "text/plain; charset=UTF-8",
           content       = body
