@@ -117,6 +117,8 @@ return {
 ["Canceled by administrative intervention"] = "Durch administrativen Eingriff abgebrochen";
 ["Change email address"] = "E-Mail-Adresse ändern";
 ["Change order"] = "Sortierung ändern";
+["Changeset graph:"] = false;
+["Changeset:"] = false;
 ["Check and enter personal data"] = "Persönliche Daten prüfen und eingeben";
 ["Check your #{scope} delegation to '#{trustee_name}' for '#{context}'"] = "Delegation für #{scope} '#{context}' an '#{trustee_name}' prüfen";
 ["Check your outgoing delegations"] = "Ausgehende Delegation prüfen!";
@@ -743,11 +745,11 @@ return {
 ["[Name of Language]"] = "Deutsch";
 ["[Not public]"] = "[Nicht öffentlich]";
 ["[calculating]"] = "[wird berechnet...]";
-["[event mail]       URL: #{url}"]    = "          URL: #{url}";
-["[event mail]      Area: #{name}"]   = "Themenbereich: #{name}";
-["[event mail]      Unit: #{name}"]   = "   Gliederung: #{name}";
-["[event mail]     Issue: ##{id}"]    = "        Thema: ##{id}";
-["[event mail]     Phase: #{phase}"]  = "        Phase: #{phase}";
+["[event mail]       URL: #{url}"] = "          URL: #{url}";
+["[event mail]      Area: #{name}"] = "Themenbereich: #{name}";
+["[event mail]      Unit: #{name}"] = "   Gliederung: #{name}";
+["[event mail]     Issue: ##{id}"] = "        Thema: ##{id}";
+["[event mail]     Phase: #{phase}"] = "        Phase: #{phase}";
 ["[event mail]    Policy: #{policy}"] = "    Regelwerk: #{policy}";
 ["[introduction] iniatives and issues"] = "LiquidFeedback ist kein Umfragesystem, es werden keine bereits vorher feststehenden Fragen gestellt. Statt dessen kann jeder Teilnehmer neue Initiativen starten, die Vorschläge und/oder Argumente umfassen. Sobald eine Initiative eingestellt wurde, können alle Teilnehmer alternative Initiativen mit Gegenvorschlägen starten. Alle zueinander in Konkrurrenz stehenden Initiativen bilden zusammen ein Thema. Sowohl Themen als auch Initiativen werden nummeriert. Themen erhalten hierbei vor der Nummer ein #-Zeichen (z. B. #123), während Initiativen durch ein führendes i gekennzeichnet sind (z. B. i456). Ein Thema kann mehrere Initiativen enthalten. Nur eine Initiative kann gewinnen.";
 ["[introduction] organizational units"] = "Gliederungen ermöglichen Diskussionen und Entscheidungen auch für Teilmengen der Benutzer (z. B. Gliederungen einer Organisation). In jeder Gliederung können eigene Themenbereiche zur Verfügung stehen.";
@@ -817,6 +819,7 @@ return {
 ["confirm"] = "bestätigen";
 ["confirmed address"] = "bestätigte Adresse";
 ["create newsletter"] = "Rundschreiben erstellen";
+["currently leading"] = "zur Zeit führend";
 ["database download"] = "Datenbank herunterladen";
 ["day"] = "Tag";
 ["day [interval ago]"] = "Tag";
@@ -851,7 +854,7 @@ return {
 ["external reference"] = "externe Referenz";
 ["failed #{quorum}"] = "#{quorum} nicht erreicht";
 ["featured"] = "ausgewählt";
-["featured initiatives"] = "ausgewählte Initiative";
+["featured initiatives"] = "ausgewählte Initiativen";
 ["finished"] = "abgeschlossen";
 ["global"] = "Global";
 ["has my support"] = "hat meine Unterstützung";
