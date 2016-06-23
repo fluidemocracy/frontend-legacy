@@ -14,8 +14,9 @@ installed:
   * build-essential
   * lua5.2
   * liblua5.2-dev
-  * postgresql
+  * postgresql (including the corresponding server-dev package)
   * libpq-dev
+  * libbsd-dev
   * pmake or bmake
   * imagemagick
   * exim4
