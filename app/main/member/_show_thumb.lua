@@ -14,7 +14,7 @@ else
   name_html = encode.html(member.name)
 end
 
-local container_class = "member_thumb"
+local container_class = "mdl-chip mdl-chip--contact clickable mdl-badge mdl-badge--overlap"
 if initiator and member.accepted ~= true then
   container_class = container_class .. " not_accepted"
 end
@@ -40,141 +40,69 @@ if in_delegation_chain or ((issue or initiative) and member.id == app.session.me
   container_class = container_class .. " in_delegation_chain"
 end
 
+local el_id = multirand.string(32, "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz")
+local weight = 0
+if member.weight then
+  weight = member.weight
+end
+if member.voter_weight then
+  weight = member.voter_weight
+end
+
 ui.container{
-  attr = { class = container_class },
+  attr = { id = el_id, class = container_class, ["data-badge"] = weight > 1 and "+" .. weight - 1 or nil },
   content = function()
 
-    local function doit()
-      execute.view{
-        module = "member_image",
-        view = "_show",
-        params = {
-          member = member,
-          image_type = "avatar",
-          show_dummy = true
-        }
+    execute.view{
+      module = "member_image",
+      view = "_show",
+      params = {
+        member = member,
+        image_type = "avatar",
+        show_dummy = true
       }
-      ui.tag{
-        attr = { class = "member_name" },
-        content = function() slot.put(name_html) end
-      }
-    end
+    }
+    ui.tag{
+      attr = { class = "mdl-chip__text" },
+      content = function() slot.put(name_html) end
+    }
     
-    if app.session:has_access("everything") then
-      ui.link{
-        attr = { title = _"Show member" },
-        module = "member",
-        view = "show",
-        id = member.id,
-        content = doit
-      }
-    else
-      ui.tag{ content = doit }
-    end
-
     if member.grade then
       slot.put ( " " )
-      ui.link{
-        module = "vote",
-        view = "list",
-        params = {
-          issue_id = initiative.issue.id,
-          member_id = member.id,
-        },
-        content = function()
-          if member.grade > 0 then
-            ui.image{
-              attr = { 
-                alt   = _"Voted yes",
-                title = _"Voted yes",
-                class = "icon24 right"
-              },
-              static = "icons/32/support_satisfied.png"
-            }
-          elseif member.grade < 0 then
-            ui.image{
-              attr = { 
-                alt   = _"Voted no",
-                title = _"Voted no",
-                class = "icon24 right"
-              },
-              static = "icons/32/voted_no.png"
-            }
-          else
-            ui.image{
-              attr = { 
-                alt   = _"Abstention",
-                title = _"Abstention",
-                class = "icon24 right"
-              },
-              static = "icons/16/bullet_yellow.png"
-            }
-          end
-        end
-      }
+      if member.grade > 0 then
+        ui.tag{ tag = "i", attr = { class = "material-icons icon-green" }, content = "thumb_up" }
+      elseif member.grade < 0 then
+        ui.tag{ tag = "i", attr = { class = "material-icons icon-red" }, content = "thumb_down" }
+      else
+        ui.tag{ tag = "i", attr = { class = "material-icons icon-yellow" }, content = "brightness_1" }
+      end
     end
 
     if (member.voter_comment) then
-      ui.link{
-        module = "vote",
-        view = "list",
-        params = {
-          issue_id = issue.id,
-          member_id = member.id,
-        },
-        content = function()
-          ui.image{
-            attr = { 
-              alt   = _"Voting comment available",
-              title = _"Voting comment available",
-              class = "icon24 right"
-            },
-            static = "icons/16/comment.png"
-          }
-        end
-      }
-    end
-
-    local weight = 0
-    if member.weight then
-      weight = member.weight
-    end
-    if member.voter_weight then
-      weight = member.voter_weight
-    end
-
-    if (issue or initiative) and weight > 1 then
-      local module = "interest"
-      if member.voter_weight then
-        module = "vote"
-      end
-        
-      slot.put ( " " )
-      ui.link{
+      ui.image{
         attr = { 
-          class = in_delegation_chain and "in_delegation_chain" or nil,
-          title = _"Number of incoming delegations, follow link to see more details"
+          alt   = _"Voting comment available",
+          title = _"Voting comment available",
+          class = "icon24 right"
         },
-        content = _("+ #{weight}", { weight = weight - 1 }),
-        module = module,
-        view = "show_incoming",
-        params = { 
-          member_id = member.id, 
-          initiative_id = initiative and initiative.id or nil,
-          issue_id = issue and issue.id or nil
-        }
+        static = "icons/16/comment.png"
       }
+    end
+
+
+    if (issue or initiative) and weight > 0 then
     end
     
     if member.supporter then
-      slot.put ( " " )
-      if member.supporter_satisfied then
-        local text = _"supporter"
-        ui.image{ attr = { class = "icon24 right", alt = text, title = text }, static = "icons/32/support_satisfied.png" }
-      else
-        local text = _"supporter with restricting suggestions"
-        ui.image{ attr = { class = "icon24 right", alt = text, title = text }, static = "icons/32/support_unsatisfied.png" }
-      end
+      ui.tag { attr = { class = "mdl-chip__action" }, content = function()
+        if member.supporter_satisfied then
+          local text = _"supporter"
+          ui.tag{ tag = "i", attr = { class = "material-icons" }, content = "thumb_up" }
+        else
+          local text = _"supporter with restricting suggestions"
+          ui.tag{ tag = "i", attr = { class = "material-icons mdl-color-text--orange-900" }, content = "thumb_up" }
+        end
+      end }
     end
 
     if not member.active then
@@ -205,3 +133,60 @@ ui.container{
 
   end
 }
+
+if member.grade or (issue and weight > 1) or app.session.member_id or app.session:has_access("everything") then
+  ui.tag { tag = "ul", attr = { class = "mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect", ["for"] = el_id }, content = function()
+    if (member.grade) then
+      ui.tag{ tag = "li", attr = { class = "mdl-menu__item" }, content = function()
+        ui.link{
+          attr = { class = "mdl-menu__link" },
+          module = "vote",
+          view = "list",
+          params = {
+            issue_id = issue.id,
+            member_id = member.id,
+          },
+          content = _"show ballot"
+        }
+      end }
+    end
+    if issue and weight > 1 then
+      ui.tag{ tag = "li", attr = { class = "mdl-menu__item" }, content = function()
+        local module = "interest"
+        if member.voter_weight then
+          module = "vote"
+        end
+        ui.link{ attr = { class = "mdl-menu__link" }, content = _"show incoming delegations", module = module, view = "show_incoming", params = {
+          member_id = member.id, 
+          initiative_id = initiative and initiative.id or nil,
+          issue_id = issue and issue.id or nil
+        } }
+      end }
+    end
+    if app.session:has_access("everything") then
+      ui.tag{ tag = "li", attr = { class = "mdl-menu__item" }, content = function()
+        ui.link{ attr = { class = "mdl-menu__link" }, content = _"show profile", module = "member", view = "show", id = member.id }
+      end }
+    end
+    if app.session.member_id then
+      ui.tag{ tag = "li", attr = { class = "mdl-menu__item" }, content = function()
+        ui.link{
+          attr = { class = "mdl-menu__link" },
+          text    = _"add to my list of private contacts",
+          module  = "contact",
+          action  = "add_member",
+          id      = member.id,
+          routing = {
+            default = {
+              mode = "redirect",
+              module = request.get_module(),
+              view = request.get_view(),
+              id = request.get_id_string(),
+              params = request.get_param_strings()
+            }
+          }
+        }
+      end }
+    end  
+  end }
+end

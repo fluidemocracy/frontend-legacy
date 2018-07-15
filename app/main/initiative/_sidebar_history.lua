@@ -7,7 +7,7 @@ ui.sidebar( function ()
     ui.heading { level = 1, content = _"History" }
   end )
   execute.view {
-    module = "issue", view = "_list2", params = {
+    module = "issue", view = "_list", params = {
       for_initiative = initiative, for_sidebar = true
     }
   }

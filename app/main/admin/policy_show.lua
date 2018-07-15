@@ -38,9 +38,11 @@ ui.section( function()
         ui.field.text{ label = _"Verification time",  name = "verification_time", value = hint and "15 days" or nil }
         ui.field.text{ label = _"Voting time",        name = "voting_time", value = hint and "15 days" or nil }
 
-        ui.field.text{ label = _"Issue quorum numerator",   name = "issue_quorum_num", value = hint and "10" or nil }
-        ui.field.text{ label = _"Issue quorum denominator", name = "issue_quorum_den", value = hint and "100" or nil }
+        ui.field.text{ label = _"Issue quorum",   name = "issue_quorum", value = hint and "1" or nil }
+        ui.field.text{ label = _"Issue quorum numerator",   name = "issue_quorum_num", value = hint and "1" or nil }
+        ui.field.text{ label = _"Issue quorum denominator",   name = "issue_quorum_den", value = hint and "10" or nil }
 
+        ui.field.text{ label = _"Initiative quorum absolute",   name = "initiative_quorum", value = hint and "1" or nil }
         ui.field.text{ label = _"Initiative quorum numerator",   name = "initiative_quorum_num", value = hint and "10" or nil }
         ui.field.text{ label = _"Initiative quorum denominator", name = "initiative_quorum_den", value = hint and "100" or nil }
 

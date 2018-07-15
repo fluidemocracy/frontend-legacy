@@ -6,59 +6,68 @@ if not area then
   return
 end
 
+app.current_area = area
+
+
 area:load_delegation_info_once_for_member_id(app.session.member_id)
 
 app.html_title.title = area.name
 app.html_title.subtitle = _("Area")
 
-execute.view {
-  module = "area", view = "_head", params = {
-    area = area, member = app.session.member
-  }
-}
+ui.container{ attr = { class = "mdl-grid" }, content = function()
+  ui.container{ attr = { class = "mdl-cell mdl-cell--12-col" }, content = function()
+    ui.heading{ content = area.unit.name .. " / " .. area.name }
 
-execute.view {
-  module = "area", view = "_sidebar_whatcanido", params = {
-    area = area
-  }
-}
+    execute.view {
+      module = "area", view = "_head", params = {
+        area = area, member = app.session.member
+      }
+    }
 
-execute.view {
-  module = "area", view = "_sidebar_members", params = {
-    area = area
-  }
-}
+    execute.view {
+      module = "area", view = "_sidebar_whatcanido", params = {
+        area = area
+      }
+    }
 
-local function getOpenIssuesSelector()
-  return area:get_reference_selector("issues")
-    :add_order_by("coalesce(issue.fully_frozen + issue.voting_time, issue.half_frozen + issue.verification_time, issue.accepted + issue.discussion_time, issue.created + issue.max_admission_time) - now()")
-end
+    execute.view {
+      module = "area", view = "_sidebar_members", params = {
+        area = area
+      }
+    }
 
-local admission_selector = getOpenIssuesSelector()
-  :add_where("issue.state = 'admission'");
+    local function getOpenIssuesSelector()
+      return area:get_reference_selector("issues")
+        :add_order_by("coalesce(issue.fully_frozen + issue.voting_time, issue.half_frozen + issue.verification_time, issue.accepted + issue.discussion_time, issue.created + issue.max_admission_time) - now()")
+    end
 
-local discussion_selector = getOpenIssuesSelector()
-  :add_where("issue.state = 'discussion'");
+    local admission_selector = getOpenIssuesSelector()
+      :add_where("issue.state = 'admission'");
 
-local verification_selector = getOpenIssuesSelector()
-  :add_where("issue.state = 'verification'");
+    local discussion_selector = getOpenIssuesSelector()
+      :add_where("issue.state = 'discussion'");
 
-local voting_selector = getOpenIssuesSelector()
-  :add_where("issue.state = 'voting'");
+    local verification_selector = getOpenIssuesSelector()
+      :add_where("issue.state = 'verification'");
 
-
-local closed_selector = area:get_reference_selector("issues")
-  :add_where("issue.closed NOTNULL")
-  :add_order_by("issue.closed DESC")
-
-local members_selector = area:get_reference_selector("members"):add_where("member.active")
-local delegations_selector = area:get_reference_selector("delegations")
-  :join("member", "truster", "truster.id = delegation.truster_id AND truster.active")
-  :join("member", "trustee", "trustee.id = delegation.trustee_id AND trustee.active")
+    local voting_selector = getOpenIssuesSelector()
+      :add_where("issue.state = 'voting'");
 
 
-execute.view {
-  module = "issue",
-  view = "_list2",
-  params = { for_area = area }
-}
+    local closed_selector = area:get_reference_selector("issues")
+      :add_where("issue.closed NOTNULL")
+      :add_order_by("issue.closed DESC")
+
+    local members_selector = area:get_reference_selector("members"):add_where("member.active")
+    local delegations_selector = area:get_reference_selector("delegations")
+      :join("member", "truster", "truster.id = delegation.truster_id AND truster.active")
+      :join("member", "trustee", "trustee.id = delegation.trustee_id AND trustee.active")
+
+
+    execute.view {
+      module = "issue",
+      view = "_list",
+      params = { for_area = area }
+    }
+  end }
+end }

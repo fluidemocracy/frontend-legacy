@@ -11,7 +11,7 @@ function util.micro_avatar(member, member_name)
       ui.image{
         attr = {
           title = member.name,
-          class = "microAvatar"
+          class = "mdl-chip__contact"
         },
         external = config.fastpath_url_func(member.id, "avatar")
       }
@@ -19,7 +19,7 @@ function util.micro_avatar(member, member_name)
       ui.image {
         attr = {
           title = member.name,
-          class = "microAvatar"
+          class = "mdl-chip__contact"
         },
         module = "member_image",
         view = "show",
@@ -30,7 +30,7 @@ function util.micro_avatar(member, member_name)
         }
       } 
     end
-    ui.tag { tag = "span", content = member.name }
+    ui.tag { attr = { class = "mdl-chip__text" }, content = member.name }
   end
   
   ui.tag {
@@ -38,11 +38,15 @@ function util.micro_avatar(member, member_name)
     content = function ()
       if app.session:has_access("everything") then
         ui.link {
+	  attr = { class = "mdl-chip mdl-chip--contact" },
           module = "member", view = "show", id = member.id,
           content = doit
         }
       else
-        ui.tag{ content = doit }
+        ui.tag{ 
+	  attr = { class = "mdl-chip mdl-chip--contact" },
+	  content = doit 
+	}
       end
     end
   }

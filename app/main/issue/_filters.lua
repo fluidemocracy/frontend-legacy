@@ -12,82 +12,195 @@ if for_area then
   admission_order_field = "filter_issue_order.order_in_area"
 end
 
+local filter = { class = "filter_mode", name = "mode", label = _"mode" }
+
+filter[#filter+1] = {
+  name = "issue",
+  label = _"issue list",
+  selector_modifier = function() end
+}
+
+filter[#filter+1] = {
+  name = "timeline",
+  label = _"timeline",
+  selector_modifier = function() end
+}
+
+--filters[#filters+1] = filter
+
 if not for_issue and not for_member then
-  
-  -- mode
 
-  local filter = { class = "filter_mode", name = "mode" }
+  -- units
   
-  filter[#filter+1] = {
-    name = "issue",
-    label = _"issue view",
-    selector_modifier = function () end
-  }
-
-  filter[#filter+1] = {
-    name = "timeline",
-    label = _"timeline",
-    selector_modifier = function ( selector ) 
-      selector:add_order_by ( "event.occurrence DESC" )
-      selector:add_order_by ( "id DESC" )
+  if not config.single_unit_id then
+  
+    local units
+    if app.session.member then
+      units = app.session.member:get_reference_selector("units"):add_order_by("name"):add_where("active"):exec()
+    else
+      units = Unit:new_selector():add_where("active"):add_order_by("name"):exec()
     end
-  }
 
-  filters[#filters+1] = filter
+    units:load_delegation_info_once_for_member_id(app.session.member_id)
 
-  -- context
-
-  local filter = { class = "filter_filter", name = "filter" }
-  
-  if member and not for_unit and not for_area then
-    filter[#filter+1] = {
-      name = "my_units",
-      label = _"in my units",
-      selector_modifier = function ( selector )
-        selector:join ( "area", "filter_area", "filter_area.id = issue.area_id" )
-        selector:join ( "privilege", "filter_privilege", { 
-          "filter_privilege.unit_id = filter_area.unit_id AND filter_privilege.member_id = ?", member.id
-        })
-      end
-    }
-  end
-  
-  if member and not for_area then
     
+    local filter = { class = "filter_unit", name = "unit", label = _"unit" }
+
     filter[#filter+1] = {
-      name = "my_areas",
-      label = _"in my areas",
-      selector_modifier = function ( selector )
-        selector:join ( "membership", "filter_membership", { 
-          "filter_membership.area_id = issue.area_id AND filter_membership.member_id = ?", member.id
-        })
-      end
+      name = "all",
+      label = _"all units",
+      selector_modifier = function() end
     }
+
+    for i, unit in ipairs(units) do
+      filter[#filter+1] = {
+        name = tostring(unit.id),
+        label = unit.name,
+        selector_modifier = function(selector)
+          selector:join("area", "__filter_area", "__filter_area.id = issue.area_id")
+          selector:add_where{ "__filter_area.unit_id = ?", unit.id }
+        end
+      }
+      
+    end
+
+    filters[#filters+1] = filter
+
   end
   
-  if member then
+  -- areas
+  local selected_unit_id = config.single_unit_id or request.get_param{ name = "unit" }
+  if selected_unit_id == "all" then
+    selected_unit_id = nil 
+  end
+  local selected_unit = Unit:by_id(selected_unit_id)
+
+  if not config.single_area_id and selected_unit then
+  
+    local filter = { class = "filter_unit", name = "area", label = _"area" }
+
     filter[#filter+1] = {
-      name = "my_issues",
-      label = _"my issues",
-      selector_modifier = function ( selector )
-        selector:left_join("interest", "filter_interest", { "filter_interest.issue_id = issue.id AND filter_interest.member_id = ? ", member.id })
-        --selector:left_join("direct_interest_snapshot", "filter_interest_s", { "filter_interest_s.issue_id = issue.id AND filter_interest_s.member_id = ? AND filter_interest_s.event = issue.latest_snapshot_event", member.id })
-        selector:left_join("delegating_interest_snapshot", "filter_d_interest_s", { "filter_d_interest_s.issue_id = issue.id AND filter_d_interest_s.member_id = ? AND filter_d_interest_s.event = issue.latest_snapshot_event", member.id })
-      end
+      name = "all",
+      label = _"all subject areas",
+      selector_modifier = function()  end
     }
+    
+    local areas = selected_unit.areas
+    if config.area_reverse_order then
+      areas = {}
+      for i, area in ipairs(selected_unit.areas) do
+        table.insert(areas, 1, area)
+      end
+    end
+
+    for i, area in ipairs(areas) do
+      if area.active then
+        filter[#filter+1] = {
+          name = tostring(area.id),
+          label = area.name,
+          selector_modifier = function(selector)
+            if area.unit_id == selected_unit.id then
+              selector:add_where{ "issue.area_id = ?", area.id }
+            end
+          end
+        }
+      end
+    end
+    
+    filters[#filters+1] = filter
+    
+  end
+
+  if app.session.member_id then
+  
+    -- interest
+    
+    local filter = { class = "filter_filter", name = "filter", label = _"interest" }
+
+    filter[#filter+1] = {
+      name = "all",
+      label = _"all issues",
+      selector_modifier = function()  end
+    }
+
+    if member and not for_unit and not for_area and not config.single_unit_id then
+      filter[#filter+1] = {
+        name = "my_units",
+        label = _"in my units",
+        selector_modifier = function ( selector )
+          selector:join ( "area", "filter_area", "filter_area.id = issue.area_id" )
+          selector:join ( "privilege", "filter_privilege", { 
+            "filter_privilege.unit_id = filter_area.unit_id AND filter_privilege.member_id = ?", member.id
+          })
+        end
+      }
+    end
+    
+    if member then
+      filter[#filter+1] = {
+        name = "my_issues",
+        label = _"my issues",
+        selector_modifier = function ( selector )
+          selector:left_join("interest", "filter_interest", { "filter_interest.issue_id = issue.id AND filter_interest.member_id = ? ", member.id })
+          selector:left_join("direct_interest_snapshot", "filter_interest_s", { "filter_interest_s.issue_id = issue.id AND filter_interest_s.member_id = ? AND filter_interest_s.snapshot_id = issue.latest_snapshot_id", member.id })
+          selector:left_join("delegating_interest_snapshot", "filter_d_interest_s", { "filter_d_interest_s.issue_id = issue.id AND filter_d_interest_s.member_id = ? AND filter_d_interest_s.snapshot_id = issue.latest_snapshot_id", member.id })
+        end
+      }
+    end
+    
+    if not config.voting_only then
+      filters[#filters+1] = filter
+    end
+    
+    -- my issues
+
+    if request.get_param{ name = "filter" } == "my_issues" then
+      
+      local delegation = request.get_param{ name = "delegation" }
+
+      local filter = { class = "filter_interest subfilter", name = "interest", label = _"delegation" }
+      
+      filter[#filter+1] = {
+        name = "all",
+        label = _"interested directly or via delegation",
+        selector_modifier = function ( selector ) 
+          selector:add_where ( "filter_interest.issue_id NOTNULL OR filter_d_interest_s.issue_id NOTNULL" )
+        end
+      }
+
+      filter[#filter+1] = {
+        name = "direct",
+        label = _"direct interest",
+        selector_modifier = function ( selector )  
+          selector:add_where ( "filter_interest.issue_id NOTNULL" )
+        end
+      }
+
+      filter[#filter+1] = {
+        name = "via_delegation",
+        label = _"interest via delegation",
+        selector_modifier = function ( selector )  
+          selector:add_where ( "filter_d_interest_s.issue_id NOTNULL" )
+        end
+      }
+
+      filter[#filter+1] = {
+        name = "initiated",
+        label = _"initiated by me",
+        selector_modifier = function ( selector )  
+          selector:add_where ( "filter_interest.issue_id NOTNULL" )
+        end
+      }
+      
+      filters[#filters+1] = filter
+
+    end
+  
   end
   
-  filter[#filter+1] = {
-    name = "all",
-    label = _"all issues",
-    selector_modifier = function()  end
-  }
-
-  filters[#filters+1] = filter
-
   -- phase
   
-  local filter = { name = "phase" }
+  local filter = { name = "phase", label = _"phase" }
   
   filter[#filter+1] = {
     name = "all",
@@ -106,7 +219,7 @@ if not for_issue and not for_member then
 
   filter[#filter+1] = {
     name = "admission",
-    label = _"(1) Admission",
+    label = _"Admission",
     selector_modifier = function ( selector )
       selector:add_where { "issue.state = ?", "admission" }
       if not for_events then
@@ -119,7 +232,7 @@ if not for_issue and not for_member then
 
   filter[#filter+1] = {
     name = "discussion",
-    label = _"(2) Discussion",
+    label = _"Discussion",
     selector_modifier = function ( selector )
       selector:add_where { "issue.state = ?", "discussion" }
       if not for_events then
@@ -131,7 +244,7 @@ if not for_issue and not for_member then
 
   filter[#filter+1] = {
     name = "verification",
-    label = _"(3) Verification",
+    label = _"Verification",
     selector_modifier = function ( selector )
       selector:add_where { "issue.state = ?", "verification" }
       if not for_events then
@@ -143,7 +256,7 @@ if not for_issue and not for_member then
 
   filter[#filter+1] = {
     name = "voting",
-    label = _"(4) Voting",
+    label = _"Voting",
     selector_modifier = function ( selector )
       selector:add_where { "issue.state = ?", "voting" }
       if not for_events then
@@ -155,7 +268,7 @@ if not for_issue and not for_member then
 
   filter[#filter+1] = {
     name = "closed",
-    label = _"(5) Result",
+    label = _"Results",
     selector_modifier = function ( selector )
       if not for_events then
         selector:add_where ( "issue.closed NOTNULL" )
@@ -165,57 +278,16 @@ if not for_issue and not for_member then
     end
   }
 
-  filters[#filters+1] = filter
-  
-  -- my issues
-
-  if request.get_param{ name = "filter" } == "my_issues" then
-    
-    local delegation = request.get_param{ name = "delegation" }
-
-    local filter = { class = "filter_interest subfilter", name = "interest" }
-    
-    filter[#filter+1] = {
-      name = "all",
-      label = _"interested directly or via delegation",
-      selector_modifier = function ( selector ) 
-        selector:add_where ( "filter_interest.issue_id NOTNULL OR filter_d_interest_s.issue_id NOTNULL" )
-      end
-    }
-
-    filter[#filter+1] = {
-      name = "direct",
-      label = _"direct interest",
-      selector_modifier = function ( selector )  
-        selector:add_where ( "filter_interest.issue_id NOTNULL" )
-      end
-    }
-
-    filter[#filter+1] = {
-      name = "via_delegation",
-      label = _"interest via delegation",
-      selector_modifier = function ( selector )  
-        selector:add_where ( "filter_d_interest_s.issue_id NOTNULL" )
-      end
-    }
-
-    filter[#filter+1] = {
-      name = "initiated",
-      label = _"initiated by me",
-      selector_modifier = function ( selector )  
-        selector:add_where ( "filter_interest.issue_id NOTNULL" )
-      end
-    }
-    
+  -- TODO
+  if not config.voting_only then
     filters[#filters+1] = filter
-
   end
   
   -- voting
 
   if phase == "voting" and member then
   
-    local filter = { class = "subfilter", name = "voted" }
+    local filter = { class = "subfilter", name = "voted", label = _"voted" }
     
     filter[#filter+1] = {
       name = "all",
@@ -248,8 +320,14 @@ if not for_issue and not for_member then
 
   if phase == "closed" then
   
-    local filter = { class = "subfilter", name = "closed" }
+    local filter = { class = "subfilter", name = "closed", label = _"closed" }
     
+    filter[#filter+1] = {
+      name = "all",
+      label = _"all results",
+      selector_modifier = function ( selector ) end
+    }
+
     filter[#filter+1] = {
       name = "finished",
       label = _"finished",

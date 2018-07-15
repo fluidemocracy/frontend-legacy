@@ -11,15 +11,6 @@ local areas_selector = Area:new_selector()
   :add_where{ "area.active" }
   :add_order_by("area.name")
   
-if member then
-  areas_selector:left_join ( 
-    "membership", nil, 
-    { "membership.area_id = area.id AND membership.member_id = ?", member.id } 
-  )
-  areas_selector:add_field("membership.member_id NOTNULL", "subscribed", { "grouped" })
-end
-
-
 local areas = areas_selector:exec()
 if member then
   unit:load_delegation_info_once_for_member_id(member.id)

@@ -20,11 +20,12 @@ for i, policy in ipairs(policies) do
 
       ui.heading { level = 3, content = policy.name }
       
-      ui.tag{
-        content = policy.description
-      }
-
-      slot.put ( "<br />" )
+      if policy.description and #(policy.description) > 0 then
+        ui.tag{
+          content = policy.description
+        }
+        slot.put ( "<br />" )
+      end
       
       ui.link {
         attr = {
@@ -55,8 +56,8 @@ for i, policy in ipairs(policies) do
           if policy.polling then
             ui.field.text{ label = _"New" .. ":", value = _"without" }
           else
-            ui.field.text{ label = _"New" .. ":", value = "≤ min " .. format.interval_text(policy.max_admission_time) }
-            ui.field.text{ label = _"New" .. ":", value = "≤ max " .. format.interval_text(policy.max_admission_time) }
+            ui.field.text{ label = _"New" .. ":", value = "≥ " .. format.interval_text(policy.min_admission_time) }
+            ui.field.text{ label = _"New" .. ":", value = "≤ " .. format.interval_text(policy.max_admission_time) }
           end
           ui.field.text{ label = _"Discussion" .. ":", value = format.interval_text(policy.discussion_time) or _"variable" }
           ui.field.text{ label = _"Frozen" .. ":", value = format.interval_text(policy.verification_time) or _"variable" }
@@ -69,7 +70,7 @@ for i, policy in ipairs(policies) do
           else
             ui.field.text{
               label = _"Issue quorum" .. ":", 
-              value = "≥ " .. tostring(policy.issue_quorum_num) .. "/" .. tostring(policy.issue_quorum_den)
+              value = "≥ " .. tostring(policy.issue_quorum)
             }
           end
           ui.field.text{

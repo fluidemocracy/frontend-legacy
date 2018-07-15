@@ -1,5 +1,6 @@
 #!/usr/bin/env lua
 return {
+["all subject areas"] = "Alle Themenbereiche";
 [" to receive updates by email"] = " bearbeiten um Aktualisierungen per E-Mail zu erhalten";
 ["#{closed_ago} ago"] = "vor #{closed_ago}";
 ["#{count} Neutral"] = "#{count} Enthaltung";
@@ -33,7 +34,7 @@ return {
 ["#{policy_name} ##{issue_id}"] = false;
 ["#{policy} ##{id}"] = false;
 ["#{result}: #{yes_count} Yes (#{yes_percent}), #{no_count} No (#{no_percent}), #{neutral_count} Abstention (#{neutral_percent})"] = "#{result}: #{yes_count} Ja (#{yes_percent}), #{no_count} Nein (#{no_percent}), #{neutral_count} Enthaltung (#{neutral_percent})";
-["#{result}: No votes (0)"] = "#{result}: Keine Stimmen (0)";
+["No votes (0)"] = "Keine Stimmen (0)";
 ["(+ #{count} potential)"] = "(+ #{count} potentielle)";
 ["(1) Admission"] = "(1) Zulassung";
 ["(1) Admission phase"] = "(1) Zulassungsphase";
@@ -425,7 +426,7 @@ return {
 ["No matching members found"] = "Keine passenden Mitglieder gefunden";
 ["No more events available"] = "Keine weiteren Ereignisse verfügbar";
 ["No multistage majority"] = "Keine mehrstufigen Mehrheiten";
-["No published contacts"] = "Keiner Kontakte veröffentlicht";
+["No published contacts"] = "Keine Kontakte veröffentlicht";
 ["No results for this selection"] = "Keine Ergebnisse für diese Auswahl";
 ["No reverse beat path"] = "Kein rückwärtsgerichteter Schlagpfad";
 ["No suggestions"] = "Keine Verbesserungsvorschläge";
@@ -958,9 +959,9 @@ return {
 ["supporter"] = "Unterstützer";
 ["supporter with restricting suggestions"] = "Unterstützer mit beschränkenden Verbesserungsvorschlägen";
 ["take a look at the competing initiatives"] = "schau dir die konkurrierenden Initiativen an";
-["take a look at the suggestions (see left) and rate them"] = "schau dir die Verbesserungsvorschläge (links) an und bewerte sie";
+["take a look at the suggestions (see right) and rate them"] = "schau dir die Verbesserungsvorschläge (rechts) an und bewerte sie";
 ["take a look at the suggestions of your supporters"] = "schau dir die Verbesserungsvorschläge deiner Unterstützer an";
-["take a look on the issues (see left)"] = "schau dir die Themen an (siehe links)";
+["take a look on the issues (see right)"] = "schau dir die Themen an (siehe rechts)";
 ["the following login is connected to this email address:\n\n"] = "der folgende Anmeldename ist mit dieser E-Mail-Adresse verknüpft:\n\n";
 ["this issue is in verification phase, therefore the initiative text cannot be updated anymore"] = "dieses Thema ist in der Überprüfungsphase, daher kann der Text nicht mehr geändert werden";
 ["this issue is in voting phase, therefore the initiative text cannot be updated anymore"] = "dieses Thema ist in Abstimmung, daher kann der Text nicht mehr geändert werden";
@@ -1007,4 +1008,8 @@ return {
 ["you have #{count} incoming delegations"] = "#{count} eingehende Delegationen";
 ["you restricted your support by rating suggestions as must or must not"] = "deine Untersützung ist aufgrund von 'muss'- oder 'darf nicht'-Verbesserungsvorschlägen beschränkt";
 ["you voted"] = "du hast abgestimmt";
+["new issue"] = "Neues Thema starten";
+["expert editor (HTML)"] = "Expertenmodus (HTML)";
+["show profile"] = "Profil aufrufen";
+["show ballot"] = "Stimmzettel aufrufen";
 }

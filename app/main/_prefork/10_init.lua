@@ -1,4 +1,4 @@
-config.app_version = "3.2.1"
+config.app_version = "4.0.0-pre"
 
 -- TODO abstraction
 -- get record by id
@@ -62,6 +62,61 @@ end
 
 if config.ldap == nil then
   config.ldap = {}
+end
+
+if config.oauth2 then
+  local scopes = {
+    { scope = "authentication", name = { de = "Identität feststellen (nur Screen-Name)", en = "Determine identity (screen name only)" } },
+    { scope = "identification", name = { de = "Identität feststellen", en = "Determine identity" } },
+    { scope = "notify_email", name = { de = "E-Mail-Adresse für Benachrichtigungen verwenden", en = "Use email address for notifications" } },
+    { scope = "read_contents", name = { de = "Inhalte lesen", en = "Read content" } },
+    { scope = "read_authors", name = { de = "Autorennamen lesen", en = "Read author names" } },
+    { scope = "read_ratings", name = { de = "Bewertungen lesen", en = "Read ratings" } },
+    { scope = "read_identities", name = { de = "Identitäten lesen", en = "Read identities" } },
+    { scope = "read_profiles", name = { de = "Profile lesen", en = "Read profiles" } },
+    { scope = "post", name = { de = "Neue Inhalte veröffentlichen", en = "Post new content" } },
+    { scope = "rate", name = { de = "Bewertungen vornehmen", en = "Do ratings" } },
+    { scope = "vote", name = { de = "Abstimmen", en = "Vote" } },
+    { scope = "delegate", name = { de = "Delegieren", en = "Delegate" } },
+    { scope = "profile", name = { de = "Eigenes Profil lesen", en = "Read your profile" } },
+    { scope = "settings", name = { de = "Einstellungen einsehen", en = "Read your settings" } },
+    { scope = "update_name", name = { de = "Screen-Namen ändern", en = "Update screen name" } },
+    { scope = "update_notify_email", name = { de = "E-Mail-Adresse für Benachrichtigungen ändern", en = "Update notify email address" } },
+    { scope = "update_profile", name = { de = "Profil bearbeiten", en = "Update your profile" } },
+    { scope = "update_settings", name = { de = "Benutzereinstellungen ändern", en = "Update your settings" } }   
+  }
+  local s = config.oauth2.available_scopes or {}
+  for i, scope in ipairs(scopes) do
+    s[#s+1] = scope
+  end
+  config.oauth2.available_scopes = s
+  if not config.oauth2.endpoint_magic then
+    config.oauth2.endpoint_magic = "liquidfeedback_client/redirection_endpoint"
+  end
+  if not config.oauth2.manifest_magic then
+    config.oauth2.manifest_magic = "liquidfeedback_client/manifest"
+  end
+  if not config.oauth2.host_func then
+    config.oauth2.host_func = function(domain) return extos.pfilter(nil, "host", "-t", "TXT", domain) end
+  end
+  if not config.oauth2.authorization_code_lifetime then
+    config.oauth2.authorization_code_lifetime = 5 * 60
+  end
+  if not config.oauth2.refresh_token_lifetime then
+    config.oauth2.refresh_token_lifetime = 60 * 60 * 24 * 30 * 3
+  end
+  if not config.oauth2.refresh_pause then
+    config.oauth2.refresh_pause = 60
+  end
+  if not config.oauth2.refresh_grace_period then
+    config.oauth2.refresh_grace_period = 60
+  end
+  if not config.oauth2.access_token_lifetime then
+    config.oauth2.access_token_lifetime = 60 * 60
+  end
+  if not config.oauth2.dynamic_registration_lifetime then
+    config.oauth2.dynamic_registration_lifetime = 60 * 60 * 24
+  end
 end
 
 if not config.database then
@@ -135,7 +190,19 @@ request.set_404_route{ module = 'index', view = '404' }
 
 request.set_absolute_baseurl(config.absolute_base_url)
 
+-- TODO remove style cache
+
 listen(listen_options)
+
+listen{
+  {
+    proto = "main",
+    name = "process_event_stream",
+    handler = function(poll)
+      Event:process_stream(poll)
+    end    
+  }
+}
 
 listen{
   {
@@ -145,11 +212,6 @@ listen{
     handler = function()
       while true do
         if not Newsletter:send_next_newsletter() then
-          break
-        end
-      end
-      while true do
-        if not Event:send_next_notification() then
           break
         end
       end

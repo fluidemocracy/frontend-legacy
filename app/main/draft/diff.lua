@@ -33,41 +33,8 @@ if app.session.member then
 end
 
 
-execute.view{ module = "issue", view = "_sidebar_state", params = {
-  initiative = initiative
-} }
-
-execute.view { 
-  module = "issue", view = "_sidebar_issue", 
-  params = {
-    issue = initiative.issue,
-    highlight_initiative_id = initiative.id
-  }
-}
-
-execute.view {
-  module = "issue", view = "_sidebar_whatcanido",
-  params = { initiative = initiative }
-}
-
-execute.view { 
-  module = "issue", view = "_sidebar_members", params = {
-    issue = initiative.issue, initiative = initiative
-  }
-}
-
-
-
-execute.view {
-  module = "issue", view = "_head", params = {
-    issue = initiative.issue
-  }
-}
-
-
-
-local old_draft_content = string.gsub(string.gsub(old_draft.content, "\n", " ###ENTER###\n"), " ", "\n")
-local new_draft_content = string.gsub(string.gsub(new_draft.content, "\n", " ###ENTER###\n"), " ", "\n")
+local old_draft_content = string.gsub(string.gsub(util.html_to_text(old_draft.content), "\n", " ###ENTER###\n"), " ", "\n")
+local new_draft_content = string.gsub(string.gsub(util.html_to_text(new_draft.content), "\n", " ###ENTER###\n"), " ", "\n")
 
 local key = multirand.string(24, "0123456789abcdefghijklmnopqrstuvwxyz")
 
@@ -84,7 +51,7 @@ new_draft_file:write(new_draft_content)
 new_draft_file:write("\n")
 new_draft_file:close()
 
-local output, err, status = extos.pfilter(nil, "sh", "-c", "diff -U 1000000000 '" .. old_draft_filename .. "' '" .. new_draft_filename .. "' | grep -v ^--- | grep -v ^+++ | grep -v ^@")
+local output, err, status = extos.pfilter(nil, "sh", "-c", "diff -a -U 1000000000 '" .. old_draft_filename .. "' '" .. new_draft_filename .. "' | grep --binary-files=text -v ^--- | grep --binary-files=text -v ^+++ | grep --binary-files=text -v ^@")
 
 os.remove(old_draft_filename)
 os.remove(new_draft_filename)
@@ -116,93 +83,133 @@ local function process_line(line)
     if not state_changed then
       slot.put(" ")
     end
-    slot.put(encode.html(line))
+    --slot.put(encode.html(line))
+    slot.put(line)
   else
     slot.put("<br />")
   end
 end
 
-ui.section( function()
-  ui.sectionHead( function()
-    ui.link{
-      module = "initiative", view = "show", id = initiative.id,
-      content = function ()
+execute.view{ module = "issue", view = "_head", params = { issue = initiative.issue } }
+
+ui.grid{ content = function()
+  ui.cell_main{ content = function()
+    ui.container{ attr = { class = "mdl-card mdl-card__fullwidth mdl-shadow--2dp" }, content = function()
+
+      ui.container{ attr = { class = "mdl-card__title mdl-card--border" }, content = function ()
         ui.heading { 
-          level = 1,
-          content = initiative.display_name
+          attr = { class = "mdl-card__title-text" },
+          content = function()
+            ui.link{
+              module = "initiative", view = "show", id = initiative.id,
+              content = initiative.display_name
+            }
+          end
         }
+        ui.container{ content = _("Comparision of revisions #{id1} and #{id2}", {
+          id1 = old_draft.id,
+          id2 = new_draft.id 
+        } ) }
+      end }
+
+      if app.session.member_id and not new_draft.initiative.revoked then
+        local supporter = app.session.member:get_reference_selector("supporters")
+          :add_where{ "initiative_id = ?", new_draft.initiative_id }
+          :optional_object_mode()
+          :exec()
+        if supporter and supporter.draft_id == old_draft.id and new_draft.id == initiative.current_draft.id then
+          ui.container {
+            attr = { class = "mdl-card__content mdl-card--no-bottom-pad mdl-card--notice" },
+            content = _"The draft of this initiative has been updated!"
+          }
+          ui.container {
+            attr = { class = "mdl-card__actions mdl-card--action-border  mdl-card--notice" },
+            content = function ()
+              ui.link{
+                attr = { class = "mdl-button mdl-js-button mdl-button--raised" },
+                text   = _"refresh my support",
+                module = "initiative",
+                action = "add_support",
+                id     = new_draft.initiative.id,
+                params = { draft_id = new_draft.id },
+                routing = {
+                  default = {
+                    mode = "redirect",
+                    module = "initiative",
+                    view = "show",
+                    id = new_draft.initiative.id
+                  }
+                }
+              }
+
+              slot.put(" &nbsp; ")
+              
+              ui.link{
+                attr = { class = "mdl-button mdl-js-button mdl-button--raised" },
+                text   = _"remove my support",
+                module = "initiative",
+                action = "remove_support",
+                id     = new_draft.initiative.id,
+                routing = {
+                  default = {
+                    mode = "redirect",
+                    module = "initiative",
+                    view = "show",
+                    id = new_draft.initiative.id
+                  }
+                }
+              }        
+
+              slot.put(" &nbsp; ")
+              
+              ui.link{
+                attr = { class = "mdl-button mdl-js-button" },
+                text   = _"cancel",
+                module = "initiative",
+                view   = "show",
+                id     = new_draft.initiative.id,
+              }        
+            end
+          }
+        end
       end
-    }
-    ui.heading{ level = 2, content = _("Comparision of revisions #{id1} and #{id2}", {
-      id1 = old_draft.id,
-      id2 = new_draft.id 
-    } ) }
-  end )
 
-  if app.session.member_id and not new_draft.initiative.revoked then
-    local supporter = app.session.member:get_reference_selector("supporters")
-      :add_where{ "initiative_id = ?", new_draft.initiative_id }
-      :optional_object_mode()
-      :exec()
-    if supporter and supporter.draft_id ~= new_draft.id then
-      ui.sectionRow("draft_updated_info", function()
-        ui.container{ 
-          attr = { class = "info" },
-          content = _"The draft of this initiative has been updated!"
-        }
-        slot.put(" ")
-        ui.link{
-          text   = _"refresh my support",
-          module = "initiative",
-          action = "add_support",
-          id     = new_draft.initiative.id,
-          params = { draft_id = new_draft.id },
-          routing = {
-            default = {
-              mode = "redirect",
-              module = "initiative",
-              view = "show",
-              id = new_draft.initiative.id
+      ui.container {
+        attr = { class = "draft mdl-card__content mdl-card--border" },
+        content = function ()
+          if not status then
+            ui.field.text{ value = _"The drafts do not differ" }
+          else
+            ui.container{
+              tag = "div",
+              attr = { class = "diff" },
+              content = function()
+                output = output:gsub("[^\n\r]+", function(line)
+                  process_line(line)
+                end)
+              end
             }
-          }
-        }
-
-        slot.put(" &middot; ")
-         
-        ui.link{
-          text   = _"remove my support",
-          module = "initiative",
-          action = "remove_support",
-          id     = new_draft.initiative.id,
-          routing = {
-            default = {
-              mode = "redirect",
-              module = "initiative",
-              view = "show",
-              id = new_draft.initiative.id
-            }
-          }
-        }        
-        
-      end )
-    end
-  end
-
-  ui.sectionRow( function()
-
-    if not status then
-      ui.field.text{ value = _"The drafts do not differ" }
-    else
-      ui.container{
-        tag = "div",
-        attr = { class = "diff" },
-        content = function()
-          output = output:gsub("[^\n\r]+", function(line)
-            process_line(line)
-          end)
+          end 
         end
       }
-    end 
+    end }
+  end }
+  ui.cell_sidebar{ content = function()
 
-  end )
-end )
+    execute.view{ module = "issue", view = "_sidebar", params = {
+      initiative = initiative,
+      issue = initiative.issue
+    } }
+
+    execute.view {
+      module = "issue", view = "_sidebar_whatcanido",
+      params = { initiative = initiative }
+    }
+
+    execute.view { 
+      module = "issue", view = "_sidebar_members", params = {
+        issue = initiative.issue, initiative = initiative
+      }
+    }
+  end }
+end }

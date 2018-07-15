@@ -1,4 +1,4 @@
-function model.has_rendered_content(class, rendered_class, content_field_name)
+function model.has_rendered_content(class, rendered_class, content_field_name, primary_key)
 
   local content_field_name = content_field_name or 'content'
   
@@ -12,6 +12,8 @@ function model.has_rendered_content(class, rendered_class, content_field_name)
       for i, key in ipairs(class.primary_key) do
         selector:add_where{ "$ = ?", { key }, self[key] }
       end
+    elseif class.primary_key then
+      selector:add_where{ "$ = ?", { class.primary_key }, self[class.primary_key] }
     else
       selector:add_where{ "id = ?", self.id }
     end
@@ -24,6 +26,8 @@ function model.has_rendered_content(class, rendered_class, content_field_name)
         for i, key in ipairs(class.primary_key) do
           selector:add_where{ "$.$ = ?", { rendered_class.table }, { key }, self[key] }
         end
+      elseif class.primary_key then
+        selector:add_where{ "$." .. primary_key .. " = ?", { rendered_class.table }, self[class.primary_key] }
       else
         selector:add_where{ "$." .. class.table .. "_id = ?", { rendered_class.table }, self.id }
       end
@@ -43,6 +47,8 @@ function model.has_rendered_content(class, rendered_class, content_field_name)
       for i, key in ipairs(class.primary_key) do
         rendered[key] = self[key]
       end
+    elseif class.primary_key then
+      rendered[primary_key] = self[class.primary_key]
     else
       rendered[class.table .. "_id"] = self.id
     end
@@ -65,6 +71,8 @@ function model.has_rendered_content(class, rendered_class, content_field_name)
       for i, key in ipairs(class.primary_key) do
         selector:add_where{ "$.$ = ?", { rendered_class.table }, { key }, self.id }
       end
+    elseif class.primary_key then
+      selector:add_where{ primary_key .. " = ?", self[class.primary_key] }
     else
       selector:add_where{ class.table .. "_id = ?", self.id }
     end

@@ -8,6 +8,7 @@ if not unit then
   return
 end
 
+app.current_unit = unit
 
 unit:load_delegation_info_once_for_member_id(app.session.member_id)
 
@@ -38,36 +39,40 @@ local closed_issues_selector = Issue:new_selector()
   :add_where("issue.closed NOTNULL")
   :add_order_by("issue.closed DESC")
 
-  
+  ui.container{ attr = { class = "mdl-grid" }, content = function()
+    ui.container{ attr = { class = "mdl-cell mdl-cell--12-col" }, content = function()
+        
+      ui.heading{ content = unit.name }
 
-execute.view { module = "unit", view = "_head", params = { unit = unit } }
+      execute.view { module = "unit", view = "_head", params = { unit = unit } }
 
+      execute.view { 
+        module = "unit", view = "_sidebar", params = { 
+          unit = unit
+        }
+      }
 
-execute.view { 
-  module = "unit", view = "_sidebar", params = { 
-    unit = unit
-  }
-}
+      execute.view { 
+        module = "unit", view = "_sidebar_whatcanido", params = { 
+          unit = unit
+        }
+      }
 
-execute.view { 
-  module = "unit", view = "_sidebar_whatcanido", params = { 
-    unit = unit
-  }
-}
+      execute.view { 
+        module = "unit", view = "_sidebar_members", params = { 
+          unit = unit
+        }
+      }
 
-execute.view { 
-  module = "unit", view = "_sidebar_members", params = { 
-    unit = unit
-  }
-}
-
-execute.view {
-  module = "issue",
-  view = "_list2",
-  params = { for_unit = unit, head = function ()
-    ui.heading { attr = { class = "left" }, level = 1, content = unit.name }
+      execute.view {
+        module = "issue",
+        view = "_list",
+        params = { for_unit = unit, head = function ()
+          ui.heading { attr = { class = "left" }, level = 1, content = unit.name }
+        end }
+      }
+    end }
   end }
-}
 
 --[[
 if app.session:has_access("all_pseudonymous") then

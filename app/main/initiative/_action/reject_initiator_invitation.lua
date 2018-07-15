@@ -13,7 +13,7 @@ elseif issue.half_frozen then
 end
 
 if initiator.accepted ~= nil then
-  error("access denied")
+  return execute.view { module = "index", view = "403" }
 end
 
 initiator.accepted = false

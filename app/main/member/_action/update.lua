@@ -1,28 +1,16 @@
-local fields = {
-  "organizational_unit",
-  "internal_posts",
-  "realname",
-  "birthday",
-  "address",
-  "email",
-  "xmpp_address",
-  "website",
-  "phone",
-  "mobile_phone",
-  "profession",
-  "external_memberships",
-  "external_posts"
-}
+local profile = app.session.member.profile
 
-local update_args = { app.session.member }
-
-for i, field in ipairs(fields) do
-  if not util.is_profile_field_locked(app.session.member, field) then
-    param.update(app.session.member, field)
+for i, field in ipairs(config.member_profile_fields) do
+  if not util.is_profile_field_locked(app.session.member, field.id) then
+    local value = param.get(field.id)
+    if value == "" then 
+      value = null
+    end
+    profile.profile[field.id] = value
   end
 end
 
-if not util.is_profile_field_locked(app.session.member, "statement") then
+if not util.is_profile_field_locked(profile, "statement") then
   local formatting_engine = param.get("formatting_engine") or config.enforce_formatting_engine
 
   local formatting_engine_valid = false
@@ -38,24 +26,37 @@ if not util.is_profile_field_locked(app.session.member, "statement") then
 
   local statement = param.get("statement")
 
-  if statement ~= app.session.member.statement or 
-     formatting_engine ~= app.session.member.formatting_engine then
-    app.session.member.formatting_engine = formatting_engine
-    app.session.member.statement = statement
-    app.session.member:render_content(true)
+  if statement ~= profile.statement or 
+     formatting_engine ~= profile.formatting_engine then
+    profile.formatting_engine = formatting_engine
+    profile.statement = statement
+    profile:render_content(true)
   end
 
 end
 
-if not util.is_profile_field_locked(app.session.member, "birthday") then
-  if tostring(app.session.member.birthday) == "invalid_date" then
-    app.session.member.birthday = nil
+if not util.is_profile_field_locked(profile, "birthday") then
+  if tostring(profile.birthday) == "invalid_date" then
+    profile.birthday = nil
     slot.put_into("error", _"Date format is not valid. Please use following format: YYYY-MM-DD")
     return false
   end
 end
 
-app.session.member:save()
+local search_strings = {}
+for i, field in ipairs(config.member_profile_fields) do
+  if field.index and profile.profile[field.id] and #(profile.profile[field.id]) > 0 then
+    search_strings[#search_strings+1] = profile.profile[field.id]
+  end
+end
+
+if profile.statement and #(profile.statement) > 0 then
+  search_strings[#search_strings+1] = profile.statement
+end
+
+profile.profile_text_data = table.concat(search_strings, " ")
+
+profile:save()
 
 
 slot.put_into("notice", _"Your page has been updated")

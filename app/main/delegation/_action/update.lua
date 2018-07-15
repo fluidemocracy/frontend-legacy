@@ -1,3 +1,7 @@
+if config.disable_delegations then
+  return
+end
+
 local truster_id = app.session.member.id
 
 local trustee_id = param.get("trustee_id", atom.integer)
@@ -58,7 +62,7 @@ else
   end
 
   if not app.session.member:has_voting_right_for_unit_id(check_unit_id) then
-    error("access denied")
+    return execute.view { module = "index", view = "403" }
   end
 
   if not delegation then

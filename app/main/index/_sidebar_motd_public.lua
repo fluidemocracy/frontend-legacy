@@ -1,10 +1,7 @@
 if config.motd_public then
-  slot.select("motd", function()
-    ui.container{
-      attr = { class = "wiki motd" },
-      content = function()
-        slot.put(config.motd_public)
-      end
-    }
-  end )
+  ui.container{ attr = { class = "mdl-special-card mdl-card__fullwidth mdl-shadow--2dp" }, content = function()
+    ui.container{ attr = { class = "mdl-card__content" }, content = function()
+      slot.put(config.motd_public)
+    end }
+  end }
 end

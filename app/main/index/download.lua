@@ -1,5 +1,5 @@
 if not config.download_dir then
-  error("feature not enabled")
+  return execute.view { module = "index", view = "404" }
 end
 
 local file_list = extos.listdir(config.download_dir)

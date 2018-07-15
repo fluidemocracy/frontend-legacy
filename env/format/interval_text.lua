@@ -5,6 +5,8 @@ function format.interval_text(value, options)
   
   local options = options or {}
   
+  value = value:match("^([^ ]* *[^ ]* *[^ ]* *[^ ]*)")
+    
   value = value:gsub("%..*", "")
     :gsub("days", "{DAYS}")
     :gsub("day", "{DAY}")

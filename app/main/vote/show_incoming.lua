@@ -8,6 +8,13 @@ else
   issue = Issue:by_id(param.get("issue_id"))
 end
 
+if not issue then
+  execute.view { module = "index", view = "404" }
+  request.set_status("404 Not Found")
+  return
+end
+
+
 if app.session.member_id then
   if initiative then
     initiative:load_everything_for_member_id(app.session.member.id)

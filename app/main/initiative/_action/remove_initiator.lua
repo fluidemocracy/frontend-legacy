@@ -20,11 +20,11 @@ end
 local initiator_todelete = Initiator:by_pk(initiative.id, param.get("member_id", atom.integer))
 
 if not (initiator and initiator.accepted) and not (initiator.member_id == initiator_todelete.member_id) then
-  error("access denied")
+  return execute.view { module = "index", view = "403" }
 end
 
 if initiator_todelete.accepted == false and initiator.member_id ~= initiator_todelete.member_id then
-  error("access denied")
+  return execute.view { module = "index", view = "403" }
 end
 
 local initiators = initiative

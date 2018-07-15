@@ -3,10 +3,16 @@ if cancel then return end
 
 local issue = Issue:new_selector():add_where{ "id = ?", param.get("issue_id", atom.integer) }:for_share():single_object_mode():exec()
 
+-- TODO patch for project voting
+if config.alternative_voting and config.alternative_voting[tostring(issue.policy.id)] then
+  return false
+end
+
+
 local preview = (param.get("preview") or param.get("edit")) and true or false
 
 if not app.session.member:has_voting_right_for_unit_id(issue.area.unit_id) then
-  error("access denied")
+  return execute.view { module = "index", view = "403" }
 end
 
 local update_comment = param.get("update_comment") and true or false
@@ -82,7 +88,8 @@ if not move_down and not move_up then
         end
       end
       if not formatting_engine_valid then
-        error("invalid formatting engine!")
+        slot.put_into("error", "invalid formatting engine!")
+        return false
       end
     end
 
@@ -116,7 +123,7 @@ if not move_down and not move_up then
       local grade = tonumber(grade)
       local initiative = Initiative:by_id(initiative_id)
       if initiative.issue.id ~= issue.id then
-        error("initiative from wrong issue")
+        return execute.view { module = "index", view = "403" }
       end
       if not preview and not issue.closed then
         local vote = Vote:by_pk(initiative_id, app.session.member.id)

@@ -162,7 +162,7 @@ Issue:add_reference{
     selector:add_field ( "non_voter.member_id NOTNULL", "non_voter" )
     selector:left_join ( "direct_interest_snapshot", nil, { [[
       direct_interest_snapshot.issue_id = issue.id AND 
-      direct_interest_snapshot.event = issue.latest_snapshot_event AND 
+      direct_interest_snapshot.snapshot_id = issue.latest_snapshot_id AND 
       direct_interest_snapshot.member_id = ?
     ]], options.member_id }) 
     selector:add_field ( "direct_interest_snapshot.weight", "weight" )
@@ -275,3 +275,10 @@ function Issue.object_get:state_time_text()
     return _("ends in #{state_time_left}", { state_time_left = self.state_time_left })
   end
 end
+
+function Issue:by_ids(ids)
+  local selector = self:new_selector()
+  selector:add_where{'"id" IN ($)', { ids } }
+  return selector:exec()
+end
+

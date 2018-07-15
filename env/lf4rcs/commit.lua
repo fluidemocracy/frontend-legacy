@@ -42,7 +42,7 @@ function lf4rcs.commit(issue)
     local target_node_id = initiative.current_draft.external_reference
     if target_node_id then
       local branch = "i" .. initiative.id
-      lf4rcs[repository].commit(path, exec, branch, target_node_id, close_message, merge_message)
+      config.lf4rcs[repository].commit(path, exec, branch, target_node_id, close_message, merge_message)
     end
   end
 end

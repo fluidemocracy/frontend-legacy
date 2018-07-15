@@ -1,5 +1,7 @@
 local id = param.get_id()
 
+local hint = not id
+
 local unit = Unit:by_id(id)
 
 ui.titleAdmin(_"Organizational unit")
@@ -40,7 +42,7 @@ ui.form{
       ui.field.text{     label = _"Name",         name = "name" }
       ui.field.text{     label = _"Description",  name = "description", multiline = true }
       ui.field.text{     label = _"External reference",  name = "external_reference" }
-      ui.field.boolean{  label = _"Active?",      name = "active" }
+      ui.field.boolean{  label = _"Active?",      name = "active", value = hint and true or nil }
 
       slot.put("<br />")
       ui.submit{         text  = _"update unit" }

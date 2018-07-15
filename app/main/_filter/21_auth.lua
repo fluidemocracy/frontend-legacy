@@ -2,26 +2,59 @@ local module = request.get_module()
 local view   = request.get_view()
 local action = request.get_action()
 
-local auth_needed = not (
-  module == 'index'
-  and (
-view   == "login"
-    or action == "login"
-    or view   == "register"
-    or action == "register"
-    or action == "cancel_register"
-    or view   == "about"
-    or view   == "reset_password"
-    or action == "reset_password"
-    or view   == "send_login"
-    or action == "send_login"
-    or view   == "confirm_notify_email"
-    or action == "confirm_notify_email"
-    or view   == "menu"
-    or action == "set_lang"
-    or view   == "404"
-  )
-)
+local auth_needed = true
+
+if module == 'index' and (
+     view == 'index'
+  or view   == "login"
+  or action == "login"
+  or view   == "register"
+  or action == "register"
+  or action == "cancel_register"
+  or view   == "about"
+  or view   == "reset_password"
+  or action == "reset_password"
+  or view   == "send_login"
+  or action == "send_login"
+  or view   == "confirm_notify_email"
+  or action == "confirm_notify_email"
+  or view   == "menu"
+  or action == "set_lang"
+  or view   == "403"
+  or view   == "404"
+  or view   == "405"
+) then
+  auth_needed = false
+end
+
+if module == "registration" then
+  auth_needed = false
+end
+
+if module == "style" then
+  auth_needed = false
+end
+
+if module == "help" then
+  auth_needed = false
+end
+
+if module == "oauth2" and (
+     view   == "validate"
+  or view   == "token"
+  or view   == "session"
+  or view   == "register"
+) then
+  auth_needed = false
+end
+
+if module == "oauth2_client" then
+  auth_needed = false
+end
+
+if module == "api" then
+  auth_needed = false
+end
 
 if app.session:has_access("anonymous") then
 
@@ -41,6 +74,7 @@ if app.session:has_access("anonymous") then
     or module == "index" and view == "search"
     or module == "index" and view == "usage_terms"
     or module == "help" and view == "introduction"
+    or module == "style"
   then
     auth_needed = false
   end
@@ -94,11 +128,21 @@ end
 
 if auth_needed and app.session.member == nil then
   trace.debug("Not authenticated yet.")
+  local params = json.object()
+  for key, val in pairs(request.get_param_strings()) do
+    if type(val) == "string" then
+      params[key] = val
+    else
+      -- shouldn't happen
+      error("array type params not implemented")
+    end
+  end
   request.redirect{
     module = 'index', view = 'login', params = {
       redirect_module = module,
       redirect_view = view,
-      redirect_id = param.get_id()
+      redirect_id = param.get_id(),
+      redirect_params = params
     }
   }
 elseif auth_needed and app.session.member.locked then

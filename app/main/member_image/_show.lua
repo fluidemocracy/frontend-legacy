@@ -13,15 +13,18 @@ else
   class = ""
 end
 
-
 if config.fastpath_url_func then
   ui.image{
-    attr = { title = popup_text, class = "member_image member_image_" .. image_type .. class },
+    attr = { title = popup_text, class = "mdl-chip__contact member_image member_image_" .. image_type .. class },
     external = config.fastpath_url_func(member_id, image_type)
   }
 else
+  local c = "mdl-chip__contact "
+  if image_type == "photo" then
+    c = ""
+  end
   ui.image{
-    attr = { title = popup_text, class = "member_image member_image_" .. image_type .. class },
+    attr = { title = popup_text, class = c .. "member_image member_image_" .. image_type .. class },
     module = "member_image",
     view = "show",
     extension = "jpg",

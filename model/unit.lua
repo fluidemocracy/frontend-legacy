@@ -7,7 +7,8 @@ Unit:add_reference{
   this_key      = 'id',
   that_key      = 'unit_id',
   ref           = 'areas',
-  back_ref      = 'unit'
+  back_ref      = 'unit',
+  default_order = "area.name, area.id"
 }
 
 Unit:add_reference{

@@ -154,9 +154,9 @@ Initiative:add_reference{
     
     selector:left_join("supporter", nil, "supporter.initiative_id = initiative.id AND supporter.member_id = delegation_info.participating_member_id")
 
-    selector:left_join("delegating_interest_snapshot", "delegating_interest_s", { "delegating_interest_s.event = issue.latest_snapshot_event AND delegating_interest_s.issue_id = issue.id AND delegating_interest_s.member_id = ?", options.member_id })
+    selector:left_join("delegating_interest_snapshot", "delegating_interest_s", { "delegating_interest_s.snapshot_id = issue.latest_snapshot_id AND delegating_interest_s.issue_id = issue.id AND delegating_interest_s.member_id = ?", options.member_id })
 
-    selector:left_join("direct_supporter_snapshot", "supporter_s", { "supporter_s.event = issue.latest_snapshot_event AND supporter_s.initiative_id = initiative.id AND (supporter_s.member_id = ? OR supporter_s.member_id = delegating_interest_s.delegate_member_ids[array_upper(delegating_interest_s.delegate_member_ids, 1)])", options.member_id })
+    selector:left_join("direct_supporter_snapshot", "supporter_s", { "supporter_s.snapshot_id = issue.latest_snapshot_id AND supporter_s.initiative_id = initiative.id AND (supporter_s.member_id = ? OR supporter_s.member_id = delegating_interest_s.delegate_member_ids[array_upper(delegating_interest_s.delegate_member_ids, 1)])", options.member_id })
 
     selector:add_field("CASE WHEN issue.fully_frozen ISNULL AND issue.closed ISNULL THEN supporter.member_id NOTNULL ELSE supporter_s.member_id NOTNULL END", "supported")
     selector:add_field({ "CASE WHEN issue.fully_frozen ISNULL AND issue.closed ISNULL THEN delegation_info.own_participation AND supporter.member_id NOTNULL ELSE supporter_s.member_id = ? END", options.member_id }, "directly_supported")
