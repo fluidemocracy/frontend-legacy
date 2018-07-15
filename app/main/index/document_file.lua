@@ -1,5 +1,5 @@
 if not config.document_dir then
-  error("feature not enabled")
+  return execute.view { module = "index", view = "404" }
 end
 
 local filename = param.get("filename")

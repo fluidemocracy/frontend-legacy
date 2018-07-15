@@ -15,6 +15,9 @@ if initiative.issue.fully_frozen and initiative.issue.closed and initiative.admi
               negative_votes - 
               positive_votes
       local head_text
+
+      util.initiative_pie( initiative )
+      
       if initiative.winner then
         head_text = _"Approved"
       elseif initiative.rank then
@@ -23,8 +26,6 @@ if initiative.issue.fully_frozen and initiative.issue.closed and initiative.admi
         head_text = _"Rejected"
       end
 
-      util.initiative_pie( initiative )
-      
       ui.heading { level = 1, content = head_text }
       
       ui.tag { tag = "table", content = function ()
@@ -38,16 +39,6 @@ if initiative.issue.fully_frozen and initiative.issue.closed and initiative.admi
           }
           ui.tag { tag = "th", content = _"Yes" }
         end }
-        ui.tag { tag = "tr", attr = { class = "abstention" }, content = function ()
-          ui.tag { tag = "td", content = 
-            tostring(abstention_votes)
-          }
-          ui.tag { tag = "th", content = _"Abstention" }
-          ui.tag { tag = "td", content =
-            format.percent_floor(abstention_votes, max_value) 
-          }
-          ui.tag { tag = "th", content = _"Abstention" }
-        end }
         ui.tag { tag = "tr", attr = { class = "no" }, content = function ()
           ui.tag { tag = "td", content = 
             tostring(negative_votes)
@@ -57,6 +48,16 @@ if initiative.issue.fully_frozen and initiative.issue.closed and initiative.admi
             format.percent_floor(negative_votes, max_value) 
           }
           ui.tag { tag = "th", content = _"No" }
+        end }
+        ui.tag { tag = "tr", attr = { class = "abstention" }, content = function ()
+          ui.tag { tag = "td", content = 
+            tostring(abstention_votes)
+          }
+          ui.tag { tag = "th", content = _"Abstention" }
+          ui.tag { tag = "td", content =
+            format.percent_floor(abstention_votes, max_value) 
+          }
+          ui.tag { tag = "th", content = _"Abstention" }
         end }
       end }
     end

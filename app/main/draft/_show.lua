@@ -10,7 +10,11 @@ ui.container{
         content = draft.content
       }
     else
-      slot.put(draft:get_content("html"))
+      if draft.formatting_engine == "html" or not draft.formatting_engine then
+        slot.put(draft.content)
+      else
+        slot.put(draft:get_content("html"))
+      end
     end
   end
 }

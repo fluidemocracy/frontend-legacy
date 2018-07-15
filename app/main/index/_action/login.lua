@@ -99,6 +99,7 @@ if member then
   member:save()
   app.session.member = member
   app.session:save()
+
   trace.debug('User authenticated')
   if config.etherpad then
     do_etherpad_auth(member)
@@ -116,9 +117,7 @@ if member then
     ui.tag { content = _"to show more info and learn what you can do" }
   end )
 else
-  slot.select("error", function()
-    ui.tag{ content = _'Invalid login name or password!' }
-  end)
+  slot.put_into("error_code", "invalid_credentials")
   trace.debug('User NOT authenticated')
   return false
 end

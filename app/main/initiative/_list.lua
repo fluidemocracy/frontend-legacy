@@ -1,7 +1,8 @@
-local member = param.get("member", "table") or app.session.member
+local for_member = param.get("for_member", "table")
 
 local initiatives = param.get("initiatives", "table")
-local highlight_initiative_id = param.get ( "highlight_initiative_id", "number" )
+local ommit_initiative_id = param.get ( "ommit_initiative_id", "number" )
+
 
 local for_initiative = param.get("initiative", "table")
 
@@ -13,7 +14,7 @@ end
 
 ui.tag { 
   tag = "ul",
-  attr = { class = "initiatives" },
+  attr = { class = "initiatives mdl-list" },
   content = function ()
     local last_group
     for i, initiative in ipairs(initiatives) do
@@ -29,51 +30,57 @@ ui.tag {
           group = "not_admitted"
         end
       end
-      if not for_initiative and group ~= last_group and not for_event then
+      if not for_initiative and group ~= last_group and not for_event and not for_member then
 
         local text
         if group == "admitted" then
           if initiative.issue.state == "finished_with_winner" then
             text = _"Competing initiatives in pairwise comparison to winner:"
-          else
+          elseif initiative.issue.voter_count and initiative.issue.voter_count > 0 then
             text = _"Competing initiatives in pairwise comparison to best initiative:"
           end
         end
-        if group == "not_admitted" then
+        if group == "not_admitted" and initiative.issue.state ~= "canceled_no_initiative_admitted" then
           text = _("Competing initiatives failed the 2nd quorum (#{num}/#{den}):", {
             num = initiative.issue.policy.initiative_quorum_num,
             den = initiative.issue.policy.initiative_quorum_den
           } )
         end
         if text then
-          slot.put("<br />")
-          ui.container { attr = { class = "result" }, content = text }
+          ui.tag{ tag = "li", attr = { class = "mdl-list__item" }, content = function()
+            ui.container{ attr = { class = "mdl-list__item-primary-content" }, content = text }
+          end }
         end
         last_group = group
       end
 
-      local class = ""
-      if highlight_initiative_id == initiative.id then
-        class = "highlighted"
-      end
-      if app.session.member then
-        if initiative.member_info.supported then
-          class = class .. " supported"
+      if ommit_initiative_id ~= initiative.id then
+        local class = "mdl-list__item mdl-list__item--three-line"
+        if app.session.member then
+          if initiative.member_info.supported then
+            class = class .. " supported"
+          end
+          if initiative.member_info.satisfied then
+            class = class .. " satisfied"
+          end
         end
-        if initiative.member_info.satisfied then
-          class = class .. " satisfied"
-        end
-      end
-      ui.tag {
-        tag = "li", attr = { class = class },
-        content = function ()
-          execute.view {
-            module = "initiative", view = "_list_element", params = {
-              initiative = initiative, for_event = for_event
+        ui.tag {
+          tag = "li", attr = { class = class },
+          content = function ()
+            if i == 1 and not ommit_initiative_id and not for_member and (
+              initiative.issue.state == "finished_with_winner" 
+              or initiative.issue.state == "finished_without_winner"
+            ) then
+              util.initiative_pie(initiative)
+            end
+            execute.view {
+              module = "initiative", view = "_list_element", params = {
+                initiative = initiative, for_event = for_event, for_member = for_member
+              }
             }
-          }
-        end
-      }
+          end
+        }
+      end
     end
   end 
 }

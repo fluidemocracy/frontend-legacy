@@ -25,7 +25,7 @@ else
 end
 
 if not app.session.member:has_voting_right_for_unit_id(area.unit_id) then
-  error("access denied")
+  return execute.view { module = "index", view = "403" }
 end
 
 local policy_id = param.get("policy_id", atom.integer)
@@ -44,15 +44,15 @@ if not issue then
     return false
   end
   if policy.polling and not app.session.member:has_polling_right_for_unit_id(area.unit_id) then
-    error("no polling right for this unit")
+    return execute.view { module = "index", view = "403" }
   end
-  
   if not area:get_reference_selector("allowed_policies")
     :add_where{ "policy.id = ?", policy_id }
     :optional_object_mode()
     :exec()
   then
-    error("policy not allowed")
+    slot.put_into("error", "policy not allowed")
+    return false
   end
 end
 
@@ -82,22 +82,6 @@ if #name > 140 then
   return false
 end
 
-local formatting_engine
-if config.enforce_formatting_engine then
-  formatting_engine = config.enforce_formatting_engine
-else
-  formatting_engine = param.get("formatting_engine")
-  local formatting_engine_valid = false
-  for i, fe in ipairs(config.formatting_engines) do
-    if formatting_engine == fe.id then
-      formatting_engine_valid = true
-    end
-  end
-  if not formatting_engine_valid then
-    error("invalid formatting engine!")
-  end
-end
-
 local timing
 if not issue and policy.free_timeable then
   local free_timing_string = util.trim(param.get("free_timing"))
@@ -109,7 +93,8 @@ if not issue and policy.free_timeable then
   if config.free_timing and config.free_timing.available_func then
     available_timings = config.free_timing.available_func(policy)
     if available_timings == false then
-      error("error in free timing config")
+      slot.put_into("error", "error in free timing config")
+      return false
     end
   end
   if available_timings then
@@ -126,8 +111,37 @@ if not issue and policy.free_timeable then
   end
   timing = config.free_timing.calculate_func(policy, free_timing_string)
   if not timing then
-    error("error in free timing config")
+    slot.put_into("error", "error in free timing config")
+    return false
   end
+end
+
+local draft_text = param.get("draft")
+
+if not draft_text then
+  return false
+end
+
+local draft_text = util.wysihtml_preproc(draft_text)
+
+local valid_html, error_message = util.html_is_safe(draft_text)
+if not valid_html then
+  slot.put_into("error", _("Draft contains invalid formatting or character sequence: #{error_message}", { error_message = error_message }) )
+  return false
+end
+
+if config.initiative_abstract then
+  local abstract = param.get("abstract")
+  if not abstract then
+    return false
+  end
+  abstract = encode.html(abstract)
+  draft_text = abstract .. "<!--END_OF_ABSTRACT-->" .. draft_text
+end
+
+local location = param.get("location")
+if location == "" then
+  location = nil
 end
 
 if param.get("preview") or param.get("edit") then
@@ -177,7 +191,8 @@ initiative:save()
 local draft = Draft:new()
 draft.initiative_id = initiative.id
 draft.formatting_engine = formatting_engine
-draft.content = param.get("draft")
+draft.content = draft_text
+draft.location = location
 draft.author_id = app.session.member.id
 draft:save()
 

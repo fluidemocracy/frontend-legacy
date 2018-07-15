@@ -27,4 +27,4 @@ Suggestion:add_reference{
   default_order = '"id"'
 }
 
-model.has_rendered_content(Suggestion, RenderedSuggestion)
+model.has_rendered_content(Suggestion, RenderedSuggestion, "content", "suggestion_id")

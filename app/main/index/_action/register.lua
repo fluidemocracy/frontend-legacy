@@ -4,13 +4,13 @@ local member
 
 if app.session.authority == "ldap" then
   if not config.ldap.member or config.ldap.member.registration ~= "manual" then
-    error("access denied")
+    return execute.view { module = "index", view = "403" }
   end
   member = ldap.create_member(app.session.authority_uid, true)
   
 else
   if config.registration_disabled then
-    error("registration disabled")
+    return execute.view { module = "index", view = "403" }
   end
   member = Member:new_selector()
     :add_where{ "invite_code = ?", code }
@@ -21,38 +21,58 @@ else
     :exec()
 end
 
-  
+
 if not member then
   slot.put_into("error", _"The code you've entered is invalid")
   request.redirect{
     mode   = "forward",
     module = "index",
-    view   = "register"
+    view   = "register", params = {
+      redirect_module = param.get("redirect_module"),
+      redirect_view = param.get("redirect_view"),
+      redirect_id = param.get("redirect_id"),
+      redirect_params = param.get("redirect_params")
+    }
   }
   return false
 end
 
 local notify_email = param.get("notify_email")
 
-if not util.is_profile_field_locked(member, "notify_email") and notify_email then
+if not util.is_profile_field_locked(member, "notify_email") and not member.notify_email and notify_email then
   if #notify_email < 5 then
     slot.put_into("error", _"Email address too short!")
     request.redirect{
       mode   = "redirect",
       module = "index",
       view   = "register",
-      params = { code = member.invite_code }
+      params = { 
+        code = member.invite_code,
+        skip = param.get("skip"),
+        redirect_module = param.get("redirect_module"),
+        redirect_view = param.get("redirect_view"),
+        redirect_id = param.get("redirect_id"),
+        redirect_params = param.get("redirect_params")
+      }
     }
     return false
   end
 end
 
-if member and not util.is_profile_field_locked(member, "notify_email") and not notify_email then
+if member and not util.is_profile_field_locked(member, "notify_email") and not member.notify_email and not notify_email then
   request.redirect{
     mode   = "redirect",
     module = "index",
     view   = "register",
-    params = { code = member.invite_code, step = 1 }
+    params = {
+      code = member.invite_code, 
+      skip = param.get("skip"),
+      step = 1, 
+      redirect_module = param.get("redirect_module"),
+      redirect_view = param.get("redirect_view"),
+      redirect_id = param.get("redirect_id"),
+      redirect_params = param.get("redirect_params")
+    }
   }
   return false
 end
@@ -71,7 +91,12 @@ if not util.is_profile_field_locked(member, "name") and name then
       params = {
         code = member.invite_code,
         notify_email = notify_email,
-        step = 1
+        step = 1,
+        skip = param.get("skip"),
+        redirect_module = param.get("redirect_module"),
+        redirect_view = param.get("redirect_view"),
+        redirect_id = param.get("redirect_id"),
+        redirect_params = param.get("redirect_params")
       }
     }
     return false
@@ -87,7 +112,12 @@ if not util.is_profile_field_locked(member, "name") and name then
       params = {
         code = member.invite_code,
         notify_email = notify_email,
-        step = 1
+        step = 1,
+        skip = param.get("skip"),
+        redirect_module = param.get("redirect_module"),
+        redirect_view = param.get("redirect_view"),
+        redirect_id = param.get("redirect_id"),
+        redirect_params = param.get("redirect_params")
       }
     }
     return false
@@ -105,7 +135,12 @@ if notify_email and not util.is_profile_field_locked(member, "name") and not mem
     params = {
       code = member.invite_code,
       notify_email = notify_email,
-      step = 1
+      step = 1,
+      skip = param.get("skip"),
+      redirect_module = param.get("redirect_module"),
+      redirect_view = param.get("redirect_view"),
+      redirect_id = param.get("redirect_id"),
+      redirect_params = param.get("redirect_params")
     }
   }
   return false
@@ -124,7 +159,12 @@ if not util.is_profile_field_locked(member, "login") and login then
         code = member.invite_code,
         notify_email = notify_email,
         name = member.name,
-        step = 1
+        step = 1,
+        skip = param.get("skip"),
+        redirect_module = param.get("redirect_module"),
+        redirect_view = param.get("redirect_view"),
+        redirect_id = param.get("redirect_id"),
+        redirect_params = param.get("redirect_params")
       }
     }
     return false
@@ -141,7 +181,12 @@ if not util.is_profile_field_locked(member, "login") and login then
         code = member.invite_code,
         notify_email = notify_email,
         name = member.name,
-        step = 1
+        step = 1,
+        skip = param.get("skip"),
+        redirect_module = param.get("redirect_module"),
+        redirect_view = param.get("redirect_view"),
+        redirect_id = param.get("redirect_id"),
+        redirect_params = param.get("redirect_params")
       }
     }
     return false
@@ -158,7 +203,12 @@ if member.name and not util.is_profile_field_locked(member, "login") and not mem
       code = member.invite_code,
       notify_email = notify_email,
       name = member.name,
-      step = 1
+      step = 1,
+      skip = param.get("skip"),
+      redirect_module = param.get("redirect_module"),
+      redirect_view = param.get("redirect_view"),
+      redirect_id = param.get("redirect_id"),
+      redirect_params = param.get("redirect_params")
     }
   }
   return false
@@ -169,10 +219,16 @@ local step = param.get("step", atom.integer)
 if step > 2 then
 
   for i, checkbox in ipairs(config.use_terms_checkboxes) do
-    local accepted = param.get("use_terms_checkbox_" .. checkbox.name, atom.boolean)
-    if not accepted then
-      slot.put_into("error", checkbox.not_accepted_error)
-      return false
+    local member_useterms = MemberUseterms:new_selector()
+      :add_where{ "member_id = ?", member.id }
+      :add_where{ "contract_identifier = ?", checkbox.name }
+      :exec()
+    if #member_useterms == 0 then
+      local accepted = param.get("use_terms_checkbox_" .. checkbox.name, atom.boolean)
+      if not accepted then
+        slot.put_into("error", checkbox.not_accepted_error)
+        return false
+      end
     end
   end  
 
@@ -190,7 +246,12 @@ if step > 2 then
           code = member.invite_code,
           notify_email = notify_email,
           name = member.name,
-          login = member.login
+          login = member.login,
+          skip = param.get("skip"),
+          redirect_module = param.get("redirect_module"),
+          redirect_view = param.get("redirect_view"),
+          redirect_id = param.get("redirect_id"),
+          redirect_params = param.get("redirect_params")
         }
       }
     --]]
@@ -219,7 +280,7 @@ if step > 2 then
     member.name = name
   end
 
-  if notify_email ~= member.notify_email then
+  if not member.notify_email then
     local success = member:set_notify_email(notify_email)
     if not success then
       slot.put_into("error", _"Can't send confirmation email")
@@ -231,7 +292,10 @@ if step > 2 then
 
   for i, checkbox in ipairs(config.use_terms_checkboxes) do
     local accepted = param.get("use_terms_checkbox_" .. checkbox.name, atom.boolean)
-    member:set_setting("use_terms_checkbox_" .. checkbox.name, "accepted at " .. tostring(now))
+    local member_useterms = MemberUseterms:new()
+    member_useterms.member_id = member.id
+    member_useterms.contract_identifier = checkbox.name
+    member_useterms:save()
   end
 
   member.activated = 'now'
@@ -239,12 +303,24 @@ if step > 2 then
   member.last_activity = 'now'
   member:save()
   
-  slot.put_into("notice", _"You've successfully registered and you can login now with your login and password!")
+  if not member.profile then
+    local profile = MemberProfile:new()
+    profile.member_id = member.id
+    profile.profile = json.object()
+    profile:save()
+  end
+  
+  slot.put_into("notice", _"Registration succeeded")
+  
+  app.session.member_id = member.id
+  app.session:save()
 
   request.redirect{
     mode   = "redirect",
-    module = "index",
-    view   = "login",
+    module = param.get("redirect_module") or "index",
+    view   = param.get("redirect_view") or "index",
+    id     = param.get("redirect_id"),
+    params = param.get("redirect_params")
   }
 end
   

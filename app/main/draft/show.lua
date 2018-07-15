@@ -1,4 +1,12 @@
-local draft = Draft:new_selector():add_where{ "id = ?", param.get_id() }:single_object_mode():exec()
+local draft = Draft:new_selector():add_where{ "id = ?", param.get_id() }:optional_object_mode():exec()
+
+if not draft then
+  execute.view { module = "index", view = "404" }
+  request.set_status("404 Not Found")
+  return
+end
+
+
 local source = param.get("source", atom.boolean)
 
 execute.view{

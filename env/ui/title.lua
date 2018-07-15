@@ -7,10 +7,7 @@ function ui.title ( content )
       module = "index", view = "index",
       attr = { class = "home", title = _"Home" },
       content = function ()
-        ui.image { 
-          attr = { class = "icon24", alt = title },
-          static = "icons/48/home.png"
-        }
+        ui.tag{ tag = "i", attr = { class = "material-icons" }, content = "home" }
       end
     }
   
@@ -18,12 +15,12 @@ function ui.title ( content )
       ui.tag { attr = { class = "spacer" }, content = function()
         slot.put ( " » " )
       end }
-      ui.tag { tag = "span", content = content }
+      ui.tag { content = content }
     else
       ui.tag { attr = { class = "spacer" }, content = function()
         slot.put ( " " )
       end }
-      ui.tag { tag = "span", content = _"Home" }
+      ui.tag { content = _"Home" }
     end
     
   end )

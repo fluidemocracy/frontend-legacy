@@ -2,7 +2,21 @@ local id = param.get_id()
 
 local member = Member:by_id(id) or Member:new()
 
-param.update(member, "identification", "notify_email", "admin")
+param.update(member, "identification", "admin")
+
+local notify_email = param.get("notify_email")
+if notify_email == "" then
+  notify_email = nil
+end
+
+member.notify_email = notify_email
+
+local notify_email_unconfirmed = param.get("notify_email_unconfirmed")
+if notify_email_unconfirmed == "" then
+  notify_email_unconfirmed = nil
+end
+
+member.notify_email_unconfirmed = notify_email_unconfirmed
 
 local locked = param.get("locked", atom.boolean)
 if locked ~= nil then
@@ -40,8 +54,16 @@ if not id and config.single_unit_id then
   local privilege = Privilege:new()
   privilege.member_id = member.id
   privilege.unit_id = config.single_unit_id
+  privilege.initiative_right = true
   privilege.voting_right = true
   privilege:save()
+end
+
+if not id then
+  local profile = MemberProfile:new()
+  profile.member_id = member.id
+  profile.profile = json.object()
+  profile:save()
 end
 
 local units = Unit:new_selector()

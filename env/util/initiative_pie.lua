@@ -10,7 +10,7 @@ function util.initiative_pie(initiative, d, gap)
   local first_preference_votes = initiative.first_preference_votes
     
   local d = d or 100
-  local gap = gap or d / 20
+  local gap = 2
   
   local r = d/2
   local r_circle = r - gap

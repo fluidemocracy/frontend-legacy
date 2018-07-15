@@ -4,7 +4,6 @@ end
 
 local area = param.get("area", "table")
 local members_selector = Member:new_selector()
-  :join("membership", nil, { "membership.member_id = member.id AND membership.area_id = ?", area.id })
   :add_where("member.active")
   :limit(50)
   

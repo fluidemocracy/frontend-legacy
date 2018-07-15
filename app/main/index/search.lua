@@ -94,7 +94,7 @@ ui.section( function()
   if count > 0 then
     execute.view{
       module = "issue",
-      view = "_list2",
+      view = "_list",
       params = {
         search = search_string,
         no_filter = true

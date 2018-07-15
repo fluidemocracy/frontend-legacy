@@ -61,129 +61,141 @@ app.html_title.subtitle = _("Member")
 
 ui.titleMember(member)
 
-execute.view {
-  module = "member", view = "_sidebar_whatcanido", params = {
-    member = member
-  }
-}
-
-execute.view {
-  module = "member", view = "_sidebar_contacts", params = {
-    member = member
-  }
-}
-
-
-ui.section( function() 
-  ui.sectionHead( function()
-    execute.view{
-      module = "member_image",
-      view = "_show",
-      params = {
-        member = member,
-        image_type = "avatar",
-        show_dummy = true,
-        class = "left",
-        force_update = app.session.member_id == member.id
-      }
-    }
-    ui.heading{ level = 1, content = member.name }
-    slot.put("<br />")
-    ui.container {
-      attr = { class = "right" },
-      content = function()
-        ui.link{
-          content = _"Account history",
-          module = "member", view = "history", id = member.id
+ui.grid{ content = function()
+  ui.cell_main{ content = function()
+    ui.container{ attr = { class = "mdl-card mdl-card__fullwidth mdl-shadow--2dp" }, content = function()
+      
+      ui.container{ attr = { class = "mdl-card__title mdl-card--border" }, content = function()
+        ui.heading { attr = { class = "mdl-card__title-text" }, level = 2, content = function()
+          execute.view{
+            module = "member_image",
+            view = "_show",
+            params = {
+              member = member,
+              image_type = "avatar",
+              show_dummy = true,
+              class = "left",
+              force_update = app.session.member_id == member.id
+            }
+          }
+          slot.put(" ")
+          ui.tag{ content = member.name }
+        end }
+        ui.container {
+          attr = { class = "float-right" },
+          content = function()
+            ui.link{
+              content = _"Account history",
+              module = "member", view = "history", id = member.id
+            }
+          end
         }
-      end
-    }
-    if member.identification then
-      ui.container{ content = member.identification }
+      end }
+      
+      ui.container{ attr = { class = "mdl-card__content" }, content = function()
+
+        if member.identification then
+          ui.container{ content = member.identification }
+        end
+
+        execute.view{
+          module = "member",
+          view = "_profile",
+          params = { member = member }
+        }
+
+        --[[
+        execute.view {
+          module = "member", view = "_timeline",
+          params = { member = member }
+        }
+        --]]
+      end }
+    end }
+    
+    if #initiated_initiatives > 0 then
+      ui.container{ attr = { class = "mdl-card mdl-card__fullwidth mdl-shadow--2dp" }, content = function()
+        ui.container{ attr = { class = "mdl-card__title mdl-card--border" }, content = function()
+          ui.heading { attr = { class = "mdl-card__title-text" }, level = 2, content = _"Initiatives created by this member" }
+        end }
+        ui.container{ attr = { class = "initiative_list" }, content = function()
+          execute.view {
+            module = "initiative", view = "_list",
+            params = { initiatives = initiated_initiatives, for_member = member },
+          }
+        end }
+      end }
     end
-  end )
-  ui.sectionRow( function()
-    execute.view{
-      module = "member",
-      view = "_profile",
-      params = { member = member }
-    }
-  end )
-end )
+    
+    if #supported_initiatives > 0 then
+      ui.container{ attr = { class = "mdl-card mdl-card__fullwidth mdl-shadow--2dp" }, content = function()
+        ui.container{ attr = { class = "mdl-card__title mdl-card--border" }, content = function()
+          ui.heading { attr = { class = "mdl-card__title-text" }, level = 2, content = _"What this member is currently supporting" }
+        end }
+        ui.container{ attr = { class = "initiative_list" }, content = function()
+          execute.view {
+            module = "initiative", view = "_list",
+            params = { initiatives = supported_initiatives, for_member = member },
+          }
+        end }
+      end }
+    end
+    
+    if #voted_initiatives > 0 then
+      ui.container{ attr = { class = "mdl-card mdl-card__fullwidth mdl-shadow--2dp" }, content = function()
+        ui.container{ attr = { class = "mdl-card__title mdl-card--border" }, content = function()
+          ui.heading { attr = { class = "mdl-card__title-text" }, level = 2, content = _"How this member voted" }
+        end }
+        ui.container{ attr = { class = "initiative_list" }, content = function()
+          execute.view {
+            module = "initiative", view = "_list",
+            params = { initiatives = voted_initiatives, for_member = member },
+          }
+        end }
+      end }
+    end
+    --[[
+    ui.container{ attr = { class = "mdl-card mdl-card__fullwidth mdl-shadow--2dp" }, content = function()
+      ui.container{ attr = { class = "mdl-card__title mdl-card--border" }, content = function()
+        ui.heading { attr = { class = "mdl-card__title-text" }, level = 2, content = _"Outgoing delegations" }
+      end }
+      ui.container{ attr = { class = "mdl-card__content" }, content = function()
+        execute.view {
+          module = "delegation", view = "_list",
+          params = { delegations_selector = outgoing_delegations_selector, outgoing = true },
+        }
+      end }
+    end }
 
-
-ui.section( function()
-  ui.sectionHead( function()
-    ui.heading { level = 2, content = _"Initiatives created by this member" }
-  end )
-  ui.sectionRow( function()
-    for i, initiative in ipairs(initiated_initiatives) do
-      execute.view {
-        module = "initiative", view = "_list",
-        params = { initiative = initiative },
+    ui.container{ attr = { class = "mdl-card mdl-card__fullwidth mdl-shadow--2dp" }, content = function()
+      ui.container{ attr = { class = "mdl-card__title mdl-card--border" }, content = function()
+        ui.heading { attr = { class = "mdl-card__title-text" }, level = 2, content = _"Incoming delegations" }
+      end }
+      ui.container{ attr = { class = "mdl-card__content" }, content = function()
+        execute.view {
+          module = "delegation", view = "_list",
+          params = { delegations_selector = incoming_delegations_selector, incoming = true },
+        }
+      end }
+    end }
+    --]]
+  end }
+    
+  ui.cell_sidebar{ content = function()
+    execute.view {
+      module = "member", view = "_sidebar_whatcanido", params = {
         member = member
       }
-    end
-  end )
-end )
+    }
 
-ui.section( function()
-  ui.sectionHead( function()
-    ui.heading { level = 2, content = _"What this member is currently supporting" }
-  end )
-  ui.sectionRow( function()
-    for i, initiative in ipairs(supported_initiatives) do
-      execute.view {
-        module = "initiative", view = "_list",
-        params = { initiative = initiative },
+    execute.view {
+      module = "member", view = "_sidebar_contacts", params = {
         member = member
       }
-    end
-  end )
-end )
-
-ui.section( function()
-  ui.sectionHead( function()
-    ui.heading { level = 2, content = _"How this member voted" }
-  end )
-  ui.sectionRow( function()
-    for i, initiative in ipairs(voted_initiatives) do
-      execute.view {
-        module = "initiative", view = "_list",
-        params = { initiative = initiative }
-      }
-    end
-  end )
-end )
-
-
-ui.section( function()
-  ui.sectionHead( function()
-    ui.heading { level = 2, content = _"Outgoing delegations" }
-  end )
-  ui.sectionRow( function()
-    execute.view {
-      module = "delegation", view = "_list",
-      params = { delegations_selector = outgoing_delegations_selector, outgoing = true },
     }
-  end )
-end )
+  end }
 
-
-ui.section( function()
-   
-  ui.sectionHead( function()
-    ui.heading { level = 2, content = _"Incoming delegations" }
-  end )
-  ui.sectionRow( function()
-    execute.view {
-      module = "delegation", view = "_list",
-      params = { delegations_selector = incoming_delegations_selector, incoming = true },
-    }
-  end )
-  
-end )
-
+end }
 
 if app.session.member_id == member.id then
   ui.script{ script = [[

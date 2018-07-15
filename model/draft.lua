@@ -23,7 +23,7 @@ function Draft.object_get:author_name()
   return self.author and self.author.name or _"Unknown author"
 end
 
-model.has_rendered_content(Draft, RenderedDraft)
+model.has_rendered_content(Draft, RenderedDraft, "content", "draft_id")
 
 function Draft:update_content(member_id, initiative_id, p_formatting_engine, content, external_reference, preview)
   local initiative = Initiative:by_id(initiative_id)
@@ -44,7 +44,7 @@ function Draft:update_content(member_id, initiative_id, p_formatting_engine, con
 
   local initiator = Initiator:by_pk(initiative.id, member_id)
   if not initiator or not initiator.accepted then
-    error("access denied")
+    return false
   end
 
   local tmp = db:query({ "SELECT text_entries_left FROM member_contingent_left WHERE member_id = ? AND polling = ?", member_id, initiative.polling }, "opt_object")

@@ -7,7 +7,7 @@ local draft_id = param.get("draft_id", atom.integer)
 local issue = initiative:get_reference_selector("issue"):for_share():single_object_mode():exec()
 
 if not app.session.member:has_voting_right_for_unit_id(issue.area.unit_id) then
-  error("access denied")
+  return execute.view { module = "index", view = "403" }
 end
 
 if issue.closed then

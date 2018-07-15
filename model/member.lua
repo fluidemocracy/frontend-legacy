@@ -166,6 +166,24 @@ Member:add_reference{
 }
 
 Member:add_reference{
+  mode          = '11',
+  to            = "MemberProfile",
+  this_key      = 'id',
+  that_key      = 'member_id',
+  ref           = 'profile',
+  back_ref      = 'member'
+}
+
+Member:add_reference{
+  mode          = '11',
+  to            = "MemberSettings",
+  this_key      = 'id',
+  that_key      = 'member_id',
+  ref           = 'settings',
+  back_ref      = 'member'
+}
+
+Member:add_reference{
   mode                  = 'mm',
   to                    = "Member",
   this_key              = 'id',
@@ -241,8 +259,6 @@ Member:add_reference{
   connected_by_that_key = 'initiative_id',
   ref                   = 'supported_initiatives'
 }
-
-model.has_rendered_content(Member, RenderedMemberStatement, "statement")
 
 function Member:build_selector(args)
   local selector = self:new_selector()
@@ -531,6 +547,12 @@ function Member:by_login_and_password(login, password)
   
 end
 
+function Member:by_ids(ids)
+  local selector = self:new_selector()
+  selector:add_where{'"id" IN ($)', { ids } }
+  return selector:exec()
+end
+
 function Member:by_login(login)
   local selector = self:new_selector()
   selector:add_where{'"login" = ?', login }
@@ -589,19 +611,23 @@ function Member.object:send_invitation(template_file, subject)
   
   local subject = subject
   local content
-  
+  local baseurl = request.get_absolute_baseurl() .. "index/register.html"
+  local url = baseurl .. "?skip=1&code=" .. self.invite_code
   if template_file then
     local fh = io.open(template_file, "r")
     content = fh:read("*a")
-    content = (content:gsub("#{invite_code}", self.invite_code))
+    content = content:gsub("#{url}", url):gsub("#{baseurl}", baseurl):gsub("#{code}", self.invite_code)
+  elseif config.invitation_mail then
+    subject = config.invitation_mail.subject
+    content = config.invitation_mail.content:gsub("#{url}", url):gsub("#{baseurl}", baseurl):gsub("#{code}", self.invite_code)
   else
     subject = config.mail_subject_prefix .. _"Invitation to LiquidFeedback"
     content = slot.use_temporary(function()
       slot.put(_"Hello\n\n")
       slot.put(_"You are invited to LiquidFeedback. To register please click the following link:\n\n")
-      slot.put(request.get_absolute_baseurl() .. "index/register.html?invite=" .. self.invite_code .. "\n\n")
+      slot.put(url .. "\n\n")
       slot.put(_"If this link is not working, please open following url in your web browser:\n\n")
-      slot.put(request.get_absolute_baseurl() .. "index/register.html\n\n")
+      slot.put(baseurl .. "\n\n")
       slot.put(_"On that page please enter the invite key:\n\n")
       slot.put(self.invite_code .. "\n\n")
     end)
@@ -738,7 +764,33 @@ function Member.object:ui_field_text(args)
   end
 end
 
-function Member.object:has_voting_right_for_unit_id(unit_id)
+local function populate_units_with_initiative_right_hash(self)
+  if not self.__units_with_initiative_right_hash then
+    local privileges = Privilege:new_selector()
+      :add_where{ "member_id = ?", self.id }
+      :add_where("initiative_right")
+      :exec()
+    self.__units_with_initiative_right_hash = {}
+    for i, privilege in ipairs(privileges) do
+      self.__units_with_initiative_right_hash[privilege.unit_id] = true
+    end
+  end
+end
+
+function Member.object:has_initiative_right_for_unit_id(unit_id)
+  populate_units_with_initiative_right_hash(self)
+  return self.__units_with_initiative_right_hash[unit_id] and true or false
+end
+
+function Member.object_get:has_initiative_right()
+  populate_units_with_initiative_right_hash(self)
+  for k, v in pairs(self.__units_with_initiative_right_hash) do
+    return true
+  end
+  return false
+end
+
+local function populate_units_with_voting_right_hash(self)
   if not self.__units_with_voting_right_hash then
     local privileges = Privilege:new_selector()
       :add_where{ "member_id = ?", self.id }
@@ -749,6 +801,18 @@ function Member.object:has_voting_right_for_unit_id(unit_id)
       self.__units_with_voting_right_hash[privilege.unit_id] = true
     end
   end
+end
+
+function Member.object_get:has_voting_right()
+  populate_units_with_voting_right_hash(self)
+  for k, v in pairs(self.__units_with_voting_right_hash) do
+    return true
+  end
+  return false
+end
+
+function Member.object:has_voting_right_for_unit_id(unit_id)
+  populate_units_with_voting_right_hash(self)
   return self.__units_with_voting_right_hash[unit_id] and true or false
 end
 
@@ -777,4 +841,14 @@ end
 
 function Member.object:delete()
   db:query{ "SELECT delete_member(?)", self.id }
+end
+
+function Member.object_get:display_name()
+  if self.identification then
+    return self.identification
+  elseif self.name then
+    return self.name
+  else
+    return "Member #" .. self.id
+  end
 end

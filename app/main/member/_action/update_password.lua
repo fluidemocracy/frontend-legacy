@@ -1,3 +1,7 @@
+if app.session.member.role then
+  return execute.view { module = "index", view = "403" }
+end
+
 local old_password = param.get("old_password")
 local new_password1 = param.get("new_password1")
 local new_password2 = param.get("new_password2")

@@ -1,3 +1,5 @@
+if true then return end
+
 local member = param.get ( "member", "table" )
 local units
 if member then
@@ -29,14 +31,6 @@ for i, unit in ipairs(units) do
       :add_where{ "area.unit_id = ?", unit.id }
       :add_where{ "area.active" }
       :add_order_by("area.name")
-
-    if member then
-      areas_selector:left_join ( 
-        "membership", nil, 
-        { "membership.area_id = area.id AND membership.member_id = ?", member.id } 
-      )
-      areas_selector:add_field("membership.member_id NOTNULL", "subscribed", { "grouped" })
-    end
 
     local areas = areas_selector:exec()
     if member then
@@ -78,21 +72,9 @@ for i, unit in ipairs(units) do
       
       ui.tag { tag = "div", attr = { class = "areas areas-" .. unit.id }, content = function ()
       
-        local any_subscribed = false
-        local subscribed_count = 0
         for i, area in ipairs(areas) do
 
-          local class = "sidebarRow"
-          class = class .. (not area.subscribed and " disabled" or "")
-          
-          ui.tag { tag = "div", attr = { class = class }, content = function ()
-            
-            if area.subscribed then
-              local text = _"subscribed"
-              ui.image { attr = { class = "icon16 star", alt = text, title = text }, static = "icons/48/star.png" }
-              any_subscribed = true
-              subscribed_count = subscribed_count +1
-            end
+          ui.tag { tag = "div", attr = { class = "sidebarRow" }, content = function ()
             
             if member then
               local delegation = Delegation:by_pk(member.id, nil, area.id, nil)
@@ -119,31 +101,6 @@ for i, unit in ipairs(units) do
             }
             
             
-          end }
-        end
-        if subscribed_count < #areas then
-          local text 
-          if any_subscribed then
-            text = _"show other subject areas"
-          else
-            text = _"show subject areas"
-          end
-          ui.script{ script = "$('.areas-" .. unit.id .. "').addClass('folded');" }
-          ui.tag { tag = "div", attr = { class = "sidebarRow moreLink whenfolded" }, content = function ()
-            ui.link {
-              attr = { 
-                onclick = "$('.areas-" .. unit.id .. "').removeClass('folded'); return false;"
-              },
-              text = text
-            }
-          end }
-          ui.tag { tag = "div", attr = { class = "sidebarRow moreLink whenunfolded" }, content = function ()
-            ui.link {
-              attr = { 
-                onclick = "$('.areas-" .. unit.id .. "').addClass('folded'); return false;"
-              },
-              text = _"collapse subject areas"
-            }
           end }
         end
       end }

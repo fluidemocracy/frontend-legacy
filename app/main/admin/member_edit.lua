@@ -41,7 +41,8 @@ ui.form{
   
     ui.sectionRow( function()
       ui.field.text{     label = _"Identification", name = "identification" }
-      ui.field.text{     label = _"Notification email", name = "notify_email" }
+      ui.field.text{     label = _"Notification email (confirmed)", name = "notify_email" }
+      ui.field.text{     label = _"Notification email (unconfirmed)", name = "notify_email_unconfirmed" }
       if member and member.activated then
         ui.field.text{     label = _"Screen name",        name = "name" }
       end

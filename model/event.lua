@@ -3,6 +3,30 @@ Event.table = 'event'
 
 Event:add_reference{
   mode          = 'm1',
+  to            = "Unit",
+  this_key      = 'unit_id',
+  that_key      = 'id',
+  ref           = 'unit',
+}
+
+Event:add_reference{
+  mode          = 'm1',
+  to            = "Area",
+  this_key      = 'area_id',
+  that_key      = 'id',
+  ref           = 'area',
+}
+
+Event:add_reference{
+  mode          = 'm1',
+  to            = "Policy",
+  this_key      = 'policy_id',
+  that_key      = 'id',
+  ref           = 'policy',
+}
+
+Event:add_reference{
+  mode          = 'm1',
   to            = "Issue",
   this_key      = 'issue_id',
   that_key      = 'id',
@@ -32,6 +56,13 @@ Event:add_reference{
   that_key      = 'id',
   ref           = 'member',
 }
+
+function Event:by_member_id(member_id)
+  return Event:new_selector()
+    :add_where{ "member_id = ?", member_id }
+    :add_order_by("id DESC")
+    :exec()
+end
 
 function Event.object_get:event_name()
   return ({
@@ -136,40 +167,57 @@ function Event.object:send_notification()
   
 end
 
-function Event:send_next_notification()
-  
-  local notification_event_sent = NotificationEventSent:new_selector()
-    :optional_object_mode()
-    :for_update()
-    :exec()
-    
-  local last_event_id = 0
-  if notification_event_sent then
-    last_event_id = notification_event_sent.event_id
-  end
-  
-  local event = Event:new_selector()
-    :add_where{ "event.id > ?", last_event_id }
-    :add_order_by("event.id")
-    :limit(1)
-    :optional_object_mode()
-    :exec()
+function Event:get_events_after_id(id)
+  return (
+    Event:new_selector()
+      :add_where{ "event.id > ?", id }
+      :add_order_by("event.id")
+      :exec()
+  )
+end
+      
 
-  if event then
-    if last_event_id == 0 then
-      db:query{ "INSERT INTO notification_event_sent (event_id) VALUES (?)", event.id }
+
+Event.handlers = {}
+
+function Event:add_handler(func)
+  table.insert(Event.handlers, func)
+end
+
+function Event:process_stream(poll)
+
+  db:query('LISTEN "event"')
+
+  local last_event_id = EventProcessed:get_last_id()
+  
+  while true do
+    
+    local events = Event:get_events_after_id(last_event_id)
+    
+    for i_event, event in ipairs(events) do
+      last_event_id = event.id
+      EventProcessed:set_last_id(last_event_id)
+      for i_handler, event_handler in ipairs(Event.handlers) do
+        event_handler(event)
+      end
+      event:send_notification()
+    end
+
+    if poll then
+      while not db:wait(0) do
+        if not poll({[db.fd]=true}, nil, nil, true) then
+          goto exit
+        end
+      end
     else
-      db:query{ "UPDATE notification_event_sent SET event_id = ?", event.id }
+      db:wait()
     end
+    while db:wait(0) do end  -- discard multiple events
     
-    event:send_notification()
-    
-    if config.notification_handler_func then
-      config.notification_handler_func(event)
-    end
-    
-    return true
-
   end
+
+  ::exit::
+
+  db:query('UNLISTEN "event"')
 
 end

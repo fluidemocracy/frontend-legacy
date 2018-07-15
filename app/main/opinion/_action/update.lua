@@ -41,7 +41,7 @@ if degree == 0 then
 end
 
 if degree ~= 0 and not app.session.member:has_voting_right_for_unit_id(suggestion.initiative.issue.area.unit_id) then
-  error("access denied")
+  return execute.view { module = "index", view = "403" }
 end
 
 if not opinion then

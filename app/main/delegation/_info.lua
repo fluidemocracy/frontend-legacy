@@ -174,7 +174,7 @@ if not param.get("no_star", "boolean") then
   if info.own_participation then
     if issue and issue.fully_frozen then
       ui.link{
-        attr = { class = "right" },
+        attr = { class = "mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--underlined" },
         module = "vote", view = "list", params = {
           issue_id = issue.id
         },
@@ -184,8 +184,9 @@ if not param.get("no_star", "boolean") then
       }
     else
       if issue then
-        local text = _"you are interested"
-        ui.image { attr = { class = "star", title = text, alt = text }, static = "icons/48/eye.png" }
+        ui.tag{ tag = "i", attr = { class = "material-icons" }, content = "star" }
+        slot.put(" ")
+        ui.tag{ content = _"you are interested" }
         if not issue.closed and info.own_participation and info.weight and info.weight > 1 then
           ui.link { 
             attr = { class = "right" }, content = "+" .. (info.weight - 1),
@@ -198,11 +199,7 @@ if not param.get("no_star", "boolean") then
         local text = _"you are subscribed"
         ui.image { attr = { class = "icon24 star", title = text, alt = text }, static = "icons/48/star.png" }
       end
-      if not for_title then
-        slot.put("<br />")
-      else
-        slot.put(" ")
-      end
+      slot.put(" ")
     end
   end
 end
@@ -260,3 +257,15 @@ if info.own_participation or info.first_trustee_id then
   end
 end
 
+if issue and app.session.member and issue.fully_frozen and not issue.closed and not issue.member_info.direct_voted and app.session.member:has_voting_right_for_unit_id(issue.area.unit_id) then
+    ui.link{
+      attr = { class = "mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--underlined" },
+      module = "vote", view = "list", params = {
+        issue_id = issue.id
+      },
+      content = function ()
+        ui.tag { content = _"vote now" }
+      end
+    }
+  else
+end

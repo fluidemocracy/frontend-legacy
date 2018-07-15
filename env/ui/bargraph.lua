@@ -26,7 +26,7 @@ function ui.bargraph(args)
         if bar.value > 0 then
           at_least_one_bar = true
           local value = bar.value * args.width / args.max_value
-          if quorum and quorum < length + value then
+          if quorum and quorum <= length + value then
             local dlength = math.max(quorum - length - 1, 0)
             local dlength_abs = math.floor(dlength)
             local rest = rest + dlength - dlength_abs

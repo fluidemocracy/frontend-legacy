@@ -1,74 +1,52 @@
 local issue = param.get("issue", "table")
-local initiative = param.get("initiative", "table")
+local link_issue = param.get("link_issue", atom.boolean)
 
-local member = param.get ( "member", "table" )
-
+slot.put_into("header", issue.name)
 
 ui.title ( function ()
+  
+  if not config.single_unit_id then
+    ui.link {
+      attr = { class = "unit" },
+      content = function()
+        ui.tag{ attr = { class = "name" }, content = issue.area.unit.name }
+      end,
+      module = "index", view = "index",
+      params = { unit = issue.area.unit.id }
+    }
 
-  ui.tag {
-    attr = { class = "unit" },
-    content = function()
-      ui.link {
-        content = function()
-          ui.tag{ attr = { class = "name" }, content = issue.area.unit.name }
-        end,
-        module = "unit", view = "show",
-        id = issue.area.unit.id
-      }
-    end
-  }
-  ui.tag { attr = { class = "spacer" }, content = function()
-    slot.put ( " » " )
-  end }
-
-  ui.tag {
-    attr = { class = "area" },
-    content = function()
+    ui.tag { attr = { class = "spacer" }, content = function()
+      slot.put ( " » " )
+    end }
+  end
+  
+  if not config.single_area_id then
+    ui.tag { attr = { class = "area" }, content = function()
+      -- area link
       ui.link {
         content = function()
           ui.tag{ attr = { class = "name" }, content = issue.area.name }
         end,
-        module = "area", view = "show",
-        id = issue.area.id
+        module = "index", view = "index",
+        params = { unit = issue.area.unit_id, area = issue.area.id }
       }
-    end
-  }
-
-  ui.tag { attr = { class = "spacer" }, content = function()
-    slot.put ( " » " )
-  end }
+    end }
   
-  ui.tag {
-    attr = { class = "issue" },
-    content = function()
-      -- issue link
-      ui.link {
-        text = _("#{policy_name} ##{issue_id}", { 
-          policy_name = issue.policy.name,
-          issue_id = issue.id
-        } ),
-        module = "issue", view = "show",
-        id = issue.id
-      }
-
-      slot.put ( " " )
-      
-      if member then
-        execute.view {
-          module = "delegation", view = "_info", params = { 
-            issue = issue, member = member, for_title = true
-          }
-        }
-      end
-    end
-  }
-  
-  if initiative then
-    ui.tag{
-      attr = { class = "initiative" },
-      content = initiative.display_name
-    }
+    ui.tag { attr = { class = "spacer" }, content = function()
+      slot.put ( " » " )
+    end }
   end
   
-end ) -- ui.title
+  if link_issue then
+    ui.link {
+      content = function()
+        ui.tag { attr = { class = "issue" }, content = issue.name }
+      end,
+      module = "issue", view = "show", id = issue.id
+    }
+  else
+    ui.tag { attr = { class = "issue" }, content = issue.name }
+  end
+  
+end )
+

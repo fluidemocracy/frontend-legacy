@@ -1,5 +1,5 @@
 if not config.document_dir then
-  error("feature not enabled")
+  return execute.view { module = "index", view = "404" }
 end
 
 slot.put_into("title", _"Download documents")

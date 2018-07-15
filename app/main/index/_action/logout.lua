@@ -9,3 +9,7 @@ if app.session then
     }
   end
 end
+
+if config.meta_navigation_logout_url then
+  request.redirect{ external = config.meta_navigation_logout_url }
+end

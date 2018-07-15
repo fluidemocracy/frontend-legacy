@@ -7,6 +7,18 @@ if app.session.member.notify_email_unconfirmed then
   }
 end
 
+local agents = Agent:new_selector()
+  :add_where{ "controller_id = ?", app.session.member_id }
+  :add_where{ "accepted ISNULL" }
+  :exec()
+for i, agent in ipairs(agents) do
+  local member = Member:by_id(agent.controlled_id)
+  notification_links[#notification_links+1] = {
+    module = "agent", view = "show", params = { controlled_id = agent.controlled_id },
+    text = _("Account access invitation from '#{member_name}'", { member_name = member.name })
+  }
+end
+
 if config.check_delegations_interval_soft then
   local member = Member:new_selector()
     :add_where({ "id = ?", app.session.member_id })
@@ -99,28 +111,19 @@ for i, initiative in ipairs(updated_drafts) do
   }
 end
 
-local mode = param.get("mode") or "view"
-
 if #notification_links > 0 then
-  if mode == "link" then
-    slot.select("notification", function ()
-      local text = _"notifications"
-      ui.link {
-        attr = { class = "notifications", title = text },
-        module = "index", view = "notifications",
-        content = function ()
-          ui.image { attr = { class = "icon", alt = text }, static = "icons/48/bell.png" }
-          ui.tag { attr = { class = "count" }, content = #notification_links }
-        end
-      }
-    end )
-  elseif mode == "view" then
-    ui.tag{ tag = "ul", attr = { class = "ul" }, content = function()
-      for i, notification_link in ipairs(notification_links) do
-        ui.tag{ tag = "li", content = function()
-          ui.link(notification_link)
-        end }
-      end
+  ui.container{ attr = { class = "mdl-card mdl-card__fullwidth mdl-shadow--2dp" }, content = function()
+    ui.container{ attr = { class = "mdl-card__title mdl-card--border" }, content = function()
+      ui.heading { attr = { class = "mdl-card__title-text" }, level = 2, content = _"Notifications" }
     end }
-  end
+    ui.container{ attr = { class = "mdl-card__content what-can-i-do-here" }, content = function()
+      ui.tag{ tag = "ul", attr = { class = "ul" }, content = function()
+        for i, notification_link in ipairs(notification_links) do
+          ui.tag{ tag = "li", content = function()
+            ui.link(notification_link)
+          end }
+        end
+      end }
+    end }
+  end }
 end

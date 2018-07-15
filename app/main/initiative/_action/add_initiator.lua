@@ -8,7 +8,7 @@ end
 
 local initiator = Initiator:by_pk(initiative.id, app.session.member.id)
 if not initiator or initiator.accepted ~= true then
-  error("access denied")
+  return execute.view { module = "index", view = "403" }
 end
 
 -- TODO important m1 selectors returning result _SET_!

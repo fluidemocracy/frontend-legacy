@@ -24,9 +24,10 @@ jsProtect(function() {
         draggedElement.style.backgroundColor = "#eee";
         draggedElement.style.opacity = 0.8;
         originalElement.offsetParent.appendChild(draggedElement);
-        // workaround for wrong clientWidth and clientHeight information:
-        draggedElement.style.width = 2*originalElement.clientWidth - draggedElement.clientWidth;
-        draggedElement.style.height = 2*originalElement.clientHeight - draggedElement.clientHeight;
+        draggedElement.style.width = originalElement.clientWidth + "px";
+        draggedElement.style.height = originalElement.clientHeight + "px";
+        draggedElement.style.left = originalElement.offsetLeft + "px";
+        draggedElement.style.top = originalElement.offsetTop + "px";
         mouseOffsetX = mouseX;
         mouseOffsetY = mouseY;
         dropFunc = func;
@@ -36,8 +37,8 @@ jsProtect(function() {
           mouseX = event.pageX;
           mouseY = event.pageY;
           if (draggedElement) {
-            draggedElement.style.left = elementOffsetX + mouseX - mouseOffsetX;
-            draggedElement.style.top  = elementOffsetY + mouseY - mouseOffsetY;
+            draggedElement.style.left = elementOffsetX + mouseX - mouseOffsetX + "px";
+            draggedElement.style.top  = elementOffsetY + mouseY - mouseOffsetY + "px";
           }
         });
       }, true);
@@ -72,7 +73,7 @@ jsProtect(function() {
               event.preventDefault();
             });
           }, false);
-        } else if (element.className == "clickable") {
+        } else if (element.classList.contains("clickable")) {
           element.addEventListener("mousedown", function(event) {
             jsProtect(function() {
               event.stopPropagation();

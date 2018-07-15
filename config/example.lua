@@ -88,7 +88,7 @@ config.formatting_engines = {
 -- "everything"
 --     -> Show everything a member can see, including profile pages
 -- ------------------------------------------------------------------------
-config.public_access = "none"
+config.public_access = "authors_pseudonymous"
 
 
 
@@ -483,5 +483,28 @@ end
 -- ------------------------------------------------------------------------
 -- uncomment the following line to enable debug trace
 -- ------------------------------------------------------------------------
--- config.enable_debug_trace = true
+config.enable_debug_trace = true
+
+
+config.fork = {
+  pre =1, min = 1, max = 1, max_requests = 1, min_requests = 1
+}
+
+config.localhost = true
+
+config.oauth2 = {
+  available_scopes = {
+    { scope = "read", name = { de = "Lesen", en = "Read data" } },
+    { scope = "write", name = { de = "Schreiben", en = "Write data" } },
+    { scope = "privA", name = { de = "Beispielprivileg A", en = "Example privilege A" } },
+    { scope = "privB", name = { de = "Beispielprivileg B", en = "Example privilege B" } }
+  },
+  authorization_code_lifetime = 5 * 60,
+  refresh_token_lifetime = 60 * 60 * 24 * 30 * 3,
+  refresh_pause = 60,
+  refresh_grace_period = 60,
+  access_token_lifetime = 60 * 60,
+  -- NOTE for init.lua : check for refresh_pause >= refresh_grace_period
+  endpoint_magic = "liquidfeedback_client_redirection_endpoint"
+}
 

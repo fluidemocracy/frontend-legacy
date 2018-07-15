@@ -18,7 +18,7 @@ if initiative or issue then
     members_selector:left_join("delegating_voter", "_member_list__delegating_voter", { "_member_list__delegating_voter.issue_id = issue.id AND _member_list__delegating_voter.member_id = ?", app.session.member_id })
     members_selector:add_field("member.id = ANY(_member_list__delegating_voter.delegate_member_ids)", "in_delegation_chain")
   else
-    members_selector:left_join("delegating_interest_snapshot", "_member_list__delegating_interest", { "_member_list__delegating_interest.event = issue.latest_snapshot_event AND _member_list__delegating_interest.issue_id = issue.id AND _member_list__delegating_interest.member_id = ?", app.session.member_id })
+    members_selector:left_join("delegating_interest_snapshot", "_member_list__delegating_interest", { "_member_list__delegating_interest.snapshot_id = issue.latest_snapshot_id AND _member_list__delegating_interest.issue_id = issue.id AND _member_list__delegating_interest.member_id = ?", app.session.member_id })
     members_selector:add_field("member.id = ANY(_member_list__delegating_interest.delegate_member_ids)", "in_delegation_chain")
   end
 end
@@ -80,7 +80,7 @@ local function list_members()
     name = paginator_name,
     anchor = paginator_name,
     selector = members_selector,
-    per_page = 25,
+    per_page = 100,
     content = function() 
       ui.container{
         attr = { class = "member_list" },
@@ -88,20 +88,18 @@ local function list_members()
           local members = members_selector:exec()
 
           for i, member in ipairs(members) do
-            ui.sectionRow( function()
-              execute.view{
-                module = "member",
-                view = "_show_thumb",
-                params = {
-                  class = member_class,
-                  member = member,
-                  initiative = initiative,
-                  issue = issue,
-                  trustee = trustee,
-                  initiator = initiator
-                }
+            execute.view{
+              module = "member",
+              view = "_show_thumb",
+              params = {
+                class = member_class,
+                member = member,
+                initiative = initiative,
+                issue = issue,
+                trustee = trustee,
+                initiator = initiator
               }
-            end )
+            }
           end
 
 

@@ -1,114 +1,88 @@
-local function getIssuesSelector()
-  return Issue:new_selector()
-    :add_order_by([[
-      coalesce(
-        issue.fully_frozen + issue.voting_time, 
-        issue.half_frozen + issue.verification_time, 
-        issue.accepted + issue.discussion_time, 
-        issue.created + issue.max_admission_time
-      ) - now()
-    ]])
+if not app.session:has_access("anonymous") then
+  slot.put("<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Closed user group, please login.<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />")
+  return
 end
 
---[[
-ui.title( function ()
-  ui.link { attr = { class = "home" }, module = "index", view = "index", text = _"Home" }
-end)
---]]
+local unit_id = request.get_param{ name = "unit" }
+local area_id = request.get_param{ name = "area" }
 
-ui.title()
-
-if false then
-slot.select ( "tabs", function ()
-  
-  ui.tag {
-    attr = { onclick = "showTab(0);" },
-    content = "units",
-  }
-  slot.put ( " " )
-  ui.tag {
-    attr = { onclick = "showTab(1);" },
-    content = "timeline"
-  }
-  slot.put ( " " )
-  ui.tag {
-    attr = { onclick = "showTab(2);" },
-    content = "what"
-  }
-  slot.put ( " " )
-  ui.tag {
-    attr = { onclick = "showTab(3);" },
-    content = "members"
-  }
-  
-end )
-
-ui.script { script = [[
-  
-  var tabs = ["tab1", "main", "tab2", "tab3"]
-  var currentId;
-  
-  function showTab(id) {
-    var tabId = tabs[id];
-    $('.tab').hide();
-    $('.main').hide();
-    $('.' + tabId).show();
-    currentId = id;
-  };
-  
-  showTab(0);
-  
-  $(function(){
-    // Bind the swipeHandler callback function to the swipe event on div.box
-    $( "body" ).on( "swiperight", function swipeHandler( event ) {
-      newId = currentId - 1;
-      if (newId < 0) return;
-      showTab(newId);
-    } )
-    $( "body" ).on( "swipeleft", function swipeHandler( event ) {
-      newId = currentId + 1;
-      if (newId > tabs.length - 1) return;
-      showTab(newId);
-    } )
-  });
-  
-]]}
+if unit_id == "all" then
+  unit_id = nil
 end
 
-
-if app.session.member then
-  execute.view{ module = "index", view = "_sidebar_motd_intern" }
-else
-  execute.view{ module = "index", view = "_sidebar_motd_public" }
+if area_id == "all" then
+  area_id = nil
 end
 
-if app.session:has_access("anonymous") then
-  -- show the units the member has voting privileges for
-  execute.view {
-    module = "index", view = "_sidebar_units", params = {
-      member = app.session.member
-    }
-  }
+local unit
+local area
+
+if unit_id then
+  unit = Unit:by_id(unit_id)
 end
 
--- show the user what can be done
-execute.view { module = "index", view = "_sidebar_whatcanido" }
-
--- show active members
-if app.session:has_access("all_pseudonymous") then
-  execute.view{ module = "index", view = "_sidebar_members" }
+if area_id then
+  area = Area:by_id(area_id)
 end
 
-if app.session:has_access("anonymous") then
-  
-  if not app.session.member then
---    execute.view {
---      module = "slideshow", view = "_index"
---    }
-  end
-  
-  execute.view {
-    module = "issue", view = "_list2", params = { }
-  }
-  
-end -- if app.session:has_access "anonymous"
+ui.grid{ content = function()
+  ui.cell_main{ content = function()
+
+    execute.view{ module = "index", view = "_sidebar_motd_public" }
+    
+    execute.view{ module = "issue", view = "_list" }
+  end }
+
+  ui.cell_sidebar{ content = function()
+    execute.view{ module = "index", view = "_sidebar_motd" }
+    if app.session.member then
+      execute.view{ module = "index", view = "_sidebar_notifications" }
+    end
+    if config.firstlife then
+      ui.container{ attr = { class = "map mdl-special-card mdl-shadow--2dp pos-before-main" }, content = function()
+        ui.tag{ tag = "iframe", attr = { src = config.firstlife.areaviewer_url .. "?" .. config.firstlife.coordinates .. "&domain=" .. request.get_absolute_baseurl(), class = "map" }, content = "" }
+      end }
+    end
+    if config.map then
+      local initiatives = Initiative:new_selector():exec()
+      local geo_objects = {}
+      for i, initiative in ipairs(initiatives) do
+        if initiative.location and initiative.location.coordinates then
+          local geo_object = {
+            lon = initiative.location.coordinates[1],
+            lat = initiative.location.coordinates[2],
+            label = "i" .. initiative.id,
+            description = slot.use_temporary(function()
+              ui.link{ module = "initiative", view = "show", id = initiative.id, text = initiative.display_name }
+            end),
+            type = "initiative"
+          }
+          table.insert(geo_objects, geo_object)
+        end
+      end
+      if ontomap_get_instances then
+        local instances = ontomap_get_instances()
+        for i, instance in ipairs(instances) do
+          table.insert(geo_objects, instance)
+        end
+      end
+      ui.container{ attr = { class = "map mdl-special-card mdl-shadow--2dp pos-before-main" }, content = function()
+        ui.map(geo_objects)  
+      end }
+    end
+    if config.logo then
+      config.logo()
+    end
+    if area then
+      execute.view{ module = "area", view = "_sidebar_whatcanido", params = { area = area } }
+    elseif unit then
+      execute.view{ module = "unit", view = "_sidebar_whatcanido", params = { unit = unit } }
+    else
+      execute.view{ module = "index", view = "_sidebar_whatcanido" }
+    end
+    
+    execute.view { module = "index", view = "_sidebar_members" }
+    
+  end }
+end }
+

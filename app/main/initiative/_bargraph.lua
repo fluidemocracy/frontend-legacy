@@ -43,14 +43,17 @@ else
   local max_value = initiative.issue.population or 0
   local quorum
   if initiative.issue.accepted then
-    quorum = initiative.issue.policy.initiative_quorum_num / initiative.issue.policy.initiative_quorum_den
+    quorum = initiative.issue.initiative_quorum or 0
   else
-    quorum = initiative.issue.policy.issue_quorum_num / initiative.issue.policy.issue_quorum_den
+    quorum = initiative.issue.issue_quorum or 0
+  end
+  if quorum > max_value then
+    max_value = quorum
   end
   ui.bargraph{
     max_value = max_value,
     width = 100,
-    quorum = max_value * quorum,
+    quorum = quorum,
     quorum_color = "#00F",
     bars = {
       { color = "#5a5", value = (initiative.satisfied_supporter_count or 0) },

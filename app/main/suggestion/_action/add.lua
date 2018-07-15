@@ -6,7 +6,7 @@ end
 
 local initiative = Initiative:by_id(param.get("initiative_id", atom.integer))
 if not app.session.member:has_voting_right_for_unit_id(initiative.issue.area.unit_id) then
-  error("access denied")
+  return execute.view { module = "index", view = "403" }
 end
 
 
@@ -27,7 +27,8 @@ for i, fe in ipairs(config.formatting_engines) do
   end
 end
 if not formatting_engine_valid then
-  error("invalid formatting engine!")
+  slot.put_into("error", "invalid formatting engine!")
+  return false
 end
 
 if param.get("preview") then

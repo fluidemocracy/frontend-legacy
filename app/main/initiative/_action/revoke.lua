@@ -2,7 +2,7 @@ local initiative = Initiative:by_id(param.get_id())
 
 local initiator = Initiator:by_pk(initiative.id, app.session.member.id)
 if not initiator or initiator.accepted ~= true then
-  error("access denied")
+  return execute.view { module = "index", view = "403" }
 end
 
 -- TODO important m1 selectors returning result _SET_!
@@ -29,7 +29,7 @@ local suggested_initiative_id = param.get("suggested_initiative_id", atom.intege
 if suggested_initiative_id ~= -1 then
   local suggested_initiative = Initiative:by_id(suggested_initiative_id)
   if not suggested_initiative then
-    error("object not found")
+    return false
   end
   if initiative.id == suggested_initiative.id then
     slot.put_into("error", _"You can't suggest the initiative you are revoking")

@@ -5,7 +5,7 @@ local interest = Interest:by_pk(issue_id, app.session.member.id)
 local issue = Issue:new_selector():add_where{ "id = ?", issue_id }:for_share():single_object_mode():exec()
 
 if not app.session.member:has_voting_right_for_unit_id(issue.area.unit_id) then
-  error("access denied")
+  return execute.view { module = "index", view = "403" }
 end
 
 if issue.closed then
@@ -25,9 +25,9 @@ end
 if param.get("delete", atom.boolean) then
   if interest then
     interest:destroy()
-    slot.put_into("notice", _"Interest removed")
+--    slot.put_into("notice", _"Interest removed")
   else
-    slot.put_into("notice", _"Interest already removed")
+-- slot.put_into("notice", _"Interest already removed")
   end
   return
 end
@@ -37,5 +37,5 @@ if not interest then
   interest.issue_id   = issue_id
   interest.member_id  = app.session.member_id
   interest:save()
-  slot.put_into("notice", _"Interest updated")
+-- slot.put_into("notice", _"Interest updated")
 end

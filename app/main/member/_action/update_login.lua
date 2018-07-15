@@ -1,5 +1,5 @@
-if util.is_profile_field_locked(app.session.member, "login") then
-  error("access denied")
+if util.is_profile_field_locked(app.session.member, "login") or app.session.member.role then
+  return execute.view { module = "index", view = "403" }
 end
 
 local login = param.get("login")
