@@ -67,17 +67,19 @@ ui.container{ attr = { class = "mdl-grid" }, content = function()
             value = _"Proceed with registration"
           }
         }
-        slot.put(" &nbsp; ")
-        ui.tag{
-          tag = "input",
-          attr = {
-            name = "manual_verification",
-            id = "manual_verification_button",
-            type = "submit",
-            class = "mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--underlined",
-            value = _"Manual verification (w/o mobile)"
+        if config.self_registration.allow_bypass_checks then
+          slot.put(" &nbsp; ")
+          ui.tag{
+            tag = "input",
+            attr = {
+              name = "manual_verification",
+              id = "manual_verification_button",
+              type = "submit",
+              class = "mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--underlined",
+              value = _"Manual verification (w/o mobile)"
+            }
           }
-        }
+        end
         slot.put(" &nbsp; ")
         ui.link{ 
           attr = { class = "mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--underlined" },
