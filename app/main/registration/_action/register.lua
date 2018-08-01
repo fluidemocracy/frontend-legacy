@@ -232,6 +232,10 @@ if manual_verification then
   table.insert(manual_check_reasons, "User requested manual verification (during step 1)")
 end
 
+if not config.self_registration.sms_id then
+  table.insert(manual_check_reasons, "User requested manual verification (during step 1)")
+end
+
 local existing_verifications = Verification:new_selector()
   :add_where{ "request_data->>'mobile_phone' = ?", mobile_phone }
   :add_where("comment ilike '%SMS code%'")
