@@ -4,8 +4,8 @@ app.html_title.title = _"Self registration"
 ui.container{ attr = { class = "mdl-grid" }, content = function()
   ui.container{ attr = { class = "mdl-cell mdl-cell--12-col" }, content = function()
 
-    if config.self.registration.manual_verification_needed_text then
-      slot.put(config.self.registration.manual_verification_needed_text)
+    if config.self_registration.manual_verification_needed_text then
+      slot.put(config.self_registration.manual_verification_needed_text)
     else
       ui.heading{ content = _"Manual verification needed" }
       slot.put("<br />")
