@@ -81,6 +81,12 @@ ui.container{ attr = { class = "mdl-grid" }, content = function()
           }
         end
         slot.put(" &nbsp; ")
+        if config.self_registration.cancel_link then
+          ui.link{ 
+            attr = { class = "mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--underlined" },
+            external = config.self_registration.cancel_link, text = _"Cancel"
+            } 
+          
         ui.link{ 
           attr = { class = "mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--underlined" },
           module = "index", view = "login", text = _"Cancel", params = {
