@@ -138,7 +138,7 @@ for i, field in ipairs(config.self_registration.fields) do
     
   else
     local value = param.get("verification_data_" .. field.name)
-    if not value or (#value < 1 and (not manual_verification or field.name ~= "mobile_phone")) then
+    if not field.optional and (not value or (#value < 1 and (not manual_verification or field.name ~= "mobile_phone"))) then
       slot.put_into("self_registration__invalid_" .. field.name, "to_short")
       slot.select("error", function()
         ui.container{ content = _("Please enter: #{field_name}", { field_name = field.label }) }
