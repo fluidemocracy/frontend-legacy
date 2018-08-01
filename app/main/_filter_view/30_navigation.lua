@@ -33,7 +33,11 @@ if not config.meta_navigation_items_func or not config.meta_navigation_html_func
   slot.select ( 'header_bar', function ()
     ui.tag{ tag = "header", attr = { class = "mdl-layout__header mdl-layout__header--seamed" }, content = function()
       ui.container{ attr = { class = "mdl-layout__header-row" }, content = function()
-        ui.link{ module = "index", view = "index", attr = { class = "mdl-layout-title" }, content = "LiquidFeedback" }
+        local title = "LiquidFeedback"
+        if config.instance_name then
+          title = config.instance_name .. " :: " .. title
+        end
+        ui.link{ module = "index", view = "index", attr = { class = "mdl-layout-title" }, content = title }
         ui.tag{ attr = { class = "mdl-layout-spacer" }, content = "" }
 
         if app.session:has_access ("anonymous") then
