@@ -9,6 +9,10 @@ for i, field in ipairs(config.self_registration.fields) do
   end
   if field.name == "date_of_birth" then
     slot.put("<br />")
+    local label = field.label
+    if field.optional then
+      label = label .. config.self_registration.optional_field_indicator
+    end
     ui.tag{ tag = "label", attr = { style = "vertical-align: bottom; border-bottom: 1px solid rgba(0,0,0, 0.12); color: #777; font-size: 16px;" }, content = field.label .. ":" }
     slot.put(" &nbsp; ")
     local days = { { id = 0, name = _"day" } }
