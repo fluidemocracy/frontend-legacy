@@ -85,17 +85,18 @@ ui.container{ attr = { class = "mdl-grid" }, content = function()
           ui.link{ 
             attr = { class = "mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--underlined" },
             external = config.self_registration.cancel_link, text = _"Cancel"
+          }
+        else
+          ui.link{ 
+            attr = { class = "mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--underlined" },
+            module = "index", view = "login", text = _"Cancel", params = {
+              redirect_module = param.get("redirect_module"),
+              redirect_view = param.get("redirect_view"),
+              redirect_id = param.get("redirect_id"),
+              redirect_params = param.get("redirect_params")
             } 
-          
-        ui.link{ 
-          attr = { class = "mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--underlined" },
-          module = "index", view = "login", text = _"Cancel", params = {
-            redirect_module = param.get("redirect_module"),
-            redirect_view = param.get("redirect_view"),
-            redirect_id = param.get("redirect_id"),
-            redirect_params = param.get("redirect_params")
-          } 
-        }
+          }
+        end
       end
     }
 
