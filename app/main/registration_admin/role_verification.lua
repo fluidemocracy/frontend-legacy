@@ -31,13 +31,13 @@ end
 
 
 ui.title(function()
-  ui.link { module = "registration_admin", view = "index", content = _"Rolemanagement" }
+  ui.link { module = "registration_admin", view = "index", content = _"Role management" }
   slot.put ( " » " )
   ui.link { module = "registration_admin", view = view, content = group }
   slot.put ( " » " )
   ui.tag { tag = "span", content = title }
 end)
-app.html_title.title = _"Rolemanagement"
+app.html_title.title = _"Role management"
 
 ui.container{ attr = { class = "mdl-grid" }, content = function()
   ui.container{ attr = { class = "mdl-cell mdl-cell--12-col" }, content = function()
