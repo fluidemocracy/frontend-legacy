@@ -36,16 +36,16 @@ ui.container{ attr = { class = "mdl-grid" }, content = function()
               ui.link{ module = "registration_admin", view = "verification_requests", params = { mode = "manual_requested", step = 1 }, content = _("Manual verification requested during step 1 (#{count})", { count = count }) }
             end }
             
-            local count = Verification:new_selector()
-              :add_where("verified_member_id ISNULL")
-              :add_where("denied ISNULL")
-              :add_where("comment ilike '%User requested manual verification (during step 2)'")
-              :count()
-            ui.tag{ tag = "li", content = function()
-              ui.link{ module = "registration_admin", view = "verification_requests", params = { mode = "manual_requested", step = 2 }, content = _("Manual verification requested during step 2 (#{count})", { count = count }) }
-            end }
-            
             if config.self_registration.sms_id then
+              local count = Verification:new_selector()
+                :add_where("verified_member_id ISNULL")
+                :add_where("denied ISNULL")
+                :add_where("comment ilike '%User requested manual verification (during step 2)'")
+                :count()
+              ui.tag{ tag = "li", content = function()
+                ui.link{ module = "registration_admin", view = "verification_requests", params = { mode = "manual_requested", step = 2 }, content = _("Manual verification requested during step 2 (#{count})", { count = count }) }
+              end }
+              
               local count = Verification:new_selector()
                 :add_where("verified_member_id ISNULL")
                 :add_where("denied ISNULL")
