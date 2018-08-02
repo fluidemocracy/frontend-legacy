@@ -34,6 +34,8 @@ elseif mode == "same_name_already_exists" then
   verifications_selector:add_where("comment ilike '%user with same name already exists'")
 elseif mode == "other" then
   title = _"Other reasons"
+  verifications_selector:add_where("not comment ilike '%User requested manual verification (during step 1)'")
+  verifications_selector:add_where("not comment ilike '%User requested manual verification (during step 2)'")
   verifications_selector:add_where("not comment ilike '%User requested manual verification'")
   verifications_selector:add_where("not comment ilike '% sent'")
   verifications_selector:add_where("not comment similar to '%fiscal code does not match[^/]*'")
