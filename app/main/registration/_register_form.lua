@@ -93,6 +93,12 @@ for i, field in ipairs(config.self_registration.fields) do
       units_selector:add_where(field.where)
     end
     local units = units_selector:exec()
+    if field.optional then
+      table.insert(units, {
+        id = "",
+        name = _"None"
+      })
+    end
     ui.field.select{
       label = field.label,
       foreign_records = units,
