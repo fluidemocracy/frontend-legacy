@@ -94,6 +94,7 @@ for i, field in ipairs(config.self_registration.fields) do
     end
     local units = units_selector:exec()
     ui.field.select{
+      label = field.label,
       foreign_records = units,
       foreign_id = "id",
       foreign_name = "name",
