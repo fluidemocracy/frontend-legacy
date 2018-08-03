@@ -108,7 +108,7 @@ for i, field in ipairs(config.self_registration.fields) do
       foreign_records = units,
       foreign_id = "id",
       foreign_name = "name",
-      name = field.name,
+      name = "verification_data_" .. field.name,
       value = tonumber(request.get_param{ name = "verification_data_" .. field.name })
     }
   else
