@@ -151,6 +151,9 @@ for i, field in ipairs(config.self_registration.fields) do
     elseif field.name == "mobile_phone" then
       value = string.gsub(value, "[^0-9]", "")
     elseif field.type == "image" then
+      if field.save_func then
+        value = field.save_func(value)
+      end
     else
       value = string.gsub(value, "^%s+", "")
       value = string.gsub(value, "%s+$", "")
