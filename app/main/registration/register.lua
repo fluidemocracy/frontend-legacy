@@ -9,7 +9,7 @@ ui.container{ attr = { class = "mdl-grid" }, content = function()
     ui.form{
       attr = { onsubmit = "document.getElementById('register_button').disabled = true;" },
       module = "registration", action = "register",
-      enctype = 'multipart/form-data'
+      enctype = 'multipart/form-data',
       routing = {
         error = { mode = "forward", module = "registration", view = "register" }
       },
