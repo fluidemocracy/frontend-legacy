@@ -63,14 +63,17 @@ ui.container{ attr = { class = "mdl-grid" }, content = function()
 
             for i, field in ipairs(config.self_registration.fields) do
               ui.container{ content = function()
-                ui.field.text{
-                  container_attr = { class = "mdl-textfield mdl-js-textfield mdl-textfield--floating-label" },
-                  attr = { id = "lf-register__data_" .. field.name, class = "mdl-textfield__input" },
-                  label_attr = { class = "mdl-textfield__label", ["for"] = "lf-register__data" .. field.name },
-                  label = field.label,
-                  name = field.name
-                }
-                
+                if field.type == "image" then
+                  ui.link{ module = "registration_admin", view = "verification_image", id = verification[field.name], params = { field = i } }
+                else
+                  ui.field.text{
+                    container_attr = { class = "mdl-textfield mdl-js-textfield mdl-textfield--floating-label" },
+                    attr = { id = "lf-register__data_" .. field.name, class = "mdl-textfield__input" },
+                    label_attr = { class = "mdl-textfield__label", ["for"] = "lf-register__data" .. field.name },
+                    label = field.label,
+                    name = field.name
+                  }
+                end
                 ui.tag{ content = verification.request_data[field.name] }
               end }
             end
