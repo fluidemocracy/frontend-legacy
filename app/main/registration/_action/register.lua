@@ -135,7 +135,7 @@ for i, field in ipairs(config.self_registration.fields) do
       return
     end
     verification.request_data[field.name] = string.format("%04i-%02i-%02i", year, month, day)
-    
+  
   else
     local value = param.get("verification_data_" .. field.name)
     if not field.optional and (not value or (#value < 1 and (not manual_verification or field.name ~= "mobile_phone"))) then
@@ -150,6 +150,7 @@ for i, field in ipairs(config.self_registration.fields) do
       value = string.gsub(value, "[^A-Z0-9]", "")
     elseif field.name == "mobile_phone" then
       value = string.gsub(value, "[^0-9]", "")
+    elseif field.type == "image" then
     else
       value = string.gsub(value, "^%s+", "")
       value = string.gsub(value, "%s+$", "")
