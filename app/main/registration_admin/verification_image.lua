@@ -1,5 +1,5 @@
 local field = param.get("field", atom.number)
-local id = param.get("id")
+local id = param.get_id(atom.string)
 
 if not string.match(id, "[0-9a-z]") then
   return
