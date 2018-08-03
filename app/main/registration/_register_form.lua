@@ -88,7 +88,7 @@ for i, field in ipairs(config.self_registration.fields) do
     
   elseif field.type == "image" then
     ui.tag{ tag = "label", content = field.label }
-    ui.tag{ tag = "input", type = "file", name = field.name }
+    ui.tag{ tag = "input", attr = { type = "file", name = field.name } }
     
   elseif field.name == "unit" then
     local units_selector = Unit:new_selector()
