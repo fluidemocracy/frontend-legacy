@@ -84,8 +84,22 @@ for i, field in ipairs(config.self_registration.fields) do
       name = "verification_data_" .. field.name .. "_year",
       value = tonumber(request.get_param{ name = "verification_data_" .. field.name .. "_year" })
     }
-  slot.put("<br />")
+    slot.put("<br />")
     
+  elseif field.name == "unit" then
+    local units_selector = Unit:new_selector()
+      :add_where{ "active" }
+    if field.where then
+      units_selector:add_where(field.where)
+    end
+    local units = units_selector:exec()
+    ui.field.select{
+      foreign_records = units,
+      foreign_id = "id",
+      foreign_name = "name",
+      name = field.name,
+      value = tonumber(request.get_param{ name = "verification_data_" .. field.name })
+    }
   else
     if field.name == "mobile_phone" then
       if config.self_registration.lang ~= "en" then
