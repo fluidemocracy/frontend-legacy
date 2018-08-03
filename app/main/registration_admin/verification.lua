@@ -64,7 +64,7 @@ ui.container{ attr = { class = "mdl-grid" }, content = function()
             for i, field in ipairs(config.self_registration.fields) do
               ui.container{ content = function()
                 if field.type == "image" then
-                  ui.link{ text = _"Show image", module = "registration_admin", view = "verification_image", id = verification[field.name], params = { field = i } }
+                  ui.link{ text = field.name, module = "registration_admin", view = "verification_image", id = verification.request_data[field.name], params = { field = i } }
                 else
                   ui.field.text{
                     container_attr = { class = "mdl-textfield mdl-js-textfield mdl-textfield--floating-label" },
@@ -73,8 +73,8 @@ ui.container{ attr = { class = "mdl-grid" }, content = function()
                     label = field.label,
                     name = field.name
                   }
+                  ui.tag{ content = verification.request_data[field.name] }
                 end
-                ui.tag{ content = verification.request_data[field.name] }
               end }
             end
             
