@@ -9,7 +9,7 @@ local function update_data()
       value = string.gsub(value, "[^A-Z0-9]", "")
     elseif field.name == "mobile_phone" then
       value = string.gsub(value, "[^0-9]", "")
-    else
+    elseif field.type ~= "image" then
       value = string.gsub(value, "^%s+", "")
       value = string.gsub(value, "%s+$", "")
       value = string.gsub(value, "%s+", " ")
