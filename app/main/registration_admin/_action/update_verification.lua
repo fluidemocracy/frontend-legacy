@@ -13,7 +13,7 @@ local function update_data()
     elseif field.name == "unit" then
       value = string.gsub(value, "[^0-9]", "")
       if old_verification_data.unit and old_verification_data.unit ~= "" then
-        local old_unit_privilege = Privilege:by_pk(verification.verified_member_id, old_verification_data.unit)
+        local old_unit_privilege = Privilege:by_pk(old_verification_data.unit, verification.verified_member_id)
         if old_unit_privilege then
           old_unit_privilege:destroy()
         end
