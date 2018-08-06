@@ -113,76 +113,76 @@ verification.request_origin = json.object{
 verification.request_data = json.object()
 
 for i, field in ipairs(config.self_registration.fields) do
-  if field.name == "date_of_birth" then
-    local day = tonumber(param.get("verification_data_" .. field.name .. "_day"))
-    local month = tonumber(param.get("verification_data_" .. field.name .. "_month"))
-    local year = tonumber(param.get("verification_data_" .. field.name .. "_year"))
-    local date = atom.date:new{ year = year, month = month, day = day }
-    if date.invalid then
-      slot.select("error", function()
-        ui.container{ content = _"Please check date of birth" }
-        slot.put_into("self_registration__invalid_" .. field.name, "invalid")
-      end)
-      errors = errors + 1
-    end
-    local today = atom.date:get_current()
-    local date_16y_ago = atom.date:new{ year = today.year - 16, month = today.month, day = today.day }
-    if date_16y_ago.invalid and today.month == 2 and today.day == 29 then
-      date_16y_ago = atom.date:new{ year = today.year - 16, month = 2, day = 28 }
-    end
-    if date > date_16y_ago then
-      request.redirect{ external = encode.url { module = "registration", view = "register_rejected_age" } }      
-      return
-    end
-    verification.request_data[field.name] = string.format("%04i-%02i-%02i", year, month, day)
-  
-  else
-    local value = param.get("verification_data_" .. field.name)
-    if not field.optional and (not value or (#value < 1 and (not manual_verification or field.name ~= "mobile_phone"))) then
-      slot.put_into("self_registration__invalid_" .. field.name, "to_short")
-      slot.select("error", function()
-        ui.container{ content = _("Please enter: #{field_name}", { field_name = field.label }) }
-      end)
-      errors = errors + 1
-    end
-    if field.name == "fiscal_code" then
-      value = string.upper(value)
-      value = string.gsub(value, "[^A-Z0-9]", "")
-    elseif field.name == "mobile_phone" then
-      value = string.gsub(value, "[^0-9]", "")
-    elseif field.type == "image" then
-      if field.save_func then
-        value = field.save_func(value)
+  if not field.internal then
+    if field.name == "date_of_birth" then
+      local day = tonumber(param.get("verification_data_" .. field.name .. "_day"))
+      local month = tonumber(param.get("verification_data_" .. field.name .. "_month"))
+      local year = tonumber(param.get("verification_data_" .. field.name .. "_year"))
+      local date = atom.date:new{ year = year, month = month, day = day }
+      if date.invalid then
+        slot.select("error", function()
+          ui.container{ content = _"Please check date of birth" }
+          slot.put_into("self_registration__invalid_" .. field.name, "invalid")
+        end)
+        errors = errors + 1
       end
+      local today = atom.date:get_current()
+      local date_16y_ago = atom.date:new{ year = today.year - 16, month = today.month, day = today.day }
+      if date_16y_ago.invalid and today.month == 2 and today.day == 29 then
+        date_16y_ago = atom.date:new{ year = today.year - 16, month = 2, day = 28 }
+      end
+      if date > date_16y_ago then
+        request.redirect{ external = encode.url { module = "registration", view = "register_rejected_age" } }      
+        return
+      end
+      verification.request_data[field.name] = string.format("%04i-%02i-%02i", year, month, day)
+    
     else
-      value = string.gsub(value, "^%s+", "")
-      value = string.gsub(value, "%s+$", "")
-      value = string.gsub(value, "%s+", " ")
+      local value = param.get("verification_data_" .. field.name)
+      if not field.optional and (not value or (#value < 1 and (not manual_verification or field.name ~= "mobile_phone"))) then
+        slot.put_into("self_registration__invalid_" .. field.name, "to_short")
+        slot.select("error", function()
+          ui.container{ content = _("Please enter: #{field_name}", { field_name = field.label }) }
+        end)
+        errors = errors + 1
+      end
+      if field.name == "fiscal_code" then
+        value = string.upper(value)
+        value = string.gsub(value, "[^A-Z0-9]", "")
+      elseif field.name == "mobile_phone" then
+        value = string.gsub(value, "[^0-9]", "")
+      elseif field.type == "image" then
+        if field.save_func then
+          value = field.save_func(value)
+        end
+      else
+        value = string.gsub(value, "^%s+", "")
+        value = string.gsub(value, "%s+$", "")
+        value = string.gsub(value, "%s+", " ")
+      end
+      verification.request_data[field.name] = value
     end
-    verification.request_data[field.name] = value
   end
-end
 
-local automatic_verification_possible = true
+  local mobile_phone = verification.request_data.mobile_phone
 
-local mobile_phone = verification.request_data.mobile_phone
-
-if not manual_verification then
-  if config.self_registration.check_for_italien_mobile_phone then
-    if not check_italian_mobile_phone_number(mobile_phone) then
-      slot.select("error", function()
-        ui.container{ content = _"Please check the mobile phone number (invalid format)" }
-      end)
-      errors = errors + 1
+  if not manual_verification then
+    if config.self_registration.check_for_italien_mobile_phone then
+      if not check_italian_mobile_phone_number(mobile_phone) then
+        slot.select("error", function()
+          ui.container{ content = _"Please check the mobile phone number (invalid format)" }
+        end)
+        errors = errors + 1
+      end
     end
-  end
 
-  if config.self_registration.check_for_uk_mobile_phone then
-    if not check_uk_mobile_phone_number(mobile_phone) then
-      slot.select("error", function()
-        ui.container{ content = _"Please check the mobile phone number (invalid format)" }
-      end)
-      errors = errors + 1
+    if config.self_registration.check_for_uk_mobile_phone then
+      if not check_uk_mobile_phone_number(mobile_phone) then
+        slot.select("error", function()
+          ui.container{ content = _"Please check the mobile phone number (invalid format)" }
+        end)
+        errors = errors + 1
+      end
     end
   end
 end
