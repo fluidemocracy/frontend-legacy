@@ -36,7 +36,7 @@ local function update_data()
           :add_field("max((verification_data->>'sequential_number')::int8)", "max_sequential_number")
           :optional_object_mode()
           :exec()
-        if record then
+        if record and record.max_sequential_number then
           last_sequential_number = record.max_sequential_number
         end
         value = last_sequential_number + 1
