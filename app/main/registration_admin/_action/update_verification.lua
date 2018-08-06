@@ -31,13 +31,13 @@ local function update_data()
       if not value then
         local last_sequential_number = 0
         db:query('LOCK TABLE "verification" IN SHARE ROW EXCLUSIVE MODE')
-        local max_record = Verification:new_selector()
+        local record = Verification:new_selector()
           :reset_fields()
-          :add_field("max((verification_data->>'sequential_number')::int8)")
+          :add_field("max((verification_data->>'sequential_number')::int8)", "max_sequential_number")
           :optional_object_mode()
           :exec()
-        if max_record then
-          last_sequential_number = max_record.verification_data.sequential_number
+        if record then
+          last_sequential_number = record.max_sequential_number
         end
         value = last_sequential_number + 1
       end
