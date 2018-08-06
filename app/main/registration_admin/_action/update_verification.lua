@@ -11,10 +11,12 @@ local function update_data()
       value = string.gsub(value, "[^0-9]", "")
     elseif field.name == "unit" then
       value = string.gsub(value, "[^0-9]", "")
-      if verification.verification_data.unit and value ~= verification.verification_data.unit then
-        local old_unit_privilege = Privilege:by_pk(verification.verified_member_id, verification.verification_data.unit)
-        old_unit_privilege:destroy()
-        unit_privilege = Privilege:new()
+      if value ~= verification.verification_data.unit then
+        if verification.verification_data.unit then
+          local old_unit_privilege = Privilege:by_pk(verification.verified_member_id, verification.verification_data.unit)
+          old_unit_privilege:destroy()
+        end
+        local unit_privilege = Privilege:new()
         unit_privilege.member_id = verification.verified_member_id
         unit_privilege.unit_id = verification.verification_data.unit
         unit_privilege.voting_right = true
