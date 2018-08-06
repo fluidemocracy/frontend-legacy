@@ -65,6 +65,27 @@ ui.container{ attr = { class = "mdl-grid" }, content = function()
               ui.container{ content = function()
                 if field.type == "image" then
                   ui.link{ content = field.label, module = "registration_admin", view = "verification_image", id = verification.request_data[field.name], params = { field = i }, attr = { target = "_blank" } }
+                elseif field.name == "unit" then
+                  local units_selector = Unit:new_selector()
+                    :add_where{ "active" }
+                  if field.where then
+                    units_selector:add_where(field.where)
+                  end
+                  local units = units_selector:exec()
+                  if field.optional then
+                    table.insert(units, {
+                      id = "",
+                      name = _"None"
+                    })
+                  end
+                  ui.field.select{
+                    label = field.label,
+                    foreign_records = units,
+                    foreign_id = "id",
+                    foreign_name = "name",
+                    name = "verification_data_" .. field.name,
+                    value = tonumber(request.get_param{ name = "verification_data_" .. field.name })
+                  }
                 else
                   ui.field.text{
                     container_attr = { class = "mdl-textfield mdl-js-textfield mdl-textfield--floating-label" },
