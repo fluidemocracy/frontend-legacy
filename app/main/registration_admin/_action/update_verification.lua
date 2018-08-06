@@ -21,7 +21,7 @@ local function update_data()
         unit_privilege.unit_id = verification.verification_data.unit
         unit_privilege.voting_right = true
         unit_privilege.initiative_right = true
-        unit_privilege.save()
+        unit_privilege:save()
       end
     elseif field.type ~= "image" then
       value = string.gsub(value, "^%s+", "")
