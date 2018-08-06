@@ -90,14 +90,8 @@ ui.container{ attr = { class = "mdl-grid" }, content = function()
                     value = tonumber(data[field.name])
                   }
                 elseif field.name == "sequential_number" then
-                  ui.field.text{
-                    container_attr = { class = "mdl-textfield mdl-js-textfield mdl-textfield--floating-label" },
-                    attr = { id = "lf-register__data_" .. field.name, class = "mdl-textfield__input" },
-                    label_attr = { class = "mdl-textfield__label", ["for"] = "lf-register__data" .. field.name },
-                    label = field.label,
-                    name = field.name,
-                    readonly = true
-                  }
+                  ui.tag{ tag = "label", content = field.label }
+                  ui.tag{ tag = "span", content = data.sequential_number or _"None yet" }
                 else
                   ui.field.text{
                     container_attr = { class = "mdl-textfield mdl-js-textfield mdl-textfield--floating-label" },
