@@ -83,8 +83,7 @@ ui.container{ attr = { class = "mdl-grid" }, content = function()
                     foreign_records = units,
                     foreign_id = "id",
                     foreign_name = "name",
-                    name = "lf-register__data_" .. field.name,
-                    value = tonumber(request.get_param{ name = "verification_data_" .. field.name })
+                    name = field.name
                   }
                 else
                   ui.field.text{
