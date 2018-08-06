@@ -89,7 +89,7 @@ ui.container{ attr = { class = "mdl-grid" }, content = function()
                     name = field.name,
                     value = tonumber(data[field.name])
                   }
-                elseif field.name = "sequential_number" then
+                elseif field.name == "sequential_number" then
                   ui.field.text{
                     container_attr = { class = "mdl-textfield mdl-js-textfield mdl-textfield--floating-label" },
                     attr = { id = "lf-register__data_" .. field.name, class = "mdl-textfield__input" },
