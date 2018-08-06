@@ -71,19 +71,23 @@ ui.container{ attr = { class = "mdl-grid" }, content = function()
                   if field.where then
                     units_selector:add_where(field.where)
                   end
-                  local units = units_selector:exec()
+                  local units = {}
                   if field.optional then
                     table.insert(units, {
                       id = "",
                       name = _"None"
                     })
                   end
+                  for j, units in ipairs(units_selector:exec()) do
+                    table.insert(units, unit)
+                  end
                   ui.field.select{
                     label = field.label,
                     foreign_records = units,
                     foreign_id = "id",
                     foreign_name = "name",
-                    name = field.name
+                    name = field.name,
+                    value = tonumber(data[field.name])
                   }
                 else
                   ui.field.text{
