@@ -32,6 +32,19 @@ local function update_data()
       value = string.gsub(value, "%s+", " ")
     elseif field.name == "sequential_number" then
       value = old_verification_data.sequential_number 
+      if not value then
+        local last_sequential_number = 0
+        db:query('LOCK TABLE "verification" IN SHARE ROW EXCLUSIVE MODE')
+        local max_record = Verification:new_selector()
+          :reset_fields()
+          :add_field("max((verification_data->>'sequential_number')::int8)")
+          :optional_object_mode()
+          :exec()
+        if max_record then
+          last_sequential_number = max_record.verification_data.sequential_number
+        end
+        value = last_sequential_number + 1
+      end
     end
     verification.verification_data[field.name] = value
   end
