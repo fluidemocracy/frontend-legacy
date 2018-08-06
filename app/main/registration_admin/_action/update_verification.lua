@@ -30,6 +30,8 @@ local function update_data()
       value = string.gsub(value, "^%s+", "")
       value = string.gsub(value, "%s+$", "")
       value = string.gsub(value, "%s+", " ")
+    elseif field.name == "sequential_number" then
+      value = old_verification_data.sequential_number 
     end
     verification.verification_data[field.name] = value
   end
