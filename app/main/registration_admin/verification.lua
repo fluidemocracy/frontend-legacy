@@ -78,7 +78,7 @@ ui.container{ attr = { class = "mdl-grid" }, content = function()
                       name = _"None"
                     })
                   end
-                  for j, units in ipairs(units_selector:exec()) do
+                  for i_unit, unit in ipairs(units_selector:exec()) do
                     table.insert(units, unit)
                   end
                   ui.field.select{
