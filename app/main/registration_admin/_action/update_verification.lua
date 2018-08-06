@@ -26,10 +26,6 @@ local function update_data()
         unit_privilege.initiative_right = true
         unit_privilege:save()
       end
-    elseif field.type ~= "image" then
-      value = string.gsub(value, "^%s+", "")
-      value = string.gsub(value, "%s+$", "")
-      value = string.gsub(value, "%s+", " ")
     elseif field.name == "sequential_number" then
       value = old_verification_data.sequential_number 
       if not value then
@@ -45,6 +41,10 @@ local function update_data()
         end
         value = last_sequential_number + 1
       end
+    elseif field.type ~= "image" then
+      value = string.gsub(value, "^%s+", "")
+      value = string.gsub(value, "%s+$", "")
+      value = string.gsub(value, "%s+", " ")
     end
     verification.verification_data[field.name] = value
   end
