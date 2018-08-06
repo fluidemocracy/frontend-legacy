@@ -18,7 +18,7 @@ local function update_data()
         end
         local unit_privilege = Privilege:new()
         unit_privilege.member_id = verification.verified_member_id
-        unit_privilege.unit_id = verification.verification_data.unit
+        unit_privilege.unit_id = tonumber(value)
         unit_privilege.voting_right = true
         unit_privilege.initiative_right = true
         unit_privilege:save()
