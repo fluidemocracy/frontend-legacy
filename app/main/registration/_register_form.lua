@@ -9,7 +9,6 @@ for i, field in ipairs(config.self_registration.fields) do
   end
   if not field.internal then
     if field.name == "date_of_birth" then
-      slot.put("<br />")
       local label = field.label
       if field.optional then
         label = label .. config.self_registration.optional_field_indicator
@@ -106,6 +105,7 @@ for i, field in ipairs(config.self_registration.fields) do
       slot.put("<br />")
 
     elseif field.type == "image" then
+      slot.put("<br />")
       ui.tag{ tag = "label", attr = { style = "vertical-align: bottom; border-bottom: 1px solid rgba(0,0,0, 0.12); color: #777; font-size: 16px;" }, content = field.label .. ":" }
       slot.put(" &nbsp; ")
       ui.tag{ tag = "input", attr = { type = "file", name = "verification_data_" .. field.name } }
@@ -162,6 +162,7 @@ for i, field in ipairs(config.self_registration.fields) do
         name = "verification_data_" .. field.name,
         value = tonumber(request.get_param{ name = "verification_data_" .. field.name })
       }
+      slot.put("<br />")
     else
       if field.name == "mobile_phone" then
         if config.self_registration.lang ~= "en" then
