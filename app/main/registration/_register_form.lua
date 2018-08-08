@@ -91,10 +91,9 @@ for i, field in ipairs(config.self_registration.fields) do
       ui.tag{ tag = "label", content = field.label }
       ui.tag{ tag = "input", attr = { type = "file", name = "verification_data_" .. field.name } }
       if field.optional_checkbox then
-        ui.tag{ tag = "input", attr = {
+        ui.tag{ tag = "input", content = "", attr = {
           name = "verification_data_" .. field.name .. "_optout",
           checked = request.get_param{ name = "verification_data_" .. field.name .. "_optout" } and true or false,
-          content = ""
         } }
         slot.put(" ")
         ui.tag{ content = field.optional_checkbox }
