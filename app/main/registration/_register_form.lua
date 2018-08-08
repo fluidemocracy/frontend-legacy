@@ -94,8 +94,9 @@ for i, field in ipairs(config.self_registration.fields) do
         ui.field.boolean{
           name = "verification_data_" .. field.name .. "_optout",
           value = request.get_param{ name = "verification_data_" .. field.name .. "_optout" } and true or false,
-          label = field.optional_checkbox
         }
+        slot.put(" ")
+        ui.tag{ content = field.optional_checkbox }
       end
       
     elseif field.name == "unit" then
