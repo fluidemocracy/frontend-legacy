@@ -91,12 +91,15 @@ for i, field in ipairs(config.self_registration.fields) do
       ui.tag{ tag = "label", content = field.label }
       ui.tag{ tag = "input", attr = { type = "file", name = "verification_data_" .. field.name } }
       if field.optional_checkbox then
-        ui.tag{ tag = "input", attr = {
-          name = "verification_data_" .. field.name .. "_optout",
-          checked = request.get_param{ name = "verification_data_" .. field.name .. "_optout" } and "checked" or nil,
-        } }
-        slot.put(" ")
-        ui.tag{ content = field.optional_checkbox }
+        ui.container{ content = function()
+          ui.tag{ tag = "input", attr = {
+            type = "checkbox",
+            name = "verification_data_" .. field.name .. "_optout",
+            checked = request.get_param{ name = "verification_data_" .. field.name .. "_optout" } and "checked" or nil,
+          } }
+          slot.put(" ")
+          ui.tag{ content = field.optional_checkbox }
+        end }
       end
       
     elseif field.name == "unit" then
