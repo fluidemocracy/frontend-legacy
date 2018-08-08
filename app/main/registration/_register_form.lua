@@ -88,7 +88,7 @@ for i, field in ipairs(config.self_registration.fields) do
       slot.put("<br />")
     
     elseif field.type == "dropdown" then
-      local options = { { id = "", value = field.label } }
+      local options = { { id = "", name = field.label } }
       for i_options, option in ipairs(field.options) do
         table.insert(options, option)
       end
