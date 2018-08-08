@@ -154,6 +154,7 @@ for i, field in ipairs(config.self_registration.fields) do
       ui.tag{ tag = "label", attr = { style = "vertical-align: bottom; border-bottom: 1px solid rgba(0,0,0, 0.12); color: #777; font-size: 16px;" }, content = field.label .. ":" }
       slot.put(" &nbsp; ")
       ui.field.select{
+        container_attr = { style = "display: inline-block; " },
         foreign_records = units,
         foreign_id = "id",
         foreign_name = "name",
