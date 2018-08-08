@@ -106,8 +106,8 @@ for i, field in ipairs(config.self_registration.fields) do
       slot.put("<br />")
 
     elseif field.type == "image" then
-      ui.tag{ tag = "label", content = field.label }
-      slot.put(" ")
+      ui.tag{ tag = "label", attr = { style = "vertical-align: bottom; border-bottom: 1px solid rgba(0,0,0, 0.12); color: #777; font-size: 16px;" }, content = field.label .. ":" }
+      slot.put(" &nbsp; ")
       ui.tag{ tag = "input", attr = { type = "file", name = "verification_data_" .. field.name } }
       if field.optional_checkbox then
         ui.tag{ tag = "label", attr = {
@@ -151,8 +151,9 @@ for i, field in ipairs(config.self_registration.fields) do
       for i_unit, unit in ipairs(units_selector:exec()) do
         table.insert(units, unit)
       end
+      ui.tag{ tag = "label", attr = { style = "vertical-align: bottom; border-bottom: 1px solid rgba(0,0,0, 0.12); color: #777; font-size: 16px;" }, content = field.label .. ":" }
+      slot.put(" &nbsp; ")
       ui.field.select{
-        label = field.label,
         foreign_records = units,
         foreign_id = "id",
         foreign_name = "name",
