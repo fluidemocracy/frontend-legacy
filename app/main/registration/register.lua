@@ -16,6 +16,7 @@ ui.container{ attr = { class = "mdl-grid" }, content = function()
       content = function()
 
         ui.container{ content = config.self_registration.info_top }
+        slot.put("<br />")
 
         execute.view{ module = "registration", view = "_register_form" }
 
