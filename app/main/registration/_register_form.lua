@@ -103,6 +103,7 @@ for i, field in ipairs(config.self_registration.fields) do
         name = "verification_data_" .. field.name,
         value = tonumber(request.get_param{ name = "verification_data_" .. field.name })
       }
+      slot.put("<br />")
 
     elseif field.type == "image" then
       ui.tag{ tag = "label", content = field.label }
