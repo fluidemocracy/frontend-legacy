@@ -89,6 +89,7 @@ for i, field in ipairs(config.self_registration.fields) do
       
     elseif field.type == "image" then
       ui.tag{ tag = "label", content = field.label }
+      slot.put(" ")
       ui.tag{ tag = "input", attr = { type = "file", name = "verification_data_" .. field.name } }
       if field.optional_checkbox then
         ui.container{ content = function()
