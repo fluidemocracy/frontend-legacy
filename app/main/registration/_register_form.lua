@@ -110,7 +110,7 @@ for i, field in ipairs(config.self_registration.fields) do
       slot.put(" &nbsp; ")
       ui.tag{ tag = "input", attr = { type = "file", name = "verification_data_" .. field.name } }
       if field.optional_checkbox then
-        slot.put("<br />")
+        slot.put("<br /><br />")
         ui.tag{ tag = "label", attr = {
             class = "mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect",
             ["for"] = "verification_data_" .. field.name .. "_optout"
