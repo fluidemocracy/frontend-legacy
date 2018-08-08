@@ -86,7 +86,22 @@ for i, field in ipairs(config.self_registration.fields) do
         value = tonumber(request.get_param{ name = "verification_data_" .. field.name .. "_year" })
       }
       slot.put("<br />")
-      
+    
+    elseif field.type == "dropdown" then
+      local options = { id = "", value = field.label }
+      for i_options, option in ipairs(field.options) do
+        table.insert(options, option)
+      end
+      ui.field.select{
+        container_attr = { style = "display: inline-block; " },
+        attr = { class = class },
+        foreign_records = options,
+        foreign_id = "id",
+        foreign_name = "name",
+        name = "verification_data_" .. field.name,
+        value = tonumber(request.get_param{ name = "verification_data_" .. field.name })
+      }
+
     elseif field.type == "image" then
       ui.tag{ tag = "label", content = field.label }
       slot.put(" ")
