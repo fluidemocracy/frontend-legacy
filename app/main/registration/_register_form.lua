@@ -88,10 +88,12 @@ for i, field in ipairs(config.self_registration.fields) do
       slot.put("<br />")
     
     elseif field.type == "dropdown" then
-      local options = { { id = "", name = field.label } }
+      local options = { { id = "", name = "" } }
       for i_options, option in ipairs(field.options) do
         table.insert(options, option)
       end
+      ui.tag{ tag = "label", attr = { style = "vertical-align: bottom; border-bottom: 1px solid rgba(0,0,0, 0.12); color: #777; font-size: 16px;" }, content = field.label .. ":" }
+      slot.put(" &nbsp; ")
       ui.field.select{
         container_attr = { style = "display: inline-block; " },
         attr = { class = class },
