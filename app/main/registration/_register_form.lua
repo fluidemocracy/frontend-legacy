@@ -94,6 +94,7 @@ for i, field in ipairs(config.self_registration.fields) do
         ui.tag{ tag = "input", attr = {
           name = "verification_data_" .. field.name .. "_optout",
           checked = request.get_param{ name = "verification_data_" .. field.name .. "_optout" } and true or false,
+          content = ""
         } }
         slot.put(" ")
         ui.tag{ content = field.optional_checkbox }
