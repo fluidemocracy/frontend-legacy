@@ -48,7 +48,7 @@ if not for_issue and not for_member then
 
     filter[#filter+1] = {
       name = "all",
-      label = _"all units",
+      label = _"All units",
       selector_modifier = function() end
     }
 
