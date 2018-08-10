@@ -9,7 +9,7 @@ end
 
 ui.tag{ tag = "button", attr = { id = "unit-menu", class = "mdl-button mdl-js-button" }, content = function()
   ui.tag{ tag = "i", attr = { class = "material-icons" }, content = "filter_list" }
-  ui.tag{ content = "All units" }
+  ui.tag{ content = _"All units" }
 end }
 ui.tag{ tag = "ul", attr = { class = "mdl-menu mdl-menu--top-left mdl-js-menu mdl-js-ripple-effect", ["data-mdl-for"]="unit-menu" }, content = function()
   if #units > 0 then
