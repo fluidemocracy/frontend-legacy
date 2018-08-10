@@ -29,7 +29,7 @@ if app.current_unit then
   ui.tag{ tag = "button", attr = { id = "area-menu", class = "mdl-button mdl-js-button mdl-button--icon" }, content = function()
     ui.tag{ tag = "i", attr = { class = "material-icons" }, content = "more_vert" }
   end }
-  ui.tag{ content = "All units" }
+  ui.tag{ content = _"All units" }
   ui.tag{ tag = "ul", attr = { class = "mdl-menu mdl-menu--top-left mdl-js-menu mdl-js-ripple-effect", ["data-mdl-for"]="area-menu" }, content = function()
     for i, area in ipairs({}) do
       local class = "mdl-navigation__link mdl-menu__item--small" 
