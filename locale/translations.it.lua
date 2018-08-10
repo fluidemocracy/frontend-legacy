@@ -684,7 +684,7 @@ return {
 ["Verify account"] = false;
 ["Vote delegation"] = "Delega del voto";
 ["Voted no"] = "Votato no";
-["Voters"] = "Vontanti";
+["Voters"] = "Votanti";
 ["Voting"] = "Votazione";
 ["Voting #{time_info}"] = "Votazione #{time_info}";
 ["Voting comment"] = "Commento sul voto";
