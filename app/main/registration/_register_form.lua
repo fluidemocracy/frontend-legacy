@@ -115,15 +115,14 @@ for i, field in ipairs(config.self_registration.fields) do
         function fileChoosen(obj){
           var file = obj.value;
           var fileName = file.split("\\");
+          var checked = false;
+          var label = "]] .. field.upload_label .. [[";
           if (fileName.length > 0) {
             checked = true;
             label = fileName[fileName.length-1];
-          } else {
-            checked = false;
-            label = "]] .. field.upload_label .. [[";
           }
-          document.getElementById("fileCheckbox").checked = checked
-          document.getElementById("fileBtn").innerHTML = label
+          document.getElementById("fileCheckbox").checked = checked;
+          document.getElementById("fileBtn").innerHTML = label;
           event.preventDefault();
         }
       ]] }
