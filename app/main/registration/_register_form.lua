@@ -116,22 +116,32 @@ for i, field in ipairs(config.self_registration.fields) do
           var file = obj.value;
           var fileName = file.split("\\");
           document.getElementById("fileBtn").innerHTML = fileName[fileName.length-1];
-          document.getElementById("fileCheckbox").checked = true;
+          document.getElementById("fileCheckbox").checked = fileName.length > 0 ? true : false;
           event.preventDefault();
         }
       ]] }
       ui.tag{ tag = "input", attr = { id = "fileInput", style = "display: none;", type = "file", name = "verification_data_" .. field.name, onchange = "fileChoosen(this);" } }
-      ui.tag{
-        tag = "input",
-        attr = {
-          type = "checkbox",
-          class = "mdl-checkbox__input",
-          id = "fileCheckbox",
-          style = "float: left;",
-          onclick = "getFile();"
+      ui.tag{ tag = "label", attr = {
+          class = "mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect",
+          style = "display: inline;",
+        },
+        content = function()
+          ui.tag{
+            tag = "input",
+            attr = {
+              type = "checkbox",
+              class = "mdl-checkbox__input",
+              id = "fileCheckbox",
+              style = "float: left;",
+              onclick = "getFile();"
+            }
+          }
+          ui.tag{
+            attr = { id = "fileBtn", class = "mdl-checkbox__label", onclick = "getFile();"  },
+            content = field.upload_label
+          }
         }
       }
-      ui.tag{ attr = { id = "fileBtn", onclick = "getFile();", style = "font-size: 16px;" }, content = field.upload_label }
       if field.optional_checkbox then
         slot.put(" &nbsp; ")
         ui.tag{ tag = "label", attr = {
