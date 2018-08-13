@@ -167,7 +167,7 @@ for i, field in ipairs(config.self_registration.fields) do
       if field.optional then
         table.insert(units, {
           id = "",
-          name = _"None"
+          name = _"none"
         })
       end
       for i_unit, unit in ipairs(units_selector:exec()) do
