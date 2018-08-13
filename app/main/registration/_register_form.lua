@@ -117,7 +117,7 @@ for i, field in ipairs(config.self_registration.fields) do
           var fileName = file.split("\\");
           var checked = false;
           var label = "]] .. field.upload_label .. [[";
-          if (fileName.length > 0) {
+          if (fileName[fileName.length-1].length > 0) {
             label = fileName[fileName.length-1];
           }
           document.getElementById("fileBtn").innerHTML = label;
