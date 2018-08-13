@@ -119,8 +119,8 @@ for i, field in ipairs(config.self_registration.fields) do
           event.preventDefault();
         }
       ]] }
-      ui.tag{ attr = { id = "fileBtn", onclick = "getFile();"}, content = field.upload_label }
       ui.tag{ tag = "input", attr = { id = "fileInput", style = "display: none;", type = "file", name = "verification_data_" .. field.name, onchange = "fileChoosen(this);" } }
+      ui.tag{ attr = { id = "fileBtn", onclick = "getFile();"}, content = field.upload_label }
       if field.optional_checkbox then
         slot.put(" &nbsp; ")
         ui.tag{ tag = "label", attr = {
