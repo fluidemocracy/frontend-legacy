@@ -118,10 +118,8 @@ for i, field in ipairs(config.self_registration.fields) do
           var checked = false;
           var label = "]] .. field.upload_label .. [[";
           if (fileName.length > 0) {
-            checked = true;
             label = fileName[fileName.length-1];
           }
-          document.getElementById("fileCheckbox").checked = checked;
           document.getElementById("fileBtn").innerHTML = label;
           event.preventDefault();
         }
