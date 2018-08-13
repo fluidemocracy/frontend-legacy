@@ -106,11 +106,22 @@ for i, field in ipairs(config.self_registration.fields) do
 
     elseif field.type == "image" then
       slot.put("<br />")
-      ui.tag{ tag = "label", attr = { style = "vertical-align: bottom; border-bottom: 1px solid rgba(0,0,0, 0.12); color: #777; font-size: 16px;" }, content = field.label .. ":" }
-      slot.put(" &nbsp; ")
-      ui.tag{ tag = "input", attr = { type = "file", name = "verification_data_" .. field.name } }
+      ui.tag{ tag = "label", attr = { style = "display: block; vertical-align: bottom; border-bottom: 1px solid rgba(0,0,0, 0.12); color: #777; font-size: 16px;" }, content = field.label .. ":" }
+      ui.script{ script = [[
+        function getFile(){
+          document.getElementById("upfile").click();
+        }
+        function fileChoosen(obj){
+          var file = obj.value;
+          var fileName = file.split("\\");
+          document.getElementById("fileBtn").innerHTML = fileName[fileName.length-1];
+          event.preventDefault();
+        }
+      ]] }
+      ui.tag{ attr = { id = "fileBtn", onclick = "getFile();"}, content = field.upload_label }
+      ui.tag{ tag = "input", attr = { style = "display: none;", type = "file", name = "verification_data_" .. field.name, onchange = "fileChoosen(this);" } }
       if field.optional_checkbox then
-        slot.put("<br /><br />")
+        slot.put(" &nbsp; ")
         ui.tag{ tag = "label", attr = {
             class = "mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect",
             ["for"] = "verification_data_" .. field.name .. "_optout"
