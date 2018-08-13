@@ -120,11 +120,12 @@ for i, field in ipairs(config.self_registration.fields) do
         }
       ]] }
       ui.tag{ tag = "input", attr = { id = "fileInput", style = "display: none;", type = "file", name = "verification_data_" .. field.name, onchange = "fileChoosen(this);" } }
-      ui.tag{ attr = { id = "fileBtn", onclick = "getFile();"}, content = field.upload_label }
+      ui.tag{ attr = { id = "fileBtn", onclick = "getFile();", style = "font-size: 16px;" }, content = field.upload_label }
       if field.optional_checkbox then
         slot.put(" &nbsp; ")
         ui.tag{ tag = "label", attr = {
             class = "mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect",
+            style = "display: inline;",
             ["for"] = "verification_data_" .. field.name .. "_optout"
           },
           content = function()
