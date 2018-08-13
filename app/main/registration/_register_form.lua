@@ -126,7 +126,7 @@ for i, field in ipairs(config.self_registration.fields) do
       ]] }
       ui.tag{ tag = "input", attr = { id = "fileInput", style = "display: none;", type = "file", name = "verification_data_" .. field.name, onchange = "fileChoosen(this);" } }
       ui.tag{
-        attr = { id = "fileBtn", class = "mdl-checkbox__label", onclick = "getFile();"  },
+        attr = { id = "fileBtn", class = "mdl-button mdl-js-button mdl-button--underlined", onclick = "getFile();" },
         content = field.upload_label
       }
       if field.optional_checkbox then
