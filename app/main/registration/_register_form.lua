@@ -140,7 +140,7 @@ for i, field in ipairs(config.self_registration.fields) do
             attr = { id = "fileBtn", class = "mdl-checkbox__label", onclick = "getFile();"  },
             content = field.upload_label
           }
-        }
+        end
       }
       if field.optional_checkbox then
         slot.put(" &nbsp; ")
