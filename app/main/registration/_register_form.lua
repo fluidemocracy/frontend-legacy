@@ -191,6 +191,10 @@ for i, field in ipairs(config.self_registration.fields) do
           slot.put(" ")
         end
       end
+      local label = field.label
+      if field.optional then
+        label = label .. config.self_registration.optional_field_indicator
+      end
       ui.field.text{
         container_attr = { class = "mdl-textfield mdl-js-textfield mdl-textfield--floating-label" .. class },
         attr = { id = "lf-register__data_" .. field.name, class = "mdl-textfield__input" },
