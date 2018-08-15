@@ -199,7 +199,7 @@ for i, field in ipairs(config.self_registration.fields) do
         container_attr = { class = "mdl-textfield mdl-js-textfield mdl-textfield--floating-label" .. class },
         attr = { id = "lf-register__data_" .. field.name, class = "mdl-textfield__input" },
         label_attr = { class = "mdl-textfield__label", ["for"] = "lf-register__data" .. field.name },
-        label = field.label,
+        label = label,
         name = "verification_data_" .. field.name,
         value = request.get_param{ name = "verification_data_" .. field.name }
       }
