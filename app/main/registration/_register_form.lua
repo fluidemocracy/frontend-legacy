@@ -160,6 +160,7 @@ for i, field in ipairs(config.self_registration.fields) do
     elseif field.name == "unit" then
       local units_selector = Unit:new_selector()
         :add_where{ "active" }
+        :add_order_by("name")
       if field.where then
         units_selector:add_where(field.where)
       end
