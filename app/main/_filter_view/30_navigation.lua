@@ -36,7 +36,7 @@ if not config.meta_navigation_items_func or not config.meta_navigation_html_func
         ui.link{ module = "index", view = "index", attr = { class = "mdl-layout-title" }, content = function()
           if config.instance_name then
             ui.tag{ attr = { class = "mdl-layout--large-screen-only" }, content = config.instance_name .. " ♦" } 
-            slot.put(" &nbsp; ")
+            slot.put(" ")
           end
           ui.tag{ content = "LiquidFeedback" }
         end }
