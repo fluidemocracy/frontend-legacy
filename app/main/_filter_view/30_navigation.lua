@@ -33,13 +33,14 @@ if not config.meta_navigation_items_func or not config.meta_navigation_html_func
   slot.select ( 'header_bar', function ()
     ui.tag{ tag = "header", attr = { class = "mdl-layout__header mdl-layout__header--seamed" }, content = function()
       ui.container{ attr = { class = "mdl-layout__header-row" }, content = function()
-        local title = "LiquidFeedback"
-        if config.instance_name then
-          title = config.instance_name .. " :: " .. title
-        end
-        ui.link{ module = "index", view = "index", attr = { class = "mdl-layout-title" }, content = title }
+        ui.link{ module = "index", view = "index", attr = { class = "mdl-layout-title" }, content = function()
+          local title = 
+          if config.instance_name then
+            ui.tag{ attr = { class = "mdl-layout--large-screen-only" }, content = config.instance_name .. " ♦ " .. title } 
+          end
+          ui.tag{ content = "LiquidFeedback" }
+        end }
         ui.tag{ attr = { class = "mdl-layout-spacer" }, content = "" }
-
         if app.session:has_access ("anonymous") then
           ui.form { attr = { class = "mdl-textfield mdl-js-textfield mdl-textfield--expandable mdl-textfield--floating-label mdl-textfield--align-right" }, method = "get", module = "index", view = "search", content = function ()
             ui.tag{ tag = "label", attr = { class = "mdl-button mdl-js-button mdl-button--icon", ["for"] = "fixed-header-drawer-exp" }, content = function()
