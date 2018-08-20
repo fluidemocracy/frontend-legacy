@@ -35,7 +35,8 @@ if not config.meta_navigation_items_func or not config.meta_navigation_html_func
       ui.container{ attr = { class = "mdl-layout__header-row" }, content = function()
         ui.link{ module = "index", view = "index", attr = { class = "mdl-layout-title" }, content = function()
           if config.instance_name then
-            ui.tag{ attr = { class = "mdl-layout--large-screen-only" }, content = config.instance_name .. " ♦ " .. title } 
+            ui.tag{ attr = { class = "mdl-layout--large-screen-only" }, content = config.instance_name .. " ♦" } 
+            slot.put(" &nbsp; ")
           end
           ui.tag{ content = "LiquidFeedback" }
         end }
