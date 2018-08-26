@@ -214,11 +214,13 @@ listen{
         if not Newsletter:send_next_newsletter() then
           break
         end
+        moonbridge_io.poll(nil, nil, 1)
       end
       while true do
         if not InitiativeForNotification:notify_next_member() then
           break
         end
+        moonbridge_io.poll(nil, nil, 1)
       end
     end
   },
