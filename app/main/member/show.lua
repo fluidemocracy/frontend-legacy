@@ -94,9 +94,11 @@ ui.grid{ content = function()
       
       ui.container{ attr = { class = "mdl-card__content" }, content = function()
 
+        --[[
         if member.identification then
           ui.container{ content = member.identification }
         end
+        --]]
 
         execute.view{
           module = "member",
