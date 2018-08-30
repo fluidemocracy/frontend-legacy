@@ -188,7 +188,3 @@ end
 if app.current_area then
   app.current_unit = app.current_area.unit
 end
-
-if not for_meta_navigation then
-  execute.view{ module = "index", view = "_drawer" }
-end
