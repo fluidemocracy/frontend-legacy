@@ -52,7 +52,8 @@ for i, field in ipairs(config.self_registration.fields) do
         }
       end
       local years = { { id = 0, name = _"year" } }
-      for i = 2002, 1900, -1 do
+      local min_age = config.self_registration.min_age or 16
+      for i = (atom.date:get_current()).year - min_age, 1900, -1 do
         table.insert(years, { id = i, name = i })
       end
       ui.field.select{
