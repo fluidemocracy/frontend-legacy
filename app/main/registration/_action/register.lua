@@ -127,11 +127,12 @@ for i, field in ipairs(config.self_registration.fields) do
         errors = errors + 1
       end
       local today = atom.date:get_current()
-      local date_16y_ago = atom.date:new{ year = today.year - 16, month = today.month, day = today.day }
-      if date_16y_ago.invalid and today.month == 2 and today.day == 29 then
-        date_16y_ago = atom.date:new{ year = today.year - 16, month = 2, day = 28 }
+      local min_age = config.self_registration.min_age or 16
+      local date_nyears_ago = atom.date:new{ year = today.year - min_age, month = today.month, day = today.day }
+      if date_nyears_ago.invalid and today.month == 2 and today.day == 29 then
+        date_nyears_ago = atom.date:new{ year = today.year - min_age, month = 2, day = 28 }
       end
-      if date > date_16y_ago then
+      if date > date_nyears_ago then
         request.redirect{ external = encode.url { module = "registration", view = "register_rejected_age" } }      
         return
       end
