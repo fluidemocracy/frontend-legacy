@@ -113,7 +113,7 @@ verification.request_origin = json.object{
 verification.request_data = json.object()
 
 for i, field in ipairs(config.self_registration.fields) do
-  if not field.internal then
+  if not field.internal and field.type ~= "comment" then
     if field.name == "date_of_birth" then
       local day = tonumber(param.get("verification_data_" .. field.name .. "_day"))
       local month = tonumber(param.get("verification_data_" .. field.name .. "_month"))
