@@ -8,7 +8,9 @@ for i, field in ipairs(config.self_registration.fields) do
     class = " is-invalid"
   end
   if not field.internal then
-    if field.name == "date_of_birth" then
+    if field.type == "comment" then
+      ui.tag { content = field.label }
+    elseif field.name == "date_of_birth" then
       local label = field.label
       if field.optional then
         label = label .. config.self_registration.optional_field_indicator
