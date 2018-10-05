@@ -53,7 +53,6 @@ if not for_issue and not for_member then
         if app.session.member then
           selector:join("area", "__filter_area", "__filter_area.id = issue.area_id")
           selector:join("privilege", "__filter_privilege", { "__filter_privilege.unit_id = __filter_area.unit_id AND __filter_privilege.member_id = ?", app.session.member_id })
-          selector:add_where{ "__filter_area.unit_id = ?", unit.id }
         end
       end
     }
