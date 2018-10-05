@@ -6,7 +6,7 @@ local members_selector = Member:new_selector()
   :add_where("activated NOTNULL")
 
 if unit_id then
-  member_selector:join("privilege", nil, { "privilege.member_id = member.id AND privilege.unit_id = ?", unit_id })
+  members_selector:join("privilege", nil, { "privilege.member_id = member.id AND privilege.unit_id = ?", unit_id })
 end
 
 ui.grid{ content = function()
