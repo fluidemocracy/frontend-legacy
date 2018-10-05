@@ -52,7 +52,7 @@ if not for_issue and not for_member then
       selector_modifier = function(selector) 
         if app.session.member then
           selector:join("area", "__filter_area", "__filter_area.id = issue.area_id")
-          selector:join("unit", "__filter_unit", "__filter_unit.id = __filter_unit.id = __filter_area.unit_id AND __filter_unit.active")
+          selector:join("unit", "__filter_unit", "__filter_unit.id = __filter_area.unit_id AND __filter_unit.active")
           selector:join("privilege", "__filter_privilege", { "__filter_privilege.unit_id = __filter_area.unit_id AND __filter_privilege.member_id = ?", app.session.member_id })
         end
       end
