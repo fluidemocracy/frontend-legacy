@@ -53,7 +53,9 @@ ui.container{ attr = { class = "mdl-card mdl-shadow--2dp mdl-card__fullwidth" },
       ui.link {
         attr = { class = "mdl-button mdl-js-button" },
         text = _"Show full member list",
-        module = "member", view = "list"
+        module = "member", view = "list", params = {
+          unit_id = unit_id
+        }
       }
     end }
   end
