@@ -15,7 +15,7 @@ ui.container{ attr = { class = "box" }, content = function()
           if for_admin then
             ui.link{ text = unit.name, module = "admin", view = "unit_edit", id = unit.id }
           else
-            ui.link{ text = unit.name, module = "unit", view = "show", id = unit.id }
+            ui.link{ text = unit.name, module = "index", view = "index", params = { unit = unit.id } }
           end
         end 
       }
