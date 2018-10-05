@@ -63,7 +63,7 @@ if not for_issue and not for_member then
         name = tostring(unit.id),
         label = unit.name,
         selector_modifier = function(selector)
-          selector:join("area", "__filter_area", "__filter_area.id = issue.area_id")
+          selector:join("area", "__filter_area", "__filter_area.id = issue.area_id AND __filter_area.active")
           selector:add_where{ "__filter_area.unit_id = ?", unit.id }
         end
       }
