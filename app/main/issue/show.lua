@@ -71,9 +71,16 @@ ui.grid{ content = function()
               ui.field.timestamp{  label = _"Half frozen at",        name = "half_frozen" }
             end
             ui.field.text{       label = _"Verification time",     value = format.interval_text(issue.verification_time_text) }
+            local quorums = {}
+            if policy.initiative_quorum_num / policy.initiative_quorum_den then
+              table.insert(quorums, format.percentage(policy.initiative_quorum_num / policy.initiative_quorum_den))
+            end
+            if policy.initiative_quorum then
+              table.insert(quorums, policy.initiative_quorum)
+            end
             ui.field.text{
               label   = _"Initiative quorum",
-              value = format.percentage(policy.initiative_quorum_num / policy.initiative_quorum_den)
+              value = table.concat(quorums, " / ")
             }
             if issue.fully_frozen then
               ui.field.timestamp{  label = _"Fully frozen at",       name = "fully_frozen" }
