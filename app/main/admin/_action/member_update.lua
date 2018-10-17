@@ -27,8 +27,10 @@ if deactivate then
   member.active = false
 end
 local login = param.get("login")
-if login then
+if login and #login > 0 then
   member.login = login
+else
+  member.login = nil
 end
 local name = param.get("name")
 if name then

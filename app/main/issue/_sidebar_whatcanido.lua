@@ -256,7 +256,7 @@ ui.container{ attr = { class = "mdl-card mdl-card__fullwidth mdl-shadow--2dp" },
       end }
     end
     
-    if not config.disable_delegations and privileged_to_vote and not issue.closed and not issue.fully_frozen then
+    if privileged_to_vote and not issue.closed and not issue.fully_frozen then
       if issue.member_info.own_participation then
         ui.container { attr = { class = "mdl-card__content mdl-card--border" }, content = function ()
           --[[
