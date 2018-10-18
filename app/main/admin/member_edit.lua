@@ -41,10 +41,10 @@ ui.grid{ content = function()
           },
           content = function()
 
-            ui.heading { level = 1, content = member and (member.name or member.id) or _"New member" }
-            
             if member and member.identification then
               ui.heading { level = 3, content = member.identification }
+            else
+              ui.heading { level = 3, content = _"New member" }
             end
           
             ui.field.text{     label = _"Identification", name = "identification" }
