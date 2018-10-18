@@ -4,6 +4,8 @@ local units = Unit:get_flattened_tree{ include_inactive = inactive }
 
 local policies = Policy:build_selector{}:add_order_by("index"):exec()
 
+ui.titleAdmin()
+
 ui.grid{ content = function()
 
   ui.cell_main{ content = function()
