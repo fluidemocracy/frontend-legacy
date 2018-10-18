@@ -42,6 +42,7 @@ ui.grid{ content = function()
           content = function()
 
             ui.heading { level = 1, content = member and (member.name or member.id) or _"New member" }
+            
             if member and member.identification then
               ui.heading { level = 3, content = member.identification }
             end
@@ -49,6 +50,7 @@ ui.grid{ content = function()
             ui.field.text{     label = _"Identification", name = "identification" }
             ui.field.text{     label = _"Notification email (confirmed)", name = "notify_email" }
             ui.field.text{     label = _"Notification email (unconfirmed)", name = "notify_email_unconfirmed" }
+            
             if member and member.activated then
               ui.field.text{     label = _"Screen name",        name = "name" }
             end
@@ -62,7 +64,7 @@ ui.grid{ content = function()
               name = "unit_" .. unit.id,
               label = unit.name,
               value = unit.voting_right
-            }
+            end
             slot.put("<br /><br />")
 
             if member then
