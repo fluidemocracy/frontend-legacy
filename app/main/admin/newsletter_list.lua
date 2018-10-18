@@ -4,29 +4,31 @@ local newsletter = Newsletter:new_selector()
 
 ui.titleAdmin(_"Newsletter")
 
-ui.section( function()
+ui.grid{ content = function()
 
-  ui.sectionHead( function()
-    ui.heading { level = 1, content = _"Newsletter list" }
-  end )
+  ui.cell_main{ content = function()
+    ui.container{ attr = { class = "mdl-card mdl-card__fullwidth mdl-shadow--2dp" }, content = function()
+      ui.container{ attr = { class = "mdl-card__title mdl-card--border" }, content = function()
+        ui.heading { attr = { class = "mdl-card__title-text" }, level = 2, content = _"Newsletter list" }
+      end }
+      ui.container{ attr = { class = "mdl-card__content" }, content = function()
 
-  ui.sectionRow( function ()
-
-    ui.list{
-      records = newsletter,
-      columns = {
-        { label = _"Unit", content = function(r) ui.tag{ content = r.unit and r.unit.name or _"All members" } end },
-        { name = "published", label = _"Published" },
-        { name = "subject", label = _"Subject" },
-        { label = _"sent", content = function(r) 
-          if not r.sent then 
-            ui.link{ text = _"Edit", module = "admin", view = "newsletter_edit", id = r.id } 
-          else
-            ui.tag{ content = format.timestamp(r.sent) }
-          end 
-        end }
-      }
-    }
-
-  end)
-end)
+        ui.list{
+          records = newsletter,
+          columns = {
+            { label = _"Unit", content = function(r) ui.tag{ content = r.unit and r.unit.name or _"All members" } end },
+            { name = "published", label = _"Published" },
+            { name = "subject", label = _"Subject" },
+            { label = _"sent", content = function(r) 
+              if not r.sent then 
+                ui.link{ text = _"Edit", module = "admin", view = "newsletter_edit", id = r.id } 
+              else
+                ui.tag{ content = format.timestamp(r.sent) }
+              end 
+            end }
+          }
+        }
+      end }
+    end }
+  end }
+end }
