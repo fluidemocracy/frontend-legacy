@@ -160,7 +160,7 @@ ui.grid{ content = function()
           content = function()
             ui.tag { tag = "ul", attr = { class = "ul" }, content = function()
               ui.tag { tag = "li", content = function()
-                ui.field.text{ label = _"Issue #", name = "id" }
+                ui.field.text{ container_attr = { style = "display: inline-block;" }, label = _"Issue #", name = "id" }
                 ui.submit{ text = _"cancel issue" }
               end }
             end }
