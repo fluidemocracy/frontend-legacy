@@ -90,7 +90,7 @@ ui.container{ attr = { class = "mdl-grid" }, content = function()
                     value = tonumber(data[field.name])
                   }
                   local requested_unit = Unit:by_id(tonumber(verification.request_data.unit))
-                  ui.tag{ content = requested_unit }
+                  ui.tag{ content = requested_unit or "-" }
                 elseif field.name == "sequential_number" then
                   ui.tag{ tag = "label", content = field.label }
 		  slot.put(" ")
