@@ -15,7 +15,7 @@ ui.grid{ content = function()
   ui.cell_main{ content = function()
     ui.container{ attr = { class = "mdl-card mdl-card__fullwidth mdl-shadow--2dp" }, content = function()
       ui.container{ attr = { class = "mdl-card__title mdl-card--border" }, content = function()
-        ui.heading { attr = { class = "mdl-card__title-text" }, level = 2, content = _"Member list" }
+        ui.heading { attr = { class = "mdl-card__title-text" }, level = 2, content = area.name or _"New area" }
       end }
       ui.container{ attr = { class = "mdl-card__content" }, content = function()
         ui.form{
@@ -46,10 +46,6 @@ ui.grid{ content = function()
 
             
             ui.section( function()
-              ui.sectionHead( function()
-                ui.heading { level = 1, content = area.name or _"New area" }
-              end )
-            
               ui.sectionRow( function()
                 
                 ui.field.hidden{ name = "unit_id", value = area.unit_id }
