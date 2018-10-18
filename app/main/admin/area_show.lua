@@ -59,7 +59,7 @@ ui.grid{ content = function()
                             foreign_id      = "id",
                             foreign_name    = "name"
                 }
-                ui.heading { level = 3, content = _"Allowed policies" }
+                ui.container{ content = _"Allowed policies" }
                 ui.multiselect{   name = "allowed_policies[]",
                                   foreign_records = policies,
                                   foreign_id      = "id",
