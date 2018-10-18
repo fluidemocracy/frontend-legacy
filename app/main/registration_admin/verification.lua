@@ -49,7 +49,7 @@ ui.container{ attr = { class = "mdl-grid" }, content = function()
 
       ui.form{
         module = "registration_admin", action = "update_verification", id = verification.id,
-        routing = { ok = { mode = "redirect", module = "registration_admin", view = view } },
+        routing = { ok = { mode = "redirect", module = "registration_admin", view = "index" } },
         record = data,
         content = function()
 
