@@ -74,9 +74,15 @@ ui.grid{ content = function()
                 ui.field.text{    label = _"Admission qourum factor", name = "quorum_factor", value = hint and 2 or nil }
                 slot.put("<br /><br />")
                 ui.field.boolean{ label = _"Active?",     name = "active", value = hint and true or nil }
-                ui.submit{ text = _"update area" }
+                ui.submit{
+                  attr = { class = "mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect" },
+                  text = _"update area"
+                }
                 slot.put(" ")
-                ui.link{ module = "admin", view = "index", content = _"cancel" }
+                ui.link{
+                  attr = { class = "mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect" },
+                  module = "admin", view = "index", content = _"cancel"
+                }
               end )
             end )
           end
