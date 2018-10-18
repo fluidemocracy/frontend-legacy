@@ -41,12 +41,6 @@ ui.grid{ content = function()
           },
           content = function()
 
-            if member and member.identification then
-              ui.heading { level = 3, content = member.identification }
-            else
-              ui.heading { level = 3, content = _"New member" }
-            end
-          
             ui.field.text{     label = _"Identification", name = "identification" }
             ui.field.text{     label = _"Notification email (confirmed)", name = "notify_email" }
             ui.field.text{     label = _"Notification email (unconfirmed)", name = "notify_email_unconfirmed" }
@@ -93,13 +87,22 @@ ui.grid{ content = function()
             slot.put("<br />")
             ui.field.boolean{  label = _"Admin?", name = "admin" }
             slot.put("<br />")
-            ui.submit{         text  = _"update member" }
+            ui.submit{
+              attr = { class = "mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect" },
+              text  = _"update member"
+            }
             slot.put(" ")
             if member then
-              ui.link { module = "admin", view = "member_deactivate", content = _"Deactivate member", id = member.id }
+              ui.link { 
+                attr = { class = "mdl-button mdl-js-button mdl-button--raised" },
+                module = "admin", view = "member_deactivate", content = _"Deactivate member", id = member.id 
+              }
               slot.put(" ")
             end
-            ui.link { module = "admin", view = "index", content = _"cancel" }
+            ui.link {
+                attr = { class = "mdl-button mdl-js-button" },
+                module = "admin", view = "index", content = _"cancel"
+            }
 
           end
         }
