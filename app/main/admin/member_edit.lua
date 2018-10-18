@@ -98,9 +98,9 @@ ui.grid{ content = function()
             end
             ui.link { module = "admin", view = "index", content = _"cancel" }
 
-          end }
-        end
-      }
+          end
+        }
+      end }
     end }
   end }
 end }
