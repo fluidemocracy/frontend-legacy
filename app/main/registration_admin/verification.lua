@@ -132,9 +132,9 @@ ui.container{ attr = { class = "mdl-grid" }, content = function()
                 ui.submit{ name = "invite", attr = { class = "mdl-button mdl-js-button mdl-button--raised" }, value = "Send email invitation again" }
                 slot.put(" &nbsp; ")
               end
-              ui.link{ attr = { class = "mdl-button mdl-js-button mdl-button--raised" }, module = "admin", view = "member_edit", params = { id = member.id }, content = "User account" }
-              slot.put(" &nbsp; ")
               ui.link{ attr = { class = "mdl-button mdl-js-button mdl-button--raised" }, module = "registration_admin", view = view, content = "Back" }
+              slot.put(" &nbsp; ")
+              ui.link{ attr = { class = "mdl-button mdl-js-button" }, module = "admin", view = "member_edit", id = member.id, content = "User account" }
               slot.put(" &nbsp; ")
               ui.submit{ name = "cancel", attr = { class = "mdl-button mdl-js-button" }, value = _"Delete account" }
             else
