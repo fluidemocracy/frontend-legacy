@@ -61,9 +61,10 @@ ui.grid{ content = function()
 
             for i, unit in ipairs(units) do
               ui.field.boolean{
-              name = "unit_" .. unit.id,
-              label = unit.name,
-              value = unit.voting_right
+                name = "unit_" .. unit.id,
+                label = unit.name,
+                value = unit.voting_right
+              }
             end
             slot.put("<br /><br />")
 
