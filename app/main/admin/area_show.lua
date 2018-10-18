@@ -10,70 +10,82 @@ end
 
 ui.titleAdmin(_"area")
 
-ui.form{
-  attr = { class = "vertical section" },
-  record = area,
-  module = "admin",
-  action = "area_update",
-  routing = {
-    ok = {
-      mode = "redirect",
-      module = "admin",
-      view = "index",
-      params = { unit_id = area.unit_id }
-    },
-  },
-  id = id,
-  content = function()
-    local policies = Policy:build_selector{ active = true }:exec()
-    local def_policy = {
-      {
-        id = "-1",
-        name = _"No default"
-      }
-    }
-    for i, record in ipairs(policies) do
-      def_policy[#def_policy+1] = record
-    end
+ui.grid{ content = function()
 
-    
-    ui.section( function()
-      ui.sectionHead( function()
-        ui.heading { level = 1, content = area.name or _"New area" }
-      end )
-    
-      ui.sectionRow( function()
-        
-        ui.field.hidden{ name = "unit_id", value = area.unit_id }
-        ui.field.text{    label = _"Unit", value = area.unit.name, readonly = true }
-        ui.field.text{    label = _"Name",        name = "name" }
-        ui.field.text{    label = _"Description", name = "description", multiline = true }
-        ui.field.text{    label = _"External reference", name = "external_reference" }
-        ui.field.select{  label = _"Default Policy",   name = "default_policy",
-                    value=area.default_policy and area.default_policy.id or "-1",
-                    foreign_records = def_policy,
-                    foreign_id      = "id",
-                    foreign_name    = "name"
+  ui.cell_main{ content = function()
+    ui.container{ attr = { class = "mdl-card mdl-card__fullwidth mdl-shadow--2dp" }, content = function()
+      ui.container{ attr = { class = "mdl-card__title mdl-card--border" }, content = function()
+        ui.heading { attr = { class = "mdl-card__title-text" }, level = 2, content = _"Member list" }
+      end }
+      ui.container{ attr = { class = "mdl-card__content" }, content = function()
+        ui.form{
+          attr = { class = "vertical section" },
+          record = area,
+          module = "admin",
+          action = "area_update",
+          routing = {
+            ok = {
+              mode = "redirect",
+              module = "admin",
+              view = "index",
+              params = { unit_id = area.unit_id }
+            },
+          },
+          id = id,
+          content = function()
+            local policies = Policy:build_selector{ active = true }:exec()
+            local def_policy = {
+              {
+                id = "-1",
+                name = _"No default"
+              }
+            }
+            for i, record in ipairs(policies) do
+              def_policy[#def_policy+1] = record
+            end
+
+            
+            ui.section( function()
+              ui.sectionHead( function()
+                ui.heading { level = 1, content = area.name or _"New area" }
+              end )
+            
+              ui.sectionRow( function()
+                
+                ui.field.hidden{ name = "unit_id", value = area.unit_id }
+                ui.field.text{    label = _"Unit", value = area.unit.name, readonly = true }
+                ui.field.text{    label = _"Name",        name = "name" }
+                ui.field.text{    label = _"Description", name = "description", multiline = true }
+                ui.field.text{    label = _"External reference", name = "external_reference" }
+                ui.field.select{  label = _"Default Policy",   name = "default_policy",
+                            value=area.default_policy and area.default_policy.id or "-1",
+                            foreign_records = def_policy,
+                            foreign_id      = "id",
+                            foreign_name    = "name"
+                }
+                ui.heading { level = 3, content = _"Allowed policies" }
+                ui.multiselect{   name = "allowed_policies[]",
+                                  foreign_records = policies,
+                                  foreign_id      = "id",
+                                  foreign_name    = "name",
+                                  connecting_records = area.allowed_policies or {},
+                                  foreign_reference  = "id",
+                }
+                ui.field.text{    label = _"Admission quorum standard", name = "quorum_standard", value = hint and 10 or nil }
+                ui.field.text{    label = _"Admission quorum issues", name = "quorum_issues", value = hint and 10 or nil }
+                ui.field.text{    label = _"Admission quorum time", name = "quorum_time", value = hint and "60 days" or nil }
+                ui.field.text{    label = _"Admission quorum exponent", name = "quorum_exponent", value = hint and 0.5 or nil }
+                ui.field.text{    label = _"Admission qourum factor", name = "quorum_factor", value = hint and 2 or nil }
+                slot.put("<br /><br />")
+                ui.field.boolean{ label = _"Active?",     name = "active", value = hint and true or nil }
+                ui.submit{ text = _"update area" }
+                slot.put(" ")
+                ui.link{ module = "admin", view = "index", content = _"cancel" }
+              end )
+            end )
+          end
         }
-        ui.heading { level = 3, content = _"Allowed policies" }
-        ui.multiselect{   name = "allowed_policies[]",
-                          foreign_records = policies,
-                          foreign_id      = "id",
-                          foreign_name    = "name",
-                          connecting_records = area.allowed_policies or {},
-                          foreign_reference  = "id",
-        }
-        ui.field.text{    label = _"Admission quorum standard", name = "quorum_standard", value = hint and 10 or nil }
-        ui.field.text{    label = _"Admission quorum issues", name = "quorum_issues", value = hint and 10 or nil }
-        ui.field.text{    label = _"Admission quorum time", name = "quorum_time", value = hint and "60 days" or nil }
-        ui.field.text{    label = _"Admission quorum exponent", name = "quorum_exponent", value = hint and 0.5 or nil }
-        ui.field.text{    label = _"Admission qourum factor", name = "quorum_factor", value = hint and 2 or nil }
-        slot.put("<br /><br />")
-        ui.field.boolean{ label = _"Active?",     name = "active", value = hint and true or nil }
-        ui.submit{ text = _"update area" }
-        slot.put(" ")
-        ui.link{ module = "admin", view = "index", content = _"cancel" }
-      end )
-    end )
-  end
-}
+      end }
+    end }
+  end }
+end }
