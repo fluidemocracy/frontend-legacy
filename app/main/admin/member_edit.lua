@@ -17,83 +17,93 @@ end
 
 local units = units_selector:exec()
   
-ui.form{
-  attr = { class = "vertical section" },
-  module = "admin",
-  action = "member_update",
-  id = member and member.id,
-  record = member,
-  readonly = not app.session.member.admin,
-  routing = {
-    default = {
-      mode = "redirect",
-      modules = "admin",
-      view = "index"
-    }
-  },
-  content = function()
+ui.grid{ content = function()
 
-    ui.sectionHead( function()
-      ui.heading { level = 1, content = member and (member.name or member.id) or _"New member" }
-      if member and member.identification then
-        ui.heading { level = 3, content = member.identification }
-      end
-    end )
-  
-    ui.sectionRow( function()
-      ui.field.text{     label = _"Identification", name = "identification" }
-      ui.field.text{     label = _"Notification email (confirmed)", name = "notify_email" }
-      ui.field.text{     label = _"Notification email (unconfirmed)", name = "notify_email_unconfirmed" }
-      if member and member.activated then
-        ui.field.text{     label = _"Screen name",        name = "name" }
-      end
-      
-      if member and member.activated and not deactivated then
-        ui.field.text{     label = _"Login name",        name = "login" }
-      end
+  ui.cell_main{ content = function()
+    ui.container{ attr = { class = "mdl-card mdl-card__fullwidth mdl-shadow--2dp" }, content = function()
+      ui.container{ attr = { class = "mdl-card__title mdl-card--border" }, content = function()
+        ui.heading { attr = { class = "mdl-card__title-text" }, level = 2, content = _"Member" }
+      end }
+      ui.container{ attr = { class = "mdl-card__content" }, content = function()
+        ui.form{
+          attr = { class = "vertical section" },
+          module = "admin",
+          action = "member_update",
+          id = member and member.id,
+          record = member,
+          readonly = not app.session.member.admin,
+          routing = {
+            default = {
+              mode = "redirect",
+              modules = "admin",
+              view = "index"
+            }
+          },
+          content = function()
 
-      for i, unit in ipairs(units) do
-        ui.field.boolean{
-          name = "unit_" .. unit.id,
-          label = unit.name,
-          value = unit.voting_right
-        }
-      end
-      slot.put("<br /><br />")
+            ui.sectionHead( function()
+              ui.heading { level = 1, content = member and (member.name or member.id) or _"New member" }
+              if member and member.identification then
+                ui.heading { level = 3, content = member.identification }
+              end
+            end )
+          
+            ui.sectionRow( function()
+              ui.field.text{     label = _"Identification", name = "identification" }
+              ui.field.text{     label = _"Notification email (confirmed)", name = "notify_email" }
+              ui.field.text{     label = _"Notification email (unconfirmed)", name = "notify_email_unconfirmed" }
+              if member and member.activated then
+                ui.field.text{     label = _"Screen name",        name = "name" }
+              end
+              
+              if member and member.activated and not deactivated then
+                ui.field.text{     label = _"Login name",        name = "login" }
+              end
 
-      if member then
-        ui.field.text{  label = _"Activated",       name = "activated", readonly = true }
-      end
-         
-      if not member or not member.activated then
-        ui.field.boolean{  label = _"Send invite?",       name = "invite_member" }
-      end
-      
-      if member then
-        ui.field.boolean{ 
-          label = _"Member inactive?", name = "deactivate",
-          readonly = true, 
-          value = member and member.active == false
-        }
-      end
-      
-      if member then
-        ui.field.boolean{
-          label = _"Lock member?", name = "locked",
-        }
-      end
-      
-      slot.put("<br />")
-      ui.field.boolean{  label = _"Admin?", name = "admin" }
-      slot.put("<br />")
-      ui.submit{         text  = _"update member" }
-      slot.put(" ")
-      if member then
-        ui.link { module = "admin", view = "member_deactivate", content = _"Deactivate member", id = member.id }
-        slot.put(" ")
-      end
-      ui.link { module = "admin", view = "index", content = _"cancel" }
-    end )
-  end
-}
+              for i, unit in ipairs(units) do
+                ui.field.boolean{
+                name = "unit_" .. unit.id,
+                label = unit.name,
+                value = unit.voting_right
+              }
+            end
+            slot.put("<br /><br />")
 
+            if member then
+              ui.field.text{  label = _"Activated",       name = "activated", readonly = true }
+            end
+              
+            if not member or not member.activated then
+              ui.field.boolean{  label = _"Send invite?",       name = "invite_member" }
+            end
+            
+            if member then
+              ui.field.boolean{ 
+                label = _"Member inactive?", name = "deactivate",
+                readonly = true, 
+                value = member and member.active == false
+              }
+            end
+            
+            if member then
+              ui.field.boolean{
+                label = _"Lock member?", name = "locked",
+              }
+            end
+            
+            slot.put("<br />")
+            ui.field.boolean{  label = _"Admin?", name = "admin" }
+            slot.put("<br />")
+            ui.submit{         text  = _"update member" }
+            slot.put(" ")
+            if member then
+              ui.link { module = "admin", view = "member_deactivate", content = _"Deactivate member", id = member.id }
+              slot.put(" ")
+            end
+            ui.link { module = "admin", view = "index", content = _"cancel" }
+          end )
+        end
+      }
+    end }
+  end }
+end }
