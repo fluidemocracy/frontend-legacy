@@ -93,9 +93,13 @@ ui.grid{ content = function()
               foreign_name = "name"
             }
             
-            ui.submit{ text = _"publish suggestion" }
+            ui.submit{ 
+              attr = { class = "mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect" },
+              text = _"publish suggestion" 
+            }
             slot.put(" ")
             ui.link{
+              attr = { class = "mdl-button mdl-js-button" },
               content = _"cancel",
               module = "initiative",
               view = "show",
