@@ -136,9 +136,11 @@ ui.container{ attr = { class = "mdl-grid" }, content = function()
           routing = {
             default = {
               mode = "redirect",
-              module = area and "area" or initiative and "initiative" or issue and "issue" or "unit",
-              view = "show",
-              id = area and area.id or initiative and initiative.id or issue and issue.id or unit.id,
+              module = issue and "issue" or initiative and "initiative" or "index",
+              view = issue and "show" or initiative and "show" or "index",
+              id = initiative and initiative.id or issue and issue.id,
+              params = { area = area and area.id, unit = unit and unit.id or area and area.unit_id }
+              
             }
           },
           content = function()
