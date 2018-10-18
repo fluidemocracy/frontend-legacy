@@ -2,7 +2,8 @@ local inactive = param.get("inactive", atom.boolean)
 
 local units = Unit:get_flattened_tree{ include_inactive = inactive }
 
-local policies = Policy:build_selector{}:add_order_by("index"):exec()
+local policies = Policy:build_selector{ active = not inactive }:exec()
+--local policies = Policy:build_selector{}:add_order_by("index"):exec()
 
 ui.titleAdmin()
 
@@ -121,12 +122,11 @@ ui.grid{ content = function()
           view = "policy_show"
         }
         slot.put(" &nbsp; ")
-        ui.link{
-          text = _"Show policies not in use",
-          module = "admin",
-          view = "policy_list",
-          params = { show_not_in_use = true }
-        }
+        if (not inactive) then
+          ui.link { module = "admin", view = "index", params = { inactive = true }, content = _"Show inactive" }
+        else
+          ui.link { module = "admin", view = "index", content = _"Hide inactive" }
+        end
       end }
     end }
 
