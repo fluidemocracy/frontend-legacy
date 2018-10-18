@@ -41,32 +41,28 @@ ui.grid{ content = function()
           },
           content = function()
 
-            ui.sectionHead( function()
-              ui.heading { level = 1, content = member and (member.name or member.id) or _"New member" }
-              if member and member.identification then
-                ui.heading { level = 3, content = member.identification }
-              end
-            end )
-          
-            ui.sectionRow( function()
-              ui.field.text{     label = _"Identification", name = "identification" }
-              ui.field.text{     label = _"Notification email (confirmed)", name = "notify_email" }
-              ui.field.text{     label = _"Notification email (unconfirmed)", name = "notify_email_unconfirmed" }
-              if member and member.activated then
-                ui.field.text{     label = _"Screen name",        name = "name" }
-              end
-              
-              if member and member.activated and not deactivated then
-                ui.field.text{     label = _"Login name",        name = "login" }
-              end
-
-              for i, unit in ipairs(units) do
-                ui.field.boolean{
-                name = "unit_" .. unit.id,
-                label = unit.name,
-                value = unit.voting_right
-              }
+            ui.heading { level = 1, content = member and (member.name or member.id) or _"New member" }
+            if member and member.identification then
+              ui.heading { level = 3, content = member.identification }
             end
+          
+            ui.field.text{     label = _"Identification", name = "identification" }
+            ui.field.text{     label = _"Notification email (confirmed)", name = "notify_email" }
+            ui.field.text{     label = _"Notification email (unconfirmed)", name = "notify_email_unconfirmed" }
+            if member and member.activated then
+              ui.field.text{     label = _"Screen name",        name = "name" }
+            end
+            
+            if member and member.activated and not deactivated then
+              ui.field.text{     label = _"Login name",        name = "login" }
+            end
+
+            for i, unit in ipairs(units) do
+              ui.field.boolean{
+              name = "unit_" .. unit.id,
+              label = unit.name,
+              value = unit.voting_right
+            }
             slot.put("<br /><br />")
 
             if member then
@@ -101,7 +97,8 @@ ui.grid{ content = function()
               slot.put(" ")
             end
             ui.link { module = "admin", view = "index", content = _"cancel" }
-          end )
+
+          end }
         end
       }
     end }
