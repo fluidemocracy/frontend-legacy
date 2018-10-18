@@ -12,7 +12,7 @@ ui.grid{ content = function()
           module = "admin", view = "member_list",
           content = function()
           
-            ui.field.text{ label = _"search", name = "search", value = search }
+            ui.field.text{ container_attr = { style = "display: inline-block;" }, label = _"search", name = "search", value = search }
             
             ui.submit{ value = _"search" }
           
