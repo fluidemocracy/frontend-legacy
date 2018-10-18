@@ -67,14 +67,15 @@ ui.grid{ content = function()
                                   connecting_records = area.allowed_policies or {},
                                   foreign_reference  = "id",
                 }
-                slot.put("<br /><br />")
+                slot.put("<br />")
                 ui.field.text{    label = _"Admission quorum standard", name = "quorum_standard", value = hint and 10 or nil }
                 ui.field.text{    label = _"Admission quorum issues", name = "quorum_issues", value = hint and 10 or nil }
                 ui.field.text{    label = _"Admission quorum time", name = "quorum_time", value = hint and "60 days" or nil }
                 ui.field.text{    label = _"Admission quorum exponent", name = "quorum_exponent", value = hint and 0.5 or nil }
                 ui.field.text{    label = _"Admission qourum factor", name = "quorum_factor", value = hint and 2 or nil }
-                slot.put("<br /><br />")
+                slot.put("<br />")
                 ui.field.boolean{ label = _"Active?",     name = "active", value = hint and true or nil }
+                slot.put("<br />")
                 ui.submit{
                   attr = { class = "mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect" },
                   text = _"update area"
