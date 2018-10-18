@@ -53,9 +53,15 @@ ui.grid{ content = function()
             ui.field.text{     label = _"Subject", name = "subject" }
             ui.field.text{     label = _"Content", name = "content", multiline = true, attr = { rows = "20" } }
 
-            ui.submit{         text  = _"create newsletter" }
+            ui.submit{  
+              attr = { class = "mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect" },
+              text  = _"create newsletter" 
+            }
             slot.put(" ")
-            ui.link { module = "admin", view = "index", content = _"cancel" }
+            ui.link {
+              attr = { class = "mdl-button mdl-js-button" },
+              module = "admin", view = "index", content = _"cancel" 
+            }
 
           end
         }
