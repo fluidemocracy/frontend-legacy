@@ -12,6 +12,7 @@ if member then
   units_selector
     :left_join("privilege", nil, { "privilege.member_id = ? AND privilege.unit_id = unit.id", member.id })
     :add_field("privilege.voting_right", "voting_right")
+    :add_order_by("unit.name")
 end
 
 local units = units_selector:exec()
