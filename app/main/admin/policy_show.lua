@@ -67,9 +67,15 @@ ui.grid{ content = function()
 
             ui.field.boolean{ label = _"Active?", name = "active", value = hint and true or nil }
 
-            ui.submit{ text = _"update policy" }
+            ui.submit{ 
+              attr = { class = "mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect" },
+              text = _"update policy" 
+            }
             slot.put(" ")
-            ui.link { module = "admin", view = "index", content = _"cancel" }
+            ui.link { 
+              attr = { class = "mdl-button mdl-js-button" },
+              module = "admin", view = "index", content = _"cancel" 
+            }
           end
         }
       end }
