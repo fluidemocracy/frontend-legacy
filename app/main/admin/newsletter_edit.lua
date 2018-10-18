@@ -13,7 +13,7 @@ ui.grid{ content = function()
   ui.cell_main{ content = function()
     ui.container{ attr = { class = "mdl-card mdl-card__fullwidth mdl-shadow--2dp" }, content = function()
       ui.container{ attr = { class = "mdl-card__title mdl-card--border" }, content = function()
-        ui.heading { attr = { class = "mdl-card__title-text" }, level = 2, content = _"Member list" }
+        ui.heading { attr = { class = "mdl-card__title-text" }, level = 2, content = newsletter and (newsletter.subject) or _"New newsletter" }
       end }
       ui.container{ attr = { class = "mdl-card__content" }, content = function()
         ui.form{
@@ -31,37 +31,32 @@ ui.grid{ content = function()
           },
           content = function()
 
-            ui.sectionHead( function()
-              ui.heading { level = 1, content = newsletter and (newsletter.subject) or _"New newsletter" }
-            end )
-          
-            ui.sectionRow( function()
-              local units = { 
-                { id = 0, name = _"All members" },
-                { id = "_", name = _"" },
-              }
-              for i, unit in ipairs(Unit:get_flattened_tree()) do
-                units[#units+1] = unit
-              end
-              ui.field.text{ label = _"Date", name = "published" }
-              ui.field.select{
-                label = "Recipient",
-                name = "unit_id",
-                foreign_records = units,
-                foreign_id = "id",
-                foreign_name = "name",
-                disabled_records = { ["_"] = true },
-                value = newsletter.unit_id
-              }
-              ui.field.boolean{  label = _"Override disable notifications?", name = "include_all_members" }
-              slot.put("<br />")
-              ui.field.text{     label = _"Subject", name = "subject" }
-              ui.field.text{     label = _"Content", name = "content", multiline = true, attr = { rows = "20" } }
+            local units = { 
+              { id = 0, name = _"All members" },
+              { id = "_", name = _"" },
+            }
+            for i, unit in ipairs(Unit:get_flattened_tree()) do
+              units[#units+1] = unit
+            end
+            ui.field.text{ label = _"Date", name = "published" }
+            ui.field.select{
+              label = "Recipient",
+              name = "unit_id",
+              foreign_records = units,
+              foreign_id = "id",
+              foreign_name = "name",
+              disabled_records = { ["_"] = true },
+              value = newsletter.unit_id
+            }
+            ui.field.boolean{  label = _"Override disable notifications?", name = "include_all_members" }
+            slot.put("<br />")
+            ui.field.text{     label = _"Subject", name = "subject" }
+            ui.field.text{     label = _"Content", name = "content", multiline = true, attr = { rows = "20" } }
 
-              ui.submit{         text  = _"create newsletter" }
-              slot.put(" ")
-              ui.link { module = "admin", view = "index", content = _"cancel" }
-            end )
+            ui.submit{         text  = _"create newsletter" }
+            slot.put(" ")
+            ui.link { module = "admin", view = "index", content = _"cancel" }
+
           end
         }
       end }
