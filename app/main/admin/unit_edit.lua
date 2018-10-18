@@ -19,7 +19,7 @@ ui.grid{ content = function()
   ui.cell_main{ content = function()
     ui.container{ attr = { class = "mdl-card mdl-card__fullwidth mdl-shadow--2dp" }, content = function()
       ui.container{ attr = { class = "mdl-card__title mdl-card--border" }, content = function()
-        ui.heading { attr = { class = "mdl-card__title-text" }, level = 2, content = _"Member list" }
+        ui.heading { attr = { class = "mdl-card__title-text" }, level = 2, content = unit and unit.name or _"New organizational unit" }
       end }
       ui.container{ attr = { class = "mdl-card__content" }, content = function()
         ui.form{
@@ -36,9 +36,6 @@ ui.grid{ content = function()
             }
           },
           content = function()
-            ui.sectionHead( function()
-              ui.heading { level = 1, content = unit and unit.name or _"New organizational unit" }
-            end )
             ui.sectionRow( function()
               ui.field.select{
                 label = _"Parent unit",
