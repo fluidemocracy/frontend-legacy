@@ -61,103 +61,104 @@ ui.grid{ content = function()
   
   ui.cell_sidebar{ content = function()
 
-  ui.container{ attr = { class = "mdl-card mdl-card__fullwidth mdl-shadow--2dp" }, content = function()
-    ui.container{ attr = { class = "mdl-card__title mdl-card--border" }, content = function()
-      ui.heading { attr = { class = "mdl-card__title-text" }, level = 2, content = _"Members" }
-    end }
-    ui.container{ attr = { class = "mdl-card__content" }, content = function()
-      ui.tag { tag = "ul", attr = { class = "ul" }, content = function()
-        ui.tag { tag = "li", content = function()
-          ui.form{
-            module = "admin", view = "member_list",
-            content = function()
-            
-              ui.field.text{ label = _"search", name = "search" }
-              
-              ui.submit{ value = _"search" }
-            
-            end
-          }
-        end }
+    ui.container{ attr = { class = "mdl-card mdl-card__fullwidth mdl-shadow--2dp" }, content = function()
+      ui.container{ attr = { class = "mdl-card__title mdl-card--border" }, content = function()
+        ui.heading { attr = { class = "mdl-card__title-text" }, level = 2, content = _"Members" }
       end }
-      ui.sidebarSection( "moreLink", function()
-        ui.link{
-          text = _"Register new member",
-          module = "admin",
-          view = "member_edit"
-        }
-      end )
-    end }
-  end }
-
-  ui.container{ attr = { class = "mdl-card mdl-card__fullwidth mdl-shadow--2dp" }, content = function()
-    ui.container{ attr = { class = "mdl-card__title mdl-card--border" }, content = function()
-      ui.heading { attr = { class = "mdl-card__title-text" }, level = 2, content = _"Newsletter" }
-    end }
-    ui.container{ attr = { class = "mdl-card__content" }, content = function()
-      ui.link{
-        text = _"Create a newsletter",
-        module = "admin",
-        view = "newsletter_edit"
-      }
-      ui.link{
-        text = _"Manage newsletters",
-        module = "admin",
-        view = "newsletter_list"
-      }
-    end }
-  end }
-
-  ui.container{ attr = { class = "mdl-card mdl-card__fullwidth mdl-shadow--2dp" }, content = function()
-    ui.container{ attr = { class = "mdl-card__title mdl-card--border" }, content = function()
-      ui.heading { attr = { class = "mdl-card__title-text" }, level = 2, content = _"Cancel issue" }
-    end }
-    ui.container{ attr = { class = "mdl-card__content" }, content = function()
-      ui.form{
-        module = "admin",
-        view = "cancel_issue",
-        content = function()
-          ui.tag { tag = "ul", attr = { class = "ul" }, content = function()
-            ui.tag { tag = "li", content = function()
-              ui.field.text{ label = _"Issue #", name = "id" }
-              ui.submit{ text = _"cancel issue" }
-            end }
-          end }
-        end
-      }
-    end }
-  end }
-
-  ui.container{ attr = { class = "mdl-card mdl-card__fullwidth mdl-shadow--2dp" }, content = function()
-    ui.container{ attr = { class = "mdl-card__title mdl-card--border" }, content = function()
-      ui.heading { attr = { class = "mdl-card__title-text" }, level = 2, content = _"Policies" }
-    end }
-    ui.container{ attr = { class = "mdl-card__content" }, content = function()
-      ui.tag { tag = "ul", attr = { class = "ul" }, content = function()
-        for i, policy in ipairs(policies) do
+      ui.container{ attr = { class = "mdl-card__content" }, content = function()
+        ui.tag { tag = "ul", attr = { class = "ul" }, content = function()
           ui.tag { tag = "li", content = function()
-            ui.link{
-              content = policy.name,
-              module = "admin",
-              view = "policy_show",
-              id = policy.id
+            ui.form{
+              module = "admin", view = "member_list",
+              content = function()
+              
+                ui.field.text{ label = _"search", name = "search" }
+                
+                ui.submit{ value = _"search" }
+              
+              end
             }
           end }
-        end
+        end }
+        ui.sidebarSection( "moreLink", function()
+          ui.link{
+            text = _"Register new member",
+            module = "admin",
+            view = "member_edit"
+          }
+        end )
       end }
+    end }
 
-      ui.link{
-        text = _"Create new policy",
-        module = "admin",
-        view = "policy_show"
-      }
+    ui.container{ attr = { class = "mdl-card mdl-card__fullwidth mdl-shadow--2dp" }, content = function()
+      ui.container{ attr = { class = "mdl-card__title mdl-card--border" }, content = function()
+        ui.heading { attr = { class = "mdl-card__title-text" }, level = 2, content = _"Newsletter" }
+      end }
+      ui.container{ attr = { class = "mdl-card__content" }, content = function()
+        ui.link{
+          text = _"Create a newsletter",
+          module = "admin",
+          view = "newsletter_edit"
+        }
+        ui.link{
+          text = _"Manage newsletters",
+          module = "admin",
+          view = "newsletter_list"
+        }
+      end }
+    end }
 
-      ui.link{
-        text = _"Show policies not in use",
-        module = "admin",
-        view = "policy_list",
-        params = { show_not_in_use = true }
-      }
+    ui.container{ attr = { class = "mdl-card mdl-card__fullwidth mdl-shadow--2dp" }, content = function()
+      ui.container{ attr = { class = "mdl-card__title mdl-card--border" }, content = function()
+        ui.heading { attr = { class = "mdl-card__title-text" }, level = 2, content = _"Cancel issue" }
+      end }
+      ui.container{ attr = { class = "mdl-card__content" }, content = function()
+        ui.form{
+          module = "admin",
+          view = "cancel_issue",
+          content = function()
+            ui.tag { tag = "ul", attr = { class = "ul" }, content = function()
+              ui.tag { tag = "li", content = function()
+                ui.field.text{ label = _"Issue #", name = "id" }
+                ui.submit{ text = _"cancel issue" }
+              end }
+            end }
+          end
+        }
+      end }
+    end }
+
+    ui.container{ attr = { class = "mdl-card mdl-card__fullwidth mdl-shadow--2dp" }, content = function()
+      ui.container{ attr = { class = "mdl-card__title mdl-card--border" }, content = function()
+        ui.heading { attr = { class = "mdl-card__title-text" }, level = 2, content = _"Policies" }
+      end }
+      ui.container{ attr = { class = "mdl-card__content" }, content = function()
+        ui.tag { tag = "ul", attr = { class = "ul" }, content = function()
+          for i, policy in ipairs(policies) do
+            ui.tag { tag = "li", content = function()
+              ui.link{
+                content = policy.name,
+                module = "admin",
+                view = "policy_show",
+                id = policy.id
+              }
+            end }
+          end
+        end }
+
+        ui.link{
+          text = _"Create new policy",
+          module = "admin",
+          view = "policy_show"
+        }
+
+        ui.link{
+          text = _"Show policies not in use",
+          module = "admin",
+          view = "policy_list",
+          params = { show_not_in_use = true }
+        }
+      end }
     end }
   end }
 end }
