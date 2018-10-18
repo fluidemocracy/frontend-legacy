@@ -92,6 +92,39 @@ ui.grid{ content = function()
 
     ui.container{ attr = { class = "mdl-card mdl-card__fullwidth mdl-shadow--2dp" }, content = function()
       ui.container{ attr = { class = "mdl-card__title mdl-card--border" }, content = function()
+        ui.heading { attr = { class = "mdl-card__title-text" }, level = 2, content = _"Policies" }
+      end }
+      ui.container{ attr = { class = "mdl-card__content" }, content = function()
+        ui.tag { tag = "ul", attr = { class = "ul" }, content = function()
+          for i, policy in ipairs(policies) do
+            ui.tag { tag = "li", content = function()
+              ui.link{
+                content = policy.name,
+                module = "admin",
+                view = "policy_show",
+                id = policy.id
+              }
+            end }
+          end
+        end }
+
+        ui.link{
+          text = _"Create new policy",
+          module = "admin",
+          view = "policy_show"
+        }
+        slot.put(" &nbsp; ")
+        ui.link{
+          text = _"Show policies not in use",
+          module = "admin",
+          view = "policy_list",
+          params = { show_not_in_use = true }
+        }
+      end }
+    end }
+
+    ui.container{ attr = { class = "mdl-card mdl-card__fullwidth mdl-shadow--2dp" }, content = function()
+      ui.container{ attr = { class = "mdl-card__title mdl-card--border" }, content = function()
         ui.heading { attr = { class = "mdl-card__title-text" }, level = 2, content = _"Newsletter" }
       end }
       ui.container{ attr = { class = "mdl-card__content" }, content = function()
@@ -100,6 +133,7 @@ ui.grid{ content = function()
           module = "admin",
           view = "newsletter_edit"
         }
+        slot.put(" &nbsp; ")
         ui.link{
           text = _"Manage newsletters",
           module = "admin",
@@ -128,38 +162,6 @@ ui.grid{ content = function()
       end }
     end }
 
-    ui.container{ attr = { class = "mdl-card mdl-card__fullwidth mdl-shadow--2dp" }, content = function()
-      ui.container{ attr = { class = "mdl-card__title mdl-card--border" }, content = function()
-        ui.heading { attr = { class = "mdl-card__title-text" }, level = 2, content = _"Policies" }
-      end }
-      ui.container{ attr = { class = "mdl-card__content" }, content = function()
-        ui.tag { tag = "ul", attr = { class = "ul" }, content = function()
-          for i, policy in ipairs(policies) do
-            ui.tag { tag = "li", content = function()
-              ui.link{
-                content = policy.name,
-                module = "admin",
-                view = "policy_show",
-                id = policy.id
-              }
-            end }
-          end
-        end }
-
-        ui.link{
-          text = _"Create new policy",
-          module = "admin",
-          view = "policy_show"
-        }
-
-        ui.link{
-          text = _"Show policies not in use",
-          module = "admin",
-          view = "policy_list",
-          params = { show_not_in_use = true }
-        }
-      end }
-    end }
   end }
 end }
 
