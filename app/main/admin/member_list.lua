@@ -1,5 +1,7 @@
 local search = param.get("search")
 
+ui.titleAdmin(_"Member")
+
 ui.grid{ content = function()
 
   ui.cell_main{ content = function()
