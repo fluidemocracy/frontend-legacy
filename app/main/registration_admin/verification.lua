@@ -68,6 +68,7 @@ ui.container{ attr = { class = "mdl-grid" }, content = function()
                 elseif field.name == "unit" then
                   local units_selector = Unit:new_selector()
                     :add_where{ "active" }
+                    :add_order_by("name")
                   if field.where then
                     units_selector:add_where(field.where)
                   end
@@ -82,6 +83,7 @@ ui.container{ attr = { class = "mdl-grid" }, content = function()
                     table.insert(units, unit)
                   end
                   ui.field.select{
+                    container_attr = { style = "display: inline-block;" },
                     label = field.label,
                     foreign_records = units,
                     foreign_id = "id",
