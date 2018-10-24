@@ -21,24 +21,27 @@ ui.tag{ tag = "table", content = function()
 local function quorum_text(policy, quorum)
   local num
   local den
-  
+
   if quorum == 1 then
     return math.max(policy.issue_quorum or 0, issue.issue_quorum or 0)
   elseif quorum == 2 then
     num = policy.initiative_quorum_num
     den = policy.initiative_quorum_den
   end
-  
-  if num == nil or den == nil then
-    return 0
+
+  local quorums = {}
+
+  if num and num > 0 and den == 100 or den == 10 then
+    table.insert(quorums, _("#{percentage}%", { percentage = num * 100 / den }))
+  elseif num and num > 0 and den and den > 0 then
+    table.insert(quorums, num .. "/" .. den)
   end
-  
-  if den == 100 or den == 10 then
-    return _("#{percentage}%", { percentage = num * 100 / den })
-  else
-    return num .. "/" .. den
+
+  if policy.initiative_quorum then
+    table.insert(quorums, policy.initiative_quorum)
   end
-  
+
+  return table.concat(quorums, " / ")
 end
 
 local phases = { "admission", "discussion", "verification", "voting" }
