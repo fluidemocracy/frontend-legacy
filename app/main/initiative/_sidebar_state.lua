@@ -71,7 +71,20 @@ if initiative.admitted == false then
     attr = { class = "sectionRow not_admitted_info" },
     content = function ()
       ui.heading { level = 1, content = _"Initiative not admitted" }
-      ui.container { content = _("This initiative has not been admitted! It failed the 2nd quorum of #{quorum}.", { quorum = format.percentage ( policy.initiative_quorum_num / policy.initiative_quorum_den ) } ) }
+      local num = policy.initiative_quorum_num                                                                                                        
+      local den = policy.initiative_quorum_den                                                                                                        
+      local quorums = {}                                                                                                                              
+      if num and num > 0 and den == 100 or den == 10 then                                                                                             
+        table.insert(quorums, _("#{percentage}%", { percentage = num * 100 / den }))                                                                  
+      elseif num and num > 0 and den and den > 0 then                                                                                                 
+        table.insert(quorums, num .. "/" .. den)                                                                                                      
+      end                                                                                                                                             
+      if policy.initiative_quorum then                                                                                                                
+        table.insert(quorums, policy.initiative_quorum)                                                                                               
+      end                                                                                                                                             
+      local quorum = table.concat(quorums, " / ")                                                                                                     
+                                                                                                                                                      
+      ui.container { content = _("This initiative has not been admitted! It failed the 2nd quorum of #{quorum}.", { quorum = quorum } ) }             
     end
   }
 end
