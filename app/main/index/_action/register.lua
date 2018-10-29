@@ -320,7 +320,7 @@ if step > 2 then
     module = param.get("redirect_module") or "index",
     view   = param.get("redirect_view") or "index",
     id     = param.get("redirect_id"),
-    params = param.get("redirect_params")
+    params = json.import(param.get("redirect_params"))
   }
 end
   
