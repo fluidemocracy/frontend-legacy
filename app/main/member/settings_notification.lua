@@ -26,11 +26,10 @@ ui.grid{ content = function()
             }
           },
           content = function()
-
-          
+            
             ui.container{ content = function()
               ui.tag{ tag = "label", attr = {
-                  class = "mdl-radio mdl-js-radio mdl-js-ripple-effect",
+                  class = "mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect",
                   ["for"] = "notify_level_all"
                 },
                 content = function()
@@ -38,13 +37,14 @@ ui.grid{ content = function()
                     tag = "input",
                     attr = {
                       id = "notify_level_all",
-                      class = "mdl-radio__button",
-                      type = "radio", name = "disable_notifications", value = "false",
+                      class = "mdl-checkbox__input",
+                      type = "checkbox", name = "enable_notifications", value = "true",
                       checked = not app.session.member.disable_notifications and "checked" or nil,
+                      onchange = [[ display = document.getElementById("view_on_notify_level_all_false").style.display = this.checked ? "block" : "none"; ]]
                     }
                   }
                   ui.tag{
-                    attr = { class = "mdl-radio__label", ['for'] = "notify_level_all" },
+                    attr = { class = "mdl-checkbox__label", ['for'] = "notify_level_all" },
                     content = _"I like to receive notifications"
                   }
                 end
@@ -52,14 +52,14 @@ ui.grid{ content = function()
             end }
             
             
-            ui.container{ attr = { class = "view_on_notify_level_all_false", style = "margin-left: 3em;" }, content = function()
+            ui.container{ attr = { id = "view_on_notify_level_all_false" }, content = function()
               slot.put("<br />")
             
               ui.container{ content = _"You will receive status update notification on issue phase changes. Additionally you can subscribe for a regular digest including updates on initiative drafts and new suggestions." }
               slot.put("<br />")
               ui.container{ content = function()
                 ui.tag{ tag = "label", attr = {
-                    class = "mdl-radio mdl-js-radio mdl-js-ripple-effect",
+                    class = "mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect",
                     ["for"] = "digest_on"
                   },
                   content = function()
@@ -67,20 +67,21 @@ ui.grid{ content = function()
                       tag = "input", 
                       attr = {
                         id = "digest_on",
-                        class = "mdl-radio__button",
-                        type = "radio", name = "digest", value = "true",
-                        checked = (app.session.member.disable_notifications or app.session.member.notification_hour ~= nil) and "checked" or nil,
+                        class = "mdl-checkbox__input",
+                        type = "checkbox", name = "digest", value = "true",
+                        checked = app.session.member.notification_hour ~= nil and "checked" or nil,
+                        onchange = [[ display = document.getElementById("view_on_digest_true").style.display = this.checked ? "block" : "none"; ]]
                       }
                     }
                     ui.tag{
-                      attr = { class = "mdl-radio__label", ['for'] = "digest_on" },
+                      attr = { class = "mdl-checkbox__label", ['for'] = "digest_on" },
                       content = _"I want to receive a regular digest"
                     }
                   end
                 }
               end }
           
-              ui.container{ attr = { class = "view_on_digest_true", style = "margin-left: 4em;" }, content = function()
+              ui.container{ attr = { id = "view_on_digest_true", style = "margin-left: 4em;" }, content = function()
 
                 ui.tag{ content = _"every" }
                 slot.put(" ")
@@ -128,56 +129,19 @@ ui.grid{ content = function()
                   value = random_hour or app.session.member.notification_hour
                 }
               end }
-              
-              ui.container{ content = function()
-                ui.tag{ tag = "label", attr = {
-                    class = "mdl-radio mdl-js-radio mdl-js-ripple-effect",
-                    ["for"] = "digest_off"
-                  },
-                  content = function()
-                    ui.tag{
-                      tag = "input", 
-                      attr = {
-                        id = "digest_off",
-                        class = "mdl-radio__button",
-                        type = "radio", name = "digest", value = "false",
-                        checked = not app.session.member.disable_notifications and app.session.member.notification_dow == nil and app.session.member.notification_hour == nil and "checked" or nil,
-                      }
-                    }
-                    ui.tag{
-                      tag = "label", attr = { class = "mdl-radio__label", ['for'] = "digest_off" },
-                      content = _"don't send me a digest"
-                    }
-                  end
-                }
-              end }
+
             end }
             
             slot.put("<br />")
             
-            ui.container{ content = function()
-              ui.tag{ tag = "label", attr = {
-                  class = "mdl-radio mdl-js-radio mdl-js-ripple-effect",
-                  ["for"] = "notify_level_none"
-                },
-                content = function()
-                  ui.tag{
-                    tag = "input", 
-                    attr = {
-                      id = "notify_level_none",
-                      class = "mdl-radio__button",
-                      type = "radio", name = "disable_notifications", value = "true",
-                      checked = app.session.member.disable_notifications and "checked" or nil
-                    }
-                  }
-                  ui.tag{
-                    attr = { class = "mdl-radio__label", ['for'] = "notify_level_none" },
-                    content = _"don't send me notifications by email"
-                  }
-                end
-              }
-            end }
+            if app.session.member.disable_notifications then
+              ui.script{ script = [[ document.getElementById("view_on_notify_level_all_false").style.display = "none"; ]] }
+            end
             
+            if app.session.member.notification_hour == nil  then
+              ui.script{ script = [[ document.getElementById("view_on_digest_true").style.display = "none"; ]] }
+            end
+   
             slot.put("<br />")
           
             ui.tag{

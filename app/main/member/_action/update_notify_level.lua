@@ -1,4 +1,4 @@
-local disable_notifications = param.get("disable_notifications") == "true" and true or false
+local disable_notifications = param.get("enable_notifications") ~= "true" and true or false
 
 if app.session.member.disable_notifications ~= disable_notifications then
   IgnoredArea:destroy_by_member_id(app.session.member_id)
@@ -8,6 +8,7 @@ end
 if app.session.member.disable_notifications then
   app.session.member.notification_dow = nil
   app.session.member.notification_hour = nil
+  
 else 
   if param.get("digest") == "true" then
     local dow = param.get("notification_dow")
