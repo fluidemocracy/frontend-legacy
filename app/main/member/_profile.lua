@@ -37,9 +37,11 @@ ui.form{
     end
     if member.profile then
       local profile = member.profile.profile or {}
-      for i, field in ipairs(config.member_profile_fields) do
-        if profile[field.id] and #(profile[field.id]) > 0 then
-          ui.field.text{ label = field.name, name = field.id, value = profile[field.id] }
+      if config.member_profile_fields then
+        for i, field in ipairs(config.member_profile_fields) do
+          if profile[field.id] and #(profile[field.id]) > 0 then
+            ui.field.text{ label = field.name, name = field.id, value = profile[field.id] }
+          end
         end
       end
     end
