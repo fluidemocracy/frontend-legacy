@@ -27,16 +27,17 @@ ui.grid{ content = function()
           
             ui.container{ content = _"All fields are optional. Please enter only data which should be published." }
             
-            for i, field in ipairs(config.member_profile_fields) do
-              ui.container{
-                attr = { class = "mdl-textfield mdl-js-textfield mdl-textfield--floating-label" },
-                content = function()
-                  ui.tag{ tag = "input", attr = { class = "mdl-textfield__input", name = field.id, id = "input_" .. field.id, readonly = config.locked_profile_fields[field.id], value = profile and profile.profile and profile.profile[field.id] or nil } }
-                  ui.tag{ tag = "label", attr = { class = "mdl-textfield__label", ["for"] = "input_" .. field.id }, content = field.name }
-              end }
-              slot.put("<br />")
+            if config.member_profile_fields then
+              for i, field in ipairs(config.member_profile_fields) do
+                ui.container{
+                  attr = { class = "mdl-textfield mdl-js-textfield mdl-textfield--floating-label" },
+                  content = function()
+                    ui.tag{ tag = "input", attr = { class = "mdl-textfield__input", name = field.id, id = "input_" .. field.id, readonly = config.locked_profile_fields[field.id], value = profile and profile.profile and profile.profile[field.id] or nil } }
+                    ui.tag{ tag = "label", attr = { class = "mdl-textfield__label", ["for"] = "input_" .. field.id }, content = field.name }
+                end }
+                slot.put("<br />")
+              end
             end
-
             if not config.enforce_formatting_engine then
               ui.field.select{
                 label = _"Wiki engine for statement",
