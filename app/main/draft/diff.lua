@@ -11,9 +11,7 @@ then
     ui.tag{ content = _"Please choose two different versions of the draft to compare" }
   end )
   request.redirect{
-    module = "draft", view = "list", params = {
-      initiative_id = initiative_id
-    }
+    module = "initiative", view = "history", id = initiative_id
   }
   return
 end

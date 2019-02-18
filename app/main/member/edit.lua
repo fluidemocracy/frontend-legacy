@@ -25,7 +25,7 @@ ui.grid{ content = function()
           },
           content = function()
           
-            ui.container{ content = _"All fields are optional. Please enter only data which should be published." }
+--            ui.container{ content = _"All fields are optional. Please enter only data which should be published." }
             
             if config.member_profile_fields then
               for i, field in ipairs(config.member_profile_fields) do

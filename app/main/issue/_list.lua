@@ -196,48 +196,33 @@ local function doit()
 
       if not for_issue and not for_initiative then
         ui.container{ attr = { class = "mdl-card__title mdl-card--has-fab mdl-card--border" }, content = function()
-          if not (config.single_unit_id and config.single_area_id) then
-            if not config.single_unit_id then
-              slot.put ( " " )
-              ui.link{
-                module = "index", view = "index", params = { unit = issue.area.unit_id },
-                attr = { class = "mdl-chip unit" }, content = function()
-                  ui.tag{ attr = { class = "mdl-chip__text" }, content = function()
-                    ui.tag{ tag = "i", attr = { class = "material-icons" }, content = "flag" }              
-                    slot.put(" ")
-                    ui.tag{ content = issue.area.unit.name }
-                  end }
-                end 
-              }
+          ui.container{ attr = { class = "contextlinks" }, content = function()
+            if not (config.single_unit_id and config.single_area_id) then
+              if not config.single_unit_id then
+                slot.put ( " " )
+                ui.link{
+                  module = "index", view = "index", params = { unit = issue.area.unit_id },
+                  attr = { class = "unit" }, content = issue.area.unit.name
+                }
+              end
+              if not config.single_area_id then
+                slot.put(" » ")
+                ui.link{
+                  module = "index", view = "index", params = { unit = issue.area.unit_id, area = issue.area_id },
+                  attr = { class = "area" }, content = issue.area.name
+                }
+              end
             end
-            if not config.single_area_id then
-              slot.put(" ")
-              ui.link{
-                module = "index", view = "index", params = { unit = issue.area.unit_id, area = issue.area_id },
-                attr = { class = "mdl-chip area" }, content = function()
-                  ui.tag{ attr = { class = "mdl-chip__text" }, content = function()
-                    ui.tag{ tag = "i", attr = { class = "material-icons" }, content = "folder" }
-                    slot.put(" ")
-                    ui.tag{ content = issue.area.name }
-                  end}
-                end 
-              }
-            end
-          end
-          --ui.heading{ level = 2, attr = { class = "mdl-card__title-text", style = "display: block;" }, content = function()
-            slot.put(" ")
+            slot.put(" » ")
             ui.link{
               module = "issue", view = "show", id = issue.id,
-              attr = { class = "mdl-chip issue" }, content = function()
-                ui.tag{ tag = "i", attr = { class = "material-icons" }, content = "label" }
-                slot.put(" ")
-                ui.tag{ attr = { class = "mdl-chip__text" }, content = issue.name }
-            end }
-          --end }
+              attr = { class = "issue" }, content = issue.name
+            }
+          end }
           ui.container{ attr = { class = "mdl-card__subtitle-text .mdl-cell--hide-phone" }, content = function()
             ui.container{ attr = { class = class }, content = function ()
               if event_icon then
-                ui.tag{ tag = "i", attr = { class = "material-icons" }, content = event_icon }
+                ui.tag{ tag = "i", attr = { class = "material-icons", ["aria-hidden"] = "true" }, content = event_icon }
               end
               slot.put(" ")
               ui.tag { content = event_name }
@@ -418,6 +403,8 @@ else
 end
 
 filters.class = "mdl-special-card mdl-card__fullwidth mdl-shadow--2dp"
+
+filters.legend = _"Filter issues:"
 
 ui.filters(filters)
 
