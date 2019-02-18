@@ -188,9 +188,10 @@ if not param.get("no_star", "boolean") then
         slot.put(" ")
         ui.tag{ content = _"you are interested" }
         if not issue.closed and info.own_participation and info.weight and info.weight > 1 then
+          slot.put(" ")
           ui.link { 
             attr = { class = "right" }, content = "+" .. (info.weight - 1),
-            module = "delegation", view = "show_incoming", params = { 
+            module = "interest", view = "show_incoming", params = { 
               issue_id = issue.id, member_id = member.id
             }
           }

@@ -114,7 +114,24 @@ if not for_issue and not for_member then
     end
     
     filters[#filters+1] = filter
-    
+
+--[[
+  else
+
+    local filter = { class = "filter_unit", name = "area", label = _"area" }
+
+    filter[#filter+1] = {
+      name = "all",
+      label = _"all subject areas",
+      selector_modifier = function()  end
+    }
+    filter[#filter+1] = {
+      name = "_dummy",
+      label = _"Select unit first",
+      selector_modifier = function(selector) end
+    }
+    filters[#filters+1] = filter
+--]]    
   end
 
   if app.session.member_id then

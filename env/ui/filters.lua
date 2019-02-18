@@ -5,9 +5,14 @@ local function filters(args)
   if args.class then
     class = class .. " " .. args.class
   end
-  ui.container{
+  ui.tag{
+    tag = "fieldset",
     attr = { class = { class } },
     content = function()
+      local legend = args.legend
+      if legend then
+        ui.tag{ tag = "legend", attr = { style = "display: none;" }, content = legend }
+      end
       for idx, filter in ipairs(args) do
         local filter_name = filter.name or "filter"
         local current_option_name = atom.string:load(request.get_param{ name = filter_name })
@@ -26,7 +31,7 @@ local function filters(args)
         ui.tag{ tag = "button", attr = { id = "filter-" .. filter_name .. "-menu", class = "mdl-button mdl-js-button" }, content = function()
           ui.tag{ content = current_option.label }
           slot.put(" ")
-          ui.tag{ tag = "i", attr = { class = "material-icons" }, content = "arrow_drop_down" }
+          ui.tag{ tag = "i", attr = { class = "material-icons", ["aria-hidden"] = "true" }, content = "arrow_drop_down" }
         end }
         local id     = request.get_id_string()
         local params = request.get_param_strings()

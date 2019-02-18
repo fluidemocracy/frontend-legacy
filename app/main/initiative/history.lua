@@ -37,27 +37,29 @@ ui.grid{ content = function()
               
                 local columns = {
                   {
-                    label = _"draft ID",
                     content = function(record)
-                      ui.tag { content = record.id }
-                    end
-                  },
-                  {
-                    label = _"published at",
-                    content = function(record)
+                      slot.put('<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="old_draft_id_' .. record.id .. '"><input type="radio" class="mdl-radio__button" id="old_draft_id_' .. record.id .. '" name="old_draft_id" value="' .. tostring(record.id) .. '">') 
+                      ui.tag { content = "compare" }
+                      slot.put(" ")
                       ui.link{
                         attr = { class = "action" },
                         module = "draft", view = "show", id = record.id,
                         text = format.timestamp(record.created)
                       }
+                      slot.put("</label>")
                     end
                   },
                   {
-                    label = _"compare",
                     content = function(record)
-                      slot.put('<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="old_draft_id_' .. record.id .. '"><input type="radio" class="mdl-radio__button" id="old_draft_id_' .. record.id .. '" name="old_draft_id" value="' .. tostring(record.id) .. '"></label>')
-                      slot.put('<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="new_draft_id_' .. record.id .. '"><input type="radio" class="mdl-radio__button" id="new_draft_id_' .. record.id .. '" name="new_draft_id" value="' .. tostring(record.id) .. '"></label>')
-                      --lot.put('<input type="radio" name="new_draft_id" value="' .. tostring(record.id) .. '">')
+                      slot.put('<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="new_draft_id_' .. record.id .. '"><input type="radio" class="mdl-radio__button" id="new_draft_id_' .. record.id .. '" name="new_draft_id" value="' .. tostring(record.id) .. '">')
+                      ui.tag { content = _"with" }
+                      slot.put(" ")
+                      ui.link{
+                        attr = { class = "action" },
+                        module = "draft", view = "show", id = record.id,
+                        text = format.timestamp(record.created)
+                      }
+                      slot.put("</label>")
                     end
                   }
                 }
