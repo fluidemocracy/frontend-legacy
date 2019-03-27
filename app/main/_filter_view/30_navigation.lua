@@ -132,6 +132,11 @@ slot.select ("footer", function ()
     ui.link{ content = _"Quick guide", module = "help", view = "introduction" }
   end }
   if app.session.member_id and app.session.member.admin then
+    if config.self_registration then
+      ui.tag{ tag = "li", content = function()
+        ui.link{ content = _"User management", module = "registration_admin", view = "index" }
+      end }
+    end
     ui.tag{ tag = "li", content = function()
       if config.admin_link then
         ui.link(config.admin_link)

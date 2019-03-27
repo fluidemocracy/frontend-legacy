@@ -206,7 +206,9 @@ local function doit()
                 }
               end
               if not config.single_area_id then
-                slot.put(" » ")
+                if not config.single_unit_id then
+                  slot.put(" » ")
+                end
                 ui.link{
                   module = "index", view = "index", params = { unit = issue.area.unit_id, area = issue.area_id },
                   attr = { class = "area" }, content = issue.area.name

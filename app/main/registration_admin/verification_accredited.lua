@@ -41,7 +41,7 @@ ui.container{ attr = { class = "mdl-grid" }, content = function()
                     ui.container{ content = function()
                       local member = Member:by_id(record.verified_member_id)
                       if member then
-                        ui.link{ module = "registration_admin", view = "verification", id = record.id, content = member.identification }  
+                        ui.link{ module = "registration_admin", view = "verification", id = record.id, content = member.identification or "[no ident]" }  
                       end
                     end }
                   end
