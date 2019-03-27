@@ -15,7 +15,11 @@ ui.container{ attr = { class = "mdl-grid" }, content = function()
       },
       content = function()
 
-        ui.container{ content = config.self_registration.info_top }
+        if config.self_registration.info_top_html then
+          slot.put(config.self_registration.info_top_html)
+        else
+          ui.container{ content = config.self_registration.info_top }
+        end 
         slot.put("<br />")
 
         execute.view{ module = "registration", view = "_register_form" }
@@ -60,13 +64,17 @@ ui.container{ attr = { class = "mdl-grid" }, content = function()
 
         slot.put("<br />")
 
+        local text = _"Proceed with registration" 
+        if config.self_registration.manual_invitation then
+          text = _"Register now"
+        end
         ui.tag{
           tag = "input",
           attr = {
             id = "register_button",
             type = "submit",
             class = "mdl-button mdl-js-button mdl-button--raised mdl-button--colored",
-            value = _"Proceed with registration"
+            value = text
           }
         }
         if config.self_registration.allow_bypass_checks then

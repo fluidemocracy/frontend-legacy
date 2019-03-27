@@ -53,6 +53,23 @@ for i, field in ipairs(config.self_registration.fields) do
           { id = 12, name = "December" },
         }
       end
+      if config.self_registration.lang == "de" then
+        months = {
+          { id = 0, name = _"month" },
+          { id = 1, name = "Januar" },
+          { id = 2, name = "Februar" },
+          { id = 3, name = "März" },
+          { id = 4, name = "April" },
+          { id = 5, name = "Mai" },
+          { id = 6, name = "Juni" },
+          { id = 7, name = "Juli" },
+          { id = 8, name = "August" },
+          { id = 9, name = "September" },
+          { id = 10, name = "Oktober" },
+          { id = 11, name = "November" },
+          { id = 12, name = "Dezember" },
+        }
+      end
       local years = { { id = 0, name = _"year" } }
       local min_age = config.self_registration.min_age or 16
       for i = (atom.date:get_current()).year - min_age, 1900, -1 do

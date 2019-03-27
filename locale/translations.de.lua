@@ -1012,4 +1012,20 @@ return {
 ["expert editor (HTML)"] = "Expertenmodus (HTML)";
 ["show profile"] = "Profil aufrufen";
 ["show ballot"] = "Stimmzettel aufrufen";
+["year"] = "Jahr";
+["month"] = "Monat";
+["Self registration"] = "Selbstregistrierung";
+["Proceed with registration"] = "Registrierung fortsetzen";
+["Register now"] = "Jetzt registrieren";
+["User management"] = "Benutzerverwaltung";
+["User accounts"] = "Benutzerkonten";
+["Open requests (#{count})"] = "Offene Anfragen (#{count})";
+["Manual verification requested during step 1 (#{count})"] = "Manuelle Verifikation in Schritt 1 angefragt (#{count})";
+["other reasons (#{count})"] = "Andere Gründe (#{count})";
+["Accredited (#{count})"] = "Akkreditiert (#{count})";
+["Account not activated (yet) (#{count})"] = "Konto (noch) nicht aktiviert (#{count})";
+["Activated accounts (#{count})"] = "Aktivierte Konten (#{count})";
+["Cancelled accounts (#{count})"] = "Gesperrte Konten (#{count})";
+["Rejected requests (#{count})"] = "Abgelehnte Anfragen (#{count})";
+
 }

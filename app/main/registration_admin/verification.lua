@@ -49,7 +49,7 @@ ui.container{ attr = { class = "mdl-grid" }, content = function()
 
       ui.form{
         module = "registration_admin", action = "update_verification", id = verification.id,
-        routing = { ok = { mode = "redirect", module = "registration_admin", view = "index" } },
+        routing = { ok = { mode = "redirect", module = "registration_admin", view = "verification", id = verification.id } },
         record = data,
         content = function()
 
@@ -118,7 +118,11 @@ ui.container{ attr = { class = "mdl-grid" }, content = function()
               name = "identification",
               value = identification
             }
-            
+
+            if member and not member.activated and member.invite_code then
+              ui.container{ content = "Invite-Code: " .. member.invite_code }
+            end
+
           end }
             
           ui.container{ attr = { class = "mdl-card__actions mdl-card--border" }, content = function()
@@ -128,7 +132,7 @@ ui.container{ attr = { class = "mdl-grid" }, content = function()
             elseif verification.verified_member_id then
               ui.submit{ attr = { class = "mdl-button mdl-js-button mdl-button--raised" }, value = "Save personal data" }
               slot.put(" &nbsp; ")
-              if not member.activated then
+              if not member.activated and not config.self_registration.manual_invitation then
                 ui.submit{ name = "invite", attr = { class = "mdl-button mdl-js-button mdl-button--raised" }, value = "Send email invitation again" }
                 slot.put(" &nbsp; ")
               end

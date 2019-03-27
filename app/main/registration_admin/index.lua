@@ -76,33 +76,40 @@ ui.container{ attr = { class = "mdl-grid" }, content = function()
               end }
             end
 
-            local count = Verification:new_selector()
-              :add_where("verified_member_id ISNULL")
-              :add_where("denied ISNULL")
-              :add_where("comment ilike '%mobile phone number already used before'")
-              :count()
-            ui.tag{ tag = "li", content = function()
-              ui.link{ module = "registration_admin", view = "verification_requests", params = { mode = "mobile_phone" }, content = _("Phone number used before (#{count})", { count = count }) }
-            end }
-            
-            local count = Verification:new_selector()
-              :add_where("verified_member_id ISNULL")
-              :add_where("denied ISNULL")
-              :add_where("comment ilike '%user with same name already exist'")
-              :count()
-            ui.tag{ tag = "li", content = function()
-              ui.link{ module = "registration_admin", view = "verification_requests", params = { mode = "identification" }, content = _("Identification used before (#{count})", { count = count }) }
-            end }
-            
-            
-            local count = Verification:new_selector()
-              :add_where("verified_member_id ISNULL")
-              :add_where("denied ISNULL")
-              :add_where("comment ilike '%user with same name already exists'")
-              :count()
-            ui.tag{ tag = "li", content = function()
-              ui.link{ module = "registration_admin", view = "verification_requests", params = { mode = "same_name_already_exists" }, content = _("User with same name already exists (#{count})", { count = count }) }
-            end }
+            if 
+              config.self_registration.check_for_italien_mobile_phone
+              or config.self_registration.check_for_uk_mobile_phone
+            then
+              local count = Verification:new_selector()
+                :add_where("verified_member_id ISNULL")
+                :add_where("denied ISNULL")
+                :add_where("comment ilike '%mobile phone number already used before'")
+                :count()
+              ui.tag{ tag = "li", content = function()
+                ui.link{ module = "registration_admin", view = "verification_requests", params = { mode = "mobile_phone" }, content = _("Phone number used before (#{count})", { count = count }) }
+              end }
+            end
+
+            if not config.self_registration.manual_invitation then            
+              local count = Verification:new_selector()
+                :add_where("verified_member_id ISNULL")
+                :add_where("denied ISNULL")
+                :add_where("comment ilike '%user with same name already exist'")
+                :count()
+              ui.tag{ tag = "li", content = function()
+                ui.link{ module = "registration_admin", view = "verification_requests", params = { mode = "identification" }, content = _("Identification used before (#{count})", { count = count }) }
+              end }
+              
+              
+              local count = Verification:new_selector()
+                :add_where("verified_member_id ISNULL")
+                :add_where("denied ISNULL")
+                :add_where("comment ilike '%user with same name already exists'")
+                :count()
+              ui.tag{ tag = "li", content = function()
+                ui.link{ module = "registration_admin", view = "verification_requests", params = { mode = "same_name_already_exists" }, content = _("User with same name already exists (#{count})", { count = count }) }
+              end }
+            end
             
             local count = Verification:new_selector()
               :add_where("verified_member_id ISNULL")
@@ -166,48 +173,50 @@ ui.container{ attr = { class = "mdl-grid" }, content = function()
           
         end }
 
-        ui.container{ content = _"Role accounts" }
-      
-        ui.tag{ tag = "ul", content = function()
+        if config.role_accounts then
 
-          local count = RoleVerification:new_selector()
-            :add_where("verified ISNULL")
-            :add_where("denied ISNULL")
-            :count()
-          ui.tag{ tag = "li", content = function()
-            ui.link{ module = "registration_admin", view = "role_verification_requests", content = _("Open requests (#{count})", { count = count }) }
+          ui.container{ content = _"Role accounts" }
+        
+          ui.tag{ tag = "ul", content = function()
+
+            local count = RoleVerification:new_selector()
+              :add_where("verified ISNULL")
+              :add_where("denied ISNULL")
+              :count()
+            ui.tag{ tag = "li", content = function()
+              ui.link{ module = "registration_admin", view = "role_verification_requests", content = _("Open requests (#{count})", { count = count }) }
+            end }
+            
+            local count = RoleVerification:new_selector()
+              :add_where("verified NOTNULL")
+              :add_where("denied ISNULL")
+              :join("member", nil, "member.id = role_verification.verified_member_id")
+              :add_where("member.deleted ISNULL")
+              :count()
+            ui.tag{ tag = "li", content = function()
+              ui.link{ module = "registration_admin", view = "role_verification_accredited", content = _("Accredited (#{count})", { count = count }) }
+            end }
+            
+            local count = RoleVerification:new_selector()
+              :add_where("verified NOTNULL")
+              :add_where("denied ISNULL")
+              :join("member", nil, "member.id = role_verification.verified_member_id")
+              :add_where("member.deleted NOTNULL")
+              :count()
+            ui.tag{ tag = "li", content = function()
+              ui.link{ module = "registration_admin", view = "role_verification_cancelled", content = _("Cancelled (#{count})", { count = count }) }
+            end }
+            
+            local count = RoleVerification:new_selector()
+              :add_where("verified ISNULL")
+              :add_where("denied NOTNULL")
+              :count()
+            ui.tag{ tag = "li", content = function()
+              ui.link{ module = "registration_admin", view = "role_verification_rejected", content = _("Rejected (#{count})", { count = count }) }
+            end }
+            
           end }
-          
-          local count = RoleVerification:new_selector()
-            :add_where("verified NOTNULL")
-            :add_where("denied ISNULL")
-            :join("member", nil, "member.id = role_verification.verified_member_id")
-            :add_where("member.deleted ISNULL")
-            :count()
-          ui.tag{ tag = "li", content = function()
-            ui.link{ module = "registration_admin", view = "role_verification_accredited", content = _("Accredited (#{count})", { count = count }) }
-          end }
-          
-          local count = RoleVerification:new_selector()
-            :add_where("verified NOTNULL")
-            :add_where("denied ISNULL")
-            :join("member", nil, "member.id = role_verification.verified_member_id")
-            :add_where("member.deleted NOTNULL")
-            :count()
-          ui.tag{ tag = "li", content = function()
-            ui.link{ module = "registration_admin", view = "role_verification_cancelled", content = _("Cancelled (#{count})", { count = count }) }
-          end }
-          
-          local count = RoleVerification:new_selector()
-            :add_where("verified ISNULL")
-            :add_where("denied NOTNULL")
-            :count()
-          ui.tag{ tag = "li", content = function()
-            ui.link{ module = "registration_admin", view = "role_verification_rejected", content = _("Rejected (#{count})", { count = count }) }
-          end }
-          
-          
-        end }
+        end          
 
       end }
     end }

@@ -83,7 +83,20 @@ elseif param.get("accredit") then
   member.identification = param.get("identification")
   member.notify_email = param.get("email")
   member:save()
-  member:send_invitation()
+
+  if config.self_registration.manual_invitation then
+    local function secret_token()
+      local parts = {}
+      for i = 1, 5 do
+        parts[#parts+1] = multirand.string(5, "23456789bcdfghjkmnpqrstvwxyz")
+      end
+      return (table.concat(parts, "-"))
+    end
+    member.invite_code = secret_token()
+    member:save()
+  else
+    member:send_invitation()
+  end
 
   for i, unit_id in ipairs(config.self_registration.grant_privileges_for_unit_ids) do
     local privilege = Privilege:new()
