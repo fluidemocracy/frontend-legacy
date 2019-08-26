@@ -219,7 +219,7 @@ function Issue:get_search_selector(search_string)
   return self:new_selector()
     :join('"initiative"', nil, '"initiative"."issue_id" = "issue"."id"')
     :join('"draft"', nil, '"draft"."initiative_id" = "initiative"."id"')
-    :add_where{ '"initiative"."text_search_data" @@ "text_search_query"(?) OR "draft"."text_search_data" @@ "text_search_query"(?)', search_string, search_string }
+    :add_where{ 'to_tsvector("initiative") @@ "plainto_tsquery"(?) OR to_tsvector("draft") @@ "plainto_tsquery"(?)', search_string, search_string }
     :add_group_by('"issue"."id"')
 end
 
