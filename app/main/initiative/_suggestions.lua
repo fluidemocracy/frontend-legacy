@@ -221,7 +221,7 @@ ui.container {
                       }
                       
                       for i, option in ipairs(options) do
-                        local active = opinion.degree == option.degree
+                        local active = opinion.degree == option.degree or opinion.degree == nil and option.degree == 0
                         ui.tag{
                           tag = "label", 
                           attr = { class = "mdl-radio mdl-js-radio mdl-js-ripple-effect" }, 
