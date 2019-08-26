@@ -395,7 +395,9 @@ else
       selector:add_order_by ( "CASE WHEN issue.accepted ISNULL THEN " .. admission_order_field .. " ELSE NULL END" )
       selector:add_order_by ( "id" )
     end
-    execute.view{ module = "index", view = "_head" }
+    if not search then
+      execute.view{ module = "index", view = "_head" }
+    end
     ui.paginate{
       selector = selector,
       per_page = 25,
