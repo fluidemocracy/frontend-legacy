@@ -20,7 +20,7 @@ Session:add_reference{
 
 local secret_length = 24
 local secret_alphabet = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
-local secret_purposes = { "oauth", "csrf", "_other" }
+local secret_purposes = { "oauth", "_other" }
 for idx, purpose in ipairs(secret_purposes) do
   secret_purposes[purpose] = idx
 end

@@ -11,8 +11,6 @@ if not app.session then
   }
 end
 
-request.set_csrf_secret(app.session:additional_secret_for("csrf"))
-
 locale.set{ lang = app.session.lang or config.default_lang or "en" }
 
 if locale.get("lang") == "de" then
