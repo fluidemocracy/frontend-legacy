@@ -23,7 +23,7 @@ end
 
 ui.form{
   record = draft,
-  attr = { class = "vertical section" },
+  attr = { class = "vertical section", enctype = 'multipart/form-data' },
   module = "draft",
   action = "add",
   params = { initiative_id = initiative.id },
@@ -64,6 +64,54 @@ ui.form{
                   end
                 }
                 slot.put("<br />")
+
+                if config.attachments then
+                  local file_upload_session = param.get("file_upload_session") or multirand.string(
+                    32,
+                    '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
+                  )
+                  file_upload_session = string.gsub(file_upload_session, "[^A-Za-z0-9]", "")
+                  ui.field.hidden{ name = "file_upload_session", value = file_upload_session }
+                   local files = File:new_selector()
+                    :left_join("draft_attachment", nil, "draft_attachment.file_id = file.id")
+                    :add_where{ "draft_attachment.draft_id = ?", initiative.current_draft.id }
+                    :reset_fields()
+                    :add_field("file.id")
+                    :add_field("draft_attachment.title")
+                    :add_field("draft_attachment.description")
+                    :add_order_by("draft_attachment.id")
+                    :exec()
+
+                  if #files > 0 then
+                    ui.container {
+                      content = function()
+                        for i, file in ipairs(files) do
+                          if param.get("file_delete_" .. file.id, atom.boolean) then
+                            ui.field.hidden{ name = "file_delete_" .. file.id, value = "1" }
+                          else
+                            ui.image{ module = "file", view = "show.jpg", id = file.id, params = { preview = true } }
+                            ui.container{ content = file.title or "" }
+                            ui.container{ content = file.description or "" }
+                            slot.put("<br /><br />")
+                          end
+                        end
+                      end
+                    }
+                  end
+                  local filename = encode.file_path(WEBMCP_BASE_PATH, 'tmp', "file_upload-" .. file_upload_session .. ".json")
+                  local fh = io.open(filename, "r")
+                  if fh then
+                    local file_uploads = json.import(fh:read("*a"))
+                    for i, file_upload in ipairs(file_uploads) do
+                      ui.image{ module = "draft", view = "show_file_upload", params = {
+                        file_upload_session = file_upload_session, file_id = file_upload.id, preview = true
+                      } }
+                      ui.container{ content = file_upload.title or "" }
+                      ui.container{ content = file_upload.description or "" }
+                      slot.put("<br />")
+                    end
+                  end
+                end
 
                 ui.tag{
                   tag = "input",
@@ -123,7 +171,71 @@ ui.form{
                 else
                   ui.container { content = _"You cannot change your text again later, because this issue is already in verfication phase!" }
                 end
+
                 slot.put("<br />")
+                if config.attachments then
+                  local file_upload_session = param.get("file_upload_session") or multirand.string(
+                    32,
+                    '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
+                  )
+                  file_upload_session = string.gsub(file_upload_session, "[^A-Za-z0-9]", "")
+                  ui.field.hidden{ name = "file_upload_session", value = file_upload_session }
+                  local files = File:new_selector()
+                    :left_join("draft_attachment", nil, "draft_attachment.file_id = file.id")
+                    :add_where{ "draft_attachment.draft_id = ?", initiative.current_draft.id }
+                    :reset_fields()
+                    :add_field("file.id")
+                    :add_field("draft_attachment.title")
+                    :add_field("draft_attachment.description")
+                    :add_order_by("draft_attachment.id")
+                    :exec()
+
+                  if #files > 0 then
+                    ui.container {
+                      content = function()
+                        for i, file in ipairs(files) do
+                          ui.image{ module = "file", view = "show.jpg", id = file.id, params = { preview = true } }
+                          ui.container{ content = file.title or "" }
+                          ui.container{ content = file.description or "" }
+                          ui.field.boolean{ label = _"delete", name = "file_delete_" .. file.id, value = param.get("file_delete_" .. file.id) and true or false }
+                          slot.put("<br /><br />")
+                        end
+                      end
+                    }
+                  end
+
+                  local filename = encode.file_path(WEBMCP_BASE_PATH, 'tmp', "file_upload-" .. file_upload_session .. ".json")
+                  local fh = io.open(filename, "r")
+                  if fh then
+                    local file_uploads = json.import(fh:read("*a"))
+                    for i, file_upload in ipairs(file_uploads) do
+                      ui.image{ module = "draft", view = "show_file_upload", params = {
+                        file_upload_session = file_upload_session, file_id = file_upload.id, preview = true
+                      } }
+                      ui.container{ content = file_upload.title or "" }
+                      ui.container{ content = file_upload.description or "" }
+                      ui.field.boolean{ label = _"delete", name = "file_upload_delete_" .. file_upload.id }
+                      slot.put("<br />")
+                    end
+                  end
+                  ui.container{ attr = { id = "file_upload_template", style = "display: none;" }, content = function()
+                    ui.field.text{ label = _"Title", name = "__ID_title__" }
+                    ui.field.text{ label = _"Description", name = "__ID_description__" }
+                    ui.field.image{ field_name = "__ID_file__" }
+                  end }
+                  ui.container{ attr = { id = "file_upload" }, content = function()
+                  end }
+                  ui.field.hidden{ attr = { id = "file_upload_last_id" }, name = "file_upload_last_id" }
+                  ui.script{ script = [[ var file_upload_id = 1; ]] }
+                  ui.tag{ tag = "a", content = _"Attach image", attr = { 
+                    href = "#",
+                    onclick = "var html = document.getElementById('file_upload_template').innerHTML; html = html.replace('__ID_file__', 'file_' + file_upload_id); html = html.replace('__ID_title__', 'title_' + file_upload_id); html = html.replace('__ID_description__', 'description_' + file_upload_id); var el = document.createElement('div'); el.innerHTML = html; document.getElementById('file_upload').appendChild(el); document.getElementById('file_upload_last_id').value = file_upload_id; file_upload_id++; return false;"
+                  } }
+                  slot.put("<br />")
+                  
+                  slot.put("<br />")
+
+                end
 
                 ui.tag{
                   tag = "input",
