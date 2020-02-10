@@ -71,6 +71,7 @@ if app.session:has_access("anonymous") then
     or module == "suggestion" and view == "show"
     or module == "draft" and view == "diff"
     or module == "draft" and view == "show"
+    or module == "file" and view == "show.jpg"
     or module == "index" and view == "search"
     or module == "index" and view == "usage_terms"
     or module == "help" and view == "introduction"

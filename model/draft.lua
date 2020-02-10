@@ -97,5 +97,19 @@ function Draft:update_content(member_id, initiative_id, p_formatting_engine, con
 
   draft:render_content()
 
+  local draft_attachments = DraftAttachment:new_selector()
+    :add_where{ "draft_id = ?", old_draft.id }
+    :exec()
+
+  for i, draft_attachment in ipairs(draft_attachments) do
+    local new_draft_attachment = DraftAttachment:new()
+    new_draft_attachment.draft_id = draft.id
+    new_draft_attachment.file_id = draft_attachment.file_id
+    new_draft_attachment.title = draft_attachment.title
+    new_draft_attachment.description = draft_attachment.description
+    new_draft_attachment:save()
+  end
+
   slot.put_into("notice", _"The initiative text has been updated")
+  return draft.id
 end

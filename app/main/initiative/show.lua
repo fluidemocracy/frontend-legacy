@@ -135,6 +135,35 @@ ui.grid{ content = function()
         end
       }
       
+      if config.attachments then
+
+        local files = File:new_selector()
+          :left_join("draft_attachment", nil, "draft_attachment.file_id = file.id")
+          :add_where{ "draft_attachment.draft_id = ?", initiative.current_draft.id }
+          :reset_fields()
+          :add_field("file.id")
+          :add_field("draft_attachment.title")
+          :add_field("draft_attachment.description")
+          :add_order_by("draft_attachment.id")
+          :exec()
+
+        if #files > 0 then
+          ui.container {
+            attr = { class = "mdl-card__content mdl-card--border" },
+            content = function()
+              for i, file in ipairs(files) do
+                ui.link{ module = "file", view = "show.jpg", id = file.id, content = function()
+                  ui.image{ module = "file", view = "show.jpg", id = file.id, params = { preview = true } }
+                end }
+                ui.container{ content = file.title or "" }
+                ui.container{ content = file.description or "" }
+                slot.put("<br /><br />")
+              end
+            end
+          }
+        end
+      end
+
       local drafts_count = initiative:get_reference_selector("drafts"):count()
       
       if not config.voting_only then
