@@ -428,7 +428,7 @@ ui.container{ attr = { class = "mdl-card mdl-card__fullwidth mdl-shadow--2dp" },
             end }
             ui.tag { tag = "li", content = function ()
               ui.link {
-                module = "initiative", view = "new", 
+                module = "draft", view = "new", 
                 params = { issue_id = issue.id },
                 content = _"start a new competing initiative"
               }

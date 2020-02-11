@@ -390,7 +390,7 @@ ui.form{
               ui.link{
                 content = _"Cancel",
                 module = initiative and "initiative" or issue and "issue" or "index",
-                view = area and "index" or "show",
+                view = area and not issue and "index" or "show",
                 id = initiative_id or issue_id,
                 params = { area = area_id, unit = area and area.unit_id or nil },
                 attr = { class = "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" }
