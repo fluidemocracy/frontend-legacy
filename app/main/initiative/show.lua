@@ -155,7 +155,9 @@ ui.grid{ content = function()
                 ui.link{ module = "file", view = "show.jpg", id = file.id, content = function()
                   ui.image{ module = "file", view = "show.jpg", id = file.id, params = { preview = true } }
                 end }
-                ui.container{ content = file.title or "" }
+                ui.container{ content = function()
+                  ui.tag{ tag = "strong", content = file.title or "" }
+                end }
                 ui.container{ content = file.description or "" }
                 slot.put("<br /><br />")
               end

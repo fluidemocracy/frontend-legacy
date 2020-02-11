@@ -190,6 +190,98 @@ ui.grid{ content = function()
           end 
         end
       }
+
+      local old_files = File:new_selector()
+        :left_join("draft_attachment", nil, "draft_attachment.file_id = file.id")
+        :add_where{ "draft_attachment.draft_id = ?", old_draft.id }
+        :reset_fields()
+        :add_field("file.id")
+        :add_field("draft_attachment.title")
+        :add_field("draft_attachment.description")
+        :add_order_by("draft_attachment.id")
+        :exec()
+
+      local new_files = File:new_selector()
+        :left_join("draft_attachment", nil, "draft_attachment.file_id = file.id")
+        :add_where{ "draft_attachment.draft_id = ?", new_draft.id }
+        :reset_fields()
+        :add_field("file.id")
+        :add_field("draft_attachment.title")
+        :add_field("draft_attachment.description")
+        :add_order_by("draft_attachment.id")
+        :exec()
+
+      local added_files = {}
+      for i, new_file in ipairs(new_files) do
+        local added = true
+        for j, old_file in ipairs(old_files) do
+          if 
+            old_file.file_id == new_file.file_id 
+            and old_file.title == new_file.title
+            and old_file.description == new_file.description
+          then
+            added = false
+          end
+        end
+        if added then
+          table.insert(added_files, new_file)
+        end
+      end
+
+      if #added_files > 0 then
+        ui.container {
+          attr = { class = "mdl-card__content mdl-card--border" },
+          content = function()
+            ui.container{ content = _"Added attachments" }
+            for i, file in ipairs(added_files) do
+              ui.image{ module = "file", view = "show.jpg", id = file.id, params = { preview = true } }
+              ui.container{ content = file.title or "" }
+              ui.container{ content = file.description or "" }
+              slot.put("<br /><br />")
+            end
+          end
+        }
+      end
+
+      local removed_files = {}      
+      for i, old_file in ipairs(old_files) do
+        local removed = true
+        for j, new_file in ipairs(new_files) do
+          if 
+            old_file.file_id == new_file.file_id 
+            and old_file.title == new_file.title
+            and old_file.description == new_file.description
+          then
+            removed = false
+          end
+        end
+        if removed then
+          table.insert(removed_files, old_file)
+        end
+      end
+
+
+      if #removed_files > 0 then
+        ui.container {
+          attr = { class = "mdl-card__content mdl-card--border" },
+          content = function()
+            ui.container{ content = _"Removed attachments" }
+            for i, file in ipairs(removed_files) do
+              ui.image{ module = "file", view = "show.jpg", id = file.id, params = { preview = true } }
+              ui.container{ content = file.title or "" }
+              ui.container{ content = file.description or "" }
+              slot.put("<br /><br />")
+            end
+          end
+        }
+      end
+
+      ui.container {
+        attr = { class = "draft mdl-card__content mdl-card--border" },
+        content = function ()
+        end
+      }
+
     end }
   end }
   ui.cell_sidebar{ content = function()

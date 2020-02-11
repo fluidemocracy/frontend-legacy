@@ -36,7 +36,7 @@ then
   ui.container{ attr = { class = "mdl-card__actions mdl-card--border" }, content = function()
     ui.link {
       attr = { class = "mdl-button mdl-js-button" },
-      module = "initiative", view = "new", 
+      module = "draft", view = "new", 
       params = { issue_id = issue.id },
       content = _"start a new competing initiative"
     }

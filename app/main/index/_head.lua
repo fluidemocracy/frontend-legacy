@@ -116,7 +116,7 @@ if area and area.unit_id == unit_id then
         if not config.voting_only and app.session.member_id and app.session.member:has_initiative_right_for_unit_id ( area.unit_id ) then
           ui.link {
             attr = { class = "mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--underlined" },
-            module = "initiative", view = "new",
+            module = "draft", view = "new",
             params = { area_id = area.id },
             content = function()
               ui.tag{ tag = "i", attr = { class = "material-icons" }, content = "add" }
