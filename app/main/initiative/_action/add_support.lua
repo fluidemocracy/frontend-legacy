@@ -1,5 +1,4 @@
 local initiative = Initiative:new_selector():add_where{ "id = ?", param.get_id()}:single_object_mode():exec()
-local auto_support = param.get("auto_support", atom.boolean)
 
 local draft_id = param.get("draft_id", atom.integer)
 
@@ -52,9 +51,6 @@ if not supporter then
   supporter.member_id = member.id
   supporter.initiative_id = initiative.id
   supporter.draft_id = last_draft.id
-  if config.auto_support and auto_support ~= nil then
-    supporter.auto_support = auto_support
-  end
   supporter:save()
 elseif supporter.draft_id ~= last_draft.id then
   supporter.draft_id = last_draft.id
