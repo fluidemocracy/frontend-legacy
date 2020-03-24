@@ -10,7 +10,8 @@ local api_endpoints = {
   profile = true,
   settings_info = true,
   settings = true,
-  event = true
+  event = true,
+  embed_initiative = true
 }
 
 function request.router()
