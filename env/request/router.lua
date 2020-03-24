@@ -11,6 +11,7 @@ local api_endpoints = {
   settings_info = true,
   settings = true,
   event = true,
+  support = true,
   embed_initiative = true
 }
 
