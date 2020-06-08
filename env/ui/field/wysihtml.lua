@@ -5,6 +5,7 @@ function ui.field.wysihtml(args)
     { command = "italic", title ="CTRL+I", icon = "format_italic" },
     { command = "createLink", icon = "insert_link" },
     { command = "removeLink", icon = "insert_link", crossed = "\\" },
+    { command = "insertImage", icon = "insert_image" },
     { command = "formatBlock", command_value = "h1", icon = "title", head_level = "1" },
     { command = "formatBlock", command_value = "h2", icon = "title", head_level = "2" },
     { command = "formatBlock", command_value = "h3", icon = "title", head_level = "3" },
@@ -54,6 +55,23 @@ function ui.field.wysihtml(args)
         </label>
         <a data-wysihtml-dialog-action="save">OK</a>&nbsp;<a data-wysihtml-dialog-action="cancel">Cancel</a>
       </div>
+
+      <div data-wysihtml-dialog="insertImage" style="display: none;">
+        <label>
+          Image:
+          <input data-wysihtml-dialog-field="src" value="http://">
+        </label>
+        <label>
+          Align:
+          <select data-wysihtml-dialog-field="className">
+            <option value="">default</option>
+            <option value="wysiwyg-float-left">left</option>
+            <option value="wysiwyg-float-right">right</option>
+          </select>
+        </label>
+        <a data-wysihtml-dialog-action="save">OK</a>&nbsp;<a data-wysihtml-dialog-action="cancel">Cancel</a>
+      </div>
+
     ]])
     slot.put([[      <a id="wysihtml-html-button" data-wysihtml-action="change_view">]] .. _"expert editor (HTML)" .. [[</a> ]])
   end }
