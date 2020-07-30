@@ -33,13 +33,21 @@ if not for_issue and not for_member then
   -- units
   
   if not config.single_unit_id then
-  
-    local units
+
+    local units_selector  
+
     if app.session.member then
-      units = app.session.member:get_reference_selector("units"):add_order_by("name"):add_where("active"):exec()
+      units_selector = app.session.member:get_reference_selector("units")
+        :add_order_by("name")
     else
-      units = Unit:new_selector():add_where("active"):add_order_by("name"):exec()
+      units_selector = Unit:new_selector()
+        :add_order_by("name")
     end
+
+    local units = units_selector
+      :add_where("attr->'hidden' ISNULL OR NOT (attr->'hidden' = 'true')")
+      :add_where("active")
+      :exec()
 
     units:load_delegation_info_once_for_member_id(app.session.member_id)
 

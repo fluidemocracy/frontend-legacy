@@ -839,6 +839,16 @@ function Member.object:get_delegatee_member(unit_id, area_id, issue_id)
   return selector:exec()
 end
 
+function Member.object:has_role(role)
+  member:load("units")
+  for i, unit in ipairs(member.units) do
+    if unit.attr.role == role then
+      return true
+    end
+  end
+  return false
+end
+
 function Member.object:delete()
   db:query{ "SELECT delete_member(?)", self.id }
 end

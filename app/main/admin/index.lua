@@ -1,6 +1,6 @@
 local inactive = param.get("inactive", atom.boolean)
 
-local units = Unit:get_flattened_tree{ include_inactive = inactive }
+local units = Unit:get_flattened_tree{ include_inactive = inactive, include_hidden = true }
 
 local policies = Policy:build_selector{ active = not inactive }:exec()
 --local policies = Policy:build_selector{}:add_order_by("index"):exec()
