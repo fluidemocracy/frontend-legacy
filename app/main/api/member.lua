@@ -13,7 +13,13 @@ if param.get("id") then
 end
 
 local members = selector:exec()
-local r.result = execute.chunk{ module = "api", chunk = "_member", params = { members = members } } 
+local r = json.object()
+r.result = execute.chunk{ module = "api", chunk = "_member", params = { 
+  members = members,
+  include_unit_ids = param.get("include_unit_ids") and true or false,
+  include_units = param.get("include_units") and true or false,
+  include_roles = param.get("include_roles") and true or false
+} } 
 
 
 slot.put_into("data", json.export(r))

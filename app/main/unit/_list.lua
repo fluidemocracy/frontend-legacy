@@ -1,5 +1,5 @@
 local for_admin = param.get("for_admin", atom.boolean)
-local units = Unit:get_flattened_tree{ active = true }
+local units = Unit:get_flattened_tree{}
 
 ui.container{ attr = { class = "box" }, content = function()
 

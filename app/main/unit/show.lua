@@ -2,7 +2,7 @@ local unit_id = config.single_unit_id or param.get_id()
 
 local unit = Unit:by_id(unit_id)
 
-if not unit then
+if not unit or unit.attr.hidden then
   execute.view { module = "index", view = "404" }
   request.set_status("404 Not Found")
   return

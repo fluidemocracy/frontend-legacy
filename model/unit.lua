@@ -101,6 +101,9 @@ function Unit:get_flattened_tree(args)
   if not args or not args.include_inactive then
     units_selector:add_where("active")
   end
+  if not args or not args.include_hidden then
+    units_selector:add_where("attr->'hidden' ISNULL OR NOT (attr->'hidden' = 'true')")
+  end
   local units = units_selector:exec()
   local unit_tree = {}
   for i, unit in ipairs(units) do

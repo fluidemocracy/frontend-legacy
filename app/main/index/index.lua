@@ -19,6 +19,11 @@ local area
 
 if unit_id then
   unit = Unit:by_id(unit_id)
+  if not unit or unit.attr.hidden then
+    execute.view { module = "index", view = "404" }
+    request.set_status("404 Not Found")
+    return
+  end
 end
 
 if area_id then
