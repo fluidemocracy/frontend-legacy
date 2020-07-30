@@ -195,7 +195,7 @@ local function doit()
       end
 
       if not for_issue and not for_initiative then
-        ui.container{ attr = { class = "mdl-card__title mdl-card--has-fab mdl-card--border" }, content = function()
+        ui.container{ attr = { class = "mdl-card__title mdl-card--has-fab mdl-card--border card-issue" }, content = function()
           ui.container{ attr = { class = "contextlinks" }, content = function()
             if not (config.single_unit_id and config.single_area_id) then
               if not config.single_unit_id then
@@ -220,9 +220,9 @@ local function doit()
               module = "issue", view = "show", id = issue.id,
               attr = { class = "issue" }, content = issue.name
             }
-          end }
-          ui.container{ attr = { class = "mdl-card__subtitle-text .mdl-cell--hide-phone" }, content = function()
-            ui.container{ attr = { class = class }, content = function ()
+--          end }
+--          ui.container{ attr = { class = "mdl-card__subtitle-text .mdl-cell--hide-phone" }, content = function()
+            ui.container{ attr = { class = class, style = "float: right; color: #fff;" }, content = function ()
               if event_icon then
                 ui.tag{ tag = "i", attr = { class = "material-icons", ["aria-hidden"] = "true" }, content = event_icon }
               end

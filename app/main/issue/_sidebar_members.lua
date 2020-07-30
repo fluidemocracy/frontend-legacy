@@ -28,6 +28,7 @@ if app.session:has_access("all_pseudonymous") then
           :join("issue", nil, { "issue.id = ?", issue.id })
           :join("direct_voter", nil, { "direct_voter.issue_id = ? AND direct_voter.member_id = member.id", issue.id })
           :join("vote", nil, { "vote.member_id = member.id AND vote.initiative_id = ?", initiative.id })
+          :add_field("direct_voter.ownweight", "ownweight")
           :add_field("direct_voter.weight", "voter_weight")
           :add_field("vote.grade")
           :add_field("direct_voter.comment", "voter_comment")
@@ -35,12 +36,14 @@ if app.session:has_access("all_pseudonymous") then
         interested_members_selector = Member:new_selector()
           :join("issue", nil, { "issue.id = ?", issue.id })
           :join("direct_voter", nil, { "direct_voter.issue_id = ? AND direct_voter.member_id = member.id", issue.id })
+          :add_field("direct_voter.ownweight", "ownweight")
           :add_field("direct_voter.weight", "voter_weight")
           :add_field("direct_voter.comment", "voter_comment")
       end
     else
       interested_members_selector = issue:get_reference_selector("interested_members_snapshot")
         :join("issue", nil, "issue.id = direct_interest_snapshot.issue_id")
+        :add_field("direct_interest_snapshot.ownweight")
         :add_field("direct_interest_snapshot.weight")
         :add_where("direct_interest_snapshot.snapshot_id = issue.latest_snapshot_id")
 

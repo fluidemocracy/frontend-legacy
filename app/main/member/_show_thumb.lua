@@ -42,15 +42,31 @@ end
 
 local el_id = multirand.string(32, "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz")
 local weight = 0
+local ownweight = member.ownweight
 if member.weight then
   weight = member.weight
 end
 if member.voter_weight then
   weight = member.voter_weight
 end
+local delegated_weight = weight - (ownweight or 0)
+
+local weight_text = ""
+
+if ownweight and ownweight > 1 then
+  weight_text = weight_text .. ownweight
+end
+
+if delegated_weight > 0 then
+  weight_text = weight_text .. "+" .. delegated_weight
+end
+
+if weight_text == "" then
+  weight_text = nil
+end
 
 ui.container{
-  attr = { id = el_id, class = container_class, ["data-badge"] = weight > 1 and "+" .. weight - 1 or nil },
+  attr = { id = el_id, class = container_class },
   content = function()
 
     execute.view{
@@ -64,7 +80,13 @@ ui.container{
     }
     ui.tag{
       attr = { class = "mdl-chip__text" },
-      content = function() slot.put(name_html) end
+      content = function() 
+        slot.put(name_html)
+        if weight_text then
+          slot.put(" ")
+          ui.tag{ attr = { class = "member_weight" }, content = weight_text }
+        end
+      end
     }
     
     if member.grade then
