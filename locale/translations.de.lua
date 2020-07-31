@@ -1,6 +1,21 @@
 #!/usr/bin/env lua
 return {
+["All issues"] = "Alle Themen";
+["All issues in your units. Use filters above to limit results."] = "Alle Themen in deinen Gliederungen werden angezeigt. Verwende die Filter oben um die Ergebnisse zu begrenzen.";
+["I want to vote"] = "Ich möchte abstimmen";
+["check the issues on the right, and click on 'Vote now' to vote on an issue which is in voting phase."] = "Schau dir rechts die Themen an und klicke auf 'Jetzt abstimmen' um deine Stimme zu einem Thema in Abstimmung abzugeben";
+["I want to show or edit my profile"] = "Ich möchte mein Profil anzeigen oder bearbeiten";
+["show my profile"] = "mein Profil anzeigen";
+["edit my profile"] = "mein Profil bearbeiten";
+["change my login"] = "meinen Anmeldenamen ändern";
+["change my password"] = "mein Kennwort ändern";
+["change my screen name"] = "meinen Screen-Namen ändern";
+["notification email address"] = "E-Mail-Adresse für Benachrichtigungen";
+["connected applications"] = "verbundene Anwendungen";
+["Connected applications"] = "Verbundene Anwendungen";
 ["all subject areas"] = "Alle Themenbereiche";
+["Results"] = "Ergebnisse";
+["all results"] = "Alle Ergebnisse";
 [" to receive updates by email"] = " bearbeiten um Aktualisierungen per E-Mail zu erhalten";
 ["#{closed_ago} ago"] = "vor #{closed_ago}";
 ["#{count} Neutral"] = "#{count} Enthaltung";
