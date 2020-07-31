@@ -35,7 +35,7 @@ ui.grid{ content = function()
               { id = 0, name = _"All members" },
               { id = "_", name = _"" },
             }
-            for i, unit in ipairs(Unit:get_flattened_tree()) do
+            for i, unit in ipairs(Unit:get_flattened_tree{include_hidden = true}) do
               units[#units+1] = unit
             end
             ui.field.text{ label = _"Date", name = "published" }
