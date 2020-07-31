@@ -12,6 +12,37 @@ if param.get("id") then
   selector:add_where{ "id = ?", param.get("id") }
 end
 
+local role = param.get("role")
+if role then
+  local units = Unit:new_selector()
+    :add_where{ "attr->>'role' = ?", role }
+    :exec()
+  if #units ~= 1 then
+    request.set_status("400 Bad Request")
+    slot.put_into("data", json.export{ 
+      error = "invalid_role",
+      error_description = "role not available"
+    })
+    return
+  end
+  local unit = units[1]
+  if unit.attr.only_visible_for_role 
+    and (
+      not app.access_token 
+      or not app.access_token.member:has_role(unit.attr.only_visible_for_role)
+    )
+  then
+    request.set_status("400 Bad Request")
+    slot.put_into("data", json.export{ 
+      error = "no_priv",
+      error_description = "no privileges to access this role"
+    })
+    return
+  end
+  selector:join("privilege", nil, "privilege.member_id = member.id")
+  selector:join("unit", nil, { "unit.id = privilege.unit_id AND unit.attr->>'role' = ?", role })
+end
+
 local members = selector:exec()
 local r = json.object()
 r.result = execute.chunk{ module = "api", chunk = "_member", params = { 
