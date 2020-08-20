@@ -400,6 +400,15 @@ ui.form{
           end }
         end }
       end }
+
+      if config.map or config.firstlife then
+        ui.cell_sidebar{ content = function()
+          ui.container{ attr = { class = "mdl-special-card map mdl-shadow--2dp" }, content = function()
+            ui.field.location{ name = "location", value = param.get("location") }
+          end }
+        end }
+      end
+
     end }
   end
 }
