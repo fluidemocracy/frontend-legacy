@@ -57,20 +57,25 @@ if grant_type ~= "access_token" then
   local cert_ca = request.get_header("X-LiquidFeedback-CA")
   local cert_distinguished_name = request.get_header("X-SSL-DN")
   local cert_common_name
-  if cert_distinguished_name then
-    cert_common_name = string.match(cert_distinguished_name, "%f[^/\0]CN=([A-Za-z0-9_.-]+)%f[/\0]")
-    if not cert_common_name then
-      return error_result("invalid_client", "CN in X.509 certificate invalid")
+
+  if not token.system_application or token.system_application.cert_common_name then
+    if cert_distinguished_name then
+      cert_common_name = string.match(cert_distinguished_name, "%f[^/\0]CN=([A-Za-z0-9_.-]+)%f[/\0]")
+      if not cert_common_name then
+        return error_result("invalid_client", "CN in X.509 certificate invalid")
+      end
+    else
+      return error_result("invalid_client", "X.509 client authorization missing")
     end
-  else
-    return error_result("invalid_client", "X.509 client authorization missing")
   end
   if token.system_application then
-    if cert_ca ~= "private" then
-      return error_result("invalid_client", "X.509 certificate not signed by private certificate authority or wrong endpoint used")
-    end
-    if cert_common_name ~= token.system_application.cert_common_name then
-      return error_result("invalid_grant", "CN in X.509 certificate incorrect")
+    if token.system_application.cert_common_name then
+      if cert_ca ~= "private" then
+        return error_result("invalid_client", "X.509 certificate not signed by private certificate authority or wrong endpoint used")
+      end
+      if cert_common_name ~= token.system_application.cert_common_name then
+        return error_result("invalid_grant", "CN in X.509 certificate incorrect")
+      end
     end
   else
     if cert_ca ~= "public" then
