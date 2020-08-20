@@ -31,10 +31,8 @@ if id then
 
   app.session:destroy()
 
-  request.set_cookie{
-    name = config.cookie_name or "liquid_feedback_session",
-    value = session.ident
-  }
+  session:set_cookie()
+
 elseif app.session.real_member_id then
   local session = Session:new()
   session.member_id = app.session.real_member_id
@@ -42,10 +40,8 @@ elseif app.session.real_member_id then
 
   app.session:destroy()
 
-  request.set_cookie{
-    name = config.cookie_name or "liquid_feedback_session",
-    value = session.ident
-  }
+  session:set_cookie()
+
 end
 
 if config.meta_navigation_home_url then

@@ -40,6 +40,18 @@ function Session:new()
   return session
 end
 
+function Session.object:set_cookie()
+  request.set_cookie{
+    name = config.cookie_name,
+    value = self.ident,
+    samesite = "none"
+  }
+  request.set_cookie{
+    name = config.cookie_name .. "_samesite",
+    value = self.ident
+  }
+end
+
 function Session.object:additional_secret_for(purpose)
   local use_hash = false
   local idx = secret_purposes[purpose]
