@@ -45,6 +45,10 @@ local scope = table.concat(scope_list, " ")
 
 local r = json.object()
 r.scope = scope
+
+local expiry = db:query({ "SELECT FLOOR(EXTRACT(EPOCH FROM ? - now())) AS access_time_left", token.expiry }, "object")
+r.expires_in = expiry.access_time_left
+
 r.member_id = token.member_id
 if token.member.role then
   r.member_is_role = true
