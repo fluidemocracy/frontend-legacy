@@ -60,6 +60,14 @@ if config.check_delegations_default == nil then
   config.check_delegations_default = "confirm"
 end
 
+if config.cookie_name == nil then
+  config.cookie_name = "liquid_feedback_session"
+end
+
+if config.cookie_name_samesite == nil then
+  config.cookie_name_samesite = config.cookie_name .. "_samesite"
+end
+
 if config.ldap == nil then
   config.ldap = {}
 end
