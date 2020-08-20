@@ -15,6 +15,10 @@ if for_initiative or for_issue or for_member then
   mode = "timeline"
 end
 
+if config.single_unit_id then
+  for_unit = Unit:by_id(config.single_unit_id)
+end
+
 local selector
 
 if search then
