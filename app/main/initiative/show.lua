@@ -37,6 +37,17 @@ ui.grid{ content = function()
         }
       }
 
+      if initiative.location and initiative.location.marker_link then
+        ui.container {
+          attr = { class = "mdl-card__content mdl-card--no-bottom-pad" },
+          content = function()
+            ui.tag{ content = _"This initiative references a FirstLife object." }
+            slot.put(" ")
+            ui.link{ external = initiative.location.marker_link, content = _"Open in FirstLife" }
+          end
+        }
+      end
+
       if direct_supporter and not initiative.issue.closed then
         local supporter = app.session.member:get_reference_selector("supporters")
           :add_where{ "initiative_id = ?", initiative.id }

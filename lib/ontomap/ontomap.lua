@@ -63,10 +63,11 @@ local function new_activity_object(attr)
   }
 end
 
-local function new_reference_object(url, application)
+local function new_reference_object(url, application, type)
   return json.object{
     application = application or config.ontomap.application_ident,
-    external_url = url
+    external_url = url,
+    type = type
   }
 end
 
@@ -204,17 +205,28 @@ local mapper = {
     ))
     log_event.details.new_issue_state = event.state
     table.insert(log_events, log_event)
-    
+
     local log_event = new_log_event(event, event.member_id, "object_created")
-    table.insert(log_event.activity_objects, new_activity_object{
+
+    local location = event.initiative.location
+    if location.marker_link then
+      local marker_link = location.marker_link
+      location.marker_link = nil
+      table.insert(log_event.references, new_reference_object(
+        marker_link, config.firstlife.application_ident, "BELONGS_TO"
+      ))
+    end 
+    
+    local activity_object = new_activity_object{
       type = "initiative",
       url = url_for("initiative", event.initiative_id),
-      geometry = event.initiative.location
-    })
+      geometry = location
+    }
+    activity_object.properties.name = event.initiative.name
+    table.insert(log_event.activity_objects, activity_object)
     table.insert(log_event.references, new_reference_object(
       url_for("issue", event.issue_id)
     ))
-    log_event.details.name = event.initiative.name
     table.insert(log_events, log_event)
 
     log_to_ontomap(log_events)
@@ -222,15 +234,24 @@ local mapper = {
 
   initiative_created_in_existing_issue = function(event)
     local log_event = new_log_event(event, event.member_id, "object_created")
-    table.insert(log_event.activity_objects, new_activity_object{
+    local location = event.initiative.location
+    if location and location.marker_link then
+      local marker_link = location.marker_link
+      location.marker_link = nil
+      table.insert(log_event.references, new_reference_object(
+        marker_link, config.firstlife.application_ident, "BELONGS_TO"
+      ))
+    end 
+    local activity_object = new_activity_object{
       type = "initiative",
       url = url_for("initiative", event.initiative_id),
-      geometry = event.initiative.location
-    })
+      geometry = location
+    }
+    activity_object.properties.name = event.initiative.name
+    table.insert(log_event.activity_objects, activity_object)
     table.insert(log_event.references, new_reference_object(
       url_for("issue", event.issue_id)
     ))
-    log_event.details.name = event.initiative.name
     log_to_ontomap(log_event)
   end,
 
