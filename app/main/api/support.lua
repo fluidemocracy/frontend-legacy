@@ -4,7 +4,7 @@ local success = util.add_support(initiative_id)
 
 slot.set_layout(nil, "application/json")
 
-local r = json.array()
+local r = json.object()
 
 if success then
   r.status = "ok"
