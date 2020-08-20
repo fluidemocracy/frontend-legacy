@@ -3,7 +3,7 @@ local cookie_samesite = request.get_cookie{ name = config.cookie_name_samesite }
 
 if
   cookie and cookie ~= cookie_samesite 
-  and not (request.get_module() == "oauth" and request.get_view() == "session")
+  and not (request.get_module() == "oauth2" and request.get_view() == "session")
 then
   slot.put_into("error", _"Cookie error. Try restarting your web browser and login again.")  
   ui.script{ script = [[
