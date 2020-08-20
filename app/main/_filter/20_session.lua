@@ -27,12 +27,14 @@ if cookie then
   app.session = Session:by_ident(cookie)
 end
 
-if not app.session and not oauth2_session_request then
+if not app.session then
   app.session = Session:new()
-  app.session:set_cookie()
+  if not oauth2_session_request then
+    app.session:set_cookie()
+  end
 end
 
-locale.set{ lang = app.session and app.session.lang or config.default_lang or "en" }
+locale.set{ lang = app.session.lang or config.default_lang or "en" }
 
 if locale.get("lang") == "de" then
   locale.set{
