@@ -209,7 +209,7 @@ local mapper = {
     local log_event = new_log_event(event, event.member_id, "object_created")
 
     local location = event.initiative.location
-    if location.marker_link then
+    if location and location.marker_link then
       local marker_link = location.marker_link
       location.marker_link = nil
       table.insert(log_event.references, new_reference_object(
