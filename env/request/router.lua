@@ -12,7 +12,8 @@ local api_endpoints = {
   settings = true,
   event = true,
   support = true,
-  embed_initiative = true
+  embed_initiative = true,
+  login = true
 }
 
 function request.router()

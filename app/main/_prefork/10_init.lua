@@ -91,7 +91,8 @@ if config.oauth2 then
     { scope = "update_name", name = { de = "Screen-Namen ändern", en = "Update screen name" } },
     { scope = "update_notify_email", name = { de = "E-Mail-Adresse für Benachrichtigungen ändern", en = "Update notify email address" } },
     { scope = "update_profile", name = { de = "Profil bearbeiten", en = "Update your profile" } },
-    { scope = "update_settings", name = { de = "Benutzereinstellungen ändern", en = "Update your settings" } }   
+    { scope = "update_settings", name = { de = "Benutzereinstellungen ändern", en = "Update your settings" } },
+    { scope = "login", name = { de = "Login", en = "Login" } }
   }
   local s = config.oauth2.available_scopes or {}
   for i, scope in ipairs(scopes) do
