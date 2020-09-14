@@ -5,7 +5,11 @@ function util.add_support(initiative_id, draft_id)
   -- TODO important m1 selectors returning result _SET_!
   local issue = initiative:get_reference_selector("issue"):for_share():single_object_mode():exec()
 
-  local member = app.access_token.member or app.session.member
+  local member = app.access_token and app.access_token.member or app.session and app.session.member
+  if not member then
+    slot.put_into("error", "no valid session")
+    return false
+  end
 
   if not member:has_voting_right_for_unit_id(issue.area.unit_id) then
     slot.put_into("error", _"No voting rights.")
