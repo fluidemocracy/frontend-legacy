@@ -63,6 +63,11 @@ ui.titleMember(member)
 
 ui.grid{ content = function()
   ui.cell_main{ content = function()
+
+    if app.session.member_id == member.id then
+      execute.view{ module = "index", view = "_lang_chooser" }
+    end
+
     ui.container{ attr = { class = "mdl-card mdl-card__fullwidth mdl-shadow--2dp" }, content = function()
       
       ui.container{ attr = { class = "mdl-card__title mdl-card--border" }, content = function()
