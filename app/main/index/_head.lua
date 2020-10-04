@@ -135,6 +135,9 @@ elseif unit then
     if unit.description and #(unit.description) > 0 then
       ui.container{ attr = { class = "mdl-card__supporting-text mdl-card--border" }, content = unit.description }
     end
+    if config.render_external_reference_unit then
+      config.render_external_reference_unit(unit)
+    end
     --ui.container{ attr = { class = "mdl-card__actions mdl-card--border" }, content = function()
     --end }
   end }
