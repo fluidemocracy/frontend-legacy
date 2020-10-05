@@ -17,13 +17,13 @@ local function firstlife_mirror_group_users(unit)
   local new_user_hash = {}
 
   for i, user in ipairs(data) do
-    print("  Processing user ID " .. user.id)
+--    print("  Processing user ID " .. user.id)
     local user_id = tonumber(string.match(user.id, "^(.+)@"))
     new_user_hash[user_id] = user
     if old_privileges[user_id] then
-      print("    Privilege entry exists")
+--      print("    Privilege entry exists")
     else
-      print("    Creating new privilege")
+--      print("    Creating new privilege")
       local privilege = Privilege:new()
       privilege.unit_id = unit.id
       privilege.member_id = user_id
@@ -36,7 +36,7 @@ local function firstlife_mirror_group_users(unit)
 
   for i, old_privilege in ipairs(old_privileges_list) do
     if not new_user_hash[old_privilege.member_id] then
-      print("  Destroying privilege for user ID " .. old_privilege.member_id)
+--      print("  Destroying privilege for user ID " .. old_privilege.member_id)
       old_privilege:destroy()
     end
   end
@@ -61,7 +61,7 @@ function _G.firstlife_mirror_groups()
   local units_new = {}
 
   for i, feature in ipairs(data.things.features) do
-    print(feature.id, feature.properties.name)
+--    print(feature.id, feature.properties.name)
     units_new[feature.id] = feature
   end
 
@@ -78,19 +78,19 @@ function _G.firstlife_mirror_groups()
   for id, unit_new in pairs(units_new) do
     local name_new = unit_new.properties.name
     local unit
-    print("Processing unit ID " .. id .. " with name " .. name_new)
+--    print("Processing unit ID " .. id .. " with name " .. name_new)
     if old_units[id] then
       unit = old_units[id]
-      print("  Unit already exists")
+--      print("  Unit already exists")
       if old_units[id].name == name_new then
-        print("  Name not changed")
+--        print("  Name not changed")
       else
-        print("  Name changed, updating")
+--        print("  Name changed, updating")
         old_units[id].name = name_new
         old_units[id]:save()
       end
     else          
-      print("  Creating as new unit")
+--      print("  Creating as new unit")
       local u = Unit:new()
       u.name = name_new
       u.attr = json.object()
@@ -111,5 +111,4 @@ function _G.firstlife_mirror_groups()
   end
 
 end
-
 
