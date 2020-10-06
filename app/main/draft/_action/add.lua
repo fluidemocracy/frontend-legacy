@@ -390,13 +390,17 @@ if config.attachments then
 
 end
 
-print(new_initiative, status)
 if new_initiative and status ~= false then
-  request.redirect{
-    module = "initiative",
-    view = "show",
-    id = new_initiative.id
-  }
+  local callback = param.get("callback")
+  if config.allow_new_draft_callback and callback then
+    request.redirect{ external = callback }
+  else
+    request.redirect{
+      module = "initiative",
+      view = "show",
+      id = new_initiative.id
+    }
+  end
 end
 
 return status
