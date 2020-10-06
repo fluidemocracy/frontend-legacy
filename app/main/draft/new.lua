@@ -30,7 +30,7 @@ if policy_id then
   policy = Policy:by_id(policy_id)
 end
 
-
+local callback = param.get("callback")
 
 
 local initiative_id = param.get("initiative_id")
@@ -73,7 +73,8 @@ ui.form{
   params = {
     area_id = area and area.id,
     issue_id = issue and issue.id or nil,
-    initiative_id = initiative_id
+    initiative_id = initiative_id,
+    callback = callback
   },
   routing = {
     ok = {
