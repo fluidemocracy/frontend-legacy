@@ -237,5 +237,21 @@ listen{
   max_fork = 1
 }
 
+if config.firstlife_groups then
+  assert(loadcached(encode.file_path(WEBMCP_BASE_PATH, "lib", "firstlife", "groups.lua")))()
+  listen{
+    {
+      proto = "interval",
+      name  = "send_pending_notifications",
+      delay = 5,
+      handler = function()
+        firstlife_mirror_groups()
+      end
+    },
+    min_fork = 1,
+    max_fork = 1
+  }
+end
+
 execute.inner()
 
