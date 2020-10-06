@@ -12,6 +12,13 @@ else
   if area_id then
     area = Area:new_selector():add_where{"id=?",area_id}:single_object_mode():exec()
     area:load_delegation_info_once_for_member_id(app.session.member_id)
+  else
+    local firstlife_id = param.get("firstlife_id")
+    if firstlife_id then
+      area = Area:new_selector():join("unit", nil, "unit.id = area.unit_id"):add_where{"attr->>'firstlife_id'=?",firstlife_id}:single_object_mode():exec()
+      area:load_delegation_info_once_for_member_id(app.session.member_id)
+      area_id = area.id
+    end
   end
 end
 
