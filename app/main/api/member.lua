@@ -43,6 +43,12 @@ if role then
   selector:join("unit", nil, { "unit.id = privilege.unit_id AND unit.attr->>'role' = ?", role })
 end
 
+local search = param.get("q")
+if app.scopes.read_identities and search then
+  search = "%" .. search .. "%"
+  selector:add_where{ "name ILIKE ? OR identification ILIKE ?", search, search }
+end
+
 local members = selector:exec()
 local r = json.object()
 r.result = execute.chunk{ module = "api", chunk = "_member", params = { 
