@@ -48,9 +48,11 @@ if need_session then
     app.session = Session:by_ident(cookie)
   end
 
-  if not cors_request and not app.session then
+  if not app.session then
     app.session = Session:new()
-    app.session:set_cookie()
+    if not cors_request then
+      app.session:set_cookie()
+    end
   end
 
 end
