@@ -8,7 +8,7 @@ local r = json.object{
   member_id = json.null
 }
 
-if app.session.member_id then
+if app.session and app.session.member_id then
   local origin = request.get_header("Origin")
   if origin then
     local system_applications = SystemApplication:by_origin(origin)
