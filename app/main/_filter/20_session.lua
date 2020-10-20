@@ -47,14 +47,13 @@ if need_session then
   if cookie then
     app.session = Session:by_ident(cookie)
   end
+end
 
-  if not app.session then
-    app.session = Session:new()
-    if not cors_request then
-      app.session:set_cookie()
-    end
+if not app.session then
+  app.session = Session:new()
+  if not cors_request then
+    app.session:set_cookie()
   end
-
 end
 
 locale.set{ lang = app.session and app.session.lang or config.default_lang or "en" }
