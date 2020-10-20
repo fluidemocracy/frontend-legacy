@@ -55,7 +55,7 @@ if need_session then
 
 end
 
-locale.set{ lang = app.session.lang or config.default_lang or "en" }
+locale.set{ lang = app.session and app.session.lang or config.default_lang or "en" }
 
 if locale.get("lang") == "de" then
   locale.set{
