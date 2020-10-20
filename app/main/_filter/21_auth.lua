@@ -56,7 +56,7 @@ if module == "api" then
   auth_needed = false
 end
 
-if app.session then
+if auth_needed then
 
   if app.session:has_access("anonymous") then
 
@@ -127,7 +127,7 @@ end
 --   app.session.user_id = 1
 -- end
 
-if auth_needed and not app.session or not app.session.member then
+if auth_needed and not app.session.member then
   trace.debug("Not authenticated yet.")
   local params = json.object()
   for key, val in pairs(request.get_param_strings()) do
@@ -149,8 +149,8 @@ if auth_needed and not app.session or not app.session.member then
 elseif auth_needed and app.session.member.locked then
   trace.debug("Member locked.")
   request.redirect{ module = 'index', view = 'login' }
-elseif app.session then
-  if config.check_delegations_interval_hard and app.session.member_id and app.session.needs_delegation_check 
+else
+  if app.session and config.check_delegations_interval_hard and app.session.member_id and app.session.needs_delegation_check 
     and not (module == "admin" or (module == "index" and (
       view == "check_delegations" 
       or action == "check_delegations" 
