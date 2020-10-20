@@ -56,70 +56,70 @@ if module == "api" then
   auth_needed = false
 end
 
-if app.session:has_access("anonymous") then
+if app.session then
 
-  if
-    module == "index" and view == "index"
-    or module == "area" and view == "show"
-    or module == "unit" and view == "show"
-    or module == "policy" and view == "show"
-    or module == "policy" and view == "list"
-    or module == "issue" and view == "show"
-    or module == "issue" and view == "history"
-    or module == "initiative" and view == "show"
-    or module == "initiative" and view == "history"
-    or module == "suggestion" and view == "show"
-    or module == "draft" and view == "diff"
-    or module == "draft" and view == "show"
-    or module == "file" and view == "show.jpg"
-    or module == "index" and view == "search"
-    or module == "index" and view == "usage_terms"
-    or module == "help" and view == "introduction"
-    or module == "style"
-  then
-    auth_needed = false
+  if app.session:has_access("anonymous") then
+
+    if
+      module == "index" and view == "index"
+      or module == "area" and view == "show"
+      or module == "unit" and view == "show"
+      or module == "policy" and view == "show"
+      or module == "policy" and view == "list"
+      or module == "issue" and view == "show"
+      or module == "issue" and view == "history"
+      or module == "initiative" and view == "show"
+      or module == "initiative" and view == "history"
+      or module == "suggestion" and view == "show"
+      or module == "draft" and view == "diff"
+      or module == "draft" and view == "show"
+      or module == "file" and view == "show.jpg"
+      or module == "index" and view == "search"
+      or module == "index" and view == "usage_terms"
+      or module == "help" and view == "introduction"
+      or module == "style"
+    then
+      auth_needed = false
+    end
+
   end
 
-end
-
-if app.session:has_access("authors_pseudonymous") then
-  if module == "member_image" and view == "show" and param.get("image_type") == "avatar" then
-    auth_needed = false
+  if app.session:has_access("authors_pseudonymous") then
+    if module == "member_image" and view == "show" and param.get("image_type") == "avatar" then
+      auth_needed = false
+    end
   end
-end
 
-if app.session:has_access("everything") then
-  if module == "member_image" and view == "show" then
-    auth_needed = false
+  if app.session:has_access("everything") then
+    if module == "member_image" and view == "show" then
+      auth_needed = false
+    end
   end
-end
 
-if app.session:has_access("all_pseudonymous") then
-  if module == "vote" and view == "show_incoming"
-   or module == "member" and view == "list"
-   or module == "interest" and view == "show_incoming"
-   or module == "vote" and view == "list" then
-    auth_needed = false
+  if app.session:has_access("all_pseudonymous") then
+    if module == "vote" and view == "show_incoming"
+     or module == "member" and view == "list"
+     or module == "interest" and view == "show_incoming"
+     or module == "vote" and view == "list" then
+      auth_needed = false
+    end
   end
-end
 
-if app.session:has_access("everything") then
-  if module == "member" and (view == "show" or view == "history") then
-    auth_needed = false
+  if app.session:has_access("everything") then
+    if module == "member" and (view == "show" or view == "history") then
+      auth_needed = false
+    end
   end
-end
 
-if module == "sitemap" then
-  auth_needed = false
-end
-
-if app.session:has_access("anonymous") and not app.session.member_id and auth_needed and module == "index" and view == "index" then
-  if config.single_unit_id then
-    request.redirect{ module = "unit", view = "show", id = config.single_unit_id }
-  else
-    request.redirect{ module = "unit", view = "list" }
+  if app.session:has_access("anonymous") and not app.session.member_id and auth_needed and module == "index" and view == "index" then
+    if config.single_unit_id then
+      request.redirect{ module = "unit", view = "show", id = config.single_unit_id }
+    else
+      request.redirect{ module = "unit", view = "list" }
+    end
+    return
   end
-  return
+
 end
 
 -- if not app.session.user_id then
@@ -127,7 +127,7 @@ end
 --   app.session.user_id = 1
 -- end
 
-if auth_needed and app.session.member == nil then
+if auth_needed and not app.session or not app.session.member then
   trace.debug("Not authenticated yet.")
   local params = json.object()
   for key, val in pairs(request.get_param_strings()) do
@@ -149,7 +149,7 @@ if auth_needed and app.session.member == nil then
 elseif auth_needed and app.session.member.locked then
   trace.debug("Member locked.")
   request.redirect{ module = 'index', view = 'login' }
-else
+elseif app.session then
   if config.check_delegations_interval_hard and app.session.member_id and app.session.needs_delegation_check 
     and not (module == "admin" or (module == "index" and (
       view == "check_delegations" 
