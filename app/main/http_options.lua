@@ -3,6 +3,7 @@ if not request._route then
   return
 end
 
+-- TODO allow cors requests on api module?
 if request.get_module() == "oauth2" and 
   (request.get_view() == "session" or request.get_view() == "validate")
 then 
