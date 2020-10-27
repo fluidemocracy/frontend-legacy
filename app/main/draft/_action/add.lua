@@ -192,6 +192,11 @@ else
     if location == "" then
       location = nil
     end
+    
+    local external_reference
+    if config.firstlife then
+      external_reference = param.get("external_reference")
+    end
 
     if param.get("preview") or param.get("edit") then
       return false
@@ -235,6 +240,7 @@ else
     end
     initiative.issue_id = issue.id
     initiative.name = name
+    initiative.external_reference = external_reference
     initiative:save()
 
     new_initiative = initiative
