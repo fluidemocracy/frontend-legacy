@@ -215,6 +215,10 @@ local mapper = {
       table.insert(log_event.references, new_reference_object(
         marker_link, config.firstlife.application_ident, "BELONGS_TO"
       ))
+    elseif event.initiative.external_reference then
+      table.insert(log_event.references, new_reference_object(
+        event.initiative.external_reference, config.firstlife.application_ident, "BELONGS_TO"
+      ))
     end 
     
     local activity_object = new_activity_object{
@@ -240,6 +244,10 @@ local mapper = {
       location.marker_link = nil
       table.insert(log_event.references, new_reference_object(
         marker_link, config.firstlife.application_ident, "BELONGS_TO"
+      ))
+    elseif event.initiative.external_reference then
+      table.insert(log_event.references, new_reference_object(
+        event.initiative.external_reference, config.firstlife.application_ident, "BELONGS_TO"
       ))
     end 
     local activity_object = new_activity_object{
