@@ -417,6 +417,10 @@ ui.form{
         end }
       end
 
+      if config.firstlife then
+        ui.field.hidden{ name = "external_reference", value = param.get("external_reference") }
+      end
+
     end }
   end
 }
