@@ -51,7 +51,7 @@ end
 
 if not app.session then
   app.session = Session:new()
-  if need_session then
+  if need_session and not cors_request then
     app.session:set_cookie()
   end
 end
