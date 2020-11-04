@@ -47,7 +47,7 @@ ui.grid{ content = function()
               ui.field.text{     label = _"Name",         name = "name" }
               ui.field.text{     label = _"Description",  name = "description", multiline = true }
               ui.field.text{     label = _"External reference",  name = "external_reference" }
-              ui.field.text{     label = _"Attr",         name = "attr" }
+              ui.field.text{     label = _"Attr",         name = "attr", value = unit.attr or '{}' }
               ui.field.boolean{  label = _"Active?",      name = "active", value = hint and true or nil }
 
               slot.put("<br />")
