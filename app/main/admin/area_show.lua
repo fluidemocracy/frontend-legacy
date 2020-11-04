@@ -68,9 +68,9 @@ ui.grid{ content = function()
                                   foreign_reference  = "id",
                 }
                 slot.put("<br />")
-                ui.field.text{    label = _"Admission quorum standard", name = "quorum_standard", value = hint and 10 or nil }
-                ui.field.text{    label = _"Admission quorum issues", name = "quorum_issues", value = hint and 10 or nil }
-                ui.field.text{    label = _"Admission quorum time", name = "quorum_time", value = hint and "60 days" or nil }
+                ui.field.text{    label = _"Admission quorum standard", name = "quorum_standard", value = hint and 0 or nil }
+                ui.field.text{    label = _"Admission quorum issues", name = "quorum_issues", value = hint and 1 or nil }
+                ui.field.text{    label = _"Admission quorum time", name = "quorum_time", value = hint and "1 days" or nil }
                 ui.field.text{    label = _"Admission quorum exponent", name = "quorum_exponent", value = hint and 0.5 or nil }
                 ui.field.text{    label = _"Admission qourum factor", name = "quorum_factor", value = hint and 2 or nil }
                 slot.put("<br />")
