@@ -164,6 +164,7 @@ then
     :add_where{ "delegating_voter.issue_id = ?", issue.id }
     :add_where{ "delegating_voter.delegate_member_ids[1] = ?", member.id }
     :add_field("delegating_voter.weight", "voter_weight")
+    :add_field("delegating_voter.ownweight", "ownweight")
     :join("issue", nil, "issue.id = delegating_voter.issue_id")
     
   ui.sidebar( "tab-members", function()
