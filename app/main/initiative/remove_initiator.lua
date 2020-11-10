@@ -18,92 +18,71 @@ execute.view {
   }
 }
 
-execute.view{ module = "issue", view = "_sidebar_state", params = {
-  initiative = initiative
-} }
+ui.grid{ content = function()
+  ui.cell_main{ content = function()
 
-execute.view { 
-  module = "issue", view = "_sidebar_issue", 
-  params = {
-    issue = initiative.issue,
-    highlight_initiative_id = initiative.id
-  }
-}
+    ui.container{ attr = { class = "mdl-card mdl-card__fullwidth mdl-shadow--2dp" }, content = function()
 
-execute.view {
-  module = "issue", view = "_sidebar_whatcanido",
-  params = { initiative = initiative }
-}
+      ui.container{ attr = { class = "mdl-card__title mdl-card--border" }, content = function()
+        ui.heading { attr = { class = "mdl-card__title-text" }, level = 2, content = initiative.display_name }
+      end }
 
-execute.view { 
-  module = "issue", view = "_sidebar_members", params = {
-    issue = initiative.issue, initiative = initiative
-  }
-}
+      ui.container{ attr = { class = "mdl-card__content" }, content = function()
 
-ui.form{
-  attr = { class = "vertical section" },
-  module = "initiative",
-  action = "remove_initiator",
-  params = {
-    initiative_id = initiative.id,
-  },
-  routing = {
-    ok = {
-      mode = "redirect",
-      module = "initiative",
-      view = "show",
-      id = initiative.id,
-      params = {
-        tab = "initiators",
-      }
-    }
-  },
-  content = function()
+        ui.form{
+          attr = { class = "vertical section" },
+          module = "initiative",
+          action = "remove_initiator",
+          params = {
+            initiative_id = initiative.id,
+          },
+          routing = {
+            ok = {
+              mode = "redirect",
+              module = "initiative",
+              view = "show",
+              id = initiative.id,
+              params = {
+                tab = "initiators",
+              }
+            }
+          },
+          content = function()
 
-    ui.sectionHead( function()
-      ui.link{
-        module = "initiative", view = "show", id = initiative.id,
-        content = function ()
-          ui.heading { 
-            level = 1,
-            content = initiative.display_name
-          }
-        end
-      }
-      ui.heading { level = 2, content = _"Remove an initiator from initiative" }
-    end )
+            ui.heading { level = 3, content = _"Remove an initiator from initiative" }
 
-    ui.sectionRow( function()
-      local records = initiative:get_reference_selector("initiating_members"):add_where("accepted OR accepted ISNULL"):exec()
-      ui.heading{ level = 2, content = _"Choose an initiator to remove" }
-      ui.field.select{
-        name = "member_id",
-        foreign_records = records,
-        foreign_id = "id",
-        foreign_name = "name",
-      }
-      slot.put("<br />")
-      ui.tag{
-        tag = "input",
-        attr = {
-          type = "submit",
-          class = "btn btn-dangerous",
-          value = _"Remove initiator"
-        },
-        content = ""
-      }
-      slot.put("<br />")
-      slot.put("<br />")
-      ui.link{
-        content = _"Cancel",
-        module = "initiative",
-        view = "show",
-        id = initiative.id,
-        params = {
-          tab = "initiators"
+            local records = initiative:get_reference_selector("initiating_members"):add_where("accepted OR accepted ISNULL"):exec()
+
+            ui.field.select{
+              name = "member_id",
+              foreign_records = records,
+              foreign_id = "id",
+              foreign_name = "name",
+            }
+            slot.put("<br />")
+            ui.tag{
+              tag = "input",
+              attr = {
+                type = "submit",
+                class = "mdl-button mdl-js-button mdl-button--raised mdl-button--colored",
+                value = _"Remove initiator"
+              },
+              content = ""
+            }
+            slot.put(" &nbsp; ")
+            ui.link{
+              attr = { class = "mdl-button mdl-js-button mdl-button--raised" },
+              content = _"Cancel",
+              module = "initiative",
+              view = "show",
+              id = initiative.id,
+              params = {
+                tab = "initiators"
+              }
+            }
+          end
         }
-      }
-    end )
-  end
-}
+      end }
+    end }
+  end }
+end }
