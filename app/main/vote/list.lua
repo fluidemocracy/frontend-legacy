@@ -568,7 +568,7 @@ ui.container{ attr = { class = "mdl-grid" }, content = function()
           view = "show",
           id = issue.id
         }
-        if direct_voter then
+        if direct_voter and not issue.closed then
           slot.put(" &nbsp; ")
           ui.link {
             attr = { class = "mdl-button mdl-js-button mdl-button--raised" },
