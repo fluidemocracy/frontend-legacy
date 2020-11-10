@@ -18,7 +18,7 @@ local function delegation_scope(delegation)
         unit = delegation.unit
       end
       slot.put("<br style='clear: left;' />")
-      ui.heading { attr = { style = "float: left;" }, level = 3, content = function()
+      ui.container { attr = { style = "float: left;" }, content = function()
         ui.link{
           content = unit.name,
           module = "unit",
@@ -69,6 +69,7 @@ end
           member_id = delegation.truster_id, class = "micro_avatar", popup_text = delegation.truster.name,
           image_type = "avatar", show_dummy = true,
         } }
+        ui.link{ module = "member", view = "show", id = delegation.truster_id, content = delegation.truster.name }
       elseif delegation.trustee then
         ui.image{
           attr = { class = "delegation_arrow" },
@@ -78,6 +79,7 @@ end
           member_id = delegation.trustee_id, class = "micro_avatar", popup_text = delegation.trustee.name,
           image_type = "avatar", show_dummy = true,
         } }
+        ui.link{ module = "member", view = "show", id = delegation.trustee_id, content = delegation.trustee.name }
       else
         ui.tag{ content = _"Delegation abandoned" }
       end
