@@ -3,6 +3,7 @@ local initiatives = app.session.member
   :get_reference_selector("supported_initiatives")
   :join("issue", nil, "issue.id = initiative.issue_id")
   :add_where("issue.closed ISNULL")
+  :add_where{ "initiative.id <> ?", initiative.id }
   :add_order_by("issue.id")
   :exec()
 
