@@ -29,105 +29,85 @@ execute.view {
     member = member
   }
 }
-execute.view{ module = "issue", view = "_sidebar_state", params = {
-  initiative = initiative
-} }
 
-execute.view { 
-  module = "issue", view = "_sidebar_issue", 
-  params = {
-    issue = initiative.issue,
-    highlight_initiative_id = initiative.id
-  }
-}
+ui.grid{ content = function()
+  ui.cell_main{ content = function()
 
-execute.view {
-  module = "issue", view = "_sidebar_whatcanido",
-  params = { initiative = initiative }
-}
+    ui.container{ attr = { class = "mdl-card mdl-card__fullwidth mdl-shadow--2dp" }, content = function()
 
-execute.view { 
-  module = "issue", view = "_sidebar_members", params = {
-    issue = initiative.issue, initiative = initiative
-  }
-}
-
-
-ui.form{
-  attr = { class = "wide section" },
-  module = "initiative",
-  action = "revoke",
-  id = initiative.id,
-  routing = {
-    ok = {
-      mode = "redirect",
-      module = "initiative",
-      view = "show",
-      id = initiative.id
-    }
-  },
-  content = function()
-
-    ui.sectionHead( function()
-      ui.link{
-        module = "initiative", view = "show", id = initiative.id,
-        content = function ()
-          ui.heading { 
-            level = 1,
-            content = initiative.display_name
-          }
-        end
-      }
-      ui.heading { level = 2, content = _"Revoke initiative" }
-    end )
-
-    ui.sectionRow( function()
-
-      ui.heading{ level = 2, content = _"Do you want to suggest to support another initiative?" }
-    
-      ui.field.select{
-        name = "suggested_initiative_id",
-        foreign_records = tmp,
-        foreign_id = "id",
-        foreign_name = "myname",
-        value = param.get("suggested_initiative_id", atom.integer)
-      }
-      ui.container{ content = _"You may choose one of the ongoing initiatives you are currently supporting" }
-      slot.put("<br />")
-      ui.heading { level = 2, content = _"Are you aware that revoking an initiative is irrevocable?" }
-      ui.container{ content = function()
-        ui.tag{ tag = "input", attr = {
-          type = "checkbox",
-          name = "are_you_sure",
-          value = "1"
-        } }
-        ui.tag { content = _"I understand, that this is not revocable" }
+      ui.container{ attr = { class = "mdl-card__title mdl-card--border" }, content = function()
+        ui.heading { attr = { class = "mdl-card__title-text" }, level = 2, content = _"Revoke initiative" }
       end }
-      
-      
-      slot.put("<br />")
-      ui.tag{
-        tag = "input",
-        attr = {
-          type = "submit",
-          class = "btn btn-dangerous",
-          value = _"Revoke now"
-        },
-        content = ""
-      }
-      slot.put("<br />")
-      slot.put("<br />")
 
-      ui.link{
-        content = _"Cancel",
-        module = "initiative",
-        view = "show",
-        id = initiative.id,
-        params = {
-          tab = "initiators"
+      ui.container{ attr = { class = "mdl-card__content" }, content = function()
+
+        ui.form{
+          attr = { class = "wide section" },
+          module = "initiative",
+          action = "revoke",
+          id = initiative.id,
+          routing = {
+            ok = {
+              mode = "redirect",
+              module = "initiative",
+              view = "show",
+              id = initiative.id
+            }
+          },
+          content = function()
+
+            ui.container{ content = _"Do you want to suggest to support another initiative?" }
+            ui.container{ content = _"You may choose one of the ongoing initiatives you are currently supporting" }
+
+            slot.put("<br />")          
+
+            ui.field.select{
+              name = "suggested_initiative_id",
+              foreign_records = tmp,
+              foreign_id = "id",
+              foreign_name = "myname",
+              value = param.get("suggested_initiative_id", atom.integer)
+            }
+            slot.put("<br />")
+            ui.container { content = _"Are you aware that revoking an initiative is irrevocable?" }
+            slot.put("<br />")          
+            ui.container{ content = function()
+              ui.tag{ tag = "input", attr = {
+                type = "checkbox",
+                name = "are_you_sure",
+                value = "1"
+              } }
+              ui.tag { content = _"I understand, that this is not revocable" }
+            end }
+            
+            
+            slot.put("<br />")
+            ui.tag{
+              tag = "input",
+              attr = {
+                type = "submit",
+                class = "mdl-button mdl-js-button mdl-button--raised mdl-button--colored",
+                value = _"Revoke now"
+              },
+              content = ""
+            }
+            slot.put(" &nbsp; ")
+
+            ui.link{
+              attr = { class = "mdl-button mdl-js-button mdl-button--raised" },
+              content = _"Cancel",
+              module = "initiative",
+              view = "show",
+              id = initiative.id,
+              params = {
+                tab = "initiators"
+              }
+            }
+
+          end
         }
-      }
-    end )
 
-  end
-}
+      end }
+    end }
+  end }
+end }
