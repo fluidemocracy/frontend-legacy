@@ -93,6 +93,22 @@ ui.form{
   },
   content = function()
   
+    if issue or initiative then
+      execute.view {
+        module = "issue", view = "_head", params = {
+          issue = issue or initiative.issue, 
+          member = app.session.member
+        }
+      }
+    else
+      execute.view {
+        module = "area", view = "_head", params = {
+          area = area,
+          member = app.session.member
+        }
+      }
+    end
+
     ui.grid{ content = function()
       ui.cell_main{ content = function()
         ui.container{ attr = { class = "mdl-card mdl-shadow--2dp mdl-card__fullwidth" }, content = function()
@@ -104,7 +120,7 @@ ui.form{
             elseif issue then
               ui.heading { attr = { class = "mdl-card__title-text" }, level = 2, content = _("New competing initiative in issue '#{issue}'", { issue = issue.name }) }
             elseif area then
-              ui.heading { attr = { class = "mdl-card__title-text" }, level = 2, content = _("New issue in area '#{area}'", { area = area.name }) }
+              ui.heading { attr = { class = "mdl-card__title-text" }, level = 2, content = _"New issue" }
             end
           end }
           ui.container{ attr = { class = "mdl-card__content mdl-card--border" }, content = function()
