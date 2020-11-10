@@ -68,7 +68,7 @@ end
 if initiative.admitted == false then
   local policy = initiative.issue.policy
   ui.container{
-    attr = { class = "sectionRow not_admitted_info" },
+    attr = { class = "draft mdl-card__content mdl-card--border" },
     content = function ()
       ui.heading { level = 1, content = _"Initiative not admitted" }
       local num = policy.initiative_quorum_num                                                                                                        
@@ -92,7 +92,7 @@ end
 -- initiative revoked info
 if initiative.revoked then
   ui.container{
-    attr = { class = "sectionRow revoked_info" },
+    attr = { class = "draft mdl-card__content mdl-card--border" },
     content = function()
       ui.heading { level = 1, content = _"Initiative revoked" }
       slot.put(_("This initiative has been revoked at #{revoked} by:", {
