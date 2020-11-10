@@ -155,37 +155,6 @@ ui.script{
   end
 }
 
-if issue.state == "finished_with_winner" 
-  or issue.state == "finished_without_winner" 
-then
-
-  local members_selector = Member:new_selector()
-    :join("delegating_voter", nil, "delegating_voter.member_id = member.id")
-    :add_where{ "delegating_voter.issue_id = ?", issue.id }
-    :add_where{ "delegating_voter.delegate_member_ids[1] = ?", member.id }
-    :add_field("delegating_voter.weight", "voter_weight")
-    :add_field("delegating_voter.ownweight", "ownweight")
-    :join("issue", nil, "issue.id = delegating_voter.issue_id")
-    
-  ui.sidebar( "tab-members", function()
-    ui.sidebarHead(function()
-      ui.heading{ level = 4, content = _"Incoming delegations" }
-    end)
-    execute.view{
-      module = "member",
-      view = "_list",
-      params = {
-        members_selector = members_selector,
-        trustee = member,
-        issue = issue,
-        initiative = initiative,
-        for_votes = true, no_filter = true,
-        member_class = "sidebarRow sidebarRowNarrow",
-      }
-    }
-  end)
-end
-
 ui.container{ attr = { class = "mdl-grid" }, content = function()
   ui.container{ attr = { class = "mdl-cell mdl-cell--12-col" }, content = function()
 
@@ -591,5 +560,43 @@ ui.container{ attr = { class = "mdl-grid" }, content = function()
         
       end }
     end }
+
+    if issue.state == "finished_with_winner" 
+      or issue.state == "finished_without_winner" 
+    then
+
+      local members_selector = Member:new_selector()
+        :join("delegating_voter", nil, "delegating_voter.member_id = member.id")
+        :add_where{ "delegating_voter.issue_id = ?", issue.id }
+        :add_where{ "delegating_voter.delegate_member_ids[1] = ?", member.id }
+        :add_field("delegating_voter.weight", "voter_weight")
+        :add_field("delegating_voter.ownweight", "ownweight")
+        :join("issue", nil, "issue.id = delegating_voter.issue_id")
+        
+      ui.container{ attr = { class = "mdl-card mdl-card__fullwidth mdl-shadow--2dp" }, content = function()
+        ui.container{ attr = { class = "mdl-card__title mdl-card--border" }, content = function()
+          ui.heading { attr = { class = "mdl-card__title-text" }, level = 2, content = function()
+            ui.tag{ content = _"Incoming delegations" }
+          end }
+        end }
+
+        ui.container{ attr = { class = "mdl-card__content" }, content = function()
+          execute.view{
+            module = "member",
+            view = "_list",
+            params = {
+              members_selector = members_selector,
+              trustee = member,
+              issue = issue,
+              initiative = initiative,
+              for_votes = true, no_filter = true,
+              member_class = "sidebarRow sidebarRowNarrow",
+            }
+          }
+        end }
+      end }
+    end
+
+
   end }
 end }
