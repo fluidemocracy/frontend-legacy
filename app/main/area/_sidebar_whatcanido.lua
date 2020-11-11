@@ -178,7 +178,7 @@ ui.container{ attr = { class = "mdl-card mdl-card__fullwidth mdl-shadow--2dp" },
                 ui.tag { content = function ()
                   ui.tag { content = _"If you cannot find any appropriate existing issue, " }
                   ui.link {
-                    module = "initiative", view = "new",
+                    module = "draft", view = "new",
                     params = { area_id = area.id },
                     text = _"start an initiative in a new issue"
                   }
