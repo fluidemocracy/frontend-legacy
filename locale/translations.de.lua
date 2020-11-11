@@ -785,7 +785,7 @@ return {
 ["activated"] = "aktiviert";
 ["add my interest"] = "Interesse anmelden";
 ["add my support"] = "unterstützen";
-["add to my list of private contacts"] = "Zur meiner Kontaktliste hinzufügen";
+["add to my list of private contacts"] = "Zu meiner Kontaktliste hinzufügen";
 ["add to my list of public contacts"] = "Zu meiner öffentlichen Kontaktliste hinzufügen";
 ["add your support (see above) and rate or write new suggestions (and thereby restrict your support to certain conditions if necessary)"] = "Die Initiative untersützen (siehe oben) und Verbesserungsvorschläge bewerten oder machen (und dabei ggfs. die Unterstützung beschränken)";
 ["all issues"] = "alle Themen";
@@ -1042,5 +1042,6 @@ return {
 ["Activated accounts (#{count})"] = "Aktivierte Konten (#{count})";
 ["Cancelled accounts (#{count})"] = "Gesperrte Konten (#{count})";
 ["Rejected requests (#{count})"] = "Abgelehnte Anfragen (#{count})";
+["Show incoming delegations"] = "Eingehende Delegationen zeigen";
 
 }
