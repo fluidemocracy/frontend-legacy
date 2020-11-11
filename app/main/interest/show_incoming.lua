@@ -17,6 +17,7 @@ local members_selector = Member:new_selector()
   :add_where{ "delegating_interest_snapshot.snapshot_id = ?", issue.latest_snapshot_id }
   :add_where{ "delegating_interest_snapshot.delegate_member_ids[1] = ?", member.id }
   :add_field{ "delegating_interest_snapshot.weight" }
+  :add_field{ "delegating_interest_snapshot.ownweight" }
 
 execute.view{ module = "issue", view = "_head", params = { issue = issue, link_issue = true } }
   
