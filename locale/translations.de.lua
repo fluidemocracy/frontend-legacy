@@ -1042,6 +1042,6 @@ return {
 ["Activated accounts (#{count})"] = "Aktivierte Konten (#{count})";
 ["Cancelled accounts (#{count})"] = "Gesperrte Konten (#{count})";
 ["Rejected requests (#{count})"] = "Abgelehnte Anfragen (#{count})";
-["Show incoming delegations"] = "Eingehende Delegationen zeigen";
+["show incoming delegations"] = "Eingehende Delegationen zeigen";
 
 }
