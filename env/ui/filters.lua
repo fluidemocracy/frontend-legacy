@@ -15,6 +15,9 @@ local function filters(args)
       end
       for idx, filter in ipairs(args) do
         local filter_name = filter.name or "filter"
+        if filter.selector_modifier then
+          filter.selector_modifier(args.selector)
+        end
         local current_option_name = atom.string:load(request.get_param{ name = filter_name })
         if not current_option_name then
           current_option_name = param.get(filter_name)

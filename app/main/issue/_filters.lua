@@ -5,6 +5,12 @@ local for_member = param.get("for_member", "table")
 local member = param.get("member", "table")
 local phase = request.get_param{ name = "phase" }
 
+local selected_unit_id = config.single_unit_id or request.get_param{ name = "unit" }
+if selected_unit_id == "all" then
+  selected_unit_id = nil 
+end
+local selected_unit = Unit:by_id(selected_unit_id)
+
 local filters = {}
 
 local admission_order_field = "filter_issue_order.order_in_unit"
@@ -66,7 +72,12 @@ if not for_issue and not for_member then
       end
     }
 
+    local selected_unit_found = false
+
     for i, unit in ipairs(units) do
+      if selected_unit and unit.id == selected_unit.id then
+        selected_unit_found = true
+      end
       filter[#filter+1] = {
         name = tostring(unit.id),
         label = unit.name,
@@ -75,19 +86,31 @@ if not for_issue and not for_member then
           selector:add_where{ "__filter_area.unit_id = ?", unit.id }
         end
       }
-      
     end
+
+    if not selected_unit_found and selected_unit then
+      filter[#filter+1] = {
+        name = tostring(selected_unit.id),
+        label = selected_unit.name,
+        selector_modifier = function(selector)
+          selector:join("area", "__filter_area", "__filter_area.id = issue.area_id AND __filter_area.active")
+          selector:add_where{ "__filter_area.unit_id = ?", selected_unit.id }
+        end
+      }
+    end
+
+--[[
+    filter.selector_modifier = function(selector)
+      selector:join("area", "__filter_area", "__filter_area.id = issue.area_id AND __filter_area.active")
+      selector:add_where{ "__filter_area.unit_id = ?", 81 }
+    end
+--]]
 
     filters[#filters+1] = filter
 
   end
   
   -- areas
-  local selected_unit_id = config.single_unit_id or request.get_param{ name = "unit" }
-  if selected_unit_id == "all" then
-    selected_unit_id = nil 
-  end
-  local selected_unit = Unit:by_id(selected_unit_id)
 
   if not config.single_area_id and selected_unit then
   
