@@ -8,8 +8,13 @@ local selector = Member:new_selector()
   :add_where("activated NOTNULL")
   :add_order_by("id")
 
-if param.get("id") then
-  selector:add_where{ "id = ?", param.get("id") }
+local id = param.get("id")
+if id then
+  local ids = { sep = ", " }
+  for match in string.gmatch(id, "[^,]+") do
+    table.insert(ids, { "?", match })
+  end
+  selector:add_where{ "id IN ($)", ids }
 end
 
 local role = param.get("role")
