@@ -428,7 +428,16 @@ ui.form{
       if config.map or config.firstlife then
         ui.cell_sidebar{ content = function()
           ui.container{ attr = { class = "mdl-special-card map mdl-shadow--2dp" }, content = function()
-            ui.field.location{ name = "location", value = param.get("location") }
+            local location = param.get("location")
+            local lat = param.get("lat")
+            local lon = param.get("lon")
+            if lat and lon then
+              location = JSON.export(JSON.object{
+                type = "Point",
+                coordinates = JSON.array{ lon, lat }
+              })
+            end
+            ui.field.location{ name = "location", value = location }
           end }
         end }
       end
