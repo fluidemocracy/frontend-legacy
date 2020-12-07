@@ -429,8 +429,8 @@ ui.form{
         ui.cell_sidebar{ content = function()
           ui.container{ attr = { class = "mdl-special-card map mdl-shadow--2dp" }, content = function()
             local location = param.get("location")
-            local lat = param.get("lat")
-            local lon = param.get("lon")
+            local lat = param.get("lat", atom.number)
+            local lon = param.get("lon", atom.number)
             if lat and lon then
               location = json.export(json.object{
                 type = "Point",
