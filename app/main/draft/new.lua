@@ -432,7 +432,7 @@ ui.form{
             local lat = param.get("lat")
             local lon = param.get("lon")
             if lat and lon then
-              location = json.export(JSON.object{
+              location = json.export(json.object{
                 type = "Point",
                 coordinates = json.array{ lon, lat }
               })
