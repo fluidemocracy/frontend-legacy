@@ -4,6 +4,7 @@ if not app.scopes.login then
 end
 
 if not app.access_token.used then
+  app.session:set_cookie()
   local result = util.login(app.access_token.member)
 
   if not result then
