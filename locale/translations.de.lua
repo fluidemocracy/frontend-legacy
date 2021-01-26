@@ -449,7 +449,7 @@ return {
 ["Not a member"] = "Kein Mitglied";
 ["Not voted issues"] = "Nicht abgestimmt";
 ["Notification address unconfirmed"] = "E-Mail-Adresse für Benachrichtigungen unbestätigt";
-["Notification email"] = "E-Mail für Benachrichtigungs";
+["Notification email"] = "E-Mail für Benachrichtigungen";
 ["Notification level not set yet"] = "Benachrichtigungseinstellungen noch nicht vorgenommen";
 ["Notifications"] = "Benachrichtigungen";
 ["Number of incoming delegations, follow link to see more details"] = "Anzahl eingehender Delegationen, Link folgen für mehr Details";
@@ -1043,5 +1043,7 @@ return {
 ["Cancelled accounts (#{count})"] = "Gesperrte Konten (#{count})";
 ["Rejected requests (#{count})"] = "Abgelehnte Anfragen (#{count})";
 ["show incoming delegations"] = "Eingehende Delegationen zeigen";
-
+["#{hours} hours"] = "#{hours} Stunden";
+["#{hours} minutes"] = "#{minutes} Minuten";
+["just now"] = "gerade eben";
 }
