@@ -79,7 +79,7 @@ if scopes.identification or scopes.authentication then
     if param.get("include_member_notify_email", atom.boolean) then
       r.member.notify_email = member.notify_email
     end
-    if param.get("include_roles") then
+    if param.get("include_roles", atom.boolean) then
       for i, unit in ipairs(member.units) do
         if unit.attr.role then
           r.roles = json.object()
