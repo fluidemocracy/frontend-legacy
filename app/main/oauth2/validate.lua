@@ -57,8 +57,8 @@ if token.session then
   r.real_member_id = token.session.real_member_id
 end
 
-if param.get("include_member", atom.boolean) then
-  if scopes.identification or scopes.authentication then
+if scopes.identification or scopes.authentication then
+  if param.get("include_member", atom.boolean) then
     local member = token.member
     r.member = json.object{
       id = member.id,
@@ -78,6 +78,18 @@ if param.get("include_member", atom.boolean) then
     end
     if param.get("include_member_notify_email", atom.boolean) then
       r.member.notify_email = member.notify_email
+    end
+    if param.get("include_roles") then
+      for i, unit in ipairs(member.units) do
+        if unit.attr.role then
+          r.roles = json.object()
+          if not unit.attr.only_visible_for_role 
+            or member:has_role(unit.attr.only_visible_for_role)
+          then
+            r.roles[unit.attr.role] = true
+          end
+        end
+      end
     end
   end
 end

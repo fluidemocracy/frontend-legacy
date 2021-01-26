@@ -273,14 +273,6 @@ if allowed_scopes.identification or allowed_scopes.authentication then
         r.real_member.identification = token.session.real_member.identification
       end
     end
-    if unit.attr.role and param.get("include_roles") then
-      r.roles = json.object()
-      if not unit.attr.only_visible_for_role 
-        or member:has_role(unit.attr.only_visible_for_role)
-      then
-        r.roles[unit.attr.role] = true
-      end
-    end
   end
 end
 
