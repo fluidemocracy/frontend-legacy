@@ -289,7 +289,7 @@ local function doit()
       if 
         app.session.member_id and (
           (not issue.fully_frozen and app.session.member:has_initiative_right_for_unit_id(issue.area.unit_id))
-          or (issue.state.fully_frozen and app.session.member:has_voting_right_for_unit_id(issue.area.unit_id))
+          or (issue.fully_frozen and app.session.member:has_voting_right_for_unit_id(issue.area.unit_id))
         )
       then
         ui.container{ attr = { class = "mdl-card__actions mdl-card--border" }, content = function()
