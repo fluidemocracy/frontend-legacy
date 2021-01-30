@@ -4,15 +4,20 @@ end
 
 local filename = param.get("filename")
 
-local file = assert(io.open(encode.file_path(config.document_dir, filename)), "file not found")
+local file = io.open(encode.file_path(config.document_dir, filename))
+
+if not file then
+  return execute.view { module = "index", view = "404" }
+end
 
 if param.get("inline") then
-  print('Content-disposition: inline; filename=' .. filename)
+  request.add_header("Content-disposition", "inline; filename=" .. filename)
 else
-  print('Content-disposition: attachment; filename=' .. filename)
+  request.add_header("Content-disposition", "attachment; filename=" .. filename)
 end
-print('')
 
-io.stdout:write(file:read("*a"))
+local data = file:read("*a")
 
-exit()
+slot.set_layout(nil, content_type)
+slot.put_into("data", data)
+
