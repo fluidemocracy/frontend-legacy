@@ -8,6 +8,7 @@ local area_id = request.get_param{ name = "area" }
 
 if unit_id == "all" then
   unit_id = nil
+  area_id = nil
 end
 
 if area_id == "all" then
@@ -25,6 +26,7 @@ if unit_id then
     return
   end
 end
+
 
 if area_id then
   area = Area:by_id(area_id)
