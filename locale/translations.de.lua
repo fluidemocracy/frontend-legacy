@@ -363,7 +363,7 @@ return {
 ["Interval format:"] = "Intervall-Format";
 ["Introduction"] = "Einführung";
 ["Invalid PIN entered"] = "Ungültige PIN eingegeben";
-["Invalid PIN entered (#{count})"] ="Ungültige PIN eingegeben (#{count})";
+["Invalid PIN entered (#{count})"] = "Ungültige PIN eingegeben (#{count})";
 ["Invalid PIN, please try again!"] = "Ungültige PIN, bitte erneut versuchen!";
 ["Invalid domain format"] = "Ungültiges Domain-Format";
 ["Invalid login name or password!"] = "Anmeldename oder Kennwort ungültig";
@@ -925,6 +925,7 @@ return {
 ["cancel issue now"] = "Thema jetzt abbrechen";
 ["canceled"] = "abgebrochen";
 ["change avatar/photo"] = "Avatar/Foto ändern";
+["change delegation..."] = "Delegation ändern...";
 ["change my login"] = "meinen Anmeldenamen ändern";
 ["change my password"] = "mein Kennwort ändern";
 ["change my screen name"] = "meinen Screen-Namen ändern";
@@ -960,6 +961,7 @@ return {
 ["days [interval time left]"] = "Tage";
 ["days [interval]"] = "Tage";
 ["deactivated"] = "deaktiviert";
+["delegate..."] = "delegieren...";
 ["delegated to"] = "delegiert an";
 ["delegates to"] = "delegiert an";
 ["delegation"] = "Delegation";
@@ -1094,6 +1096,7 @@ return {
 ["start a new competing initiative"] = "eine neue konkurrierende Initiative starten";
 ["start an initiative in a new issue"] = "eine Initiative in einem neuen Thema starten";
 ["structured discussion"] = "strukturierte Diskussion";
+["subject area: #{name}"] = "Themengebiet: #{name}";
 ["subscribe for update emails about this area"] = "Aktualisierungen per E-Mail für diesen Themenbereich abbonieren";
 ["subscribe subject areas or add your interested to issues and you will be notified about changes (follow the instruction on the area or issue page)"] = "Melde dich für Themenbereiche an oder interessiere dich für Themen, damit du benachrichtigt wirst (folge den Anweisungen auf der Themenbereichs- bzw. Themenseite)";
 ["supporter"] = "Unterstützer";
@@ -1114,6 +1117,7 @@ return {
 ["unconfirmed address"] = "unbestätigte Adresse";
 ["unit"] = "Gliederung";
 ["unit / area"] = "Gliederung / Themenbereich";
+["unit: #{name}"] = "Gliederung: #{name}";
 ["unsubscribe from update emails about this area"] = "Aktualisierungen per E-Mail für diesen Themenbereich abschalten";
 ["until"] = "bis";
 ["update area"] = "Themenbereich aktualisiern";
