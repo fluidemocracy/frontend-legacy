@@ -192,11 +192,11 @@ else
 end
 
 if next(scopes_to_accept) then
-  ui.title("Application authorization")
+  ui.title(_"Application authorization")
   ui.section(function()
     ui.sectionHead(function()
       ui.heading{ content = client_name }
-      ui.heading{ content = "wants to access your account" }
+      ui.heading{ content = _"wants to access your account" }
     end)
     if not system_application and not member_application then
       ui.sectionRow(function()
