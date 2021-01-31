@@ -106,18 +106,6 @@ ui.container{ attr = { class = "mdl-card mdl-card__fullwidth mdl-shadow--2dp" },
             if not area.delegation_info.first_trustee_id then
               ui.tag{ content = _"I want to delegate this subject area" }
             else
-              ui.container { attr = { class = "right" }, content = function()
-                local member = Member:by_id(area.delegation_info.first_trustee_id)
-                execute.view{
-                  module = "member_image",
-                  view = "_show",
-                  params = {
-                    member = member,
-                    image_type = "avatar",
-                    show_dummy = true
-                  }
-                }
-              end }
               ui.tag{ content = _"You delegated this subject area" }
             end
 
