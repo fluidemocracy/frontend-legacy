@@ -44,18 +44,6 @@ ui.container{ attr = { class = "mdl-card mdl-card__fullwidth mdl-shadow--2dp" },
               end }
             end }
           else
-            ui.container { attr = { class = "right" }, content = function()
-              local member = Member:by_id(unit.delegation_info.first_trustee_id)
-              execute.view{
-                module = "member_image",
-                view = "_show",
-                params = {
-                  member = member,
-                  image_type = "avatar",
-                  show_dummy = true
-                }
-              }
-            end }
             ui.tag{ content = _"You delegated this unit" }
 
             ui.tag { tag = "ul", attr = { class = "ul" }, content = function ()
