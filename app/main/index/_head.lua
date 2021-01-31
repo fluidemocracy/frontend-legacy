@@ -14,10 +14,7 @@ local area
 if area_id then
   area = Area:by_id(area_id)
 end
-if area and unit and area.unit_id ~= unit.id then
-  area_id = nil
-end
-if area and area.unit_id == unit_id then
+if area then
   if app.session.member_id then
     area:load_delegation_info_once_for_member_id(app.session.member_id)
   end
@@ -26,7 +23,7 @@ if area and area.unit_id == unit_id then
     if unit then
       ui.container{ attr = { class = "mdl-card__title mdl-card--border" }, content = function()
         if not config.single_area_id then
-          ui.heading { attr = { class = "mdl-card__title-text" }, level = 2, content = unit.name .. " / " .. area.name }
+          ui.heading { attr = { class = "mdl-card__title-text" }, level = 2, content = unit.name .. " » " .. area.name }
         else
           ui.heading { attr = { class = "mdl-card__title-text" }, level = 2, content = unit.name }
         end
@@ -42,77 +39,55 @@ if area and area.unit_id == unit_id then
     if not (config.voting_only and config.disable_delegations) and app.session.member_id then
       ui.container{ attr = { class = "mdl-card__actions" }, content = function()
           
-        if app.session.member_id then
-          if area.delegation_info.first_trustee_id then
-              local member = Member:by_id(area.delegation_info.first_trustee_id)
-              ui.tag{ tag = "i", attr = { class = "material-icons" }, content = "forward" }
-              execute.view{
-                module = "member_image",
-                view = "_show",
-                params = {
-                  member = member,
-                  image_type = "avatar",
-                  show_dummy = true
-                }
-              }
-          end
+        if not config.disable_delegations then
 
-          if not config.disable_delegations then
-            if area.delegation_info.own_delegation_scope == "unit" then
+          if area.delegation_info.first_trustee_id then
+            local member = Member:by_id(area.delegation_info.first_trustee_id)
+            ui.tag{ tag = "i", attr = { class = "material-icons" }, content = "forward" }
+            execute.view{
+              module = "member",
+              view = "_show_thumb",
+              params = {
+                member = member
+              }
+            }
+          end
+            
+          local text
+          if area.delegation_info.own_delegation_scope == nil then
+            text = _"delegate..."  
+          else
+            text = _"change delegation..."
+          end
+          
+          
+          ui.tag{ attr = { id = "change_delegation", class = "mdl-button" }, content = text }
+
+
+          ui.tag { tag = "ul", attr = { class = "mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect", ["for"] = "change_delegation" }, content = function()
+
+            ui.tag{ tag = "li", attr = { class = "mdl-menu__item" }, content = function()
               ui.link {
-                attr = { class = "mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--underlined" },
+                attr = { class = "mdl-menu__link" },
                 module = "delegation", view = "show", params = {
                   unit_id = area.unit_id,
                 },
-                content = _("change/revoke delegation of organizational unit")
+                content = _("unit: #{name}", { name = area.unit.name })
               }
-              slot.put(" &nbsp; ")
-            end
-            if area.delegation_info.own_delegation_scope == nil then
-              local text
-              if config.single_area_id then
-                text = _"choose delegatee"  
-              else
-                text = _"choose subject area delegatee"  
-              end
+            end }
+
+            ui.tag{ tag = "li", attr = { class = "mdl-menu__item" }, content = function()
               ui.link {
-                attr = { class = "mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--underlined" },
+                attr = { class = "mdl-menu__link" },
                 module = "delegation", view = "show", params = {
                   area_id = area.id
                 },
-                content = function()
-                  ui.tag{ tag = "i", attr = { class = "material-icons" }, content = "forward" }
-                  ui.tag{ content = text }
-                end
+                content = _("subject area: #{name}", { name = area.name })
               }
-              slot.put(" &nbsp; ")
-            elseif area.delegation_info.own_delegation_scope == "area" then
-              local text
-              if config.single_area_id then
-                text = _"change/revoke delegation" 
-              else
-                text = _"change/revoke area delegation" 
-              end
-              ui.link {
-                attr = { class = "mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--underlined" },
-                module = "delegation", view = "show", params = {
-                  area_id = area.id
-                },
-                content = text
-              }
-              slot.put(" &nbsp; ")
-            else
-              ui.link {
-                attr = { class = "mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--underlined" },
-                module = "delegation", view = "show", params = {
-                  area_id = area.id
-                },
-                content = _"change/revoke delegation only for this subject area" 
-              }
-              slot.put(" &nbsp; ")
-            end
-          end
+            end }
+          end }
         end
+                
         if not config.voting_only and app.session.member_id and app.session.member:has_initiative_right_for_unit_id ( area.unit_id ) then
           ui.link {
             attr = { class = "mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--underlined" },
