@@ -9,8 +9,8 @@ ui.title ( function ()
     content = function()
       ui.tag{ attr = { class = "name" }, content = area.unit.name }
     end,
-    module = "unit", view = "show",
-    id = area.unit.id
+    module = "index", view = "index",
+    unit = area.unit_id
   }
 
   ui.tag { attr = { class = "spacer" }, content = function()
@@ -23,8 +23,8 @@ ui.title ( function ()
       content = function()
         ui.tag{ attr = { class = "name" }, content = area.name }
       end,
-      module = "area", view = "show",
-      id = area.id
+      module = "index", view = "index",
+      params = { unit = area.unit_id, area = area.id }
     }
     
     slot.put ( " " )
