@@ -28,6 +28,11 @@ end
 
 if area_id then
   area = Area:by_id(area_id)
+  if not area or area.unit_id ~= unit.id then
+    execute.view { module = "index", view = "404" }
+    request.set_status("404 Not Found")
+    return
+  end
 end
 
 ui.grid{ content = function()
