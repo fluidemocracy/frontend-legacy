@@ -16,8 +16,6 @@ if area_id then
   area = Area:by_id(area_id)
 end
 
-print(unit_id, area_id, unit, area)
-
 if unit then
   ui.container{ attr = { class = "mdl-card mdl-card__fullwidth mdl-shadow--2dp" }, content = function()
     ui.container{ attr = { class = "mdl-card__title mdl-card--border" }, content = function()
