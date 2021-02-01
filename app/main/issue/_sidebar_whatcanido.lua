@@ -278,7 +278,7 @@ ui.container{ attr = { class = "mdl-card mdl-card__fullwidth mdl-shadow--2dp" },
                 routing = { default = {
                   mode = "redirect", module = view_module, view = "show", id = view_id
                 } },
-                params = { issue_id = issue.id, delete = true },
+                params = { issue_id = issue.id, interested = false },
                 text = _"remove my interest"
               }
             end }
@@ -291,7 +291,7 @@ ui.container{ attr = { class = "mdl-card mdl-card__fullwidth mdl-shadow--2dp" },
             ui.tag { tag = "li", content = function ()
               ui.link {
                 module = "interest", action = "update", 
-                params = { issue_id = issue.id },
+                params = { issue_id = issue.id, interested = true },
                 routing = { default = {
                   mode = "redirect", module = view_module, view = "show", id = view_id
                 } },
