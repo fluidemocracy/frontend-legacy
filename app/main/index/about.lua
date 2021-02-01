@@ -95,9 +95,6 @@ ui.grid{ content = function()
           }
         }
 
-        slot.put("<br />")
-        ui.container{ content = "3rd party license information:" }
-        slot.put('Some of the icons used in Liquid Feedback are from <a href="http://www.famfamfam.com/lab/icons/silk/">Silk icon set 1.3</a> by Mark James. His work is licensed under a <a href="http://creativecommons.org/licenses/by/2.5/">Creative Commons Attribution 2.5 License.</a>')
       end }
     end }
   end }

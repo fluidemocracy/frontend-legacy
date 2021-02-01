@@ -51,11 +51,11 @@ if number_of_initiatives > 1 then
       {
         content = function(record)
           if record.winning_count == record.losing_count then
-            ui.image{ static = "icons/16/bullet_blue.png" }
+            ui.tag{ tag = "i", attr = { class = "material-icons" }, content = "fiber_manual_record" }
           elseif record.winning_count > record.losing_count then
-            ui.image{ static = "icons/16/resultset_previous.png" }
+            ui.tag{ tag = "i", attr = { class = "material-icons" }, content = "arrow_left" }
           else
-            ui.image{ static = "icons/16/resultset_next.png" }
+            ui.tag{ tag = "i", attr = { class = "material-icons" }, content = "arrow_right" }
           end
         end
       },

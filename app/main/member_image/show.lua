@@ -14,7 +14,7 @@ else
   local default_file = "avatar.jpg"
   content_type = "image/jpeg"
   if image_type == "photo" then
-    default_file = "icons/16/lightning.png"
+    default_file = "avatar.jpg"
     content_type = "image/png"
   end
   
