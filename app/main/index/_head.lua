@@ -1,5 +1,13 @@
 local unit_id = config.single_unit_id or request.get_param{ name = "unit" }
 local area_id = config.single_area_id or request.get_param{ name = "area" }
+
+local initiative = param.get("initiative", "table")
+local issue = param.get("issue", "table")
+if issue then
+  area_id = issue.area_id
+  unit_id = issue.area.unit_id
+end
+
 if unit_id == "all" then
   unit_id = nil 
   area_id = nil

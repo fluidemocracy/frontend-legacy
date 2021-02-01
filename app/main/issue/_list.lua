@@ -386,7 +386,6 @@ end
 if mode == "timeline" then
   --dotabs()
   filters.content = function()
-    execute.view{ module = "index", view = "_head" }
     doit()
   end
 else
@@ -405,7 +404,7 @@ else
       selector:add_order_by ( "id" )
     end
     if not search then
-      execute.view{ module = "index", view = "_head" }
+--      execute.view{ module = "index", view = "_head" }
     end
     ui.paginate{
       selector = selector,
