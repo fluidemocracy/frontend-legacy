@@ -39,7 +39,7 @@ ui.container{ attr = { class = "mdl-card mdl-shadow--2dp mdl-card__fullwidth" },
     elseif not issue.closed then
       if issue.member_info.own_participation then
         ui.container{ attr = { class = "mdl-card__content mdl-card--border" }, content = function()
-          ui.tag{ tag = "i", attr = { class = "material-icons" }, content = "remove_red_eye" }
+          ui.tag{ tag = "i", attr = { class = "material-icons" }, content = "star" }
           slot.put(" ")
           ui.tag{ content = _"You are interested in this issue" }
         end }
@@ -101,7 +101,7 @@ ui.container{ attr = { class = "mdl-card mdl-shadow--2dp mdl-card__fullwidth" },
                 mode = "redirect", module = initiative and "initiative" or "issue", view = "show", id = initiative and initiative.id or issue.id
               } },
               content = function()
-                ui.tag{ tag = "i", attr = { class = "material-icons" }, content = "remove_red_eye" }
+                ui.tag{ tag = "i", attr = { class = "material-icons" }, content = "star" }
                 slot.put(" ")
                 ui.tag{ content = _"add my interest" }
               end 

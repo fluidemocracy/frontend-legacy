@@ -169,39 +169,58 @@ local function print_delegation_info()
   end
 end
 
-if not param.get("no_star", "boolean") then
-  
-  if info.own_participation then
-    if issue and issue.fully_frozen then
-      ui.link{
-        attr = { class = "mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--underlined" },
-        module = "vote", view = "list", params = {
-          issue_id = issue.id
-        },
-        content = function ()
-          ui.tag { content = _"you voted" }
-        end
-      }
-    else
-      if issue then
-        ui.tag{ tag = "i", attr = { class = "material-icons" }, content = "star" }
-        slot.put(" ")
-        ui.tag{ content = _"you are interested" }
-        if not issue.closed and info.own_participation and info.weight and info.weight > 1 then
-          slot.put(" ")
-          ui.link { 
-            attr = { class = "right" }, content = "+" .. (info.weight - 1),
-            module = "interest", view = "show_incoming", params = { 
-              issue_id = issue.id, member_id = member.id
-            }
-          }
-        end
-      else
-        local text = _"you are subscribed"
-        ui.image { attr = { class = "icon24 star", title = text, alt = text }, static = "icons/48/star.png" }
+if not param.get("no_star", "boolean") and issue then
+  local redirect_unit = request.get_param{ name = "unit" }
+  local redirect_area = request.get_param{ name = "area" }
+
+  if issue.fully_frozen and info.own_participation then
+    ui.link{
+      attr = { class = "mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--underlined" },
+      module = "vote", view = "list", params = {
+        issue_id = issue.id
+      },
+      content = function ()
+        ui.tag { content = _"you voted" }
       end
+    }
+  elseif not issue.half_frozen and not info.own_participation then
+    ui.link{
+      attr = { class = "float-right mdl-button mdl-js-button mdl-button--icon mdl-button--accent" },
+      module = "interest", action = "update", params = { issue_id = issue.id },
+      routing = { default = {
+        mode = "redirect", module = "index", view = "index", params = {
+          unit = redirect_unit, area = redirect_area
+        },
+        anchor = "issue_" .. issue.id
+      } },
+      content = function()
+        ui.tag{ tag = "i", attr = { class = "material-icons" }, content = "star_outline" }
+      end
+    }
+  elseif not issue.half_frozen and info.own_participation then
+    ui.link{
+      attr = { class = "float-right mdl-button mdl-js-button mdl-button--icon mdl-button--accent" },
+      module = "interest", action = "update", params = { issue_id = issue.id, delete = true },
+      routing = { default = {
+        mode = "redirect", module = "index", view = "index", params = {
+          unit = redirect_unit, area = redirect_area
+        },
+        anchor = "issue_" .. issue.id
+      } },
+      content = function()
+        ui.tag{ tag = "i", attr = { class = "material-icons" }, content = "star" }
+      end
+    }
+    if not issue.closed and info.own_participation and info.weight and info.weight > 1 then
       slot.put(" ")
+      ui.link { 
+        attr = { class = "right" }, content = "+" .. (info.weight - 1),
+        module = "interest", view = "show_incoming", params = { 
+          issue_id = issue.id, member_id = member.id
+        }
+      }
     end
+    slot.put(" ")
   end
 end
 
