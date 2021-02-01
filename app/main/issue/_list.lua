@@ -121,7 +121,7 @@ local function doit()
       class = class .. " suggestion"
     end
     
-    ui.container{ attr = { class = class, }, content = function()
+    ui.container{ attr = { class = class, id = "issue_" .. issue.id }, content = function()
       local event_name
       local event_icon
       local negative_event = false
