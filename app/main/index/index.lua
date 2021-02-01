@@ -25,6 +25,7 @@ if unit_id then
     request.set_status("404 Not Found")
     return
   end
+  unit:load_delegation_info_once_for_member_id(app.session.member_id)
 end
 
 
@@ -35,17 +36,27 @@ if area_id then
     request.set_status("404 Not Found")
     return
   end
+  area:load_delegation_info_once_for_member_id(app.session.member_id)
 end
+
+if area then
+  execute.view{ module = "area", view = "_head", params = { area = area } }
+elseif unit then
+  execute.view{ module = "unit", view = "_head", params = { unit = unit } }
+end
+
 
 ui.grid{ content = function()
   ui.cell_main{ content = function()
 
     execute.view{ module = "index", view = "_sidebar_motd_public" }
-    
+
     execute.view{ module = "issue", view = "_list" }
   end }
 
   ui.cell_sidebar{ content = function()
+    execute.view{ module = "index", view = "_head" }
+    
     execute.view{ module = "index", view = "_sidebar_motd" }
     if app.session.member then
       execute.view{ module = "index", view = "_sidebar_notifications" }
