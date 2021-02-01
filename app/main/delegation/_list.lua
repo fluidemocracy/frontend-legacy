@@ -21,17 +21,17 @@ local function delegation_scope(delegation)
       ui.container { attr = { style = "float: left;" }, content = function()
         ui.link{
           content = unit.name,
-          module = "unit",
-          view = "show",
-          id = unit.id
+          module = "index",
+          view = "index",
+          params = { unit = unit.id }
         }
         if area then
           slot.put(" &middot; ")
           ui.link{
             content = area.name,
-            module = "area",
-            view = "show",
-            id = area.id
+            module = "index",
+            view = "index",
+            params = { unit = area.unit_id, area = area.id }
           }
         end
         if delegation.issue then
@@ -48,41 +48,39 @@ local function delegation_scope(delegation)
   }
 end
 
+local last_scope = {}
+for i, delegation in ipairs(delegations_selector:exec()) do
+  if last_scope.unit_id ~= delegation.unit_id
+    or last_scope.area_id ~= delegation.area_id
+    or last_scope.issue_id ~= delegation.issue_id
+  then
+    last_scope.unit_id = delegation.unit_id
+    last_scope.area_id = delegation.area_id
+    last_scope.issue_id = delegation.issue_id
+    delegation_scope(delegation)
+  end
+  if incoming then
+    execute.view{
+      module = "member",
+      view = "_show_thumb",
+      params = {
+        member = delegation.truster
+      }
+    }
+  elseif delegation.trustee then
+    ui.image{
+      attr = { class = "delegation_arrow" },
+      static = "delegation_arrow_24_horizontal.png"
+    }
+    execute.view{
+      module = "member",
+      view = "_show_thumb",
+      params = {
+        member = delegation.trustee
+      }
+    }
+  else
+    ui.tag{ content = _"Delegation abandoned" }
+  end
+end
 
---ui.paginate{
---  selector = delegations_selector,
---  name = incoming and "delegation_incoming" or "delegation_outgoing",
---  content = function()
-    local last_scope = {}
-    for i, delegation in ipairs(delegations_selector:exec()) do
-      if last_scope.unit_id ~= delegation.unit_id
-        or last_scope.area_id ~= delegation.area_id
-        or last_scope.issue_id ~= delegation.issue_id
-      then
-        last_scope.unit_id = delegation.unit_id
-        last_scope.area_id = delegation.area_id
-        last_scope.issue_id = delegation.issue_id
-        delegation_scope(delegation)
-      end
-      if incoming then
-        execute.view{ module = "member_image", view = "_show", params = {
-          member_id = delegation.truster_id, class = "micro_avatar", popup_text = delegation.truster.name,
-          image_type = "avatar", show_dummy = true,
-        } }
-        ui.link{ module = "member", view = "show", id = delegation.truster_id, content = delegation.truster.name }
-      elseif delegation.trustee then
-        ui.image{
-          attr = { class = "delegation_arrow" },
-          static = "delegation_arrow_24_horizontal.png"
-        }
-        execute.view{ module = "member_image", view = "_show", params = {
-          member_id = delegation.trustee_id, class = "micro_avatar", popup_text = delegation.trustee.name,
-          image_type = "avatar", show_dummy = true,
-        } }
-        ui.link{ module = "member", view = "show", id = delegation.trustee_id, content = delegation.trustee.name }
-      else
-        ui.tag{ content = _"Delegation abandoned" }
-      end
-    end
---  end
---}
