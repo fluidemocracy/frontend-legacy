@@ -552,6 +552,11 @@ select {
   font-family: "Roboto Bold";
 }
 
+.admitted_info h1,
+.not_admitted_info h1 {
+  margin-top: 0;
+}
+
 .admitted_info table th,
 .not_admitted_info table th {
   text-align: left;
