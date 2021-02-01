@@ -64,7 +64,7 @@ ui.grid{ content = function()
         tmp[#tmp+1] = {
           name = "PostgreSQL",
           url = "http://www.postgresql.org/",
-          version = db:query("SELECT version();")[1].version:gsub("PostgreSQL ", ""):gsub("on.*", ""),
+          version = db:query("SELECT version();")[1].version:gsub("PostgreSQL ", ""):gsub("on.*", ""):gsub(" .*", ""),
           license = "PostgreSQL License",
           license_url = "http://www.postgresql.org/about/licence"
         }
