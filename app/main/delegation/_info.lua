@@ -185,8 +185,13 @@ if not param.get("no_star", "boolean") and issue then
     }
   elseif not issue.half_frozen and not info.own_participation then
     ui.link{
-      attr = { class = "float-right mdl-button mdl-js-button mdl-button--icon mdl-button--accent" },
-      module = "interest", action = "update", params = { issue_id = issue.id },
+      attr = {
+        class = "float-right mdl-button mdl-js-button mdl-button--icon mdl-button--accent",
+      },
+      form_attr = {
+        onsubmit = "toggleInterest(" .. issue.id .. ", 'issue_" .. issue.id .. "_interest_icon'); return false;"  
+      },
+      module = "interest", action = "update", params = { issue_id = issue.id, interested = true },
       routing = { default = {
         mode = "redirect", module = "index", view = "index", params = {
           unit = redirect_unit, area = redirect_area
@@ -194,13 +199,18 @@ if not param.get("no_star", "boolean") and issue then
         anchor = "issue_" .. issue.id
       } },
       content = function()
-        ui.tag{ tag = "i", attr = { class = "material-icons" }, content = "star_outline" }
+        ui.tag{ tag = "i", attr = { id = "issue_" .. issue.id .. "_interest_icon", class = "material-icons" }, content = "star_outline" }
       end
     }
   elseif not issue.half_frozen and info.own_participation then
     ui.link{
-      attr = { class = "float-right mdl-button mdl-js-button mdl-button--icon mdl-button--accent" },
-      module = "interest", action = "update", params = { issue_id = issue.id, delete = true },
+      attr = {
+        class = "float-right mdl-button mdl-js-button mdl-button--icon mdl-button--accent"
+      },
+      form_attr = {
+        onsubmit = "toggleInterest(" .. issue.id .. ", 'issue_" .. issue.id .. "_interest_icon'); return false;"  
+      },
+      module = "interest", action = "update", params = { issue_id = issue.id, interested = false },
       routing = { default = {
         mode = "redirect", module = "index", view = "index", params = {
           unit = redirect_unit, area = redirect_area
@@ -208,7 +218,7 @@ if not param.get("no_star", "boolean") and issue then
         anchor = "issue_" .. issue.id
       } },
       content = function()
-        ui.tag{ tag = "i", attr = { class = "material-icons" }, content = "star" }
+        ui.tag{ tag = "i", attr = { id = "issue_" .. issue.id .. "_interest_icon", class = "material-icons" }, content = "star" }
       end
     }
     if not issue.closed and info.own_participation and info.weight and info.weight > 1 then

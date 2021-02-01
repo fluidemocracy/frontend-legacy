@@ -86,7 +86,7 @@ ui.container{ attr = { class = "mdl-card mdl-shadow--2dp mdl-card__fullwidth" },
             ui.link {
               attr = { class = "mdl-button mdl-js-button" },
               module = "interest", action = "update", 
-              params = { issue_id = issue.id, delete = true },
+              params = { issue_id = issue.id, interested = false },
               routing = { default = {
                 mode = "redirect", module = initiative and "initiative" or "issue", view = "show", id = initiative and initiative.id or issue.id
               } },
@@ -96,7 +96,7 @@ ui.container{ attr = { class = "mdl-card mdl-shadow--2dp mdl-card__fullwidth" },
             ui.link {
               attr = { class = "mdl-button mdl-js-button" },
               module = "interest", action = "update", 
-              params = { issue_id = issue.id },
+              params = { issue_id = issue.id, interested = true },
               routing = { default = {
                 mode = "redirect", module = initiative and "initiative" or "issue", view = "show", id = initiative and initiative.id or issue.id
               } },
