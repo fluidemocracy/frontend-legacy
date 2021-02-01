@@ -101,14 +101,8 @@ ui.container{
     end
 
     if (member.voter_comment) then
-      ui.image{
-        attr = { 
-          alt   = _"Voting comment available",
-          title = _"Voting comment available",
-          class = "icon24 right"
-        },
-        static = "icons/16/comment.png"
-      }
+      local text = _"Voting comment available",
+      ui.tag{ tag = "i", attr = { class = "material-icons" }, content = "comment" }
     end
 
 
@@ -128,13 +122,8 @@ ui.container{
     end
 
     if not member.active then
-      slot.put ( " " )
       local text = _"member inactive"
-      ui.image{
-        attr = { alt = text, title = text },
-        static = "icons/16/cross.png"
-      }
-      ui.tag{ content = _"inactive" }
+      ui.tag{ tag = "i", attr = { class = "material-icons icon-red" }, content = "disabled_by_default" }
     end
 
     if initiator and initiator.accepted then
@@ -147,10 +136,7 @@ ui.container{
 
     if member.is_informed == false then
       local text = _"Member has not approved latest draft"
-      ui.image{
-        attr = { alt = text, title = text },
-        static = "icons/16/help_yellow.png"
-      }
+      ui.tag{ tag = "i", attr = { class = "material-icons icon-yellow" }, content = "help" }
     end
 
   end

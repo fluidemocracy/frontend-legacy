@@ -397,9 +397,6 @@ ui.container{ attr = { class = "mdl-grid" }, content = function()
         end
 
         if preview_trustee_id == 0 or not preview_trustee_id == null and delegation and not delegation.trustee_id then
-          ui.image{
-            static = "icons/16/table_go_crossed.png"
-          }
           if issue_id then
             slot.put(_"Delegation turned off for issue")
           elseif area_id then

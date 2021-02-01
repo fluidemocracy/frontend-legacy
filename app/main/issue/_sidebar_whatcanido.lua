@@ -259,18 +259,6 @@ ui.container{ attr = { class = "mdl-card mdl-card__fullwidth mdl-shadow--2dp" },
     if privileged_to_vote and not issue.closed and not issue.fully_frozen then
       if issue.member_info.own_participation then
         ui.container { attr = { class = "mdl-card__content mdl-card--border" }, content = function ()
-          --[[
-          ui.container{ attr = { class = "right" }, content = function()
-            ui.image{ attr = { class = "right" }, static = "icons/48/eye.png" }
-            if issue.member_info.weight and issue.member_info.weight > 1 then
-              slot.put("<br />")
-              ui.tag{ 
-                attr = { class = "right" },
-                content = "+" .. issue.member_info.weight - 1
-            }
-            end
-          end }
-          --]]
           ui.tag{ content = _("You are interested in this issue", { id = issue.id }) }
           ui.tag { tag = "ul", attr = { class = "ul" }, content = function ()
             if issue.member_info.weight and issue.member_info.weight > 1 then
