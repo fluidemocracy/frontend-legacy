@@ -569,6 +569,10 @@ select {
   padding-right: 5px;
 }
 
+.event_info i {
+  font-size: 18px;
+}
+
 .ui_list_row label.mdl-radio {
   display: inline;
 }
