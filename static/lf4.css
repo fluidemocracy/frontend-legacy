@@ -552,10 +552,6 @@ select {
   font-family: "Roboto Bold";
 }
 
-.admitted_info, .not_admitted_info {
-  margin-left: 15px;
-}
-
 .admitted_info table th,
 .not_admitted_info table th {
   text-align: left;
@@ -567,8 +563,6 @@ select {
   text-align: right;
   padding-right: 5px;
 }
-
-.admitted
 
 .event_info i {
   font-size: 18px;
