@@ -4,7 +4,7 @@ local initiative = param.get("initiative", "table")
 -- voting results
 if initiative.issue.fully_frozen and initiative.issue.closed and initiative.admitted
   and initiative.issue.voter_count then
-  local class = initiative.winner and "sectionRow admitted_info" or "sectionRow not_admitted_info"
+  local class = initiative.winner and "mdl-card__content mdl-card--border admitted_info" or "mdl-card__content mdl-card--border not_admitted_info"
   ui.container{
     attr = { class = class },
     content = function()
