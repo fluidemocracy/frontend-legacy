@@ -109,8 +109,6 @@ ui.grid{ content = function()
       config.logo()
     end
     
-    execute.view{ module = "index", view = "_head", params = { issue = issue } }
-
     execute.view {
       module = "issue", view = "_sidebar", 
       params = {
