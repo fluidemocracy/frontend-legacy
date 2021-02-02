@@ -186,7 +186,8 @@ if not param.get("no_star", "boolean") and issue then
   elseif not issue.half_frozen and not info.own_participation then
     ui.link{
       attr = {
-        class = "float-right mdl-button mdl-js-button mdl-button--icon mdl-button--accent",
+        id = "issue_" .. issue.id .. "_interest_link",
+        class = "float-right mdl-button mdl-js-button mdl-button--icon mdl-button--feature-off",
       },
       form_attr = {
         onsubmit = "toggleInterest(" .. issue.id .. ", 'issue_" .. issue.id .. "_interest_icon'); return false;"  
@@ -205,6 +206,7 @@ if not param.get("no_star", "boolean") and issue then
   elseif not issue.half_frozen and info.own_participation then
     ui.link{
       attr = {
+        id = "issue_" .. issue.id .. "_interest_link",
         class = "float-right mdl-button mdl-js-button mdl-button--icon mdl-button--accent"
       },
       form_attr = {
