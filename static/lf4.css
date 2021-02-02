@@ -41,6 +41,7 @@
 .material-icons.icon-red {
   color: #F44336;
 }
+
 .mapboxgl-popup-content {
   max-width: 200px;
 }
@@ -236,6 +237,26 @@ color: rgba(0,0,0, 0.87);
   padding-bottom: 0;
   height: 24px;
 }
+
+.mdl-button--feature-off i {
+  color: #777;
+}
+
+@keyframes feature-on {
+  0% {
+    transform: scale(0);
+  }
+  40% {
+    transform: scale(3);
+  }
+  100% {
+    transform: scale(1);
+  }}
+
+.mdl-button--feature-on {
+  animation: feature-on 0.5s;  
+}
+
 .mdl-button--underlined {
   text-decoration: underline;
 }
