@@ -202,9 +202,7 @@ ui.grid{ content = function()
     if config.logo then
       config.logo()
     end
-    execute.view{ module = "index", view = "_head", params = {
-      issue = initiative.issue, initiative = initiative
-    } }
+
     execute.view {
       module = "issue", view = "_sidebar", 
       params = {
