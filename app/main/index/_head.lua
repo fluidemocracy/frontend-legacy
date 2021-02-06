@@ -37,7 +37,10 @@ if unit then
     end }
 
 
-    if not (config.voting_only and config.disable_delegations) and app.session.member_id then
+    if not (config.voting_only and config.disable_delegations) and app.session.member_id and (
+      app.session.member:has_voting_right_for_unit_id(unit.id) 
+      or app.session.member:has_initiative_right_for_unit_id(unit.id) 
+    ) then
       ui.container{ attr = { class = "mdl-card__actions" }, content = function()
           
         unit:load_delegation_info_once_for_member_id(app.session.member_id)
@@ -82,7 +85,10 @@ if area then
         end
       end }
     end
-    if not (config.voting_only and config.disable_delegations) and app.session.member_id then
+    if not (config.voting_only and config.disable_delegations) and app.session.member_id and (
+      app.session.member:has_voting_right_for_unit_id(area.unit_id) 
+      or app.session.member:has_initiative_right_for_unit_id(area.unit_id) 
+    ) then
       ui.container{ attr = { class = "mdl-card__actions" }, content = function()
           
         area:load_delegation_info_once_for_member_id(app.session.member_id)
@@ -90,14 +96,18 @@ if area then
         local text
         if area.delegation_info.own_delegation_scope == "area" then
           local member = Member:by_id(area.delegation_info.first_trustee_id)
-          ui.tag{ tag = "i", attr = { class = "material-icons" }, content = "forward" }
-          execute.view{
-            module = "member",
-            view = "_show_thumb",
-            params = {
-              member = member
+          if member then
+            ui.tag{ tag = "i", attr = { class = "material-icons" }, content = "forward" }
+            execute.view{
+              module = "member",
+              view = "_show_thumb",
+              params = {
+                member = member
+              }
             }
-          }
+          else
+            ui.tag{ content = _"Delegation abandoned" }
+          end
           text = _"change delegation..."
         else
           text = _"delegate..."  
