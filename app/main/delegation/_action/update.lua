@@ -56,12 +56,18 @@ else
     check_unit_id = area.unit_id
   end
   
-  if trustee and not trustee:has_voting_right_for_unit_id(check_unit_id) then
+  if trustee and not (
+    trustee:has_voting_right_for_unit_id(check_unit_id)
+    or trustee:has_initiative_right_for_unit_id(check_unit_id)
+  ) then
     slot.put_into("error", _"Trustee has no voting right in this unit")
     return false
   end
 
-  if not app.session.member:has_voting_right_for_unit_id(check_unit_id) then
+  if not (
+    app.session.member:has_voting_right_for_unit_id(check_unit_id) 
+    or app.session.member:has_initiative_right_for_unit_id(check_unit_id) 
+  ) then
     return execute.view { module = "index", view = "403" }
   end
 
