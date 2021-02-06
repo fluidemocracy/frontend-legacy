@@ -1,3 +1,42 @@
+local function field(name, label, value, tooltip)
+  ui.field.text{
+    container_attr = { class = "mdl-textfield mdl-js-textfield mdl-textfield--floating-label" },
+    attr = { id = "field_" .. name, class = "mdl-textfield__input" },
+    label_attr = { class = "mdl-textfield__label", ["for"] = "field_" .. name },
+    label = label,
+    name = name,
+    value = value or nil
+  }
+  if tooltip then
+    ui.container{ attr = { class = "mdl-tooltip", ["for"] = "field_" .. name }, content = tooltip }
+  end
+end
+
+local function field_boolean(id, name, checked, label)
+  ui.container{ content = function()
+    ui.tag{ tag = "label", attr = {
+        class = "mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect",
+        ["for"] = id
+      },
+      content = function()
+        ui.tag{
+          tag = "input",
+          attr = {
+            id = id,
+            class = "mdl-checkbox__input",
+            type = "checkbox", name = name, value = "true",
+            checked = checked and "checked" or nil,
+          }
+        }
+        ui.tag{
+          attr = { class = "mdl-checkbox__label", ['for'] = id },
+          content = label
+        } 
+      end
+    }
+  end }
+end
+
 local id = param.get_id()
 
 local member = Member:by_id(id)
@@ -22,7 +61,11 @@ ui.grid{ content = function()
   ui.cell_main{ content = function()
     ui.container{ attr = { class = "mdl-card mdl-card__fullwidth mdl-shadow--2dp" }, content = function()
       ui.container{ attr = { class = "mdl-card__title mdl-card--border" }, content = function()
-        ui.heading { attr = { class = "mdl-card__title-text" }, level = 2, content = _"Member" }
+        local text = _"Member"
+        if member then
+          text = text .. " ID " .. member.id
+        end
+        ui.heading { attr = { class = "mdl-card__title-text" }, level = 2, content = text }
       end }
       ui.container{ attr = { class = "mdl-card__content" }, content = function()
         ui.form{
@@ -41,26 +84,30 @@ ui.grid{ content = function()
           },
           content = function()
 
-            ui.field.text{     label = _"Identification", name = "identification" }
-            ui.field.text{     label = _"Notification email (confirmed)", name = "notify_email" }
-            ui.field.text{     label = _"Notification email (unconfirmed)", name = "notify_email_unconfirmed" }
+            ui.container{ content = function()
+              field("identification", _"Identification")
+              if member and member.activated then
+                slot.put(" &nbsp; ")
+                field("name", "Screen name")
+              end
+            end }
+            ui.container{ content = function()
+              field("notify_email", _"Notification email (confirmed)")
+              slot.put(" &nbsp; ")
+              field("notify_email_unconfirmed", _"Notification email (unconfirmed)")
+            end }
+--            field("", "")
             
-            if member and member.activated then
-              ui.field.text{     label = _"Screen name",        name = "name" }
-            end
             
             if member and member.activated and not deactivated then
-              ui.field.text{     label = _"Login name",        name = "login" }
+              field("login", "Login name")
             end
 
             for i, unit in ipairs(units) do
-              ui.field.boolean{
-                name = "unit_" .. unit.id,
-                label = unit.name,
-                value = unit.voting_right
-              }
+              field_boolean("checkbox_unit_" .. unit.id, "unit_" .. unit.id, unit.voting_right, unit.name)
+              
             end
-            slot.put("<br /><br />")
+            slot.put("<br />")
 
             if member then
               ui.field.text{  label = _"Activated",       name = "activated", readonly = true }
@@ -91,13 +138,13 @@ ui.grid{ content = function()
               attr = { class = "mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect" },
               text  = _"update member"
             }
-            slot.put(" ")
+            slot.put(" &nbsp; ")
             if member then
               ui.link { 
-                attr = { class = "mdl-button mdl-js-button mdl-button--raised" },
+                attr = { class = "mdl-button mdl-js-button" },
                 module = "admin", view = "member_deactivate", content = _"Deactivate member", id = member.id 
               }
-              slot.put(" ")
+              slot.put(" &nbsp; ")
             end
             ui.link {
                 attr = { class = "mdl-button mdl-js-button" },
