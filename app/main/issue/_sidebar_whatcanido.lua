@@ -264,7 +264,7 @@ ui.container{ attr = { class = "mdl-card mdl-card__fullwidth mdl-shadow--2dp" },
             if issue.member_info.weight and issue.member_info.weight > 1 then
               ui.tag { tag = "li", content = function ()
                 ui.link {
-                  module = "delegation", view = "show_incoming",
+                  module = "interest", view = "show_incoming",
                   params = { issue_id = issue.id, member_id = app.session.member_id },
                   content = _("you have #{count} incoming delegations", {
                     count = issue.member_info.weight - 1
