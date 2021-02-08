@@ -32,55 +32,50 @@ local members_selector = Member:new_selector()
   :add_field("delegating_voter.ownweight", "ownweight")
   :join("issue", nil, "issue.id = delegating_voter.issue_id")
 
-
-execute.view{
-  module = "issue", view = "_head", params = {
-    issue = issue, initiative = initiative
-  }
-}
-
-execute.view{ module = "issue", view = "_sidebar_state", params = {
-  issue = issue,
-} }
-
-execute.view { 
-  module = "issue", view = "_sidebar_issue", params = {
-    issue = issue,
-    highlight_initiative_id = initiative and initiative.id or nil,
-  }
-}
-
-execute.view { 
-  module = "issue", view = "_sidebar_whatcanido", params = {
-    issue = issue
-  }
-}
-
-execute.view { 
-  module = "issue", view = "_sidebar_members", params = {
-    issue = issue,
-    initiative = initiative
-  }
-}
-
-
-ui.section( function()
-    
-  ui.sectionHead( function()
-    ui.heading{ level = 1, content = _("Incoming delegations for '#{member}'", { member = member.name }) }
-  end)
-
-  execute.view{
-    module = "member",
-    view = "_list",
-    params = {
-      members_selector = members_selector,
-      trustee = member,
-      issue = issue,
-      initiative = initiative,
-      for_votes = true, no_filter = true,
-      
-    }
-  }
+execute.view{ module = "issue", view = "_head", params = { issue = issue, link_issue = true } }
   
-end )
+
+ui.grid{ content = function()
+  
+  ui.cell_main{ content = function()
+
+    ui.container { attr = { class = "mdl-card mdl-shadow--2dp mdl-card__fullwidth" }, content = function()
+      ui.container{ attr = { class = "mdl-card__title mdl-card--border" }, content = function()
+        ui.heading { attr = { class = "mdl-card__title-text" }, level = 2, content = _("Incoming delegations for '#{member}'", { member = member.name }) }
+      end }
+      ui.container{ attr = { class = "mdl-card__content" }, content = function()
+        execute.view{
+          module = "member",
+          view = "_list",
+          params = { 
+            members_selector = members_selector,
+            issue = issue,
+            trustee = member
+            initiative = initiative,
+            for_votes = true, no_filter = true,
+          }
+        }
+      end }
+    end }
+  end }
+  
+  ui.cell_sidebar{ content = function()
+    execute.view {
+      module = "issue", view = "_sidebar", 
+      params = {
+        issue = issue,
+        member = app.session.member
+      }
+    }
+
+    execute.view { 
+      module = "issue", view = "_sidebar_members", params = {
+        issue = issue
+      }
+    }
+
+  end }
+
+end }
+
+
