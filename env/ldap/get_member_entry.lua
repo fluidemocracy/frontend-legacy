@@ -12,7 +12,7 @@
 
 function ldap.get_member_entry(filter, use_ldap_conn)
   
-  local ldap_conn, err
+  local ldap_conn, err, bind_err
   
   if use_ldap_conn then
     ldap_conn = use_ldap_conn
@@ -28,7 +28,7 @@ function ldap.get_member_entry(filter, use_ldap_conn)
     base = config.ldap.base,
     scope = config.ldap.member.scope,
     filter = filter,
-    attr = config.ldap.member.fetch_attr,
+    attrs = config.ldap.member.fetch_attr,
   }
   
   if not use_ldap_conn then
