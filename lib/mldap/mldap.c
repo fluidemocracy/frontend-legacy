@@ -340,7 +340,7 @@ static int mldap_search(lua_State *L) {
   lua_pop(L, 1);  // removes stack element 4
   filter = mldap_get_named_string_arg(L, 2, "filter", false);  // pushed to 4
   lua_getfield(L, 2, "attrs");  // pushed to 5
-  nattrs = lua_len(L, -1);
+  nattrs = luaL_len(L, -1);
   attrs = calloc(nattrs + 1, sizeof(char *));  // memory allocation, +1 for terminating NULL
   if (!attrs) return luaL_error(L, "Memory allocation error in C function 'mldap_queryconn'");
   for (attr_idx=0; attr_idx<nattrs; attr_idx++) {
