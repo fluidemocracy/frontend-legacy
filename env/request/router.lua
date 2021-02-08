@@ -5,6 +5,7 @@ local api_endpoints = {
   application = true,
   info = true,
   member = true,
+  avatar = true,
   notify_email = true,
   profile_info = true,
   profile = true,
