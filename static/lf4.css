@@ -173,6 +173,9 @@ h1 {
 .mdl-card__content.mdl-card--no-bottom-pad {
   padding-bottom: 0;
 }
+.mdl-card__actions {
+  overflow: auto;
+}
 .mdl-card__actions.mdl-card--action-border,
 .mdl-card__content.mdl-card--border {
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
