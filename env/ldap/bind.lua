@@ -27,7 +27,7 @@ function ldap.bind(dn, password)
     
     local host = table.remove(hostlist, 1)
     
-    local err
+    local err, errno
     ldap, err, errno = libldap.bind{
       uri = host.uri,
       timeout = host.timeout,
