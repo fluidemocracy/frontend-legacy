@@ -350,7 +350,7 @@ static int mldap_search(lua_State *L) {
       free(attrs);
       return luaL_error(L, "Element in attribute list is not a string");
     }
-    attrs[i] = lua_tostring(L, -1);
+    attrs[attr_idx] = lua_tostring(L, -1);
   }
   // attrs[nattrs] = NULL;  // unnecessary due to calloc
 
