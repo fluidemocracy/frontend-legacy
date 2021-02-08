@@ -51,8 +51,9 @@ ui.grid{ content = function()
           readonly = true,
           attr = { class = "sectionRow form" },
           content = function()
-            if issue.snapshot then
-              ui.field.timestamp{ label = _"Last counting:", value = issue.snapshot }
+            local latest_snapshot = Snapshot:latest_by_issue_id(issue.id)
+            if latest_snapshot then
+              ui.field.timestamp{ label = _"Last counting:", value = latest_snapshot.calculated }
             end
             ui.field.text{       label = _"Population",            name = "population" }
             ui.field.timestamp{  label = _"Created at",            name = "created" }
