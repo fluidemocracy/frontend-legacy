@@ -50,7 +50,7 @@ ui.grid{ content = function()
           params = { 
             members_selector = members_selector,
             issue = issue,
-            trustee = member
+            trustee = member,
             initiative = initiative,
             for_votes = true, no_filter = true,
           }
