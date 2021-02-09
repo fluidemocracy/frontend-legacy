@@ -35,6 +35,8 @@ function ldap.update_all_members()
       return
     end
 
+    ldap.update_member_allowed(member, ldap_entry)
+
     local err = member:try_save()
     if err then
       failure("member_try_save", err)
