@@ -413,7 +413,6 @@ function Member:by_login_and_password(login, password)
   local function prepare_login_selector()
     local selector = self:new_selector()
     selector:add_field({ "now() > COALESCE(last_delegation_check, activated) + ?::interval", config.check_delegations_interval_hard }, "needs_delegation_check_hard")
-    selector:add_where('NOT "locked"')
     selector:optional_object_mode()
     return selector
   end
@@ -476,11 +475,15 @@ function Member:by_login_and_password(login, password)
         end
 
         -- update the member attributes and privileges from LDAP
-        local ldap_conn, ldap_err, err, err2 = ldap.update_member_attr(member, nil, uid)
+        local ldap_conn, ldap_entry, err, err2 = ldap.update_member_attr(member, nil, uid)
         if not err then
+          ldap.update_member_allowed(member, ldap_entry)
           local err = member:try_save()
           if err then
             return nil, "member_save_error", err
+          end
+          if member.locked then
+            return nil, "member_locked"
           end
           local succes, err, err2 = ldap.update_member_privileges(member, ldap_entry)
           if err then
@@ -522,8 +525,12 @@ function Member:by_login_and_password(login, password)
         if config.ldap.member.cache_passwords then
           member:set_password(password)
         end
-        local ldap_conn, ldap_err, err, err2 = ldap.update_member_attr(member, nil, uid)
+        local ldap_conn, ldap_entry, err, err2 = ldap.update_member_attr(member, nil, uid)
         if not err then
+          ldap.update_member_allowed(member, ldap_entry)
+          if member.locked then
+            return nil, "member_not_allowed"
+          end
           local err = member:try_save()
           if err then
             return nil, "member_save_error", err
