@@ -14,7 +14,7 @@ function ldap.update_all_members()
   
   local ldap_conn = ldap.bind_as_app()
   
-  function update_member(member)
+  local function update_member(member)
 
     local function failure (err, err2)
       Member.get_db_conn():query("ROLLBACK")
