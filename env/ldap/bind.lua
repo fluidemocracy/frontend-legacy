@@ -30,6 +30,7 @@ function ldap.bind(dn, password)
     local err, errno
     ldap, err, errno = libldap.bind{
       uri = host.uri,
+      tls = host.tls,
       timeout = host.timeout,
       who = dn,
       password = password

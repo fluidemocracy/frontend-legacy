@@ -151,6 +151,51 @@ static int mldap_get_named_number_arg(
 }
 
 
+static bool mldap_get_named_boolean_arg(
+  // gets a named argument of type "boolean" from a table at the given stack position
+
+  lua_State *L,             // pointer to lua_State variable
+  int idx,                  // stack index of the table containing the named arguments
+  const char *argname,      // name of the argument
+  int mandatory,            // if not 0, then the argument is mandatory and an error is raised if it isn't found
+  bool default_value        // default value to return, if the argument is not mandatory and nil
+
+  // opposed to 'mldap_get_named_string_arg', this function leaves no element on the stack
+) {
+
+  bool value;  // value to return
+
+  // pushes the table entry with the given argument name on top of the stack:
+  lua_getfield(L, idx, argname);
+
+  // check, if the entry is nil:
+  if (lua_isnil(L, -1)) {
+
+    // throw error, if named argument is mandatory:
+    if (mandatory) return luaL_error(L, "Named argument '%s' missing", argname), 0;
+
+    // set default value as return value, if named argument is not mandatory:
+    value = default_value;
+
+  } else {
+
+    // throw error, if the value of the argument is not a number:
+    if (lua_type(L, -1) != LUA_TBOOLEAN) return luaL_error(L, "Named argument '%s' is not a boolean", argname), 0;
+
+    // set return value to the number:
+    value = lua_toboolean(L, -1);
+
+  }
+
+  // remove unnecessary element from stack (not needed to avoid garbage collection):
+  lua_pop(L, 1);
+  
+  return value;
+
+  // leaves no new elements on the stack
+}
+
+
 static int mldap_scope(
   // converts a string ("base", "onelevel", "subtree", "children") to an integer representing the LDAP scope
   // and throws an error for any unknown string
@@ -183,9 +228,11 @@ static int mldap_bind(lua_State *L) {
   // "who"      (string)  DN to bind as
   // "password" (string)  password for DN to bind as
   // "timeout"  (number)  timeout in seconds
+  // "tls"      (boolean) use TLS
 
   static const int ldap_version = LDAP_VERSION3;  // providing a pointer (&ldap_version) to set LDAP protocol version 3
   const char *uri;           // C string for "uri" argument
+  bool tls;                  // boolean indicating if TLS is to be used
   const char *who;           // C string for "who" argument
   struct berval cred;        // credentials ("password") are stored as struct berval
   lua_Number timeout_float;  // float (lua_Number) for timeout
@@ -201,6 +248,7 @@ static int mldap_bind(lua_State *L) {
 
   // extract arguments:
   uri = mldap_get_named_string_arg(L, 1, "uri", true);
+  tls = mldap_get_named_boolean_arg(L, 1, "tls", false, false);
   who = mldap_get_named_string_arg(L, 1, "who", false);
   cred.bv_val = (char *)mldap_get_named_string_arg(L, 1, "password", false);
   // use (char *) cast to suppress compiler warning (should be const anyway)
@@ -224,6 +272,12 @@ static int mldap_bind(lua_State *L) {
   ldap_error = ldap_set_option(ldp, LDAP_OPT_TIMEOUT, &timeout);
   // on error, jump to label "mldap_queryconn_error2", as ldap_unbind_ext_s() must be called:
   if (ldap_error != LDAP_SUCCESS) goto mldap_queryconn_error2;
+
+  // initiate TLS if requested
+  if (tls) {
+    ldap_error = ldap_start_tls_s(ldp, NULL, NULL);  
+    if (ldap_error != LDAP_SUCCESS) goto mldap_queryconn_error2;
+  }
 
   // connect to LDAP server:
   ldap_error = ldap_sasl_bind_s(
