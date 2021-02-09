@@ -79,7 +79,7 @@ static const char *mldap_get_named_string_arg(
   lua_State *L,         // pointer to lua_State variable
   int idx,              // stack index of the table containing the named arguments
   const char *argname,  // name of the argument
-  int mandatory         // if not 0, then the argument is mandatory and an error is raised if it isn't found
+  bool mandatory        // if not 0, then the argument is mandatory and an error is raised if it isn't found
 
   // leaves the string as new element on top of the stack
 ) {
@@ -114,8 +114,8 @@ static int mldap_get_named_number_arg(
   lua_State *L,             // pointer to lua_State variable
   int idx,                  // stack index of the table containing the named arguments
   const char *argname,      // name of the argument
-  int mandatory,            // if not 0, then the argument is mandatory and an error is raised if it isn't found
-  lua_Number default_value  // default value to return, if the argument is not mandatory and nil or false
+  bool mandatory,           // if not 0, then the argument is mandatory and an error is raised if it isn't found
+  lua_Number default_value  // default value to return, if the argument is not mandatory and nil
 
   // opposed to 'mldap_get_named_string_arg', this function leaves no element on the stack
 ) {
@@ -145,6 +145,8 @@ static int mldap_get_named_number_arg(
   }
 
   // remove unnecessary element from stack (not needed to avoid garbage collection):
+  lua_pop(L, 1);
+
   return value;
 
   // leaves no new elements on the stack
@@ -157,7 +159,7 @@ static bool mldap_get_named_boolean_arg(
   lua_State *L,             // pointer to lua_State variable
   int idx,                  // stack index of the table containing the named arguments
   const char *argname,      // name of the argument
-  int mandatory,            // if not 0, then the argument is mandatory and an error is raised if it isn't found
+  bool mandatory,           // if not 0, then the argument is mandatory and an error is raised if it isn't found
   bool default_value        // default value to return, if the argument is not mandatory and nil
 
   // opposed to 'mldap_get_named_string_arg', this function leaves no element on the stack
