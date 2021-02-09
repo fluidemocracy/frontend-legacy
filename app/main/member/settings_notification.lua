@@ -164,9 +164,9 @@ ui.grid{ content = function()
               }
             else
               ui.link {
-                attr = { class = "mdl-button mdl-js-button mdl-button--raised" },
-                module = "member", view = "settings", 
-                content = _"cancel"
+                attr = { class = "mdl-button mdl-js-button" },
+                module = "member", view = "show", id = app.session.member_id,
+                content = _"Cancel"
               }
             end
             
