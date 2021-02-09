@@ -10,6 +10,11 @@ ui.grid{ content = function()
 
       local applications = MemberApplication:by_member_id(app.session.member_id)
       
+      if #applications == 0 then
+        ui.container{ attr = { class = "mdl-card__content mdl-card--border" }, content = _"No applications connected" }
+          
+      end
+      
       for i, application in ipairs(applications) do
         ui.container{ attr = { class = "mdl-card__content mdl-card--border" }, content = function()
           if application.system_application_id then
