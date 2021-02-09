@@ -202,7 +202,8 @@ static int mldap_bind(lua_State *L) {
   // extract arguments:
   uri = mldap_get_named_string_arg(L, 1, "uri", true);
   who = mldap_get_named_string_arg(L, 1, "who", false);
-  cred.bv_val = mldap_get_named_string_arg(L, 1, "password", false);
+  cred.bv_val = (char *)mldap_get_named_string_arg(L, 1, "password", false);
+  // use (char *) cast to suppress compiler warning (should be const anyway)
   if (cred.bv_val) cred.bv_len = strlen(cred.bv_val);
   else cred.bv_len = 0;
   timeout_float = mldap_get_named_number_arg(L, 1, "timeout", false, -1);
@@ -308,7 +309,7 @@ static int mldap_search(lua_State *L) {
   int scope;                 // integer representing the scope
   const char *filter;        // C string for "filter" argument
   size_t nattrs;             // number of attributes in "attrs" argument
-  char **attrs;              // C string array of "attrs" argument
+  const char **attrs;        // C string array of "attrs" argument
   size_t attr_idx;           // index variable for building the C string array of "attrs"
   int ldap_error;            // LDAP error code (as returned by libldap calls)
   LDAP **ldp_ptr;            // pointer to a pointer to the OpenLDAP structure representing the connection
@@ -360,7 +361,8 @@ static int mldap_search(lua_State *L) {
     base,      // DN of the entry at which to start the search
     scope,     // scope of the search
     filter,    // string representation of the filter to apply in the search
-    attrs,     // array of attribute descriptions (array of strings)
+    (char **)attrs,  // array of attribute descriptions (array of strings)
+               // cast to suppress compiler warning (should be const anyway)
     0,         // do not only request attribute descriptions but also values
     NULL,      // no server controls
     NULL,      // no client controls
