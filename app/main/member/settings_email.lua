@@ -50,10 +50,10 @@ ui.grid{ content = function()
               content = ""
             }
             slot.put(" &nbsp; ")
-            ui.link{
-              attr = { class = "mdl-button mdl-js-button mdl-button--raised" },
-              content = _"Cancel",
-              module = "member", view = "settings"
+            ui.link {
+              attr = { class = "mdl-button mdl-js-button" },
+              module = "member", view = "show", id = app.session.member_id,
+              content = _"Cancel"
             }
           end
         }
