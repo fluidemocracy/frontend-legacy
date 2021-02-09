@@ -19,7 +19,7 @@ function toggleInterest(issueId) {
   data.append("issue_id", issueId);
   data.append("interested", interested);
 
-  fetch("/lf/interest/xhr_update", {
+  fetch(baseURL + "/interest/xhr_update", {
       method : "POST",
       body: data
   }).then(
