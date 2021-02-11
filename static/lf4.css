@@ -413,13 +413,17 @@ textarea {
   }
 }
 
+
+.suggestion-content {
+  position: relative;
+}
+
 .folded {
   position: relative;
 }
 .folded .suggestion-content {
-  max-height: 180px;
+  max-height: 250px;
   overflow: hidden;
-  position: relative;
 }
 .folded .suggestion-content:before {
   content: "";
@@ -433,6 +437,9 @@ background: linear-gradient(rgba(0,0,0,0), #fff);
 .suggestion-less,
 .suggestion-more {
   display: none;
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
 }
 .folded .suggestion-more,
 .unfolded .suggestion-less {
