@@ -23,106 +23,48 @@ initiative:load_everything_for_member_id(app.session.member_id)
 initiative.issue:load_everything_for_member_id(app.session.member_id)
 
 
-execute.view{ module = "issue", view = "_sidebar_state", params = {
-  initiative = initiative
-} }
 
-execute.view { 
-  module = "issue", view = "_sidebar_issue", 
-  params = {
-    issue = initiative.issue,
-    highlight_initiative_id = initiative.id
-  }
-}
+execute.view{ module = "issue", view = "_head", params = { issue = initiative.issue, link_issue = true } }
 
-execute.view {
-  module = "issue", view = "_sidebar_whatcanido",
-  params = { initiative = initiative }
-}
+ui.grid{ content = function()
+  ui.cell_main{ content = function()
 
-execute.view { 
-  module = "issue", view = "_sidebar_members", params = {
-    issue = initiative.issue, initiative = initiative
-  }
-}
+    ui.container{ attr = { class = "mdl-card mdl-card__fullwidth mdl-shadow--2dp" }, content = function()
+      ui.container{ attr = { class = "mdl-card__title mdl-card--border" }, content = function()
+        ui.heading { attr = { class = "mdl-card__title-text" }, level = 2, content = suggestion.name }
+      end }
 
-
-
-execute.view {
-  module = "issue", view = "_head", params = {
-    issue = initiative.issue
-  }
-}
-
-
-ui.section( function()
-  ui.sectionHead( function()
-    ui.link{
-      module = "initiative", view = "show", id = initiative.id,
-      content = function ()
-        ui.heading { 
-          level = 1,
-          content = initiative.display_name
+      ui.container{ attr = { class = "mdl-card__content mdl-card--border" }, content = function()
+        if app.session:has_access("authors_pseudonymous") and suggestion.author then 
+          util.micro_avatar(suggestion.author)
+        end
+        execute.view{
+          module = "suggestion", view = "_collective_rating", params = {
+            suggestion = suggestion
+          }
         }
-      end
-    }
-    ui.heading { level = 2, content = _("Suggestion for improvement #{id}", { id = suggestion.id }) }
-  end )
-  ui.sectionRow( function()
+      end }
 
-    ui.heading{ level = 2, content = suggestion.name }
-    if app.session:has_access("authors_pseudonymous") and suggestion.author then 
-      util.micro_avatar(suggestion.author)
-    end
-  end )
-  ui.sectionRow( function()
-    ui.container{
-      attr = { class = "suggestion_content wiki" },
-      content = function()
+      ui.container{ attr = { class = "mdl-card__content mdl-card--border" }, content = function()
         slot.put(suggestion:get_content("html"))
+      end }
+
+      if app.session:has_access("all_pseudonymous") then
+        ui.container{ attr = { class = "mdl-card__content mdl-card--border" }, content = function()
+          execute.view{
+            module = "opinion",
+            view = "_list",
+            params = { 
+              opinions_selector = Opinion:new_selector()
+                :add_where{ "suggestion_id = ?", suggestion.id }
+                :join("member", nil, "member.id = opinion.member_id")
+                :add_order_by("member.id DESC")
+            }
+          }
+        end }
       end
-    }
-    
-  end )
-end )
 
-ui.section( function()
-  ui.sectionHead( function()
-    ui.heading { level = 2, content = _"Collective rating" }
-  end )
-  ui.sectionRow( function()
+    end }
+  end }
+end }
 
-    execute.view{
-      module = "suggestion",
-      view = "_list_element",
-      params = {
-        suggestions_selector = Suggestion:new_selector():add_where{ "id = ?", suggestion.id },
-        initiative = suggestion.initiative,
-        show_name = false,
-        show_filter = false
-      }
-    }
-  end)
-end)
-  
-if app.session:has_access("all_pseudonymous") then
-  ui.section( function()
-    ui.sectionHead( function()
-      ui.heading { level = 2, content = _"Individual ratings" }
-    end )
-    ui.sectionRow( function()
-
-      execute.view{
-        module = "opinion",
-        view = "_list",
-        params = { 
-          opinions_selector = Opinion:new_selector()
-            :add_where{ "suggestion_id = ?", suggestion.id }
-            :join("member", nil, "member.id = opinion.member_id")
-            :add_order_by("member.id DESC")
-        }
-      }
-
-    end)
-  end)
-end

@@ -5,8 +5,129 @@ if app.session.member_id then
 end
 
 
-ui.link { attr = { name = "suggestions" }, text = "" }
+if direct_supporter then
+  ui.tag{ tag = "dialog", attr = { id = "rating_dialog" }, content = function ()
 
+    local opinion = {}
+    ui.form { 
+      attr = { onsubmit = "updateOpinion(); return false;" },
+      module = "opinion", action = "update",
+      routing = { default = {
+        mode = "redirect", 
+        module = "initiative", view = "show", id = initiative.id
+      } },
+      content = function ()
+        ui.field.hidden{ attr = { id = "rating_suggestion_id" }, name = "suggestion_id" }        
+        ui.container{ attr = { class = "opinon-question" }, content = _"Should the initiator implement this suggestion?" }
+        ui.container { content = function ()
+        
+          local options = {
+            { degree =  2, label = _"must" },
+            { degree =  1, label = _"should" },
+            { degree =  0, label = _"neutral" },
+            { degree = -1, label = _"should not" },
+            { degree = -2, label = _"must not" },
+          }
+          
+          for i, option in ipairs(options) do
+            ui.tag{
+              tag = "label", 
+              attr = { 
+                id = "rating_degree" .. option.degree,
+                class = "mdl-radio mdl-js-radio mdl-js-ripple-effect"
+              }, 
+              ["for"] = "rating_degree" .. option.degree, 
+              content = function()
+                ui.tag{
+                  tag = "input",
+                  attr = {
+                    class = "mdl-radio__button",
+                    type = "radio",
+                    name = "degree",
+                    value = option.degree
+                  }
+                }
+                ui.tag{
+                  attr = { class = "mdl-radio__label" },
+                  content = option.label
+                }
+              end
+            }
+            slot.put(" &nbsp;&nbsp;&nbsp; ")
+          end
+        end }
+        
+        slot.put("<br />")
+
+        ui.container{ attr = { class = "opinon-question" }, content = _"Did the initiator implement this suggestion?" }
+        ui.container { content = function ()
+
+          local options = {
+            { degree = "false", id = "notfulfilled", label = _"No (not yet)" },
+            { degree = "true", id = "fulfilled", label = _"Yes, it's implemented" },
+          }
+          
+          for i, option in ipairs(options) do
+            ui.tag{
+              tag = "label", 
+              attr = {
+                id = "rating_" .. option.id,
+                class = "mdl-radio mdl-js-radio mdl-js-ripple-effect"
+              }, 
+              ["for"] = "rating_" .. option.id, 
+              content = function()
+                ui.tag{
+                  tag = "input",
+                  attr = {
+                    class = "mdl-radio__button",
+                    type = "radio",
+                    name = "fulfilled",
+                    value = option.degree,
+                  }
+                }
+                ui.tag{
+                  attr = { class = "mdl-radio__label" },
+                  content = option.label
+                }
+              end
+            }
+            slot.put(" &nbsp;&nbsp;&nbsp; ")
+          end
+        end }
+    
+        slot.put("<br />")
+        
+        ui.tag{
+          tag = "input",
+          attr = {
+            type = "submit",
+            class = "mdl-button mdl-js-button mdl-button--raised mdl-button--colored",
+            value = _"publish my rating"
+          },
+          content = ""
+        }
+        
+        slot.put(" &nbsp; ")
+        
+        ui.tag{
+          tag = "input",
+          attr = {
+            onclick = "document.getElementById('rating_dialog').close(); return false;",
+            type = "submit",
+            class = "mdl-button mdl-js-button",
+            value = _"cancel"
+          },
+          content = ""
+        }
+        
+      end 
+    }
+
+  end }
+end
+
+
+ui.link { attr = { name = "suggestions" }, text = "" }
 
 ui.container {
   attr = { class = "section suggestions" },
@@ -38,108 +159,18 @@ ui.container {
           ui.tag{ attr = { class = "mdl-card__title mdl-card--border" }, content = function()
             ui.heading { level = 2, 
               attr = { class = "mdl-card__title-text" },
-              content = format.string(suggestion.name, {
-              truncate_at = 160, truncate_suffix = true
-            }) }
-
-            if opinion then
-              
-              ui.container { attr = { class = "mdl-card__content"}, content = function()
-                local class = ""
-                local text = ""
-                
-                if opinion.degree == 2 then
-                  class = "must"
-                  text = _"must"
-                elseif opinion.degree == 1 then
-                  class = "should"
-                  text = _"should"
-                elseif opinion.degree == 0 then
-                  class = "neutral"
-                  text = _"neutral"
-                elseif opinion.degree == -1 then
-                  class = "shouldnot"
-                  text = _"should not"
-                elseif opinion.degree == -2 then
-                  class = "mustnot"
-                  text = _"must not"
-                end
-                
-                ui.tag { 
-                  attr = { class = class }, 
-                  content = text 
+              content = function()
+                ui.tag{ content = format.string(suggestion.name, {
+                  truncate_at = 160, truncate_suffix = true })
                 }
-                
-                slot.put ( " " )
-                
-                if 
-                  (opinion.degree > 0 and not opinion.fulfilled)
-                  or (opinion.degree < 0 and opinion.fulfilled)
-                then
-                  ui.tag{ content = _"but" }
-                else
-                  ui.tag{ content = _"and" }
-                end
-                  
-                slot.put ( " " )
-                
-                local class = ""
-                local text = ""
-                
-                if opinion.fulfilled then
-                  class = "implemented"
-                  text = _"is implemented"
-                else
-                  class = "notimplemented"
-                  text = _"is not implemented"
-                end
-
-                ui.tag { 
-                  attr = { class = class }, 
-                  content = text
-                }
-
-                if 
-                  (opinion.degree > 0 and not opinion.fulfilled)
-                  or (opinion.degree < 0 and opinion.fulfilled)
-                then
-                  if math.abs(opinion.degree) > 1 then
-                    slot.put(" !!")
-                  else
-                    slot.put(" !")
-                  end
-                else
-                  slot.put(" ✓")
-                end
-
-              end }
-
-            end
-              
+              end
+            }
           end }
+
+            
       
           ui.container{ attr = { class = "suggestion-content" }, content = function()
         
-            local plus2  = (suggestion.plus2_unfulfilled_count or 0)
-                + (suggestion.plus2_fulfilled_count or 0)
-            local plus1  = (suggestion.plus1_unfulfilled_count  or 0)
-                + (suggestion.plus1_fulfilled_count or 0)
-            local minus1 = (suggestion.minus1_unfulfilled_count  or 0)
-                + (suggestion.minus1_fulfilled_count or 0)
-            local minus2 = (suggestion.minus2_unfulfilled_count  or 0)
-                + (suggestion.minus2_fulfilled_count or 0)
-            
-            local with_opinion = plus2 + plus1 + minus1 + minus2
-
-            local neutral = (suggestion.initiative.supporter_count or 0)
-                - with_opinion
-
-            local neutral2 = with_opinion 
-                  - (suggestion.plus2_fulfilled_count or 0)
-                  - (suggestion.plus1_fulfilled_count or 0)
-                  - (suggestion.minus1_fulfilled_count or 0)
-                  - (suggestion.minus2_fulfilled_count or 0)
-            
             ui.container { 
               attr = { class = "mdl-card__content mdl-card--border suggestionInfo" },
               content = function ()
@@ -148,203 +179,153 @@ ui.container {
                   util.micro_avatar ( suggestion.author )
                 end
                 
-                if with_opinion > 0 then
-                  ui.container { attr = { class = "suggestion-rating" }, content = function ()
-                    ui.tag { content = _"collective rating:" }
-                    slot.put("&nbsp;")
-                    ui.bargraph{
-                      max_value = suggestion.initiative.supporter_count,
-                      width = 100,
-                      bars = {
-                        { color = "#0a0", value = plus2 },
-                        { color = "#8a8", value = plus1 },
-                        { color = "#eee", value = neutral },
-                        { color = "#a88", value = minus1 },
-                        { color = "#a00", value = minus2 },
-                      }
-                    }
-                    slot.put(" | ")
-                    ui.tag { content = _"implemented:" }
-                    slot.put ( "&nbsp;" )
-                    ui.bargraph{
-                      max_value = with_opinion,
-                      width = 100,
-                      bars = {
-                        { color = "#0a0", value = suggestion.plus2_fulfilled_count },
-                        { color = "#8a8", value = suggestion.plus1_fulfilled_count },
-                        { color = "#eee", value = neutral2 },
-                        { color = "#a88", value = suggestion.minus1_fulfilled_count },
-                        { color = "#a00", value = suggestion.minus2_fulfilled_count },
-                      }
-                    }
-                  end }
-                end
+                execute.view{
+                  module = "suggestion", view = "_collective_rating", params = {
+                    suggestion = suggestion
+                  }
+                }
 
               end 
             }
                 
             ui.container {
-              attr = { class = "mdl-card__content mdl-card--border suggestion-text draft" },
+              attr = { class = "mdl-card__content suggestion-text draft" },
               content = function ()
                 slot.put ( suggestion:get_content( "html" ) )
+
+                ui.container { attr = { class = "floatx-right" }, content = function()
+                
+                  ui.link { 
+                    attr = { 
+                      class = "mdl-button mdl-js-button mdl-button--icon suggestion-more",
+                      onclick = "document.querySelector('#s" .. suggestion.id .. "').classList.remove('folded');document.querySelector('#s" .. suggestion.id .. "').classList.add('unfolded'); return false;"
+                    },
+                    content = function()
+                      ui.tag{ tag = "i", attr = { class = "material-icons" }, content = "expand_more" }
+                    end
+                  }
+                  
+                  ui.link { 
+                    attr = { 
+                      class = "mdl-button mdl-js-button mdl-button--icon suggestion-less",
+                      onclick = "document.querySelector('#s" .. suggestion.id .. "').classList.add('folded');document.querySelector('#s" .. suggestion.id .. "').classList.remove('unfolded'); return false;"
+                    },
+                    content = function()
+                      ui.tag{ tag = "i", attr = { class = "material-icons" }, content = "expand_less" }
+                    end
+                  }
+                  --[[
+                  ui.link{
+                    attr = { class = "mdl-button" },
+                    content = _"Details",
+                    module = "suggestion", view = "show", id = suggestion.id
+                  }
+                  --]]
+                end }
                
               end
             }
  
-            if direct_supporter then
-              ui.container{ attr = { class = "mdl-card__content rating" }, content = function ()
-
-                if not opinion then
-                  opinion = {}
-                end
-                ui.form { 
-                  module = "opinion", action = "update", params = {
-                    suggestion_id = suggestion.id
-                  },
-                  routing = { default = {
-                    mode = "redirect", 
-                    module = "initiative", view = "show", id = suggestion.initiative_id,
-                    params = { suggestion_id = suggestion.id },
-                    anchor = "s" .. suggestion.id -- TODO webmcp
-                  } },
-                  content = function ()
-                    
-                    ui.container{ attr = { class = "opinon-question" }, content = _"Should the initiator implement this suggestion?" }
-                    ui.container { content = function ()
-                    
-                      local options = {
-                        { degree =  2, label = _"must" },
-                        { degree =  1, label = _"should" },
-                        { degree =  0, label = _"neutral" },
-                        { degree = -1, label = _"should not" },
-                        { degree = -2, label = _"must not" },
-                      }
-                      
-                      for i, option in ipairs(options) do
-                        local active = opinion.degree == option.degree or opinion.degree == nil and option.degree == 0
-                        ui.tag{
-                          tag = "label", 
-                          attr = { class = "mdl-radio mdl-js-radio mdl-js-ripple-effect" }, 
-                          ["for"] = "s" .. suggestion.id .. "_degree" .. option.degree, 
-                          content = function()
-                            ui.tag{
-                              tag = "input",
-                              attr = {
-                                class = "mdl-radio__button",
-                                type = "radio",
-                                name = "degree",
-                                value = option.degree,
-                                id = "s" .. suggestion.id .. "_degree" .. option.degree,
-                                checked = active and "checked" or nil
-                              }
-                            }
-                            ui.tag{
-                              attr = { class = "mdl-radio__label" },
-                              content = option.label
-                            }
-                          end
-                        }
-                        slot.put(" &nbsp;&nbsp;&nbsp; ")
-                      end
-                    end }
-                    
-                    slot.put("<br />")
-
-                    ui.container{ attr = { class = "opinon-question" }, content = _"Did the initiator implement this suggestion?" }
-                    ui.container { content = function ()
-
-                      local options = {
-                        { degree = "false", id = "notfulfilled", label = _"No (not yet)" },
-                        { degree = "true", id = "fulfilled", label = _"Yes, it's implemented" },
-                      }
-                      
-                      for i, option in ipairs(options) do
-                        local active = opinion.fulfilled == (option.degree == "true" and true or false)
-                        ui.tag{
-                          tag = "label", 
-                          attr = { class = "mdl-radio mdl-js-radio mdl-js-ripple-effect" }, 
-                          ["for"] = "s" .. suggestion.id .. "_" .. option.id, 
-                          content = function()
-                            ui.tag{
-                              tag = "input",
-                              attr = {
-                                class = "mdl-radio__button",
-                                type = "radio",
-                                name = "fulfilled",
-                                value = option.degree,
-                                id = "s" .. suggestion.id .. "_" .. option.id,
-                                checked = active and "checked" or nil
-                              }
-                            }
-                            ui.tag{
-                              attr = { class = "mdl-radio__label" },
-                              content = option.label
-                            }
-                          end
-                        }
-                        slot.put(" &nbsp;&nbsp;&nbsp; ")
-                      end
-                    end }
-                
-                    slot.put("<br />")
-                    
-                    ui.tag{
-                      tag = "input",
-                      attr = {
-                        type = "submit",
-                        class = "mdl-button mdl-js-button mdl-button--raised mdl-button--colored",
-                        value = _"publish my rating"
-                      },
-                      content = ""
-                    }
-                    
-                  end 
-                }
-
-              end }
-            end
-            
           end }
 
-          ui.container { attr = { class = "rating-button" }, content = function()
+          ui.container { attr = { class = "mdl-card__actions mdl-card--border" }, content = function()
+
+            ui.container{ attr = { class = "float-right" }, content = function()
+              ui.tag{ attr = { id = "s" .. suggestion.id .. "_rating_text" }, content = function()
+                local text = ""
+                if opinion then
+                  if opinion.degree == 2 then
+                    text = _"must"
+                  elseif opinion.degree == 1 then
+                    text = _"should"
+                  elseif opinion.degree == 0 then
+                    text = _"neutral"
+                  elseif opinion.degree == -1 then
+                    text = _"should not"
+                  elseif opinion.degree == -2 then
+                    text = _"must not"
+                  end
+                  ui.tag { content = text }
+                  slot.put ( " " )
+                  if 
+                    (opinion.degree > 0 and not opinion.fulfilled)
+                    or (opinion.degree < 0 and opinion.fulfilled)
+                  then
+                    ui.tag{ content = _"but" }
+                  else
+                    ui.tag{ content = _"and" }
+                  end
+                  slot.put ( " " )
+                  local text = ""
+                  if opinion.fulfilled then
+                    text = _"is implemented"
+                  else
+                    text = _"is not implemented"
+                  end
+                  ui.tag { content = text }
+                end
+              end }
+              local id = "s" .. suggestion.id .. "_rating_icon"
+              if opinion and (
+                  (opinion.degree > 0 and not opinion.fulfilled)
+                  or (opinion.degree < 0 and opinion.fulfilled)
+                )
+              then
+                slot.put(" ")
+                if math.abs(opinion.degree) > 1 then
+                  ui.icon("warning", "red", id)
+                else
+                  ui.icon("warning", nil, id)
+                end
+              elseif opinion then
+                slot.put(" ")
+                ui.icon("done", nil, id)
+              else
+                slot.put(" ")
+                ui.icon("blank", nil, id)
+              end
+            end }
+            
+            ui.link{
+              attr = {
+                id = "s" .. suggestion.id .. "_rate_button",
+                class = "mdl-button",
+                onclick = "rateSuggestion(" .. suggestion.id .. ", " .. (opinion and opinion.degree or 0) .. ", " .. (opinion and (opinion.fulfilled and "true" or "false") or "null") .. ");return false;"
+              },
+              content = function()
+                if opinion then
+                  ui.tag { content = _"update rating" }
+                else
+                  ui.tag { content = _"rate suggestion" }
+                end
+              end
+            }
           
-            local text = _"Read more"
-            
-            if direct_supporter then
-              text = text .. " / " .. _"Rate suggestion"
-            end
-              
-            ui.link { 
-              attr = { 
-                class = "mdl-button mdl-js-button suggestion-more",
-                onclick = "document.querySelector('#s" .. suggestion.id .. "').classList.remove('folded');document.querySelector('#s" .. suggestion.id .. "').classList.add('unfolded'); return false;"
-              },
-              text = text
-            }
-            
-            ui.link { 
-              attr = { 
-                class = "mdl-button suggestion-less",
-                onclick = "document.querySelector('#s" .. suggestion.id .. "').classList.add('folded');document.querySelector('#s" .. suggestion.id .. "').classList.remove('unfolded'); return false;"
-              },
-              text = _"Show less"
-            }
-            --[[
             ui.link{
               attr = { class = "mdl-button" },
               content = _"Details",
               module = "suggestion", view = "show", id = suggestion.id
             }
-            --]]
+
           end }
           ui.script{ script = [[
+            var rateSuggestionRateText = "]] .. _"rate suggestion" .. [[";
+            var rateSuggestionUpdateRatingText = "]] .. _"update rating" .. [[";
+            var rateSuggestionDegreeTexts = {
+              "-2": "]] .. _"must not" .. [[",
+              "-1": "]] .. _"should not" .. [[",
+              "1": "]] .. _"should" .. [[",
+              "2": "]] .. _"must" .. [["
+            }
+            var rateSuggestionAndText = "]] .. _"and" .. [[";
+            var rateSuggestionButText = "]] .. _"but" .. [[";
+            var rateSuggestionFulfilledText = "]] .. _"is implemented" .. [[";
+            var rateSuggestionNotFulfilledText = "]] .. _"is not implemented" .. [[";
             window.addEventListener("load", function() {
               var textEl = document.querySelector('#s]] .. suggestion.id .. [[ .suggestion-content');
               var height = textEl.clientHeight;
-              if (height > 180) {
+              if (height > 250) {
                 document.querySelector('#s]] .. suggestion.id .. [[').classList.add('folded');
-                document.querySelector('#s]] .. suggestion.id .. [[ .rating-button').classList.add('mdl-card__actions');
-                document.querySelector('#s]] .. suggestion.id .. [[ .rating-button').classList.add('mdl-card--border');
               }
             });
           ]] }
