@@ -132,6 +132,32 @@ if not config.database then
   config.database = { engine='postgresql', dbname='liquid_feedback' }
 end
 
+if not config.formatting_engines then
+  config.enforce_formatting_engine = "html"
+  config.formatting_engines = {
+    { id = "html",
+      name = "html",
+      executable = "cat"
+    }
+  }
+end
+
+if not config.style then
+  config.style = {
+    color_md = {
+      primary = "green",
+      primary_contrast = "dark",
+      accent = "blue",
+      accent_contrast = "dark"
+    }
+  }
+end
+
+if not config.member_profile_fields then
+  config.member_profile_fields = {}
+end
+
+
 if config.fork == nil then
   config.fork = {}
 end
