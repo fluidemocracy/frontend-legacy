@@ -14,7 +14,7 @@
   font-family: 'Material Icons';
   font-style: normal;
   font-weight: 400;
-  src: url("font/material.woff2") format('woff2');
+  src: url("font/MaterialIcons-Regular.ttf");
 }
 
 .material-icons {
@@ -615,10 +615,8 @@ select {
 
 .contextlinks {
   color: #fff;
-  xfont-size: 14px;
-  xmargin-bottom: 5px;
 }
-    
+
 /*************************************************************************
  * Voting
  */
