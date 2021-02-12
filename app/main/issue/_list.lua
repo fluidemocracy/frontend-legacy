@@ -166,7 +166,7 @@ local function doit()
           voting = "mail",
           finished_with_winner = "emoji_events",
           finished_without_winner = "do_not_disturb",
-          canceled = "clear"
+          canceled = "do_not_disturb"
         }
         event_icon = event_icons_map[issue.state] or event_icons_map["canceled"]
         event_name = issue.state_name
