@@ -164,8 +164,8 @@ local function doit()
           discussion = "question_answer",
           verification = "find_in_page",
           voting = "mail",
-          finished_with_winner = "gavel",
-          finished_without_winner = "gavel",
+          finished_with_winner = "emoji_events",
+          finished_without_winner = "do_not_disturb",
           canceled = "clear"
         }
         event_icon = event_icons_map[issue.state] or event_icons_map["canceled"]
@@ -203,23 +203,27 @@ local function doit()
           ui.container{ attr = { class = "contextlinks" }, content = function()
             if not (config.single_unit_id and config.single_area_id) then
               if not config.single_unit_id then
-                slot.put ( " " )
+                ui.icon("group")
+                slot.put(" ")
                 ui.link{
                   module = "index", view = "index", params = { unit = issue.area.unit_id },
-                  attr = { class = "unit" }, content = issue.area.unit.name
-                }
+                  attr = { class = "unit" }, content = issue.area.unit.name                 }
               end
               if not config.single_area_id then
                 if not config.single_unit_id then
-                  slot.put(" » ")
+                  slot.put(" &nbsp;&nbsp;&nbsp; ")
                 end
+                ui.icon("category")
+                slot.put(" ")
                 ui.link{
                   module = "index", view = "index", params = { unit = issue.area.unit_id, area = issue.area_id },
                   attr = { class = "area" }, content = issue.area.name
                 }
               end
             end
-            slot.put(" » ")
+            slot.put(" &nbsp;&nbsp;&nbsp; ")
+            ui.icon("gavel")
+            slot.put(" ")
             ui.link{
               module = "issue", view = "show", id = issue.id,
               attr = { class = "issue" }, content = issue.name
