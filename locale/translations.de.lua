@@ -121,7 +121,7 @@ return {
 ["Cancel"] = "Abbrechen";
 ["Cancel issue"] = "Thema abbrechen";
 ["Cancel issue ##{id}"] = "Thema ##{id} abbrechen";
-["Canceled by administrative intervention"] = "Durch administrativen Eingriff abgebrochen";
+["Canceled by administrative intervention"] = "abgebrochen durch Admin";
 ["Cancelled (#{count})"] = "Gesperrt (#{count})";
 ["Cancelled account"] = "Gesperrtes Konto";
 ["Cancelled accounts"] = "Gesperrte Konten";
