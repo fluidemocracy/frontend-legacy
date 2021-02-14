@@ -1,8 +1,3 @@
-if not app.session:has_access("anonymous") then
-  slot.put("<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Closed user group, please login.<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />")
-  return
-end
-
 local unit_id = request.get_param{ name = "unit" }
 local area_id = request.get_param{ name = "area" }
 
