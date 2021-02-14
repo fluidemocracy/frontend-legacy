@@ -446,6 +446,11 @@ background: linear-gradient(rgba(0,0,0,0), #fff);
   display: inline-block;
 }
 
+.suggestion_rating_info {
+  float: right;
+  line-height: 200%;
+}
+
 .diff .diff_removed {
   text-decoration: line-through;
   background: #f00;

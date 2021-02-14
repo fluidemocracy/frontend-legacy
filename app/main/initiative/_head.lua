@@ -65,11 +65,13 @@ end }
 ui.container{ attr = { class = "mdl-card__content mdl-card--border" }, content = function ()
 
   if not config.voting_only and app.session:has_access("authors_pseudonymous") then
+    ui.tag{ content = _"by" }
+    slot.put(" ")
     for i, member in ipairs(initiators) do
       if i > 1 then
         slot.put(" ")
       end
-      util.micro_avatar( member )
+      ui.link{ module = "member", view = "show", id = member.id, content = member.name }
     end -- for i, member
   end
   
