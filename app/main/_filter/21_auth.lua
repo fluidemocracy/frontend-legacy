@@ -5,8 +5,7 @@ local action = request.get_action()
 local auth_needed = true
 
 if module == 'index' and (
-     view == 'index'
-  or view   == "login"
+     view   == "login"
   or action == "login"
   or view   == "register"
   or action == "register"
