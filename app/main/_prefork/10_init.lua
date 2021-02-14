@@ -126,6 +126,10 @@ if config.oauth2 then
   if not config.oauth2.dynamic_registration_lifetime then
     config.oauth2.dynamic_registration_lifetime = 60 * 60 * 24
   end
+  if config.oauth2.refresh_pause < config.oauth2.refresh_grace_period then
+    print("ERROR: config.auth2.refresh_pause is smaller than config.oauth2.refresh_grace_period")
+    os.exit()
+  end
 end
 
 if not config.database then
