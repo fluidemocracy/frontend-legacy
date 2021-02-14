@@ -176,7 +176,12 @@ ui.container {
               content = function ()
               
                 if app.session:has_access("authors_pseudonymous") then
-                  util.micro_avatar ( suggestion.author )
+                  ui.tag{ content = _"by" }
+                  slot.put(" ")
+                  ui.link{
+                    module = "member", view = "show", id = suggestion.author_id,
+                    content = suggestion.author.name
+                  }
                 end
                 
                 execute.view{
@@ -230,77 +235,79 @@ ui.container {
 
           ui.container { attr = { class = "mdl-card__actions mdl-card--border" }, content = function()
 
-            ui.container{ attr = { class = "float-right" }, content = function()
-              ui.tag{ attr = { id = "s" .. suggestion.id .. "_rating_text" }, content = function()
-                local text = ""
-                if opinion then
-                  if opinion.degree == 2 then
-                    text = _"must"
-                  elseif opinion.degree == 1 then
-                    text = _"should"
-                  elseif opinion.degree == 0 then
-                    text = _"neutral"
-                  elseif opinion.degree == -1 then
-                    text = _"should not"
-                  elseif opinion.degree == -2 then
-                    text = _"must not"
+            if direct_supporter then
+              ui.container{ attr = { class = "suggestion_rating_info" }, content = function()
+                ui.tag{ attr = { id = "s" .. suggestion.id .. "_rating_text" }, content = function()
+                  local text = ""
+                  if opinion then
+                    if opinion.degree == 2 then
+                      text = _"must"
+                    elseif opinion.degree == 1 then
+                      text = _"should"
+                    elseif opinion.degree == 0 then
+                      text = _"neutral"
+                    elseif opinion.degree == -1 then
+                      text = _"should not"
+                    elseif opinion.degree == -2 then
+                      text = _"must not"
+                    end
+                    ui.tag { content = text }
+                    slot.put ( " " )
+                    if 
+                      (opinion.degree > 0 and not opinion.fulfilled)
+                      or (opinion.degree < 0 and opinion.fulfilled)
+                    then
+                      ui.tag{ content = _"but" }
+                    else
+                      ui.tag{ content = _"and" }
+                    end
+                    slot.put ( " " )
+                    local text = ""
+                    if opinion.fulfilled then
+                      text = _"is implemented"
+                    else
+                      text = _"is not implemented"
+                    end
+                    ui.tag { content = text }
                   end
-                  ui.tag { content = text }
-                  slot.put ( " " )
-                  if 
+                end }
+                local id = "s" .. suggestion.id .. "_rating_icon"
+                if opinion and (
                     (opinion.degree > 0 and not opinion.fulfilled)
                     or (opinion.degree < 0 and opinion.fulfilled)
-                  then
-                    ui.tag{ content = _"but" }
+                  )
+                then
+                  slot.put(" ")
+                  if math.abs(opinion.degree) > 1 then
+                    ui.icon("warning", "red", id)
                   else
-                    ui.tag{ content = _"and" }
+                    ui.icon("warning", nil, id)
                   end
-                  slot.put ( " " )
-                  local text = ""
-                  if opinion.fulfilled then
-                    text = _"is implemented"
-                  else
-                    text = _"is not implemented"
-                  end
-                  ui.tag { content = text }
+                elseif opinion then
+                  slot.put(" ")
+                  ui.icon("done", nil, id)
+                else
+                  slot.put(" ")
+                  ui.icon("blank", nil, id)
                 end
               end }
-              local id = "s" .. suggestion.id .. "_rating_icon"
-              if opinion and (
-                  (opinion.degree > 0 and not opinion.fulfilled)
-                  or (opinion.degree < 0 and opinion.fulfilled)
-                )
-              then
-                slot.put(" ")
-                if math.abs(opinion.degree) > 1 then
-                  ui.icon("warning", "red", id)
-                else
-                  ui.icon("warning", nil, id)
+              
+              ui.link{
+                attr = {
+                  id = "s" .. suggestion.id .. "_rate_button",
+                  class = "mdl-button",
+                  onclick = "rateSuggestion(" .. suggestion.id .. ", " .. (opinion and opinion.degree or 0) .. ", " .. (opinion and (opinion.fulfilled and "true" or "false") or "null") .. ");return false;"
+                },
+                content = function()
+                  if opinion then
+                    ui.tag { content = _"update rating" }
+                  else
+                    ui.tag { content = _"rate suggestion" }
+                  end
                 end
-              elseif opinion then
-                slot.put(" ")
-                ui.icon("done", nil, id)
-              else
-                slot.put(" ")
-                ui.icon("blank", nil, id)
-              end
-            end }
-            
-            ui.link{
-              attr = {
-                id = "s" .. suggestion.id .. "_rate_button",
-                class = "mdl-button",
-                onclick = "rateSuggestion(" .. suggestion.id .. ", " .. (opinion and opinion.degree or 0) .. ", " .. (opinion and (opinion.fulfilled and "true" or "false") or "null") .. ");return false;"
-              },
-              content = function()
-                if opinion then
-                  ui.tag { content = _"update rating" }
-                else
-                  ui.tag { content = _"rate suggestion" }
-                end
-              end
-            }
-          
+              }
+            end
+                      
             ui.link{
               attr = { class = "mdl-button" },
               content = _"Details",
