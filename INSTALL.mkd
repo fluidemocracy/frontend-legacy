@@ -142,9 +142,9 @@ following contents:
     #!/bin/sh
 
     while true; do
-      su - www-data -s /bin/sh -c 'nice /opt/liquid_feedback_core/lf_update dbname=liquid_feedback 2>&1 | logger -t "lf_updated"'
-      su - www-data -s /bin/sh -c 'nice /opt/liquid_feedback_core/lf_update_issue_order dbname=liquid_feedback 2>&1 | logger -t "lf_updated"'
-      su - www-data -s /bin/sh -c 'nice /opt/liquid_feedback_core/lf_update_suggestion_order dbname=liquid_feedback 2>&1 | logger -t "lf_updated"'
+      nice /opt/liquid_feedback_core/lf_update dbname=liquid_feedback 2>&1 | logger -t "lf_core"
+      nice /opt/liquid_feedback_core/lf_update_issue_order dbname=liquid_feedback 2>&1 | logger -t "lf_core"
+      nice /opt/liquid_feedback_core/lf_update_suggestion_order dbname=liquid_feedback 2>&1 | logger -t "lf_core"
       sleep 5
     done
 
@@ -159,7 +159,7 @@ systemd, create a file named `/etc/systemd/system/liquid_feedback_core.service`:
     Description=LiquidFeedback Core update
 
     [Service]
-    User=lf
+    User=www-data
     ExecStart=/opt/liquid_feedback_core/lf_update.sh
 
     [Install]
@@ -180,7 +180,7 @@ Create a file named "/opt/liquid_feedback_frontend/run.sh":
 
     #/bin/bash
     
-    su - www-data -c /opt/moonbridge/moonbridge /opt/webmcp/bin/mcp.lua /opt/webmcp/ /opt/liquid_feedback_frontend/ main myconfig
+    /opt/moonbridge/moonbridge /opt/webmcp/bin/mcp.lua /opt/webmcp/ /opt/liquid_feedback_frontend/ main myconfig  2>&1 | logger -t "lf_frontend"
 
 Make it executable:
 
@@ -193,7 +193,7 @@ On systemd based systems, create a file named
     Description=LiquidFeedback Frontend
 
     [Service]
-    User=lf
+    User=www-data
     ExecStart=/opt/liquid_feedback_frontend/run.sh
 
     [Install]
