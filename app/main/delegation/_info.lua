@@ -183,7 +183,7 @@ if not param.get("no_star", "boolean") and issue then
         ui.tag { content = _"you voted" }
       end
     }
-  elseif not issue.half_frozen and not info.own_participation then
+  elseif not issue.half_frozen and not issue.closed and not info.own_participation then
     ui.link{
       attr = {
         id = "issue_" .. issue.id .. "_interest_link",
@@ -203,7 +203,7 @@ if not param.get("no_star", "boolean") and issue then
         ui.tag{ tag = "i", attr = { id = "issue_" .. issue.id .. "_interest_icon", class = "material-icons" }, content = "star_outline" }
       end
     }
-  elseif not issue.half_frozen and info.own_participation then
+  elseif not issue.half_frozen and not issue.closed and info.own_participation then
     ui.link{
       attr = {
         id = "issue_" .. issue.id .. "_interest_link",
