@@ -160,7 +160,7 @@ ui.grid{ content = function()
 
         if #files > 0 then
           ui.container {
-            attr = { class = "mdl-card__content mdl-card--border" },
+            attr = { class = "mdl-card__content mdl-card--border attachments" },
             content = function()
               for i, file in ipairs(files) do
                 ui.link{ module = "file", view = "show.jpg", id = file.id, content = function()
@@ -170,7 +170,6 @@ ui.grid{ content = function()
                   ui.tag{ tag = "strong", content = file.title or "" }
                 end }
                 ui.container{ content = file.description or "" }
-                slot.put("<br /><br />")
               end
             end
           }
