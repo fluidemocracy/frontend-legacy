@@ -4,6 +4,8 @@ local for_member = param.get("for_member", "table")
 
 local issue = initiative.issue
 
+local position = param.get("position", atom.number)
+
 if initiative.vote_grade ~= nil then
   if initiative.vote_grade > 0 then
     local text = _"voted yes"
@@ -30,6 +32,12 @@ end
 ui.container{
   attr = { class = class },
   content = function ()
+    if position == 1 and not for_member and (
+      initiative.issue.state == "finished_with_winner" 
+      or initiative.issue.state == "finished_without_winner"
+    ) then
+      util.initiative_pie(initiative)
+    end
     ui.container {
       attr = { class = "initiative_name" },
       content = function()
