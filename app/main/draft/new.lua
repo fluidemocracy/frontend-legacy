@@ -126,10 +126,10 @@ ui.form{
           ui.container{ attr = { class = "mdl-card__content mdl-card--border" }, content = function()
 
 -- -------- PREVIEW
-            if param.get("preview") then
+            if param.get("preview") and slot.get_content("error") == "" then
               ui.sectionRow( function()
                 if not issue and not initiative then
-                  ui.container { content = policy.name }
+                  ui.container { content = policy and policy.name or "" }
                 end
                 if param.get("free_timing") then
                   ui.container { content = param.get("free_timing") }
