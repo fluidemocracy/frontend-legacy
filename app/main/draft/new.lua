@@ -236,9 +236,10 @@ ui.form{
                 ui.link{
                   attr = { class = "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" },
                   content = _"Cancel",
-                  module = initiative and "initiative" or "area",
-                  view = "show",
-                  id = initiative_id or area_id
+                  module = initiative and "initiative" or "index",
+                  view = initiative and "show" or "index",
+                  id = initiative_id,
+                  params = { unit = area and area.unit_id or nil, area = area_id }
                 }
               end )
 
