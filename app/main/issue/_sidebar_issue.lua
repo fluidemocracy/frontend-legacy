@@ -1,22 +1,17 @@
 local issue = param.get("issue", "table")
 local ommit_initiative_id = param.get ( "ommit_initiative_id", "number" )
 
---[[
-ui.heading {
-  level = 2,
-  content = _"Competing initiatives"
-}
---]]
-
 if #(issue.initiatives) > (ommit_initiative_id and 1 or 0) then
-  execute.view {
-    module = "initiative", view = "_list",
-    params = {
-      issue = issue,
-      initiatives = issue.initiatives,
-      ommit_initiative_id = ommit_initiative_id
+  ui.container{ attr = { class = "competing_initiatives" }, content = function()
+    execute.view {
+      module = "initiative", view = "_list",
+      params = {
+        issue = issue,
+        initiatives = issue.initiatives,
+        ommit_initiative_id = ommit_initiative_id
+      }
     }
-  }
+  end }
 end
 
 if #issue.initiatives == 1 then

@@ -19,7 +19,7 @@ if initiative.vote_grade ~= nil then
   end
 end
 
-local class = "initiative  mdl-list__item-primary-content"
+local class = "initiative mdl-list__item-primary-content"
 if initiative.rank == 1 then
   class = class .. " rank1"
 end
@@ -135,7 +135,26 @@ ui.container{
       end
 
     end }
-
   end
 }
+
+if config.attachments and config.attachments.preview_in_listing then
+
+  local file = File:new_selector()
+    :left_join("draft_attachment", nil, "draft_attachment.file_id = file.id")
+    :add_where{ "draft_attachment.draft_id = ?", initiative.current_draft.id }
+    :reset_fields()
+    :add_field("file.id")
+    :add_field("draft_attachment.title")
+    :add_field("draft_attachment.description")
+    :add_order_by("draft_attachment.id")
+    :limit(1)
+    :optional_object_mode()
+    :exec()
+
+  if file then
+    ui.image{ attr = { class = "attachment" }, module = "file", view = "show.jpg", id = file.id, params = { preview = true } }
+  end
+end
+
 
