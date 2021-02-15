@@ -605,6 +605,10 @@ select {
   padding-right: 5px;
 }
 
+.attachments img {
+  max-width: 100%;
+}
+
 .ui_list_row label.mdl-radio {
   display: inline;
 }
