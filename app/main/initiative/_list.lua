@@ -64,17 +64,16 @@ ui.tag {
             class = class .. " satisfied"
           end
         end
+        local position
+        if not ommit_initiative_id then
+          position = i
+        end
         ui.tag {
           tag = "li", attr = { class = class },
           content = function ()
-            if i == 1 and not ommit_initiative_id and not for_member and (
-              initiative.issue.state == "finished_with_winner" 
-              or initiative.issue.state == "finished_without_winner"
-            ) then
-              util.initiative_pie(initiative)
-            end
             execute.view {
               module = "initiative", view = "_list_element", params = {
+                position = position,
                 initiative = initiative, for_event = for_event, for_member = for_member
               }
             }
