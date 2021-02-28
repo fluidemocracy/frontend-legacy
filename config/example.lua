@@ -2,20 +2,21 @@
 -- MANDATORY (MUST BE CAREFULLY CHECKED AND PROPERLY SET!)
 -- ========================================================================
 
--- Name of this instance, defaults to name of config file
+-- Absolute base url of application
 -- ------------------------------------------------------------------------
-config.instance_name = "Example Organisation"
-
+config.absolute_base_url = "https://example.org/"
 
 -- Connection information for the LiquidFeedback database
 -- ------------------------------------------------------------------------
 config.database = { engine='postgresql', dbname='liquid_feedback' }
 
-
--- Absolute base url of application
+-- Name of this instance, defaults to name of config file
 -- ------------------------------------------------------------------------
-config.absolute_base_url = "https://example.org/"
+config.instance_name = "Example Organisation"
 
+-- Information about service provider (HTML)
+-- ------------------------------------------------------------------------
+config.app_service_provider = "Snake Oil<br/>10000 Berlin<br/>Germany"
 
 -- Network interface to bind to
 -- ------------------------------------------------------------------------
@@ -25,11 +26,9 @@ config.absolute_base_url = "https://example.org/"
 -- ------------------------------------------------------------------------
 -- config.localhost = true
 
-
 -- Network port to bind to, default port 8080
 -- ------------------------------------------------------------------------
 -- config.port = 8080
-
 
 -- Serving content via IPV6
 -- ------------------------------------------------------------------------
@@ -39,11 +38,15 @@ config.absolute_base_url = "https://example.org/"
 -- ------------------------------------------------------------------------
 -- config.ipv6 = false
 
+-- ========================================================================
+-- OPTIONAL
+-- Remove leading -- to use a option
+-- ========================================================================
 
 -- Public access level
 -- ------------------------------------------------------------------------
 -- Available options:
--- "none" 
+-- "none" (default)
 --     -> Closed user group, no public access at all
 --        (except login/registration/password reset)
 -- "anonymous"
@@ -56,29 +59,15 @@ config.absolute_base_url = "https://example.org/"
 -- "everything"
 --     -> Show everything a member can see, including profile pages
 -- ------------------------------------------------------------------------
-config.public_access = "none"
-
-
--- Information about service provider (HTML)
--- ------------------------------------------------------------------------
-config.app_service_provider = "Snake Oil<br/>10000 Berlin<br/>Germany"
-
-
-
--- ========================================================================
--- OPTIONAL
--- Remove leading -- to use a option
--- ========================================================================
+-- config.public_access = "none"
 
 -- List of enabled languages, defaults to available languages
 -- ------------------------------------------------------------------------
 -- config.enabled_languages = { 'en', 'de', 'eo', 'el', 'hu', 'it', 'ka', 'nl', 'zh-Hans', 'zh-TW' }
 
-
 -- Default language, defaults to "en"
 -- ------------------------------------------------------------------------
 -- config.default_lang = "en"
-
 
 -- Disable registration
 -- ------------------------------------------------------------------------
@@ -88,11 +77,9 @@ config.app_service_provider = "Snake Oil<br/>10000 Berlin<br/>Germany"
 -- ------------------------------------------------------------------------
 -- config.disable_registration = true
 
-
 -- A HTML formatted text the user has to accept while registering
 -- ------------------------------------------------------------------------
 -- config.use_terms = "<h1>Terms of Use</h1><p>Insert terms here</p>"
-
 
 -- Checkbox(es) the user has to accept while registering
 -- ------------------------------------------------------------------------
@@ -114,31 +101,26 @@ config.app_service_provider = "Snake Oil<br/>10000 Berlin<br/>Germany"
 -- ------------------------------------------------------------------------
 -- config.delegation_warning_time = '6 months'
 
-
 -- after which time a user is advised (_soft) or forced (_hard) to check
 -- unit and area delegations. default: no check at all
 -- ------------------------------------------------------------------------
 -- config.check_delegations_interval_soft = "3 months"
 -- config.check_delegations_interval_hard = "6 months"
 
-
 -- default option when checking delegations
 -- available options: "confirm", "revoke" and "none", default: "confirm"
 -- ------------------------------------------------------------------------
 -- config.check_delegations_default = "confirm"
 
-
 -- Prefix of all automatic mails, defaults to "[Liquid Feedback] "
 -- ------------------------------------------------------------------------
 -- config.mail_subject_prefix = "[LiquidFeedback] "
-
 
 -- Sender of all automatic mails, defaults to system defaults
 -- ------------------------------------------------------------------------
 -- config.mail_envelope_from = "liquidfeedback@example.com"
 -- config.mail_from = { name = "LiquidFeedback", address = "liquidfeedback@example.com" }
 -- config.mail_reply_to = { name = "Support", address = "support@example.com" }
-
 
 -- Template for digest emails
 -- #{name} will be replaced by member screen name
@@ -152,13 +134,11 @@ config.app_service_provider = "Snake Oil<br/>10000 Berlin<br/>Germany"
 -- #{digest}
 -- ]]
 
-
 -- Configuration of password hashing algorithm (defaults to "crypt_sha512")
 -- ------------------------------------------------------------------------
 -- config.password_hash_algorithm = "crypt_sha512"
 -- config.password_hash_algorithm = "crypt_sha256"
 -- config.password_hash_algorithm = "crypt_md5"
-
 
 -- Number of rounds for crypt_sha* algorithms, minimum and maximum
 -- (defaults to minimum 10000 and maximum 20000)
@@ -166,16 +146,13 @@ config.app_service_provider = "Snake Oil<br/>10000 Berlin<br/>Germany"
 -- config.password_hash_min_rounds = 10000
 -- config.password_hash_max_rounds = 20000
 
-
 -- Local directory for database dumps offered for download
 -- ------------------------------------------------------------------------
 -- config.download_dir = nil
 
-
 -- Special use terms for database dump download
 -- ------------------------------------------------------------------------
 -- config.download_use_terms = "=== Download use terms ===\n"
-
 
 -- Use custom image conversion, defaults to ImageMagick's convert
 -- ------------------------------------------------------------------------
@@ -210,18 +187,13 @@ config.app_service_provider = "Snake Oil<br/>10000 Berlin<br/>Germany"
 -- ------------------------------------------------------------------------
 -- config.member_profile_fields = {}
 
-
-
 -- Display a html formatted public message of the day
 -- ------------------------------------------------------------------------
 -- config.motd_public = "<h1>Message of the day (public)</h1><p>The MOTD is formatted with HTML</p>"
 
-
 -- Display a html formatted internal message of the day
 -- ------------------------------------------------------------------------
 -- config.motd_intern = "<h1>Message of the day (intern)</h1><p>The MOTD is formatted with HTML</p>"
-
-
 
 -- Free timings
 -- ------------------------------------------------------------------------
@@ -268,7 +240,6 @@ config.free_timing = {
 }
 --]]
 
-
 -- External references
 -- ------------------------------------------------------------------------
 -- Rendering of external references
@@ -287,7 +258,6 @@ config.render_external_reference = {
   end
 end
 --]]
-
 
 -- Configuration of OAuth2 service, defaults to OAuth2 disabled
 -- ------------------------------------------------------------------------
@@ -311,8 +281,6 @@ end
 -- config.oauth2.refresh_grace_period = 60
 -- config.oauth2.access_token_lifetime = 60 * 60
 
-
-
 -- Admin logger
 -- ------------------------------------------------------------------------
 -- Logging administrative activities
@@ -324,9 +292,6 @@ end
 --   local url = params._webmcp_path
 --   -- do something (e.g. calling 'logger' via extos.pfilter)
 -- end
-
-
-
 
 -- Application server fork configuration
 -- ------------------------------------------------------------------------
@@ -343,7 +308,6 @@ end
 --   max_requests = 100  -- maximum count of requests handled before fork is terminated
 -- }
 
-
 -- HTTP server options
 -- ------------------------------------------------------------------------
 -- http_options = {
@@ -358,7 +322,6 @@ end
 --   minimum_output_chunk_size = 1024          -- chunk size for chunked-transfer-encoding
 -- }
 
-
 -- WebMCP accelerator
 -- ------------------------------------------------------------------------
 -- uncomment the following line to use C implementations of chosen
@@ -366,19 +329,16 @@ end
 -- ------------------------------------------------------------------------
 -- require 'webmcp_accelerator'
 
-
 -- Trace debug
 -- ------------------------------------------------------------------------
 -- uncomment the following line to enable debug trace
 -- ------------------------------------------------------------------------
 -- config.enable_debug_trace = true
 
-
 -- Configuration of lf4rcs, disabled by default
 -- for example configration see _lf4rcs.lua
 -- ------------------------------------------------------------------------
 -- execute.config("_lf4rcs")
-
 
 -- Configuration of ldap authentication, disabled by default
 -- for example configration, see _ldap.lua
@@ -386,7 +346,6 @@ end
 -- ------------------------------------------------------------------------
 -- execute.config("_ldap")
 -- execute.config("_ldap_ad")
-
 
 -- Integration of Etherpad, disabled by default
 -- ------------------------------------------------------------------------
@@ -408,5 +367,4 @@ config.firstlife = {
 }
 config.allow_new_draft_callback = true
 --]]
-
 
