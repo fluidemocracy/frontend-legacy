@@ -18,7 +18,7 @@ return {
 ["#{count} new"] = "#{count} neue";
 ["#{count} suggestions added"] = "#{count} neue Anregungen";
 ["#{count} suggestions added for #{initiative}"] = "#{count} neue Anregungen für #{initiative}";
-["#{count} supporter"] = "#{count} Unterstützer";
+["#{count} supporter"] = "#{count} Unterstützende";
 ["#{duration}"] = false;
 ["#{interested_issues_to_vote_count} issue(s) you are interested in"] = "#{interested_issues_to_vote_count} Themen, die Dich interessieren";
 ["#{interval_text} [interval]"] = "#{interval_text}";
@@ -84,7 +84,7 @@ return {
 ["Agents"] = "Zugriffsberechtigte";
 ["All fields are optional. Please enter only data which should be published."] = "Alle Felder sind optional. Bitte nur Daten eingeben, die veröffentlicht werden sollen.";
 ["All initiatives failed 2nd quorum"] = "Alle Initiativen sind am 2. Quorum gescheitert";
-["All members"] = "Alle Teilnehmer";
+["All members"] = "Alle Teilnehmenden";
 ["All units"] = "Alle Gliederungen";
 ["Allowed policies"] = "Erlaubte Regelwerke";
 ["Application authorization"] = "Anwendungszugriff";
@@ -103,10 +103,10 @@ return {
 ["Approval [many entries]"] = "Zustimmung";
 ["Approval [single entry]"] = "Zustimmung";
 ["Approved"] = "Angenommen";
-["Are you aware that revoking an initiative is irrevocable?"] = "Bist du dir bewusst, dass das Zurückziehen unwiderrufbar ist?";
+["Are you aware that revoking an initiative is irrevocable?"] = "Bist Du Dir bewusst, dass das Zurückziehen unwiderrufbar ist?";
 ["Area delegation"] = "Delegation für Themenbereich";
 ["As long as you are interested in this issue yourself, the delegation is suspended for this issue, but it will be applied again in the voting phase unless you vote yourself."] = "Solange du selber am Thema interessiert bist, wird die Delegation für dieses Thema ausgesetzt, jedoch während der Abstimmung erneut aktiv, es sei denn du stimmst selber ab.";
-["As soon as one initiative of this issue reaches the 1st quorum of #{quorum} support, the issue will proceed to discussion phase."] = "Sobald eine Initiative des Themas das 1. Quorum von #{quorum} Unterstützern erreicht, geht das Thema in die Diskussionsphase über.";
+["As soon as one initiative of this issue reaches the 1st quorum of #{quorum} support, the issue will proceed to discussion phase."] = "Sobald eine Initiative des Themas das 1. Quorum von #{quorum} Unterstützenden erreicht, geht das Thema in die Diskussionsphase über.";
 ["Attach image"] = "Bild hinzufügen";
 ["Attr"] = "Erweiterte Attribute";
 ["Author"] = "Autor";
@@ -140,7 +140,7 @@ return {
 ["Closed"] = "geschlossen";
 ["Closed issues"] = "Geschlossene Themen";
 ["Closed user group"] = "Geschlossene Benutzergruppe";
-["Collective opinion of supporters"] = "Meinungsbild der Unterstützer";
+["Collective opinion of supporters"] = "Meinungsbild der Unterstützenden";
 ["Comment"] = "Kommentar";
 ["Compare"] = "Vergleichen";
 ["Comparision of revisions #{id1} and #{id2}"] = "Vergleich der Revisionen #{id1} und #{id2}";
@@ -209,7 +209,7 @@ return {
 ["Discussion started"] = "Diskussion gestartet";
 ["Discussion time"] = "Dauer der Diskussionphase";
 ["Do you really want to irrevocably deactive this member?"] = "Soll das Mitglied wirklich unwiderrufbar deaktiviert werden?";
-["Do you want to suggest to support another initiative?"] = "Möchtest du eine andere Initiative empfehlen?";
+["Do you want to suggest to support another initiative?"] = "Möchtest Du eine andere Initiative empfehlen?";
 ["Domain too long"] = "Domain zu lang";
 ["Download"] = "Download";
 ["Download database export"] = "Datenbankexport herunterladen";
@@ -220,7 +220,7 @@ return {
 ["Duration of discussion phase of an issue."] = "Dauer der Diskussionsphase eines Themas.";
 ["Duration of verification phase of an issue."] = "Dauer der Überprüfungsphase eines Themas.";
 ["Duration of voting phase of an issue."] = "Dauer der Abstimmungsphase eines Themas.";
-["During the discussion phase, the issue is debated on while the initiators improve the proposals and reasons in their initiatives. Supporters of initiatives can write and rate suggestions for improvement."] = "Während der Diskussionsphase wird das Thema debattiert während die Initiatoren die Anträge und Begründungen in ihren Initiativen verbessern. Unterstützer der Initiativen können Verbesserungsvorschläge machen und bewerten.";
+["During the discussion phase, the issue is debated on while the initiators improve the proposals and reasons in their initiatives. Supporters of initiatives can write and rate suggestions for improvement."] = "Während der Diskussionsphase wird das Thema debattiert während die Initiatoren die Anträge und Begründungen in ihren Initiativen verbessern. Unterstützenden der Initiativen können Verbesserungsvorschläge machen und bewerten.";
 ["During the verification phase, existing initiatives cannot be changed anymore. Initiatives need to pass the 2nd quorum of #{quorum} at end of verification phase to become admitted for voting."] = "Während der Überprüfungsphase kann der Text existierender Initiativen nicht mehr geändert werden. Initiativen müssen am Ende der Überprüfungsphase das 2. Quorum von #{quorum} erreichen, um für die Abstimmung zugelassen zu werden.";
 ["During the voting phase, votes for all admitted initiatives in this issue can be cast. The final result will be calculated as soon as this phase ends."] = "Während der Abstimmungsphase können Stimmen für alle zugelassenen Initiativen abgegeben werden. Das Endergebnis wird nach Abschluss der Phase berechnet.";
 ["Edit"] = "Bearbeiten";
@@ -229,7 +229,7 @@ return {
 ["Edit your global "] = "Die globalen ";
 ["Edit your profile data"] = "Profildaten bearbeiten";
 ["Eligible as winner"] = "Als Gewinner qualifiziert";
-["Eligible members (#{count})"] = "Stimmberechtigte Teilnehmer (#{count})";
+["Eligible members (#{count})"] = "Stimmberechtigte Teilnehmende (#{count})";
 ["Email address"] = "E-Mail-Adresse";
 ["Email address confirmation"] = "Bestätigung der E-Mail-Adresse";
 ["Email address for notifications"] = "E-Mail-Adresse für Benachrichtungen";
@@ -340,7 +340,7 @@ return {
 ["Initiatives created by this member"] = "Initiativen von diesem Mitglied";
 ["Initiatives that invited you to become initiator:"] = "Initiative, die Dich eingeladen haben, Initiator zu werden:";
 ["Initiators"] = "Initiatoren";
-["Interested members"] = "Interessierte Teilnehmer";
+["Interested members"] = "Interessierte Teilnehmende";
 ["Interval format:"] = "Intervall-Format";
 ["Introduction"] = "Einführung";
 ["Invalid PIN entered"] = "Ungültige PIN eingegeben";
@@ -411,11 +411,11 @@ return {
 ["Members"] = "Mitglieder";
 ["Message of the day"] = "Meldung des Tages";
 ["Method not allowed"] = "Methode nicht erlaubt";
-["Minimum absolute number of supporters."] = "Minimale absolute Unterstützerzahl";
+["Minimum absolute number of supporters."] = "Minimale absolute Anzahl Unterstützender";
 ["Minimum admission time"] = "Minimale Dauer der Zulassungsphase";
-["Minimum number of supporters relative to the number of active participants in the organizational unit."] = "Minimale Anzahl von Unterstützern relativ zur Anzahl der aktiven Mitglieder einer Gliederung.";
-["Minimum supporter count (including support via delegation) an initiative has to reach to be an eligible candidate for the voting phase."] = "Minimale Unterstützerzahl (einschließlich Unterstützung per Delegation), die eine Initiative erreichen muss um für die Abstimmung zugelassen zu werden.";
-["Minimum supporter count (including support via delegation) one initiative of an issue has to reach to let the issue pass the 1st quorum and to proceed to discussion phase. Further requirements can occur due to per subject area issue limiter settings. See subject area settings."] = "Minimale Unterstützerzahl (einschließlich Unterstützung per Delegation), die eine Initiative eines Themas erreichen muss, damit das Thema das 1. Quorum erreicht und für die Diskussion zugelassen wird. Weitere Anforderungen können durch den Themenbegrenzer je Themengebiet gelten. Siehe Einstellungen der Themengebiete.";
+["Minimum number of supporters relative to the number of active participants in the organizational unit."] = "Minimale Anzahl von Unterstützenden relativ zur Anzahl der aktiven Mitglieder einer Gliederung.";
+["Minimum supporter count (including support via delegation) an initiative has to reach to be an eligible candidate for the voting phase."] = "Minimale Anzahl von Unterstützenden (einschließlich Unterstützung per Delegation), die eine Initiative erreichen muss um für die Abstimmung zugelassen zu werden.";
+["Minimum supporter count (including support via delegation) one initiative of an issue has to reach to let the issue pass the 1st quorum and to proceed to discussion phase. Further requirements can occur due to per subject area issue limiter settings. See subject area settings."] = "Minimale Anzahl von Unterstützenden (einschließlich Unterstützung per Delegation), die eine Initiative eines Themas erreichen muss, damit das Thema das 1. Quorum erreicht und für die Diskussion zugelassen wird. Weitere Anforderungen können durch den Themenbegrenzer je Themengebiet gelten. Siehe Einstellungen der Themengebiete.";
 ["Minimum time an issue has to stay in admission phase before it can be accepted for discussion (if it reaches the 1st quorum)."] = "Minimale Zeitdauer, die ein Thema in der Zulassungsphase verbleiben muss bevor es für die Diskussion zugelassen werden kann.";
 ["Missing parameter"] = "Fehlendes Parameter";
 ["Monday"] = "Montag";
@@ -488,7 +488,7 @@ return {
 ["Other failures"] = "Weitere Mängel";
 ["Other reasons"] = "Andere Gründe";
 ["Outgoing delegations"] = "Ausgehende Delegationen";
-["Override disable notifications?"] = "über Teilnehmer-Nachrichtensperre hinwegsetzen";
+["Override disable notifications?"] = "über Teilnehmenden-Nachrichtensperre hinwegsetzen";
 ["PIN code not entered"] = "PIN nicht eingegeben";
 ["PIN code not entered (yet) (#{count})"] = "PIN (noch) nicht eingegeben (#{count})";
 ["PIN page"] = "PIN Seite";
@@ -558,7 +558,7 @@ return {
 ["Redirect URI or response type not registered"] = false;
 ["Register new member"] = "Neues Mitglied registrieren";
 ["Register now"] = "Jetzt registrieren";
-["Registered members (#{count})"] = "Registrierte Teilnehmer (#{count})";
+["Registered members (#{count})"] = "Registrierte Teilnehmende (#{count})";
 ["Registration (step 1 of 3: Invite code)"] = "Registrierung (Schritt 1 von 3: Einladungscode)";
 ["Registration (step 2 of 3: Personal information)"] = "Registrierung (Schritt 2 von 3: Persönliche Daten)";
 ["Registration (step 3 of 3: Terms of use and password)"] = "Registrierung (Schritt 3 von 3: Nutzungsbedingungen und Kennwort)";
@@ -641,7 +641,7 @@ return {
 ["Skip admission phase and start issue in discussion phase (can only be started by members with polling privilege). If enabled, minimum and maximum admission time as well as 1st quorum needs to be cleared."] = "Zulassungsphase überspringen und das Thema direkt mit der Diskussionsphase beginnen lassen (nur für Mitglieder mit Umfrageberechtigung). Wenn aktiviert müssen minimale und maximale Zeitdauer für die Zulassung leer sein.";
 ["Sorry, but there is not confirmed email address for your account. Please contact the administrator or support."] = "Sorry, aber für diesen Account ist keine bestätigte E-Mail-Adresse hinterlegt. Bitte wende Dich an den Administrator oder den Support.";
 ["Sorry, but you are currently not invited"] = "Sorry, aber Du bist zur Zeit nicht eingeladen";
-["Sorry, but you need to be at least 16 years old to participate. You can "] = "Es tut uns leid, Sie müssen mindestens 16 Jahre alt sein um teilzunehmen";
+["Sorry, but you need to be at least 16 years old to participate. You can "] = "Es tut uns leid, Du musst mindestens 16 Jahre alt sein um teilzunehmen";
 ["Sorry, you have reached your personal flood limit. Please be slower..."] = "Sorry, Du hast Dein persönliches Flood-Limit erreicht. Bitte sei langsamer...";
 ["Sorry, your contingent for creating initiatives has been used up. Please try again later."] = "Sorry, Dein Antragskontingent ist zur Zeit ausgeschöpft. Bitte versuche es später erneut!";
 ["Source"] = "Quelltext";
@@ -653,7 +653,7 @@ return {
 ["Strict indirect majority"] = "Strenge indirekte Mehrheit";
 ["Subject"] = "Betreff";
 ["Subject areas"] = "Themenbereiche";
-["Subscribed members (#{count})"] = "Angemeldete Teilnehmer (#{count})";
+["Subscribed members (#{count})"] = "Angemeldete Teilnehmende (#{count})";
 ["Suggest no initiative"] = "Keine Initiative empfehlen";
 ["Suggestion"] = "Verbesserungsvorschlag";
 ["Suggestion currently implemented"] = "Verbesserungsvorschlag zur Zeit umgesetzt";
@@ -676,7 +676,7 @@ return {
 ["The initiators suggest to support the following initiative:"] = "Die Initiatoren empfehlen folgende Initiative zu unterstützen:";
 ["The minimum absolute number of approval votes."] = "Minimale absolute Anzahl an Zustimmungen.";
 ["This delegation is suspended, because you voted yourself."] = "Die Delegation wurde durch eigenes Abstimmen ausgesetzt.";
-["This email address already been used. Please check your inbox for an invitation or contact us."] = "Diese E-Mail-Adresse wurde bereits verwendet. Bitte überprüfen Sie Ihren Posteingang oder kontaktieren Sie uns.";
+["This email address already been used. Please check your inbox for an invitation or contact us."] = "Diese E-Mail-Adresse wurde bereits verwendet. Bitte überprüfe Deinen Posteingang oder kontaktiere uns.";
 ["This email address is too short!"] = "Diese E-Mail-Adresse ist zu kurz!";
 ["This initiative"] = "Diese Initiative";
 ["This initiative has been revoked at #{revoked} by:"] = "Diese Initiative wurde am/um #{revoked} zurückgezogen, von:";
@@ -765,7 +765,7 @@ return {
 ["You are already initiator"] = "Du bist bereits Initiator";
 ["You are already supporting the latest draft"] = "Du unterstützt bereits den neuesten Entwurf";
 ["You are currently not invited to any initiative."] = "Du bist zur Zeit von keiner Initiative eingeladen.";
-["You are currently not supporting this initiative directly. By adding suggestions to this initiative you will automatically become a potential supporter."] = "Du bist zur Zeit kein direkter Unterstützer dieser Initiative. Wenn Du einen Verbesserungsvorschlag hinzufügst wirst Du automatisch potentieller Unterstützer!";
+["You are currently not supporting this initiative directly. By adding suggestions to this initiative you will automatically become a potential supporter."] = "Du unterstützt diese Initiative zur Zeit nicht direkt. Wenn Du einen Verbesserungsvorschlag hinzufügst, dann unterstützt du die Initiative automatisch!";
 ["You are initiator of this initiative"] = "Du bist Initiator dieser Initiative";
 ["You are interested in this issue"] = "Du bist an diesem Thema interessiert";
 ["You are invited to LiquidFeedback. To register please click the following link:\n\n"] = "Du bist zu LiquidFeedback eingeladen. Bitte klicke auf den folgenden Link, um dich zu registrieren:\n\n";
@@ -774,7 +774,7 @@ return {
 ["You are not entitled to vote in this unit"] = "Du bist in dieser Gliederung nicht stimmberechtigt";
 ["You are now initiator of this initiative"] = "Du bist jetzt Initiator dieser Initiative";
 ["You are receiving updates by email for this subject area"] = "Es werden Aktualisierungen per E-Mail für diesen Themenbereich versendet";
-["You are supporter"] = "Du bist Unterstützer";
+["You are supporter"] = "Du unterstützt diese Initiative";
 ["You are supporter of this initiative"] = "Du unterstützt diese Initiative";
 ["You are supporting this initiative"] = "Du unterstützt diese Initiative";
 ["You blocked this member (i.e. you will not be notified about this members actions)"] = "Du hast dieses Mitglied geblockt (d.h. du wirst nicht mehr über dessen Aktivitäten informiert)";
@@ -831,12 +831,12 @@ return {
 ["[event mail]     Issue: ##{id}"] = "        Thema: ##{id}";
 ["[event mail]     Phase: #{phase}"] = "        Phase: #{phase}";
 ["[event mail]    Policy: #{policy}"] = "    Regelwerk: #{policy}";
-["[introduction] iniatives and issues"] = "LiquidFeedback ist kein Umfragesystem, es werden keine bereits vorher feststehenden Fragen gestellt. Statt dessen kann jeder Teilnehmer neue Initiativen starten, die Vorschläge und/oder Argumente umfassen. Sobald eine Initiative eingestellt wurde, können alle Teilnehmer alternative Initiativen mit Gegenvorschlägen starten. Alle zueinander in Konkrurrenz stehenden Initiativen bilden zusammen ein Thema. Sowohl Themen als auch Initiativen werden nummeriert. Themen erhalten hierbei vor der Nummer ein #-Zeichen (z. B. #123), während Initiativen durch ein führendes i gekennzeichnet sind (z. B. i456). Ein Thema kann mehrere Initiativen enthalten. Nur eine Initiative kann gewinnen.";
+["[introduction] iniatives and issues"] = "LiquidFeedback ist kein Umfragesystem, es werden keine bereits vorher feststehenden Fragen gestellt. Stattdessen können alle Teilnehmenden neue Initiativen starten, die Vorschläge und/oder Argumente umfassen. Sobald eine Initiative eingestellt wurde, können alle Teilnehmenden alternative Initiativen mit Gegenvorschlägen starten. Alle zueinander in Konkrurrenz stehenden Initiativen bilden zusammen ein Thema. Sowohl Themen als auch Initiativen werden nummeriert. Themen erhalten hierbei vor der Nummer ein #-Zeichen (z. B. #123), während Initiativen durch ein führendes i gekennzeichnet sind (z. B. i456). Ein Thema kann mehrere Initiativen enthalten. Nur eine Initiative kann gewinnen.";
 ["[introduction] organizational units"] = "Gliederungen ermöglichen Diskussionen und Entscheidungen auch für Teilmengen der Benutzer (z. B. Gliederungen einer Organisation). In jeder Gliederung können eigene Themenbereiche zur Verfügung stehen.";
-["[introduction] phase 1 admission"] = "Nicht jedes neue Thema wird auf ein Mindestinteresse der Teilnehmer stoßen. Daher muss ein neues Thema von einer vorab festzulegenden Mindestanzahl Teilnehmer als diskussionswürdig betrachtet  werden, um für die Diskussionsphase zugelassen zu werden. Andernfalls wird das Thema am Ende der Zulassungsphase abgebrochen und nicht weiter behandelt.";
+["[introduction] phase 1 admission"] = "Nicht jedes neue Thema wird auf ein Mindestinteresse der Teilnehmenden stoßen. Daher muss ein neues Thema von einer vorab festzulegenden Mindestanzahl Teilnehmender als diskussionswürdig betrachtet  werden, um für die Diskussionsphase zugelassen zu werden. Andernfalls wird das Thema am Ende der Zulassungsphase abgebrochen und nicht weiter behandelt.";
 ["[introduction] phase 2 discussion"] = "Während der Diskussionsphase arbeiten Initiativen auf die Verbesserung des Vorschlags und die Vervollkommnung der Argumentation hin, um die erforderliche Mehrheit zu erreichen und sich gegen eventuell vorhandene alternative Initiativen durchzusetzen.";
-["[introduction] phase 3 verification"] = "Alle in dieser Phase angezeigten Initiativtexte können nicht mehr verändert werden. Neue Initiativen können gestartet aber ebenfalls nicht mehr geändert werden. Dieses Vorgehen schützt die Teilnehmer vor überraschenden Änderungen in letzter Minute.";
-["[introduction] phase 4 voting"] = "Jede Initiative, die eine Mindestanzahl an Unterstützern erreicht, wird zur Abstimmung zugelassen und erscheint auf dem Stimmzettel. Während der Abstimmung können die Teilnehmer mittels Präferenzwahl abstimmen, die es neben Zustimmung, Enthaltung und Ablehnung zusätzlich erlaubt Präferenzen zwischen den Initiativen anzugeben.";
+["[introduction] phase 3 verification"] = "Alle in dieser Phase angezeigten Initiativtexte können nicht mehr verändert werden. Neue Initiativen können gestartet aber ebenfalls nicht mehr geändert werden. Dieses Vorgehen schützt die Teilnehmenden vor überraschenden Änderungen in letzter Minute.";
+["[introduction] phase 4 voting"] = "Jede Initiative, die eine Mindestanzahl an Unterstützenden erreicht, wird zur Abstimmung zugelassen und erscheint auf dem Stimmzettel. Während der Abstimmung können die Teilnehmenden mittels Präferenzwahl abstimmen, die es neben Zustimmung, Enthaltung und Ablehnung zusätzlich erlaubt Präferenzen zwischen den Initiativen anzugeben.";
 ["[introduction] preference voting"] = "Im Falle mehrerer ähnlicher Vorschläge auf dem Stimmzettel gibt es keine Notwendigkeit einen dieser Vorschläge auszuwählen. Stattdessen kann für (bzw. gegen) beliebig viele konkurrierende Initiativen gestimmt werden und gleichzeitig eine Präferenzreihenfolge dieser Initiativen angegeben werden. Die Präferenzen bestimmen den Gewinner, falls am Ende mehr als eine Initiative die notwendige Mehrheit an Ja-Stimmen erreicht. Auf diese Weise wird niemand ermutigt für eine Initiative zu stimmen, nur um eine andere Initiative zu verhindern, und es wird niemand ermutigt gegen eine Initiative zu stimmen, nur um einer anderen Initiative eine Chance zu geben.";
 ["[introduction] rules of procedure"] = "Ein Regelwerk definiert Fristen, Quoren und erforderliche Mehrheiten. Initiatoren wählen bei Erstellung eines Themas ein geeignetes Verfahren, das dem verfolgten Zweck entspricht.";
 ["[introduction] subject areas"] = "Themen werden immer einem Themenbereich zugeordnet. Dies dient der Strukturierung der Diskussion und des Entscheidungsprozesses.";
@@ -1056,12 +1056,12 @@ return {
 ["structured discussion"] = "strukturierte Diskussion";
 ["subscribe for update emails about this area"] = "Aktualisierungen per E-Mail für diesen Themenbereich abbonieren";
 ["subscribe subject areas or add your interested to issues and you will be notified about changes (follow the instruction on the area or issue page)"] = "Melde dich für Themenbereiche an oder interessiere dich für Themen, damit du benachrichtigt wirst (folge den Anweisungen auf der Themenbereichs- bzw. Themenseite)";
-["supporter"] = "Unterstützer";
-["supporter with restricting suggestions"] = "Unterstützer mit beschränkenden Verbesserungsvorschlägen";
+["supporter"] = "Unterstützende";
+["supporter with restricting suggestions"] = "Unterstützende mit beschränkenden Verbesserungsvorschlägen";
 ["switch to: #{member_name}"] = "wechseln zu: #{member_name}";
 ["take a look at the competing initiatives"] = "schau dir die konkurrierenden Initiativen an";
 ["take a look at the suggestions (see right) and rate them"] = "schau dir die Verbesserungsvorschläge (rechts) an und bewerte sie";
-["take a look at the suggestions of your supporters"] = "schau dir die Verbesserungsvorschläge deiner Unterstützer an";
+["take a look at the suggestions of your supporters"] = "schau dir die Verbesserungsvorschläge der Unterstützenden an";
 ["take a look on the issues (see right)"] = "schau dir die Themen an (siehe rechts)";
 ["the following login is connected to this email address:\n\n"] = "der folgende Anmeldename ist mit dieser E-Mail-Adresse verknüpft:\n\n";
 ["this issue is in verification phase, therefore the initiative text cannot be updated anymore"] = "dieses Thema ist in der Überprüfungsphase, daher kann der Text nicht mehr geändert werden";
@@ -1097,7 +1097,7 @@ return {
 ["without"] = "ohne";
 ["without quorum"] = "ohne Quorum";
 ["write a new suggestion"] = "neuen Verbesserungsvorschlag einbringen";
-["written and rated by the supportes of this initiative to improve the proposal and its reasons"] = "geschrieben und bewertet von Unterstützern dieser Initiative";
+["written and rated by the supportes of this initiative to improve the proposal and its reasons"] = "geschrieben und bewertet von Unterstützenden dieser Initiative";
 ["year"] = "Jahr";
 ["year [interval ago]"] = "Jahr";
 ["year [interval time left]"] = "Jahr";
