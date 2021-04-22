@@ -3,6 +3,7 @@ local api_endpoints = {
   navigation = true,
   style = true,
   application = true,
+  platform_config = true,
   info = true,
   member = true,
   avatar = true,
