@@ -4,10 +4,16 @@ local r = json.array()
 
 local system_applications = SystemApplication:get_all()
 
+local base_url = request.get_absolute_baseurl()
+
+if string.sub(base_url, -1, -1) == "/" then
+  base_url = string.sub(base_url, 1, -2)
+end
+
 r[#r+1] = json.object{
   type = "system",
   name = "LiquidFeedback",
-  base_url = request.get_absolute_baseurl(),
+  base_url = base_url,
   manifest_url = request.get_absolute_baseurl() .. "api/1/info",
   cert_common_name = config.oauth2.cert_common_name
 }
