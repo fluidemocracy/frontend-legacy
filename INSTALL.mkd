@@ -166,6 +166,7 @@ systemd, create a file named `/etc/systemd/system/liquid_feedback_core.service`:
     WantedBy=multi-user.target
 
 Enable and start the service:
+
     systemctl start liquid_feedback_core
     systemctl enable liquid_feedback_core
 
@@ -200,6 +201,7 @@ On systemd based systems, create a file named
     WantedBy=multi-user.target
 
 Enable and start the service:
+
     systemctl start liquid_feedback_frontend
     systemctl enable liquid_feedback_frontend
 
