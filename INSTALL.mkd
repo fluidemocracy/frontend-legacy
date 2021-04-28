@@ -177,7 +177,7 @@ Enable and start the service:
 After `lf_update` has been executed at least once, you should be able to use
 your LiquidFeedback system.
 
-Create a file named "/opt/liquid_feedback_frontend/run.sh":
+Create a file named `/opt/liquid_feedback_frontend/run.sh`:
 
     #/bin/bash
     
