@@ -163,9 +163,11 @@ ExecStart=/opt/liquid_feedback_core/lf_update.sh
 WantedBy=multi-user.target
 </code></pre>
 
-<p>Enable and start the service:
-    systemctl start liquid<em>feedback</em>core
-    systemctl enable liquid<em>feedback</em>core</p>
+<p>Enable and start the service:</p>
+
+<pre><code>systemctl start liquid_feedback_core
+systemctl enable liquid_feedback_core
+</code></pre>
 
 <h2>10. Start the frontend</h2>
 
@@ -198,9 +200,11 @@ ExecStart=/opt/liquid_feedback_frontend/run.sh
 WantedBy=multi-user.target
 </code></pre>
 
-<p>Enable and start the service:
-    systemctl start liquid<em>feedback</em>frontend
-    systemctl enable liquid<em>feedback</em>frontend</p>
+<p>Enable and start the service:</p>
+
+<pre><code>systemctl start liquid_feedback_frontend
+systemctl enable liquid_feedback_frontend
+</code></pre>
 
 <p>In the latter case, the Moonbridge server will open a TCP port according to
 your configuration. Directly accessing this TCP port through your webbrowser
