@@ -20,7 +20,7 @@ return {
 ["#{count} suggestions added for #{initiative}"] = "#{count} suggestions ajoutées pour #{initiative}";
 ["#{count} supporter"] = "#{count} partisan";
 ["#{duration}"] = "#{duration}";
-["#{interested_issues_to_vote_count} issue(s) you are interested in"] = "#{interested_issues_to_vote_count} thématiques auxquelles tu es interessé(e)"; ***
+["#{interested_issues_to_vote_count} issue(s) you are interested in"] = "#{interested_issues_to_vote_count} thématiques auxquelles tu es interessé(e)";
 ["#{interval_text} [interval]"] = "#{interval_text}";
 ["#{interval_text} ago"] = "#{interval_text} il y a"; 
 ["#{interval_text} left"] = "#{interval_text} resté(s)";
@@ -1369,3 +1369,4 @@ return {
 ["Please check the fiscal code (invalid format or does not match name, first name and/or date of birth)"] = "Le numéro de sécurité sociale ne corresponde avec les données insérées (prénom, deuxième prénom, nom, lieu et/ou date de naissance). Nous vous invitons à vous reinscrire, en faisant attention à l'exactitude des données.";
 ["We are sorry but the automatic verification of personal data has not been successful. We will need to verify your information manually. We apologise for the wait, and thank you for your cooperation. Until your information is verified, you can continue to "] = "Nous sommes désolés, mais la vérification automatique des données personnels n'a pas marché. Vos données devront être vérifiées manuellement. Nous nous excusons pour l'attente et vous remercions pour votre collaboration. Vous pouvez continuer à";
 ["browse the portal as an unregistered user"] = "naviguez dans le portal sans vous authentifier";
+}
