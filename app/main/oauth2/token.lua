@@ -62,6 +62,9 @@ if grant_type ~= "access_token" then
     if cert_distinguished_name then
       cert_common_name = string.match(cert_distinguished_name, "%f[^/\0]CN=([A-Za-z0-9_.-]+)%f[/\0]")
       if not cert_common_name then
+        cert_common_name = string.match(cert_distinguished_name, "^CN=([A-Za-z0-9_.-]+)")
+      end
+      if not cert_common_name then
         return error_result("invalid_client", "CN in X.509 certificate invalid")
       end
     else
