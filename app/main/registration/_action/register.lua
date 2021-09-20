@@ -140,6 +140,21 @@ for i, field in ipairs(config.self_registration.fields) do
     
     else
       local value = param.get("verification_data_" .. field.name)
+      if field.type == "dropdown" then
+      local other_option_id
+        for i_options, option in ipairs(field.options) do
+          if not option.id then
+            option.id = option.name
+          end
+          if option.other then
+            other_option_id = option.id
+          end
+        end
+        if other_option_id and other_option_id == value then
+          value = param.get("verification_data_" .. field.name .. "_other")
+        end
+      end
+      
       local optional = false
       if field.optional then
         optional = true

@@ -7,6 +7,12 @@ for i, field in ipairs(config.self_registration.fields) do
   if field_error then
     class = " is-invalid"
   end
+  if field.title then
+    ui.container{ attr = { style = "font-weight: bold;" }, content = field.title }
+  end
+  if field.text then
+    ui.container{ content = field.text }
+  end
   if not field.internal then
     if field.type == "comment" then
       ui.tag { content = field.label }
@@ -108,23 +114,44 @@ for i, field in ipairs(config.self_registration.fields) do
     
     elseif field.type == "dropdown" then
       local options = { { id = "", name = "" } }
+      local other_option_id
       for i_options, option in ipairs(field.options) do
         if not option.id then
           option.id = option.name
         end
+        if option.other then
+          other_option_id = option.id
+        end
         table.insert(options, option)
       end
-      ui.tag{ tag = "label", attr = { style = "vertical-align: bottom; border-bottom: 1px solid rgba(0,0,0, 0.12); color: #777; font-size: 16px;" }, content = field.label .. ":" }
-      slot.put(" &nbsp; ")
+      if field.label then
+        ui.tag{ tag = "label", attr = { style = "vertical-align: bottom; border-bottom: 1px solid rgba(0,0,0, 0.12); color: #777; font-size: 16px;" }, content = field.label .. ":" }
+        slot.put(" &nbsp; ")
+      end
+      local onchange_script
+      if other_option_id then
+        onchange_script = "var el = document.getElementById('lf-register__data_other_container_" .. field.name .. "'); if (this.value == '" .. other_option_id .. "') { console.log(el); el.classList.remove('hidden'); } else { el.classList.add('hidden'); };"
+      end
       ui.field.select{
         container_attr = { style = "display: inline-block; " },
-        attr = { class = class },
+        attr = { class = class, onchange = onchange_script },
         foreign_records = options,
         foreign_id = "id",
         foreign_name = "name",
         name = "verification_data_" .. field.name,
         value = tonumber(request.get_param{ name = "verification_data_" .. field.name })
       }
+      if other_option_id then
+        slot.put(" ")
+        ui.field.text{
+          container_attr = { id = "lf-register__data_other_container_" .. field.name, class = "hidden mdl-textfield mdl-js-textfield mdl-textfield--floating-label" .. class },
+          attr = { id = "lf-register__data_other_" .. field.name, class = "mdl-textfield__input" },
+          name = "verification_data_" .. field.name .. "_other",
+        label_attr = { class = "mdl-textfield__label", ["for"] = "lf-register__data" .. field.name },
+          label = field.name,
+          value = request.get_param{ name = "verification_data_" .. field.name .. "_other" }
+        }
+      end
       slot.put("<br />")
 
     elseif field.type == "image" then
