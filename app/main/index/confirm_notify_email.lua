@@ -22,7 +22,6 @@ ui.grid{ content = function()
             local secret = param.get("secret")
             if secret then
               ui.field.hidden{
-                label = _"Confirmation code",
                 name = "secret",
                 value = secret
               }
