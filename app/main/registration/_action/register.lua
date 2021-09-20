@@ -181,7 +181,7 @@ for i, field in ipairs(config.self_registration.fields) do
       if not optional and (not value or (#value < 1 and (not manual_verification or field.name ~= "mobile_phone"))) then
         slot.put_into("self_registration__invalid_" .. field.name, "to_short")
         slot.select("error", function()
-          ui.container{ content = _("Please enter: #{field_name}", { field_name = field.label }) }
+          ui.container{ content = _("Please enter: #{field_name}", { field_name = field.label or field.title }) }
         end)
         errors = errors + 1
       end
