@@ -139,7 +139,7 @@ for i, field in ipairs(config.self_registration.fields) do
         foreign_id = "id",
         foreign_name = "name",
         name = "verification_data_" .. field.name,
-        value = tonumber(request.get_param{ name = "verification_data_" .. field.name })
+        value = request.get_param{ name = "verification_data_" .. field.name }
       }
       if other_option_id then
         slot.put(" ")
