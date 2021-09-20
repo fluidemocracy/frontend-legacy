@@ -187,7 +187,7 @@ for i, field in ipairs(config.self_registration.fields) do
       if field.where then
         units_selector:add_where(field.where)
       end
-      local units = {}
+      local units = { { id = "", name = "" } }
       if field.optional then
         table.insert(units, {
           id = "",
