@@ -138,6 +138,22 @@ for i, field in ipairs(config.self_registration.fields) do
       end
       verification.request_data[field.name] = string.format("%04i-%02i-%02i", year, month, day)
     
+    elseif field.type == "multiselect" then
+      local values = {}
+      for i_options, option in ipairs(field.options) do
+        if not option.id then
+          option.id = option.name
+        end
+        local value = param.get("verification_data_" .. field.name .. "__" .. option.id)
+        if value == "1" then
+          if option.other then
+            table.insert(values, param.get("verification_data_" .. field.name .. "_other"))
+          else
+            table.insert(values, option.name)
+          end
+        end
+      end      
+      verification.request_data[field.name] = table.concat(values, ", ")
     else
       local value = param.get("verification_data_" .. field.name)
       if field.type == "dropdown" then

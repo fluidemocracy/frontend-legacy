@@ -154,6 +154,58 @@ for i, field in ipairs(config.self_registration.fields) do
       end
       slot.put("<br />")
 
+    elseif field.type == "multiselect" then
+      local options = { { id = "", name = "" } }
+      local other_option_id
+      for i_options, option in ipairs(field.options) do
+        if not option.id then
+          option.id = option.name
+        end
+        local onchange_script
+        if option.other then
+          onchange_script = "var el = document.getElementById('lf-register__data_other_container_" .. field.name .. "'); if (this.checked) { console.log(el); el.classList.remove('hidden'); } else { el.classList.add('hidden'); };"
+        end
+        ui.container{ content = function()
+          ui.tag{ tag = "label", attr = {
+              class = "mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect",
+              style = "display: inline;",
+              ["for"] = "verification_data_" .. field.name .. "__" .. option.id,
+            },
+            content = function()
+              ui.tag{
+                tag = "input",
+                attr = {
+                  type = "checkbox",
+                  class = "mdl-checkbox__input",
+                  onchange = onchange_script,
+                  id = "verification_data_" .. field.name .. "__" .. option.id,
+                  name = "verification_data_" .. field.name .. "__" .. option.id,
+                  value = "1",
+                  style = "float: left;",
+                  checked = request.get_param{ name = "verification_data_" .. field.name .. "__" .. option.id } and "checked" or nil,
+                }
+              }
+              ui.tag{
+                attr = { class = "mdl-checkbox__label" },
+                content = option.name
+              }
+            end
+          }
+        end }
+        if option.other then
+          slot.put(" ")
+          ui.field.text{
+            container_attr = { id = "lf-register__data_other_container_" .. field.name, class = "hidden mdl-textfield mdl-js-textfield mdl-textfield--floating-label" .. class },
+            attr = { id = "lf-register__data_other_" .. field.name, class = "mdl-textfield__input" },
+            name = "verification_data_" .. field.name .. "_other",
+          label_attr = { class = "mdl-textfield__label", ["for"] = "lf-register__data" .. field.name },
+            label = field.name,
+            value = request.get_param{ name = "verification_data_" .. field.name .. "_other" }
+          }
+        end
+      end
+      slot.put("<br />")
+
     elseif field.type == "image" then
       slot.put("<br />")
       ui.tag{ tag = "label", attr = { style = "vertical-align: bottom; border-bottom: 1px solid rgba(0,0,0, 0.12); color: #777; font-size: 16px;" }, content = field.label .. ":" }
