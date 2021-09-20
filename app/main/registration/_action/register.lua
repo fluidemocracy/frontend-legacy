@@ -152,7 +152,14 @@ for i, field in ipairs(config.self_registration.fields) do
             table.insert(values, option.name)
           end
         end
-      end      
+      end
+      if not optional and #values < 1 then
+        slot.put_into("self_registration__invalid_" .. field.name, "to_short")
+        slot.select("error", function()
+          ui.container{ content = _("Please enter: #{field_name}", { field_name = field.label or field.title }) }
+        end)
+        errors = errors + 1
+      end
       verification.request_data[field.name] = table.concat(values, ", ")
     else
       local value = param.get("verification_data_" .. field.name)
