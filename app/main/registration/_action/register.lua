@@ -149,7 +149,7 @@ for i, field in ipairs(config.self_registration.fields) do
           if option.other then
             table.insert(values, param.get("verification_data_" .. field.name .. "_other"))
           else
-            table.insert(values, option.name)
+            table.insert(values, option.id)
           end
         end
       end
