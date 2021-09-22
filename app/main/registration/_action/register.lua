@@ -153,7 +153,7 @@ for i, field in ipairs(config.self_registration.fields) do
           end
         end
       end
-      if not optional and #values < 1 then
+      if not field.optional and #values < 1 then
         slot.put_into("self_registration__invalid_" .. field.name, "to_short")
         slot.select("error", function()
           ui.container{ content = _("Please enter: #{field_name}", { field_name = field.label or field.title }) }
