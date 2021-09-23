@@ -26,7 +26,7 @@ end
 
 if area_id then
   area = Area:by_id(area_id)
-  if not area or unit and area.unit_id ~= unit.id then
+  if not area or (unit and area.unit_id ~= unit.id) then
     execute.view { module = "index", view = "404" }
     request.set_status("404 Not Found")
     return
