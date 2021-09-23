@@ -837,6 +837,19 @@ function Member.object:has_polling_right_for_unit_id(unit_id)
   return self.__units_with_polling_right_hash[unit_id] and true or false
 end
 
+function Member.object:get_single_unit_id()
+  populate_units_with_voting_right_hash(self)
+  local single_unit_id
+  local count = 0
+  for unit_id in pairs(self.__units_with_voting_right_hash) do
+    single_unit_id = unit_id
+    count = count + 1
+  end
+  if count == 1 then
+    return single_unit_id
+  end
+end
+
 function Member.object:get_delegatee_member(unit_id, area_id, issue_id)
   local selector = Member:new_selector()
   if unit_id then
