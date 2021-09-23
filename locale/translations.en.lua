@@ -306,7 +306,7 @@ return {
 ["I want to receive a regular digest"] = false;
 ["I want to save this member as contact (i.e. to use as delegatee)"] = false;
 ["I want to show or edit my profile"] = false;
-["I want to start a new initiative"] = false;
+["I want to start a new initiative"] = "I want to start a new issue";
 ["I want to stay informed"] = false;
 ["I want to stay informed about this subject area"] = false;
 ["I want to switch to another account"] = false;
@@ -319,7 +319,7 @@ return {
 ["Identification used before"] = false;
 ["Identification used before (#{count})"] = false;
 ["If this link is not working, please open following url in your web browser:\n\n"] = false;
-["If you cannot find any appropriate existing issue, "] = false;
+["If you cannot find any appropriate existing issue, "] = "Otherwise ";
 ["If you have not received a PIN code, our team will need to check your registration manually. We will be in touch within two working days. Please accept our apologies for the inconvenience."] = false;
 ["Implicitly admitted"] = false;
 ["Incoming delegations"] = false;
@@ -1062,7 +1062,7 @@ return {
 ["show profile"] = "Show profile";
 ["show vote"] = false;
 ["start a new competing initiative"] = false;
-["start an initiative in a new issue"] = false;
+["start an initiative in a new issue"] = "start a new issue";
 ["structured discussion"] = "Structured discussion";
 ["subscribe for update emails about this area"] = false;
 ["subscribe subject areas or add your interested to issues and you will be notified about changes (follow the instruction on the area or issue page)"] = false;
