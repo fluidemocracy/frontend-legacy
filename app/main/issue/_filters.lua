@@ -5,7 +5,7 @@ local for_member = param.get("for_member", "table")
 local member = param.get("member", "table")
 local phase = request.get_param{ name = "phase" }
 
-local selected_unit_id = config.single_unit_id or request.get_param{ name = "unit" }
+local selected_unit_id = app.single_unit_id or request.get_param{ name = "unit" }
 if selected_unit_id == "all" then
   selected_unit_id = nil 
 end
@@ -38,7 +38,7 @@ if not for_issue and not for_member then
 
   -- units
   
-  if not config.single_unit_id then
+  if not app.single_unit_id then
 
     local units_selector  
 
@@ -177,7 +177,7 @@ if not for_issue and not for_member then
       selector_modifier = function()  end
     }
 
-    if member and not for_unit and not for_area and not config.single_unit_id then
+    if member and not for_unit and not for_area and not app.single_unit_id then
       filter[#filter+1] = {
         name = "my_units",
         label = _"in my units",

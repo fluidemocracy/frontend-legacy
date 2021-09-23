@@ -5,7 +5,7 @@ slot.put_into("header", issue.name)
 
 ui.title ( function ()
   
-  if not config.single_unit_id then
+  if not app.single_unit_id then
     ui.link {
       attr = { class = "unit" },
       content = function()
