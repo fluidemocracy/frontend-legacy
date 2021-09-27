@@ -128,7 +128,7 @@ ui.form{
 -- -------- PREVIEW
             if param.get("preview") and slot.get_content("error") == "" then
               ui.sectionRow( function()
-                if not issue and not initiative then
+                if not issue and not initiative and #area.allowed_policies > 1 then
                   ui.container { content = policy and policy.name or "" }
                 end
                 if param.get("free_timing") then
