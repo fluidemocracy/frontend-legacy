@@ -137,14 +137,22 @@ if auth_needed and app.session.member == nil then
       error("array type params not implemented")
     end
   end
-  request.redirect{
-    module = 'index', view = 'login', params = {
-      redirect_module = module,
-      redirect_view = view,
-      redirect_id = param.get_id(),
-      redirect_params = params
+  if config.login and config.login.method == "oauth2" then
+    request.redirect{
+      module = "oauth2_client",
+      view = "redirect",
+      params = { provider = config.login.provider }
     }
-  }
+  else
+    request.redirect{
+      module = 'index', view = 'login', params = {
+        redirect_module = module,
+        redirect_view = view,
+        redirect_id = param.get_id(),
+        redirect_params = params
+      }
+    }
+  end
 elseif auth_needed and app.session.member.locked then
   trace.debug("Member locked.")
   request.redirect{ module = 'index', view = 'login' }
