@@ -16,7 +16,11 @@ if for_initiative or for_issue or for_member then
 end
 
 if app.single_unit_id then
-  for_unit = Unit:by_id(app.single_unit_id)
+  if request.get_param{ name = "unit" } then
+    for_unit = Unit:by_id(request.get_param{ name = "unit" })
+  else
+    for_unit = Unit:by_id(app.single_unit_id)
+  end
 end
 
 local selector
