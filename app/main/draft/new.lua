@@ -253,14 +253,21 @@ ui.form{
                     tmp[#tmp+1] = allowed_policy
                   end
                 end
-                ui.container{ content = _"Please choose a policy for the new issue:" }
-                ui.field.select{
-                  name = "policy_id",
-                  foreign_records = tmp,
-                  foreign_id = "id",
-                  foreign_name = "name",
-                  value = param.get("policy_id", atom.integer) or area.default_policy and area.default_policy.id
-                }
+                if #area.allowed_policies > 1 then
+                  ui.container{ content = _"Please choose a policy for the new issue:" }
+                  ui.field.select{
+                    name = "policy_id",
+                    foreign_records = tmp,
+                    foreign_id = "id",
+                    foreign_name = "name",
+                    value = param.get("policy_id", atom.integer) or area.default_policy and area.default_policy.id
+                  }
+                else
+                  ui.field.hidden{
+                    name = "policy_id",
+                    value = area.allowed_policies[1].id
+                  }
+                end
                 if policy and policy.free_timeable then
                   local available_timings
                   if config.free_timing and config.free_timing.available_func then
