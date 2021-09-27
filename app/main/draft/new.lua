@@ -130,11 +130,12 @@ ui.form{
               ui.sectionRow( function()
                 if not issue and not initiative and #area.allowed_policies > 1 then
                   ui.container { content = policy and policy.name or "" }
+                  slot.put("<br />")
                 end
                 if param.get("free_timing") then
                   ui.container { content = param.get("free_timing") }
+                  slot.put("<br />")
                 end
-                slot.put("<br />")
                 ui.field.hidden{ name = "policy_id", value = param.get("policy_id") }
                 ui.field.hidden{ name = "name", value = param.get("name") }
                 if config.initiative_abstract then
