@@ -46,6 +46,8 @@ ui.grid{ content = function()
 
     execute.view{ module = "index", view = "_sidebar_motd_public" }
 
+    execute.view{ module = "index", view = "_sidebar_motd_intern_top" }
+
     execute.view{ module = "issue", view = "_list" }
   end }
 
