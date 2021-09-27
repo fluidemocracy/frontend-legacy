@@ -54,7 +54,7 @@ ui.container{ attr = { class = "mdl-card mdl-card__fullwidth mdl-shadow--2dp" },
           end } 
         end }
       end
-      if not config.single_unit_id then
+      if not config.single_unit_id and not config.do_not_show_other_units_link then
         ui.container{ attr = { class = "mdl-card__content mdl-card--border" }, content = function()
           ui.tag{ content = _"I want to take a look at other organizational units" }
           ui.tag { tag = "ul", attr = { class = "ul" }, content = function ()
