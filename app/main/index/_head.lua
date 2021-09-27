@@ -1,4 +1,4 @@
-local unit_id = app.single_unit_id or request.get_param{ name = "unit" }
+local unit_id = config.single_unit_id or request.get_param{ name = "unit" } or app.single_unit_id
 local area_id = config.single_area_id or request.get_param{ name = "area" }
 
 local initiative = param.get("initiative", "table")
