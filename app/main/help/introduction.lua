@@ -10,6 +10,7 @@ ui.grid{ content = function()
             slot.put(config.quick_guide.title)
           else
             ui.tag{ content = _"Quick guide" }
+          end
         end }
       end }
       ui.container { attr = { class = "draft mdl-card__content mdl-card--border" }, content = function()
