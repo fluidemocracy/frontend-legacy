@@ -83,16 +83,12 @@ ui.container{ attr = { class = "mdl-card mdl-card__fullwidth mdl-shadow--2dp" },
     end
     if not app.session.member then
       ui.container { attr = { class = "mdl-card__content mdl-card--border" }, content = function ()
-        if not app.session.member_id then
-          ui.tag{ content = _"Login to participate" }
-          ui.tag{ tag = "ul", content = function()
-            ui.tag{ tag = "li", content = function()
-              ui.link{ module = "index", view = "login", content = _"Login" }
-            end }
+        ui.tag{ content = _"Login to participate" }
+        ui.tag{ tag = "ul", content = function()
+          ui.tag{ tag = "li", content = function()
+            ui.link{ module = "index", view = "login", content = _"Login" }
           end }
-        else
-          ui.tag{ content = _"You are not entitled to vote in this unit" }
-        end
+        end }
       end }
     end
     if not config.voting_only then
