@@ -882,7 +882,7 @@ return {
 ["by"] = false;
 ["by A-Z"] = false;
 ["by Z-A"] = false;
-["by default only those issues are shown, for which your are eligible to participate (change filters on top of the list)"] = false;
+["by default only those issues are shown, for which your are eligible to participate (change filters on top of the list)"] = "by default only those issues which you are eligible to participate are shown (change filters on top of the list)";
 ["by latest activity"] = false;
 ["cancel"] = false;
 ["cancel issue"] = false;
@@ -1013,8 +1013,8 @@ return {
 ["notifications settings"] = "notification settings";
 ["oldest first"] = false;
 ["one step back"] = false;
-["open the appropriate subject area for your issue and follow the instruction on that page."] = false;
-["open the organizational unit, subject area or issue you like to delegate and follow the instruction on that page."] = false;
+["open the appropriate subject area for your issue and follow the instruction on that page."] = "open the appropriate subject area for your issue and follow the instructions on that page.";
+["open the organizational unit, subject area or issue you like to delegate and follow the instruction on that page."] = "open the organizational unit, subject area or issue you want to delegate and follow the instruction on that page.";
 ["opened a new issue"] = false;
 ["ordered by delegation count"] = false;
 ["other reasons (#{count})"] = false;
@@ -1065,14 +1065,14 @@ return {
 ["start an initiative in a new issue"] = "start a new issue";
 ["structured discussion"] = "Structured discussion";
 ["subscribe for update emails about this area"] = false;
-["subscribe subject areas or add your interested to issues and you will be notified about changes (follow the instruction on the area or issue page)"] = false;
+["subscribe subject areas or add your interested to issues and you will be notified about changes (follow the instruction on the area or issue page)"] = "subscribe to subject areas or add your interest to issues and you will be notified about changes (follow the instruction on the area or issue page)";
 ["supporter"] = false;
 ["supporter with restricting suggestions"] = false;
 ["switch to: #{member_name}"] = false;
 ["take a look at the competing initiatives"] = false;
 ["take a look at the suggestions (see right) and rate them"] = false;
 ["take a look at the suggestions of your supporters"] = false;
-["take a look on the issues (see right)"] = false;
+["take a look on the issues (see right)"] = "take a look at the issues (see right)";
 ["the following login is connected to this email address:\n\n"] = false;
 ["this issue is in verification phase, therefore the initiative text cannot be updated anymore"] = false;
 ["this issue is in voting phase, therefore the initiative text cannot be updated anymore"] = false;
