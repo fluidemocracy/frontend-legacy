@@ -94,22 +94,26 @@ ui.container{ attr = { class = "mdl-card mdl-card__fullwidth mdl-shadow--2dp" },
     if not config.voting_only then
       ui.container{ attr = { class = "mdl-card__content mdl-card--border" }, content = function()
         ui.tag{ content = _"I want to learn more about LiquidFeedback" }
-        ui.tag { tag = "ul", attr = { class = "ul" }, content = function ()
-          ui.tag { tag = "li", content = function()
-            ui.link { module = "help", view = "introduction", content = _"structured discussion" }
-          end }
-          ui.tag { tag = "li", content = function()
-            ui.link { module = "help", view = "introduction", content = _"4 phases of a decision" }
-          end }
-          if not config.disable_delegations then
+        if config.quick_guide and config.quick_guide.links then
+          ui.container{ content = config.quick_guide.links }
+        else
+          ui.tag { tag = "ul", attr = { class = "ul" }, content = function ()
             ui.tag { tag = "li", content = function()
-              ui.link { module = "help", view = "introduction", content = _"vote delegation" }
+              ui.link { module = "help", view = "introduction", content = _"structured discussion" }
             end }
-          end
-          ui.tag { tag = "li", content = function()
-            ui.link { module = "help", view = "introduction", content = _"preference voting" }
-          end }
-        end } 
+            ui.tag { tag = "li", content = function()
+              ui.link { module = "help", view = "introduction", content = _"4 phases of a decision" }
+            end }
+            if not config.disable_delegations then
+              ui.tag { tag = "li", content = function()
+                ui.link { module = "help", view = "introduction", content = _"vote delegation" }
+              end }
+            end
+            ui.tag { tag = "li", content = function()
+              ui.link { module = "help", view = "introduction", content = _"preference voting" }
+            end }
+          end } 
+        end
       end }
     end
   end }
