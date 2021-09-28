@@ -53,7 +53,7 @@ ui.grid{ content = function()
   end }
 
   ui.cell_sidebar{ content = function()
-    if config.logo_startpage then
+    if not unit and not area and config.logo_startpage then
       config.logo_startpage()
     end
     execute.view{ module = "index", view = "_head" }
