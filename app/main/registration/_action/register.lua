@@ -282,17 +282,19 @@ if manual_verification then
   table.insert(manual_check_reasons, "User requested manual verification (during step 1)")
 end
 
-if not config.self_registration.sms_id then
-  table.insert(manual_check_reasons, "User requested manual verification (during step 1)")
+if config.self_registration.sms_id then
+  local existing_verifications = Verification:new_selector()
+    :add_where{ "request_data->>'mobile_phone' = ?", mobile_phone }
+    :add_where("comment ilike '%SMS code%'")
+    :exec()
+
+  if #existing_verifications > 0 then
+    table.insert(manual_check_reasons, "mobile phone number already used before")
+  end
 end
 
-local existing_verifications = Verification:new_selector()
-  :add_where{ "request_data->>'mobile_phone' = ?", mobile_phone }
-  :add_where("comment ilike '%SMS code%'")
-  :exec()
-
-if #existing_verifications > 0 then
-  table.insert(manual_check_reasons, "mobile phone number already used before")
+if config.self_registration.force_manual_check then
+  table.insert(manual_check_reasons, "Manual check enforced by configuration")
 end
 
 if #manual_check_reasons > 0 then
@@ -301,13 +303,12 @@ if #manual_check_reasons > 0 then
   verification:save()
   request.redirect{ external = encode.url { module = "registration", view = "register_manual_check_needed" } } 
 
-else
+elseif config.self_registration.sms_id then
   local pin = multirand.string(6, "0123456789")
   verification.request_data.sms_code = pin
   verification.request_data.sms_code_tries = 3
   local sms_text = config.self_registration.sms_text
   local sms_text = string.gsub(sms_text, "{PIN}", pin)
-  print("SMS Code: " .. sms_text)
   local phone_number
   if config.self_registration.sms_strip_leading_zero then
     phone_number = string.match(verification.request_data.mobile_phone, "0(.+)")
@@ -331,9 +332,7 @@ else
   
   local params_string = table.concat(params_list, "&")
   local url = "http://gateway.any-sms.biz/send_sms.php?" .. params_string
-  print("curl " .. url)
   local output, err, status = extos.pfilter(nil, "curl", url)
-  print(output)
   verification.request_data.sms_code_sent_status = output
   if not string.match(output, "^err:0") then
     verification.comment = (verification.comment or "").. " /// Manual verification needed: sending SMS failed (" .. output .. ")"
@@ -344,6 +343,17 @@ else
   verification.comment = (verification.comment or "") .. " /// SMS code " .. pin .. " sent"
   verification:save()
   request.redirect{ external = encode.url { module = "registration", view = "register_enter_pin", id = verification.id } }
+  
+else
+  local success = execute.action{
+    module = "registration", action = "_verify", params = {
+      verification = verification
+    }
+  }
+  if success == "ok" then
+    request.redirect{ external = encode.url { module = "registration", view = "register_completed" } } 
+  end
+  
 end
 
 

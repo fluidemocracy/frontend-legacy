@@ -87,7 +87,7 @@ ui.container{ attr = { class = "mdl-grid" }, content = function()
                       slot.put(" ")
                       ui.tag{ content = state } 
                     elseif record.verified then
-                      ui.tag{ content = _"SMS" }
+                      ui.tag{ content = _"automatically verified" }
                     end
                     
                   end
