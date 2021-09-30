@@ -61,7 +61,14 @@ ui.container{ attr = { class = "mdl-card mdl-card__fullwidth mdl-shadow--2dp" },
           end
         end }
       end
-      
+      if not config.voting_only and app.session.member_id and app.session.member:has_initiative_right_for_unit_id ( unit.id ) then
+        ui.container{ attr = { class = "mdl-card__content mdl-card--border" }, content = function()
+          ui.tag{ content = _"I want to start a new initiative" }
+          ui.tag{ tag = "ul", attr = { class = "ul" }, content = function ()
+            ui.tag { tag = "li", content = _"open the appropriate subject area for your issue and follow the instruction on that page." }
+          end } 
+        end }
+      end
       ui.container{ attr = { class = "mdl-card__content mdl-card--border" }, content = function()
         ui.tag{
           content = _"I want to vote" 
@@ -73,26 +80,17 @@ ui.container{ attr = { class = "mdl-card mdl-card__fullwidth mdl-shadow--2dp" },
 
     else
       ui.container { attr = { class = "mdl-card__content mdl-card--border" }, content = function ()
-        ui.tag{ content = _"You are not entitled to vote in this unit" }
         if not app.session.member_id then
+          ui.tag{ content = _"Login to participate" }
           ui.tag{ tag = "ul", content = function()
             ui.tag{ tag = "li", content = function()
               ui.link{ module = "index", view = "login", content = _"Login" }
             end }
           end }
+        else
+          ui.tag{ content = _"You are not entitled to vote in this unit" }
         end
       end }
     end
-    
-    if not config.voting_only and app.session.member_id and app.session.member:has_initiative_right_for_unit_id ( unit.id ) then
-      ui.container{ attr = { class = "mdl-card__content mdl-card--border" }, content = function()
-        ui.tag{ content = _"I want to start a new initiative" }
-        ui.tag{ tag = "ul", attr = { class = "ul" }, content = function ()
-          ui.tag { tag = "li", content = _"open the appropriate subject area for your issue and follow the instruction on that page." }
-        end } 
-      end }
-    end
-   
   end }
-  
 end }

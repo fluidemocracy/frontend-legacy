@@ -123,6 +123,10 @@ h1 {
   font-size: 18px;
   line-height: normal;
 }
+.mdl-list__item .revoked .initiative_name {
+  text-decoration: line-through;
+}
+
 .initiatives.mdl-list  {
   margin-top: 5px;
   margin-bottom: 5px;
