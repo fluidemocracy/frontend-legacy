@@ -45,11 +45,17 @@ ui.grid{ content = function()
   ui.cell_main{ content = function()
 
     execute.view{ module = "index", view = "_sidebar_motd_public" }
+    if not unit_id and not area_id then
+      execute.view{ module = "index", view = "_sidebar_motd_intern_top" }
+    end
 
     execute.view{ module = "issue", view = "_list" }
   end }
 
   ui.cell_sidebar{ content = function()
+    if not unit and not area and config.logo_startpage then
+      config.logo_startpage()
+    end
     execute.view{ module = "index", view = "_head" }
     
     execute.view{ module = "index", view = "_sidebar_motd" }

@@ -30,6 +30,14 @@ ui.container{ attr = { class = "mdl-card mdl-card__fullwidth mdl-shadow--2dp" },
           end
         end } 
       end }
+      if not config.voting_only and app.session.member.has_initiative_right then
+        ui.container{ attr = { class = "mdl-card__content mdl-card--border" }, content = function()
+          ui.tag{ content = _"I want to start a new initiative" }
+          ui.tag { tag = "ul", attr = { class = "ul" }, content = function ()
+            ui.tag { tag = "li", content = _"open the appropriate subject area for your issue and follow the instruction on that page." }
+          end } 
+        end }
+      end
       if app.session.member.has_voting_right then
         ui.container{ attr = { class = "mdl-card__content mdl-card--border" }, content = function()
           ui.tag{ content = _"I want to vote" }
@@ -46,15 +54,7 @@ ui.container{ attr = { class = "mdl-card mdl-card__fullwidth mdl-shadow--2dp" },
           end }
         end
       end
-      if not config.voting_only and app.session.member.has_initiative_right then
-        ui.container{ attr = { class = "mdl-card__content mdl-card--border" }, content = function()
-          ui.tag{ content = _"I want to start a new initiative" }
-          ui.tag { tag = "ul", attr = { class = "ul" }, content = function ()
-            ui.tag { tag = "li", content = _"open the appropriate subject area for your issue and follow the instruction on that page." }
-          end } 
-        end }
-      end
-      if not config.single_unit_id then
+      if not config.single_unit_id and not config.do_not_show_other_units_link then
         ui.container{ attr = { class = "mdl-card__content mdl-card--border" }, content = function()
           ui.tag{ content = _"I want to take a look at other organizational units" }
           ui.tag { tag = "ul", attr = { class = "ul" }, content = function ()
@@ -94,22 +94,26 @@ ui.container{ attr = { class = "mdl-card mdl-card__fullwidth mdl-shadow--2dp" },
     if not config.voting_only then
       ui.container{ attr = { class = "mdl-card__content mdl-card--border" }, content = function()
         ui.tag{ content = _"I want to learn more about LiquidFeedback" }
-        ui.tag { tag = "ul", attr = { class = "ul" }, content = function ()
-          ui.tag { tag = "li", content = function()
-            ui.link { module = "help", view = "introduction", content = _"structured discussion" }
-          end }
-          ui.tag { tag = "li", content = function()
-            ui.link { module = "help", view = "introduction", content = _"4 phases of a decision" }
-          end }
-          if not config.disable_delegations then
+        if config.quick_guide and config.quick_guide.links then
+          ui.container{ content = config.quick_guide.links }
+        else
+          ui.tag { tag = "ul", attr = { class = "ul" }, content = function ()
             ui.tag { tag = "li", content = function()
-              ui.link { module = "help", view = "introduction", content = _"vote delegation" }
+              ui.link { module = "help", view = "introduction", content = _"structured discussion" }
             end }
-          end
-          ui.tag { tag = "li", content = function()
-            ui.link { module = "help", view = "introduction", content = _"preference voting" }
-          end }
-        end } 
+            ui.tag { tag = "li", content = function()
+              ui.link { module = "help", view = "introduction", content = _"4 phases of a decision" }
+            end }
+            if not config.disable_delegations then
+              ui.tag { tag = "li", content = function()
+                ui.link { module = "help", view = "introduction", content = _"vote delegation" }
+              end }
+            end
+            ui.tag { tag = "li", content = function()
+              ui.link { module = "help", view = "introduction", content = _"preference voting" }
+            end }
+          end } 
+        end
       end }
     end
   end }
