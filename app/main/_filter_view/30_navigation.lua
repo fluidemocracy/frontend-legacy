@@ -116,6 +116,10 @@ if not config.meta_navigation_items_func or not config.meta_navigation_html_func
   end)
 end
 
+if request.get_module() ~= "survey" then
+  execute.view{ module = "survey", view = "_notification" }
+end
+
 -- show notifications about things the user should take care of
 --[[
 if app.session.member then
