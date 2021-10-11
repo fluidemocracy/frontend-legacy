@@ -351,12 +351,14 @@ else
     }
   }
   if success == "ok" then
-    local unit_privilege = Privilege:new()
-    unit_privilege.member_id = verification.requesting_member_id
-    unit_privilege.unit_id = tonumber(verification.request_data.unit)
-    unit_privilege.voting_right = true
-    unit_privilege.initiative_right = true
-    unit_privilege:save()
+    if verification.request_data.unit then
+      local unit_privilege = Privilege:new()
+      unit_privilege.member_id = verification.requesting_member_id
+      unit_privilege.unit_id = tonumber(verification.request_data.unit)
+      unit_privilege.voting_right = true
+      unit_privilege.initiative_right = true
+      unit_privilege:save()
+    end
     request.redirect{ external = encode.url { module = "registration", view = "register_completed" } } 
   end
   
