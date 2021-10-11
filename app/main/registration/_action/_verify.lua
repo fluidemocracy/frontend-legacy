@@ -1,8 +1,5 @@
 local verification = param.get("verification", "table")
 
-verification.verified = "now"
-verification.verification_data = verification.request_data
-
 local identification = config.self_registration.identification_func(verification.request_data)
 
 local members_with_same_identification = Member:new_selector()
@@ -32,8 +29,9 @@ for i, unit_id in ipairs(config.self_registration.grant_privileges_for_unit_ids)
   privilege:save()
 end
 
+verification.verified = "now"
+verification.verification_data = verification.request_data
 verification.verified_member_id = member.id
-
 verification.comment = (verification.comment or "").. " /// Account created"
 
 verification:save()
