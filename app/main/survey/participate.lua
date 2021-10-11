@@ -37,7 +37,7 @@ ui.grid{ content = function()
           else
             ui.tag{ content = question.question }
           end
-        }
+        end }
       end }
       ui.container{ attr = { class = "mdl-card__content mdl-card--border" }, content = function()
         if survey_member.finished then
