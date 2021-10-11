@@ -39,8 +39,8 @@ ui.grid{ content = function()
             { closing = format.interval_text(survey.time_left) }
           )
         }
-      end }
 --]]
+      end }
       ui.container{ attr = { class = "mdl-card__content mdl-card--border" }, content = function()
         if survey_member.finished then
           ui.container{ content = function()
