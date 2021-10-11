@@ -83,6 +83,7 @@ ui.grid{ content = function()
                       end
                     }
                   end }
+                end
 
               elseif question.answer_type == "checkbox" then
                 for i, answer_option in ipairs(question.answer_options) do
@@ -111,18 +112,18 @@ ui.grid{ content = function()
                     }
                   end }
                 end
-
-                slot.put("<br>")
-                ui.tag{
-                  tag = "input",
-                  attr = {
-                    type = "submit",
-                    class = "mdl-button mdl-js-button mdl-button--raised mdl-button--colored",
-                    value = _"Next step"
-                  },
-                  content = ""
-                }
               end
+
+              slot.put("<br>")
+              ui.tag{
+                tag = "input",
+                attr = {
+                  type = "submit",
+                  class = "mdl-button mdl-js-button mdl-button--raised mdl-button--colored",
+                  value = _"Next step"
+                },
+                content = ""
+              }
             end
           }
         end
