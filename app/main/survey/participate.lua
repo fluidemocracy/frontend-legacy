@@ -53,6 +53,7 @@ ui.grid{ content = function()
         else
           if question.description then
             ui.container{ content = question.description }
+            slot.put("<br>")
           end
           ui.form{
             module = "survey", action = "answer",
