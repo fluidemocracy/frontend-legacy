@@ -2,6 +2,7 @@ CREATE TABLE survey (
   id SERIAL4 PRIMARY KEY,
   title TEXT NOT NULL,
   text TEXT NOT NULL,
+  finished_title TEXT NOT NULL,
   finished_text TEXT NOT NULL,
   created TIMESTAMPTZ NOT NULL DEFAULT now(),
   open_from TIMESTAMPTZ NOT NULL,
