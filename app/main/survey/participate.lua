@@ -56,6 +56,7 @@ ui.grid{ content = function()
             },
             content = function()
               ui.field.hidden{ name = "question_id", value = question.id }
+
               if question.answer_type == "radio" then
                 for i, answer_option in ipairs(question.answer_options) do
                   ui.container{ content = function()
@@ -82,7 +83,35 @@ ui.grid{ content = function()
                       end
                     }
                   end }
+
+              if question.answer_type == "checkbox" then
+                for i, answer_option in ipairs(question.answer_options) do
+                  ui.container{ content = function()
+                    ui.tag{ tag = "label", attr = {
+                        class = "mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect",
+                        ["for"] = "answer_" .. i
+                      },
+                      content = function()
+                        ui.tag{
+                          tag = "input",
+                          attr = {
+                            id = "answer_" .. i,
+                            class = "mdl-checkbox__button",
+                            type = "checkbox",
+                            name = "answer_" .. answer_option,
+                            value = "1",
+                            checked = param.get("answer_" .. answer_option) and "checked" or nil,
+                          }
+                        }
+                        ui.tag{
+                          attr = { class = "mdl-checkbox__label", ['for'] = "answer_" .. i },
+                          content = answer_option
+                        }
+                      end
+                    }
+                  end }
                 end
+
                 slot.put("<br>")
                 ui.tag{
                   tag = "input",
