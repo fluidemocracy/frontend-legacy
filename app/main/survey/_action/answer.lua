@@ -54,7 +54,7 @@ elseif question.answer_type == "checkbox" then
   for i, answer_option in ipairs(question.answer_options) do
     local answer = param.get("answer_" .. answer_option)
     if answer then
-      table.insert(answers, answer)
+      table.insert(answers, answer_option)
     end
   end
   answer.answer = answers
