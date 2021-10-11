@@ -31,9 +31,8 @@ if not answer then
   answer.survey_question_id = question.id
 end
 
-local given_answer = param.get("answer")
-
 if question.answer_type == "radio" then
+  local given_answer = param.get("answer")
   if not given_answer then
     slot.put_into("error", _"Please choose an option!")
     return false
@@ -48,9 +47,19 @@ if question.answer_type == "radio" then
     slot.put_into("error", _"Internal error 1")
     return false
   end
+  answer.answer = given_answer
+
+if question.answer_type == "checkbox" then
+  local answers = json.array()
+  for i, answer_option in ipairs(question.answer_options) do
+    local answer = param.get("answer_" .. answer_option)
+    if answer then
+      table.insert(answers, answer)
+    end
+  end
+  answer.answer = answers
 end
 
-answer.answer = given_answer
 answer:save()
 
 local question
