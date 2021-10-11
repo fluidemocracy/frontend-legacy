@@ -84,7 +84,7 @@ ui.grid{ content = function()
                     }
                   end }
 
-              if question.answer_type == "checkbox" then
+              elseif question.answer_type == "checkbox" then
                 for i, answer_option in ipairs(question.answer_options) do
                   ui.container{ content = function()
                     ui.tag{ tag = "label", attr = {

@@ -49,7 +49,7 @@ if question.answer_type == "radio" then
   end
   answer.answer = given_answer
 
-if question.answer_type == "checkbox" then
+elseif question.answer_type == "checkbox" then
   local answers = json.array()
   for i, answer_option in ipairs(question.answer_options) do
     local answer = param.get("answer_" .. answer_option)
