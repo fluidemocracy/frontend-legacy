@@ -25,21 +25,13 @@ if survey_member then
   end
 end
 
-ui.title(_"Survey")
+ui.title(survey.title)
 ui.grid{ content = function()
   ui.cell_main{ content = function()
 
     ui.container{ attr = { class = "mdl-card mdl-card__fullwidth mdl-shadow--2dp survey" }, content = function()
       ui.container{ attr = { class = "mdl-card__title mdl-card--border" }, content = function()
-        ui.heading { attr = { class = "mdl-card__title-text" }, level = 2, content = survey.title }
---[[
-        ui.container{ 
-          content = _(
-            "This survey closes in #{closing}.", 
-            { closing = format.interval_text(survey.time_left) }
-          )
-        }
---]]
+        ui.heading { attr = { class = "mdl-card__title-text" }, level = 2, content = question.question }
       end }
       ui.container{ attr = { class = "mdl-card__content mdl-card--border" }, content = function()
         if survey_member.finished then
@@ -53,7 +45,6 @@ ui.grid{ content = function()
           }
           return
         else
-          ui.heading{ level = 2, content = question.question }
           if question.description then
             ui.container{ content = question.description }
           end
