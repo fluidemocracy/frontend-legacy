@@ -116,7 +116,7 @@ if not config.meta_navigation_items_func or not config.meta_navigation_html_func
   end)
 end
 
-if request.get_module() ~= "survey" then
+if config.survey and request.get_module() ~= "survey" then
   execute.view{ module = "survey", view = "_notification" }
 end
 
