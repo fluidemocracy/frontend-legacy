@@ -46,6 +46,8 @@ local deactivated = member and member.locked and member.login == nil and member.
 ui.titleAdmin(_"Member")
 
 local units_selector = Unit:new_selector()
+  :add_where("active")
+
   
 if member then
   units_selector
