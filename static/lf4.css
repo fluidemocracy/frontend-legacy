@@ -741,6 +741,11 @@ div.form .member_photo .member_image.member_image_photo {
   margin-top: 0;
 }
 
+.survey_counter {
+  position: absolute;;
+  right: 20px;
+}
+
 .trace_list {
   margin-left: 10px;
   list-style-type: none;
