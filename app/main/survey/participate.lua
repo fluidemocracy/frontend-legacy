@@ -9,6 +9,7 @@ if not survey_member then
 end
 
 local question
+local question_number = #survey.questions
 
 if survey_member then
   local answer_set = survey_member.answer_set
@@ -20,6 +21,7 @@ if survey_member then
     for i, q in ipairs(survey.questions) do
       if not question and not answers_by_question_id[q.id] then
         question = q
+        question_number = i - 1
       end
     end
   end
@@ -30,15 +32,25 @@ ui.grid{ content = function()
   ui.cell_main{ content = function()
 
     ui.container{ attr = { class = "mdl-card mdl-card__fullwidth mdl-shadow--2dp survey" }, content = function()
-      ui.container{ attr = { class = "mdl-card__title mdl-card--border" }, content = function()
+      ui.container{ attr = { class = "mdl-card__title" }, content = function()
         ui.heading { attr = { class = "mdl-card__title-text" }, level = 2, content = function()
           if survey_member.finished then
             slot.put(survey.finished_title)
           else
-            ui.tag{ content = question.question }
+            ui.tag{ tag = "span", content = question.question }
+            ui.tag{ attr = { class = "survey_counter" }, content = (question_number + 1) .. " / " .. #survey.questions }
           end
         end }
       end }
+      slot.put('<div id = "progressbar1" style="width: 100%;" class = "mdl-progress mdl-js-progress"></div>')
+      
+      ui.script{ script = [[
+        document.querySelector('#progressbar1').addEventListener('mdl-componentupgraded', 
+            function() {
+            this.MaterialProgress.setProgress(]] .. question_number / #survey.questions * 100 .. [[);
+         }); 
+      
+      ]] }
       ui.container{ attr = { class = "mdl-card__content mdl-card--border" }, content = function()
         if survey_member.finished then
           ui.container{ content = function()
@@ -62,6 +74,7 @@ ui.grid{ content = function()
               error = { mode = "forward", module = "survey", view = "participate" },
             },
             content = function()
+            
               ui.field.hidden{ name = "question_id", value = question.id }
 
               if question.answer_type == "radio" then

@@ -54,6 +54,23 @@ if app.scopes.read_identities and search then
   selector:add_where{ "name ILIKE ? OR identification ILIKE ?", search, search }
 end
 
+if app.scopes.read_profiles then
+  local profile_lookups = false
+  for i, field in ipairs(config.member_profile_fields) do
+    if field.api_lookup then
+      local value = param.get("profile_" .. field.id)
+      if value then
+        selector:add_where{ "member_profile.profile->>? = ?", field.id, value }
+        profile_lookups = true
+      end
+    end
+  end
+  if profile_lookups then
+    selector:join("member_profile", nil, "member_profile.member_id = member.id")
+  end
+end
+
+
 local members = selector:exec()
 local r = json.object()
 r.result = execute.chunk{ module = "api", chunk = "_member", params = { 
