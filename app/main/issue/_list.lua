@@ -418,6 +418,7 @@ else
       selector = selector,
       per_page = 25,
       link_attr = { class = "mdl-button mdl-js-button mdl-button--raised" },
+      active_link_attr = { class = "mdl-button mdl-js-button mdl-button--raised mdl-button--colored" },
       position = "after",
       content = doit
     }
