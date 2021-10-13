@@ -746,6 +746,11 @@ div.form .member_photo .member_image.member_image_photo {
   right: 20px;
 }
 
+.ui_paginate_select .mdl-button {
+  min-width: unset;
+  margin-right: 0.3em;
+}
+
 .trace_list {
   margin-left: 10px;
   list-style-type: none;
@@ -804,5 +809,3 @@ div.form .member_photo .member_image.member_image_photo {
   padding: 0px 3px;
   border-radius: 5px;
 }
-
-
