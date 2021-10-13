@@ -417,6 +417,8 @@ else
     ui.paginate{
       selector = selector,
       per_page = 25,
+      link_attr = "mdl-button mdl-js-button mdl-button--raised",
+      position = "after",
       content = doit
     }
   end
