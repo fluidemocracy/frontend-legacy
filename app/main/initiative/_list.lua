@@ -40,7 +40,9 @@ ui.tag {
             text = _"Competing initiatives in pairwise comparison to best initiative:"
           end
         end
-        if group == "not_admitted" and initiative.issue.state ~= "canceled_no_initiative_admitted" then
+        if group == "not_admitted" and initiative.issue.state == "canceled_issue_not_accepted" then
+          text = _"Failed 1st quorum"
+        elseif group == "not_admitted" and initiative.issue.state ~= "canceled_no_initiative_admitted" then
           text = _("Competing initiatives failed the 2nd quorum (#{num}/#{den}):", {
             num = initiative.issue.policy.initiative_quorum_num,
             den = initiative.issue.policy.initiative_quorum_den
