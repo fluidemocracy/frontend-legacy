@@ -272,7 +272,7 @@ if config.firstlife_groups then
   listen{
     {
       proto = "interval",
-      name  = "send_pending_notifications",
+      name  = "mirror_firstlife_groups",
       delay = 5,
       handler = function()
         firstlife_mirror_groups()
