@@ -305,7 +305,8 @@ ui.container {
               end
             end }
             
-            ui.link{
+            ui.tag{
+              tag = "a",
               attr = {
                 id = "s" .. suggestion.id .. "_rate_button",
                 class = "mdl-button",
