@@ -650,7 +650,7 @@ return {
 ["The initiators suggest to support the following initiative:"] = false;
 ["The minimum absolute number of approval votes."] = false;
 ["This delegation is suspended, because you voted yourself."] = false;
-["This email address already been used. Please check your inbox for an invitation or contact us."] = "This email address is already being used. Please check your inbox for an invitation or contact us.;
+["This email address already been used. Please check your inbox for an invitation or contact us."] = "This email address is already being used. Please check your inbox for an invitation or contact us.";
 ["This email address is too short!"] = false;
 ["This initiative"] = false;
 ["This initiative has been revoked at #{revoked} by:"] = false;
