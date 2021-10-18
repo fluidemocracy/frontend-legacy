@@ -857,8 +857,8 @@ return {
 ["change my screen name"] = "Change my screen name";
 ["change my vote"] = false;
 ["change vote"] = false;
-["change/revoke area delegation"] = false;
-["change/revoke delegation"] = false;
+["change/revoke area delegation"] = "Change/revoke area delegation";
+["change/revoke delegation"] = "Change/revoke delegation";
 ["change/revoke delegation of organizational unit"] = false;
 ["change/revoke delegation of subject area"] = false;
 ["change/revoke delegation only for this issue"] = false;
