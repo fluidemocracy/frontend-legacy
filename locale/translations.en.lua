@@ -844,7 +844,7 @@ return {
 ["by"] = false;
 ["by A-Z"] = false;
 ["by Z-A"] = false;
-["by default only those issues are shown, for which your are eligible to participate (change filters on top of the list)"] = "by default, only those issues are shown for which your are eligible to participate (change filters on top of the list)";
+["by default only those issues are shown, for which your are eligible to participate (change filters on top of the list)"] = "By default, only those issues are shown for which your are eligible to participate (change filters on top of the list)";
 ["by latest activity"] = false;
 ["cancel"] = false;
 ["cancel issue"] = false;
@@ -864,8 +864,8 @@ return {
 ["change/revoke delegation only for this issue"] = false;
 ["change/revoke delegation only for this subject area"] = false;
 ["change/revoke issue delegation"] = false;
-["check the issues on the right, and click on 'Vote now' to vote on an issue which is in voting phase."] = false;
-["check your "] = false;
+["check the issues on the right, and click on 'Vote now' to vote on an issue which is in voting phase."] = "Check the issues on the right, and click on 'Vote now' to vote on an issue which is in voting phase.";
+["check your "] = "Check your ";
 ["choose delegatee"] = false;
 ["choose issue delegatee"] = false;
 ["choose subject area delegatee"] = "Choose subject area delegatee";
@@ -970,8 +970,8 @@ return {
 ["notifications settings"] = "notification settings";
 ["oldest first"] = false;
 ["one step back"] = false;
-["open the appropriate subject area for your issue and follow the instruction on that page."] = "open the appropriate subject area for your issue and follow the instructions on that page.";
-["open the organizational unit, subject area or issue you like to delegate and follow the instruction on that page."] = "open the organizational unit, subject area or issue you want to delegate and follow the instruction on that page.";
+["open the appropriate subject area for your issue and follow the instruction on that page."] = "Open the appropriate subject area for your issue and follow the instructions on that page.";
+["open the organizational unit, subject area or issue you like to delegate and follow the instruction on that page."] = "Open the organizational unit, subject area or issue you want to delegate and follow the instruction on that page.";
 ["ordered by delegation count"] = false;
 ["other reasons (#{count})"] = false;
 ["phase"] = false;
