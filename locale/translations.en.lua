@@ -844,7 +844,7 @@ return {
 ["by"] = false;
 ["by A-Z"] = false;
 ["by Z-A"] = false;
-["by default only those issues are shown, for which your are eligible to participate (change filters on top of the list)"] = "by default, only those issues are shown for which your are eligible to participate (change filters on top of the list)"
+["by default only those issues are shown, for which your are eligible to participate (change filters on top of the list)"] = "by default, only those issues are shown for which your are eligible to participate (change filters on top of the list)";
 ["by latest activity"] = false;
 ["cancel"] = false;
 ["cancel issue"] = false;
