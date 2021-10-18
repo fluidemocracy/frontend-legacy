@@ -741,6 +741,31 @@ div.form .member_photo .member_image.member_image_photo {
   margin-top: 0;
 }
 
+#rating_dialog {
+  position: fixed;
+  top: 0px;
+  bottom: 0px;
+  max-width: calc((100% - 6px) - 2em);
+  max-height: calc((100% - 6px) - 2em);
+  overflow: auto;  
+  display: block;
+  left: 0px;
+  right: 0px;
+  width: fit-content;
+  width: -moz-fit-content;
+  height: fit-content;
+  height: -moz-fit-content;
+  color: #000;
+  margin: auto;
+  border-width: initial;
+  border-style: solid;
+  border-color: initial;
+  border-image: initial;
+  padding: 1em;
+  background: #fff;
+  z-index: 1;
+}
+
 .survey_counter {
   position: absolute;;
   right: 20px;
