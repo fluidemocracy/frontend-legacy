@@ -41,7 +41,9 @@ function rateSuggestion(id, degree, fulfilled) {
     document.getElementById('rating_fulfilled').MaterialRadio.uncheck();    
     document.getElementById('rating_notfulfilled').MaterialRadio.uncheck();    
   }
-  document.getElementById('rating_dialog').showModal();
+//  document.getElementById('rating_dialog').showModal();
+  document.getElementById('rating_dialog').classList.remove("hidden");
+
 }
 
 function updateOpinion() {
@@ -102,7 +104,8 @@ function updateOpinion() {
     document.getElementById("s" + suggestionId + "_rate_button").innerHTML = rateSuggestionUpdateRatingText;
   }
   document.getElementById("s" + suggestionId + "_rate_button").setAttribute("onclick", "rateSuggestion(" + suggestionId + ", " + degree + ", " + fulfilled + ");return false;")
-  document.getElementById('rating_dialog').close();
+//  document.getElementById('rating_dialog').close();
+  document.getElementById('rating_dialog').classList.add("hidden");
 
   fetch(baseURL + "opinion/xhr_update", {
     method: "POST",

@@ -6,7 +6,7 @@ end
 
 
 if direct_supporter then
-  ui.tag{ tag = "dialog", attr = { id = "rating_dialog" }, content = function ()
+  ui.tag{ tag = "div", attr = { id = "rating_dialog", class = "hidden" }, content = function ()
 
     local opinion = {}
     ui.form { 
@@ -112,7 +112,7 @@ if direct_supporter then
         ui.tag{
           tag = "input",
           attr = {
-            onclick = "document.getElementById('rating_dialog').close(); return false;",
+            onclick = "document.getElementById('rating_dialog').classList.add('hidden'); return false;",
             type = "submit",
             class = "mdl-button mdl-js-button",
             value = _"cancel"
