@@ -199,7 +199,7 @@ return {
 ["Discussion started"] = false;
 ["Discussion time"] = false;
 ["Do you really want to irrevocably deactive this member?"] = "Do you really want to irrevocably deactivate this member?";
-["Do you want to suggest to support another initiative?"] = "Do you want to suggest another initiative to your supporters?” ;
+["Do you want to suggest to support another initiative?"] = "Do you want to suggest another initiative to your supporters?";
 ["Domain too long"] = false;
 ["Download"] = false;
 ["Download database export"] = false;
