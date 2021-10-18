@@ -1020,7 +1020,7 @@ return {
 ["start an initiative in a new issue"] = "start a new issue";
 ["structured discussion"] = "Structured discussion";
 ["subscribe for update emails about this area"] = false;
-["subscribe subject areas or add your interested to issues and you will be notified about changes (follow the instruction on the area or issue page)"] = "Subscribe to subject areas or show you interest for certain issues. You will then be notified about changes to those issues (follow the instructions on the area or issue page)"]
+["subscribe subject areas or add your interested to issues and you will be notified about changes (follow the instruction on the area or issue page)"] = "Subscribe to subject areas or show you interest for certain issues. You will then be notified about changes to those issues (follow the instructions on the area or issue page)";
 ["supporter"] = "supporters";
 ["supporter with restricting suggestions"] = "supporters with restricting suggestions";
 ["switch to: #{member_name}"] = false;
