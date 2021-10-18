@@ -98,7 +98,7 @@ return {
 ["Are you aware that revoking an initiative is irrevocable?"] = false;
 ["Area delegation"] = false;
 ["As long as you are interested in this issue yourself, the delegation is suspended for this issue, but it will be applied again in the voting phase unless you vote yourself."] = "As long as you are interested in this issue yourself, your delegation will be automatically suspended for this issue. But it will be applied again in the voting phase unless you vote yourself.";
-["As soon as one initiative of this issue reaches the 1st quorum of #{quorum} support, the issue will proceed to discussion phase."] = "As soon as one initiative of this issue reaches the 1st quorum of #{quorum} supporters, the issue will proceed to discussion phase."];
+["As soon as one initiative of this issue reaches the 1st quorum of #{quorum} support, the issue will proceed to discussion phase."] = "As soon as one initiative of this issue reaches the 1st quorum of #{quorum} supporters, the issue will proceed to discussion phase.";
 ["Attach image"] = false;
 ["Attr"] = false;
 ["Author"] = false;
