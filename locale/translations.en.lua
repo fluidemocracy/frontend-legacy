@@ -749,7 +749,7 @@ return {
 ["You blocked this member (i.e. you will not be notified about this members actions)"] = "You blocked this member (i.e. you will not be notified about this member's actions)";
 ["You can change your email address only once per hour. Please try again later."] = false;
 ["You can change your text again anytime during admission and discussion phase"] = false;
-["You can choose only members which you have been saved as contact before."] = "You can only choose members which you have previously saved as contacts."
+["You can choose only members which you have been saved as contact before."] = "You can only choose members which you have previously saved as contacts.";
 ["You can't suggest the initiative you are revoking"] = false;
 ["You cannot change your text again later, because this issue is already in verfication phase!"] = "You cannot change your text again later, because this issue is already in the verification phase!";
 ["You delegated this issue"] = false;
