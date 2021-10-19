@@ -28,7 +28,6 @@ return {
 ["(new window)"] = "(ventana nueva)";
 ["(new)"] = "(nuevo(a)(s))";
 ["+ add new subject area"] = "+ añadir nueva área temática";
-["+getElementById("] = "+getElementById(";
 ["1 matching issue found"] = "1 tema correspondiente encontrado";
 ["1 matching member found"] = "1 miembro correspondiente encontrado";
 ["4 phases of a decision"] = "Las 4 fases de una decisión";
@@ -102,7 +101,6 @@ return {
 ["Attach image"] = "Adjuntar imagen";
 ["Attr"] = false;
 ["Author"] = "Autor";
-["Available policies"] = "Políticas disponibles";
 ["Avatar"] = "Avatar";
 ["Ballot of '#{member_name}'"] = "Papeleta de '#{member_name}'";
 ["Broken delegations"] = "Delegaciones rotas";
@@ -251,7 +249,6 @@ return {
 ["Forgot password?"] = "¿Olvidaste tu contraseña?";
 ["Free timing:"] = "Cronología libre:";
 ["Friday"] = "Viernes";
-["Frozen"] = "Congelado";
 ["Fully frozen at"] = "Totalmente congelado a las";
 ["Global delegation"] = "Delegación global";
 ["Go back to home page"] = "Volver a la página de inicio";
@@ -405,7 +402,6 @@ return {
 ["Move down"] = "Mover abajo";
 ["Move up"] = "Mover arriba";
 ["Name"] = "Nombre";
-["New"] = "old";
 ["New area"] = "Nueva área";
 ["New competing initiative in issue '#{issue}'"] = "Nueva iniciativa en competencia en el número '#{issue}'";
 ["New draft for initiative '#{initiative_name}'"] = "Nuevo borrador para la iniciativa '#{initiative_name}'";
@@ -460,7 +456,6 @@ return {
 ["Open requests"] = "Solicitudes abiertas";
 ["Open requests (#{count})"] = "Solicitudes abiertas (#{count})";
 ["Open role requests"] = "Solicitudes de rol abierto";
-["Options"] = "Opciones";
 ["Organizational unit"] = "Unidad organizativa";
 ["Organizational units"] = "Unidades organizativas";
 ["Organizational units and subject areas"] = "Unidades organizativas y áreas temáticas";
@@ -479,7 +474,6 @@ return {
 ["Passwords don't match!"] = "¡Las contraseñas no coinciden!";
 ["Passwords must consist of at least 8 characters!"] = "¡Las contraseñas deben tener al menos 8 caracteres!";
 ["Personal information"] = "Información personal";
-["Phase durations"] = "Duración de las fases";
 ["Phase ends soon"] = "La fase termina pronto";
 ["Phone number used before"] = "Número de teléfono utilizado anteriormente";
 ["Phone number used before (#{count})"] = "Número de teléfono utilizado antes (#{count})";
@@ -510,7 +504,6 @@ return {
 ["Please enter: #{field_name}"] = "Favor de ingresar: #{field_name}";
 ["Policies"] = "Políticas";
 ["Policy"] = "Política";
-["Policy '#{name}'"] = "Política '#{nombre}'";
 ["Policy list"] = "Lista de políticas";
 ["Polling mode"] = "Modo de sondeo";
 ["Population"] = "Población";
@@ -525,7 +518,6 @@ return {
 ["Published"] = "Publicado";
 ["Published contacts"] = "Contactos publicados";
 ["Quick guide"] = "Guía rápida";
-["Quorums"] = "Quórums";
 ["Reached #{sign}#{num}/#{den}"] = "Alcanzó #{sign}#{num}/#{den}";
 ["Recover login name"] = "Recuperar nombre de usuario";
 ["Redirect URI forbidden"] = "Redirección URI prohibida";
@@ -635,7 +627,6 @@ return {
 ["Suggestions for improvement (#{count})"] = "Sugerencias de mejora (#{count})";
 ["Sunday"] = "Domingo";
 ["Surveys"] = false;
-["Syntax help"] = "Ayuda sintáctica";
 ["System settings"] = "Configuración de sistema";
 ["Take a look through the existing issues. Maybe someone else started a debate on your topic (and you can join it) or the topic has been decided already in the past."] = "Échale un vistazo a los temas disponibles. Es posible que alguien haya iniciado un debate sobre tu tema (y puedas unirte a él), o que el tema ya se haya decidido en el pasado.";
 ["Tell others about this initiative:"] = "Cuéntale a los demás sobre esta iniciativa:";
@@ -725,8 +716,6 @@ return {
 ["Wednesday"] = "Miércoles";
 ["What can I do here?"] = "¿Qué puedo hacer aquí?";
 ["What this member is currently supporting"] = "Lo que este miembro está apoyando ahora mismo";
-["Wiki engine"] = "old";
-["Wiki engine for statement"] = "old";
 ["Yes"] = "Sí";
 ["Yes, it's implemented"] = "Sí, ha sido implementado";
 ["You already voted this issue"] = "Ya has votado por este tema";
@@ -828,8 +817,6 @@ return {
 ["and"] = "y";
 ["and #{count} more initiatives"] = "y #{count} más iniciativas";
 ["area"] = "área";
-["at least #{count} approvals"] = "por lo menos #{count} aprobaciones";
-["at least #{count} approvals or abstentions"] = "al menos #{count} aprobaciones o abstenciones";
 ["author"] = "autor";
 ["automatically verified"] = false;
 ["avatar/photo"] = "avatar/foto";
@@ -915,7 +902,6 @@ return {
 ["finished"] = "terminado";
 ["global"] = "global";
 ["has my support"] = "tiene mi apoyo";
-["hide details"] = "ocultar detalles";
 ["i#{id}: #{name}"] = "i#{id}: #{name}";
 ["if you like to implement a suggestion in your proposal and/or reasons, update your initiative draft"] = "Si quieres implementar una sugerencia en tu propuesta y/o razones por hacerlo, actualiza el borrador de tu iniciativa.";
 ["implemented:"] = "implementado";
@@ -956,7 +942,6 @@ return {
 ["new suggestion for "] = "nueva sugerencia para ";
 ["newest first"] = "lo más nuevo primero";
 ["no delegation set"] = "no hay conjunto de delegaciones.";
-["no reverse beat path to status quo (including ties)"] = "no hay reverse-beat-path al statu quo (incluidos los empates)";
 ["none"] = "ninguno";
 ["not activated (yet)"] = "no se ha activado (todavía)";
 ["not admitted"] = "no admitido";
@@ -978,7 +963,6 @@ return {
 ["preference voting"] = "Voto preferencial";
 ["proceed with registration"] = "proceder al registro";
 ["profile and settings"] = "perfil y configuración";
-["prohibit potentially instable results caused by multistage majorities"] = "Prohibir los resultados posiblemente inestables causados por mayorías multietapas";
 ["public administrative notice:"] = "aviso administrativo público:";
 ["publish avatar/photo"] = "publicar avatar/foto";
 ["publish my rating"] = "publicar mi calificación";
@@ -1008,7 +992,6 @@ return {
 ["show"] = "mostrar";
 ["show all units"] = "Mostrar todas las unidades";
 ["show ballot"] = "mostrar boleta";
-["show details"] = "mostrar detalles";
 ["show differences"] = "mostrar diferencias";
 ["show incoming delegations"] = "mostrar las delegaciones entrantes";
 ["show my profile"] = "mostrar mi perfil";
@@ -1043,7 +1026,6 @@ return {
 ["update policy"] = "política de actualización";
 ["update rating"] = "actualizar clasificación";
 ["update unit"] = "actualizar unidad";
-["variable"] = "variable";
 ["verified"] = "verificado";
 ["via delegation"] = "vía delegación";
 ["vote delegation"] = "Delegación de voto";
@@ -1057,7 +1039,6 @@ return {
 ["voted yes"] = "votó sí";
 ["wants to access your account"] = "quiere acceder a tu cuenta";
 ["with"] = "con";
-["without"] = "sin";
 ["without quorum"] = "sin quórum";
 ["write a new suggestion"] = "Escribir una nueva sugerencia";
 ["written and rated by the supportes of this initiative to improve the proposal and its reasons"] = "escrito y calificado por los partidarios de esta iniciativa para mejorar la propuesta y sus razones";
