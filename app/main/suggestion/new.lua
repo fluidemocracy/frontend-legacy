@@ -33,47 +33,6 @@ ui.grid{ content = function()
             end
             ui.field.text{ label = _"A short title (80 chars max)", name = "name" }
             
-            if not config.enforce_formatting_engine then
-              ui.field.select{
-                label = _"Wiki engine",
-                name = "formatting_engine",
-                foreign_records = config.formatting_engines,
-                attr = {id = "formatting_engine"},
-                foreign_id = "id",
-                foreign_name = "name",
-                value = param.get("formatting_engine")
-              }
-              ui.tag{
-                tag = "div",
-                content = function()
-                  ui.tag{
-                    tag = "label",
-                    attr = { class = "ui_field_label" },
-                    content = function() slot.put("&nbsp;") end,
-                  }
-                  ui.tag{
-                    content = function()
-                      ui.link{
-                        text = _"Syntax help",
-                        module = "help",
-                        view = "show",
-                        id = "wikisyntax",
-                        attr = {onClick="this.href=this.href.replace(/wikisyntax[^.]*/g, 'wikisyntax_'+getElementById('formatting_engine').value)"}
-                      }
-                      slot.put(" ")
-                      ui.link{
-                        text = _"(new window)",
-                        module = "help",
-                        view = "show",
-                        id = "wikisyntax",
-                        attr = {target = "_blank", onClick="this.href=this.href.replace(/wikisyntax[^.]*/g, 'wikisyntax_'+getElementById('formatting_engine').value)"}
-                      }
-                    end
-                  }
-                end
-              }
-            end
-
             ui.field.text{
               label = _"Describe how the proposal and/or the reasons of the initiative could be improved",
               name = "content",
