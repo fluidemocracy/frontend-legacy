@@ -61,8 +61,6 @@ if app.session:has_access("anonymous") then
     module == "index" and view == "index"
     or module == "area" and view == "show"
     or module == "unit" and view == "show"
-    or module == "policy" and view == "show"
-    or module == "policy" and view == "list"
     or module == "issue" and view == "show"
     or module == "issue" and view == "history"
     or module == "initiative" and view == "show"
