@@ -272,7 +272,7 @@ return {
 ["I do not like to hear from this member"] = "I would not like to hear from this member";
 ["I don't like any of the initiative in this issue and I want to add my opinion or counter proposal"] = "I do not like any of the initiatives in this issue, and I want to add my opinion or counter proposal";
 ["I don't like this initiative and I want to add my opinion or counter proposal"] = false;
-["I don't like to vote this issue (myself):"] = false;
+["I don't like to vote this issue (myself):"] = "I do not wish to vote on this issue myself";
 ["I don't want to particiapte"] = false;
 ["I like this initiative and I want to support it"] = false;
 ["I like to change/revoke my vote:"] = "I'd like to change/revoke my vote";
