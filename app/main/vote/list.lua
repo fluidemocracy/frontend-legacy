@@ -462,17 +462,6 @@ ui.container{ attr = { class = "mdl-grid" }, content = function()
             if app.session.member_id and app.session.member_id == member.id then
               if (not readonly or direct_voter) and not preview then
                 ui.container{ content = function()
-                  if not config.enforce_formatting_engine then
-                    ui.field.select{
-                      label = _"Wiki engine for statement",
-                      name = "formatting_engine",
-                      foreign_records = config.formatting_engines,
-                      attr = {id = "formatting_engine"},
-                      foreign_id = "id",
-                      foreign_name = "name",
-                      value = param.get("formatting_engine") or direct_voter and direct_voter.formatting_engine
-                    }
-                  end
                   ui.container{ content = _"Voting comment (optional)" }
                   ui.field.text{
                     name = "comment",
