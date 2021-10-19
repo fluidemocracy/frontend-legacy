@@ -905,6 +905,7 @@ return {
 ["closed"] = "geschlossen";
 ["collective rating:"] = "kollektive Bewertung:";
 ["compare revisions"] = "Revisionen vergleichen";
+["compare"] = "vergleiche";
 ["confirm"] = "bestätigen";
 ["confirmed address"] = "bestätigte Adresse";
 ["connected applications"] = "verbundene Anwendungen";
