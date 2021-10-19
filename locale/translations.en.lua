@@ -97,7 +97,8 @@ return {
 ["Approved"] = false;
 ["Are you aware that revoking an initiative is irrevocable?"] = false;
 ["Area delegation"] = false;
-["As long as you are interested in this issue yourself, the delegation is suspended for this issue, but it will be applied again in the voting phase unless you vote yourself."] = "As long as you are interested in this issue yourself, your delegation will be automatically suspended for this issue. But it will be applied again in the voting phase unless you vote yourself.";
+["As long as you are interested in this issue yourself, the delegation is suspended for this issue, but it will be applied again in the voting phase unless you vote yourself."] =
+"As long as you are interested in this issue yourself, your delegation will be automatically suspended for this issue. But it will be applied again in the voting phase unless you vote yourself.";
 ["As soon as one initiative of this issue reaches the 1st quorum of #{quorum} support, the issue will proceed to discussion phase."] = "As soon as one initiative of this issue reaches the 1st quorum of #{quorum} supporters, the issue will proceed to discussion phase.";
 ["Attach image"] = false;
 ["Attr"] = false;
@@ -178,7 +179,7 @@ return {
 ["Delete account"] = false;
 ["Denied at"] = false;
 ["Deny request"] = false;
-["Describe how the proposal and/or the reasons of the initiative could be improved"] = false;
+["Describe how the proposal and/or the reasons of the initiative could be improved"] = "Describe how the proposal and the reasoning for this initiative could be improved";
 ["Description"] = false;
 ["Details"] = false;
 ["Did the initiator implement this suggestion?"] = false;
@@ -267,7 +268,7 @@ return {
 ["History"] = false;
 ["Home"] = false;
 ["Hostname"] = false;
-["How important is your suggestions for you?"] = false;
+["How important is your suggestions for you?"] = "How important is this suggestion to you?";
 ["How this member voted"] = false;
 ["I do not like to hear from this member"] = "I would not like to hear from this member";
 ["I don't like any of the initiative in this issue and I want to add my opinion or counter proposal"] = "I do not like any of the initiatives in this issue, and I want to add my opinion or counter proposal";
@@ -306,7 +307,7 @@ return {
 ["Identification used before"] = false;
 ["Identification used before (#{count})"] = false;
 ["If this link is not working, please open following url in your web browser:\n\n"] = false;
-["If you cannot find any appropriate existing issue, "] = "Otherwise ";
+["If you cannot find any appropriate existing issue, "] = "You can also ";
 ["If you have not received a PIN code, our team will need to check your registration manually. We will be in touch within two working days. Please accept our apologies for the inconvenience."] = false;
 ["Implicitly admitted"] = false;
 ["Incoming delegations"] = false;
@@ -638,7 +639,8 @@ return {
 ["Surveys"] = false;
 ["Syntax help"] = false;
 ["System settings"] = false;
-["Take a look through the existing issues. Maybe someone else started a debate on your topic (and you can join it) or the topic has been decided already in the past."] = "Take a look through the existing issues. It's possible someone else started a debate on your topic (and you can join it), or the topic has already been decided on in the past.";
+["Take a look through the existing issues. Maybe someone else started a debate on your topic (and you can join it) or the topic has been decided already in the past."] =
+"Take a look through the existing issues. It's possible someone else started a debate on your topic (and you can join it), or the topic has already been decided on in the past.";
 ["Tell others about this initiative:"] = false;
 ["Terms of use"] = false;
 ["The code you've entered is invalid"] = false;
@@ -647,7 +649,7 @@ return {
 ["The following settings for experimental features should only be changed with sufficient knowledge about the Schulze method and its implementation in LiquidFeedback."] = false;
 ["The initiative draft has been updated again in the meanwhile, support not updated!"] = "The initiative draft has been updated again. Support has not updated in the meantime, however";
 ["The initiative text has been updated"] = false;
-["The initiators suggest to support the following initiative:"] = false;
+["The initiators suggest to support the following initiative:"] = "The initiators suggest supporting the following initiative";
 ["The minimum absolute number of approval votes."] = false;
 ["This delegation is suspended, because you voted yourself."] = false;
 ["This email address already been used. Please check your inbox for an invitation or contact us."] = "This email address is already being used. Please check your inbox for an invitation or contact us.";
@@ -663,7 +665,7 @@ return {
 ["This issue is already closed."] = false;
 ["This issue is already frozen."] = false;
 ["This issue is closed"] = false;
-["This login is already taken, please choose another one!"] = false;
+["This login is already taken, please choose another one!"] = "This login has already been taken. Please choose another one!";
 ["This login is too short!"] = false;
 ["This member account has been created at #{created}"] = false;
 ["This member has rejected to become initiator of this initiative"] = false;
@@ -738,8 +740,8 @@ return {
 ["You are initiator of this initiative"] = "You are the initiator of this initiative";
 ["You are interested in this issue"] = false;
 ["You are invited to LiquidFeedback. To register please click the following link:\n\n"] = false;
-["You are invited to become initiator of '#{initiative_name}'"] = false;
-["You are invited to become initiator of this initiative"] = false;
+["You are invited to become initiator of '#{initiative_name}'"] = "You have been invited to become an initiator for '#{initiative_name}'";
+["You are invited to become initiator of this initiative"] = "You have been invited to become an initiator for this initiative";
 ["You are not entitled to vote in this unit"] = false;
 ["You are now initiator of this initiative"] = false;
 ["You are receiving updates by email for this subject area"] = false;
