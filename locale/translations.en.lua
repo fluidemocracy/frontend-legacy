@@ -904,7 +904,7 @@ return {
 ["draft history (#{count})"] = false;
 ["draft updated"] = false;
 ["draft updated for "] = false;
-["drafts of #{draft_count} initiatives updated"] = "The drafts of #{draft_count} initiatives updated";
+["drafts of #{draft_count} initiatives updated"] = "The drafts of #{draft_count} initiatives have been updated";
 ["edit my profile"] = "Edit my profile";
 ["edit proposal and/or reasons"] = "Edit proposal and/or reasons";
 ["email address"] = false;
