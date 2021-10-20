@@ -2,7 +2,6 @@
 return {
 [" + file_upload_id); html = html.replace("] = false;
 [" + file_upload_id); var el = document.createElement("] = false;
-[" to receive updates by email"] = "λήψη ενημερώσεων μέσω email";
 ["#{closed_ago} ago"] = "#{closed_ago} πριν";
 ["#{count} Neutral"] = "#{count} Ουδέτεροι";
 ["#{count} No"] = "#{count} Όχι";
@@ -226,7 +225,7 @@ return {
 ["Edit"] = "Επεξεργασία";
 ["Edit again"] = "Επεξεργασία ξανά";
 ["Edit voting comment"] = "Επεξεργασία του σχολίου της ψήφου";
-["Edit your global "] = "Επεξεργασία του ολικού";
+["Edit your global <link>notification settings</link> to receive updates by email."] = "Επεξεργασία του ολικού <link>ρυθμίσεις ειδοποιήσης</link> λήψη ενημερώσεων μέσω email.";
 ["Edit your profile data"] = "Επεξεργασία στοιχείων προφίλ";
 ["Eligible as winner"] = "Επιλέξιμος ως νικητής";
 ["Eligible members (#{count})"] = "Επιλέξιμα μέλη (#{count})";
