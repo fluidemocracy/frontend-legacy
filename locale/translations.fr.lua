@@ -860,7 +860,8 @@ return {
 ["all results"] = false;
 ["all subject areas"] = "Tous les domaines";
 ["allow invitation again"] = "Autoriser l'invitation de nouveau";
-["and"] = "et";
+["#{opinion} and #{implemented}"] = "#{opinion} et #{implemented}";
+["#{opinion} but #{implemented}"] = "#{opinion} mais #{implemented}";
 ["and #{count} more initiatives"] = "et #{compter} plus d'initiatives";
 ["area"] = "domaine";
 ["at least #{count} approvals"] = "au moins #{compter} approvazioni";
@@ -872,7 +873,6 @@ return {
 ["browse the platform as a guest"] = "Naviguer sur la plateforme en tant que visiteur";
 ["browse the portal as an unregistered user"] = "naviguez dans le portal sans vous authentifier";
 ["browse through the competing initiatives"] = "Explorer les initiativs alternative";
-["but"] = "mais";
 ["by"] = false;
 ["by A-Z"] = "de A-Z";
 ["by Z-A"] = "de Z-A";

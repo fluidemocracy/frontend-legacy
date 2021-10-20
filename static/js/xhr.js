@@ -70,7 +70,7 @@ function updateOpinion() {
 
   var degreeText = rateSuggestionDegreeTexts[degree];
   var fulfilledText = fulfilled ? rateSuggestionFulfilledText : rateSuggestionNotFulfilledText;
-  var andButText;
+  var textTemplate;
   var icon;
   var iconColor;
   if (
@@ -81,12 +81,14 @@ function updateOpinion() {
     if (degree == 2 || degree == -2) { 
       iconColor = "red";
     }
-    andButText = rateSuggestionButText;
+    textTemplate = rateSuggestionButText;
   } else {
-    andButText = rateSuggestionAndText;
+    textTemplate = rateSuggestionAndText;
     icon = "done";
   }
-  var text = degreeText + " " + andButText + " " + fulfilledText;
+  textTemplate = textTemplate.replace("#{opinion}", degreeText);
+  textTemplate = textTemplate.replace("#{implemented}", fulfilledText);
+  var text = textTemplate;
   if (degree == 0) {
     text = "";
     icon = "blank";

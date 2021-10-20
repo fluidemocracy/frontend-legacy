@@ -859,7 +859,7 @@ return {
 ["all results"] = "όλα τα αποτελέσματα";
 ["all subject areas"] = "όλες οι περιοχές";
 ["allow invitation again"] = "Να επιτρέπονται ξανά προσκλήσεις";
-["and"] = "και";
+["#{opinion} and #{implemented}"] = "#{opinion} και #{implemented}";
 ["and #{count} more initiatives"] = "και #{count} περισσότερες πρωτοβουλίες";
 ["area"] = "περιοχή";
 ["at least #{count} approvals"] = "τουλάχιστον #{count} αποδοχές";
@@ -871,7 +871,7 @@ return {
 ["browse the platform as a guest"] = "δες την πλατφόρμα ως επισκέπτης";
 ["browse the portal as an unregistered user"] = "εξερεύνησε το πόρταλ ως μη εγγεγραμμένος χρήστης";
 ["browse through the competing initiatives"] = "δες τις ανταγωνιστικές πρωτοβουλίες";
-["but"] = "αλλά";
+["#{opinion} but #{implemented}"] = "#{opinion} αλλά #{implemented}";
 ["by"] = "από";
 ["by A-Z"] = "ανά A-Z";
 ["by Z-A"] = "ανά Z-A";

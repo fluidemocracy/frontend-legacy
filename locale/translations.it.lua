@@ -895,7 +895,8 @@ return {
 ["all results"] = false;
 ["all subject areas"] = "Tutte aree tematiche";
 ["allow invitation again"] = "abilita nuovamente inviti";
-["and"] = "e";
+["#{opinion} and #{implemented}"] = "#{opinion} e #{implemented}";
+["#{opinion} but #{implemented}"] = "#{opinion} ma #{implemented}";
 ["and #{count} more initiatives"] = "ed altre #{count} iniziative";
 ["area"] = "area";
 ["at least #{count} approvals"] = "almeno #{count} approvazioni";
@@ -907,7 +908,6 @@ return {
 ["browse the platform as a guest"] = "navigare il portale come utente non registrato";
 ["browse the portal as an unregistered user"] = "navigare il portale come utente non registrato";
 ["browse through the competing initiatives"] = "esplora le iniziative alternative";
-["but"] = "ma";
 ["by"] = false;
 ["by A-Z"] = "da A-Z";
 ["by Z-A"] = "da Z-A";
