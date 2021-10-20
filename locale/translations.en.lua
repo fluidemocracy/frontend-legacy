@@ -249,13 +249,13 @@ return {
 ["Forgot password?"] = false;
 ["Free timing:"] = false;
 ["Friday"] = false;
-["Fully frozen at"] = false;
+["Fully frozen at"] = "Voting phase started at";
 ["Global delegation"] = false;
 ["Go back to home page"] = false;
 ["Go to start page"] = false;
 ["Grant account access"] = false;
 ["Grant authorization"] = false;
-["Half frozen at"] = false;
+["Half frozen at"] = "Verification phase started at";
 ["Hello\n\n"] = false;
 ["Hello "] = false;
 ["Hello,\n\n"] = false;
@@ -651,7 +651,7 @@ return {
 ["This invite key is connected with the following information:"] = false;
 ["This is the only initiative in this issue, because nobody started a competing initiative."] = false;
 ["This issue is already closed."] = false;
-["This issue is already frozen."] = false;
+["This issue is already frozen."] = "The voting phase has already begun";
 ["This issue is closed"] = false;
 ["This login is already taken, please choose another one!"] = "This login has already been taken. Please choose another one!";
 ["This login is too short!"] = false;
