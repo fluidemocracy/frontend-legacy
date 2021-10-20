@@ -365,7 +365,8 @@ return {
 ["Lists must be preceeded and followed by at least one blank line"] = false;
 ["Lock member?"] = "Vergrendel deelnemer?";
 ["Locked?"] = "Gesloten?";
-["Login"] = "Login";
+["Login [headline]"] = "Login";
+["Login [button]"] = "Login";
 ["Login name"] = "Login naam";
 ["Login name request"] = false;
 ["Login-Name: "] = false;

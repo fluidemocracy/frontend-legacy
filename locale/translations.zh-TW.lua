@@ -365,7 +365,8 @@ return {
 ["Lists must be preceeded and followed by at least one blank line"] = false;
 ["Lock member?"] = "封鎖成員？";
 ["Locked?"] = "被封鎖？";
-["Login"] = "登入";
+["Login [headline]"] = "登入";
+["Login [button]"] = "登入";
 ["Login name"] = "帳號";
 ["Login name request"] = false;
 ["Login-Name: "] = false;

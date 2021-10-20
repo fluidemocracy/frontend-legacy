@@ -365,7 +365,8 @@ return {
 ["Lists must be preceeded and followed by at least one blank line"] = "ყოველ ახალ წინადადებას წინ უნდა უსწრებდეს და უკან მოყვებოდეს სულ მცირე ერთი ცარიელი ხაზი";
 ["Lock member?"] = "წევრის დაბლოკვა გსურთ?";
 ["Locked?"] = "დაბლოკილია?";
-["Login"] = "შესვლა";
+["Login [headline]"] = "შესვლა";
+["Login [button]"] = "შესვლა";
 ["Login name"] = "მომხმარებლის სახელი";
 ["Login name request"] = "მომხმარებლის სახელის მოთხოვნა";
 ["Login-Name: "] = "მომხმარებლის სახელი: ";

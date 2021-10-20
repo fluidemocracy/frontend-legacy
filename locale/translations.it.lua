@@ -394,7 +394,8 @@ return {
 ["Lists must be preceeded and followed by at least one blank line"] = "Le liste devono essere precedute da almeno una linea vuota";
 ["Lock member?"] = "Blocca membro?";
 ["Locked?"] = "Bloccato?";
-["Login"] = "Login";
+["Login [headline]"] = "Login";
+["Login [button]"] = "Login";
 ["Login name"] = "Nome utente";
 ["Login name request"] = "Richiedi login username";
 ["Login-Name: "] = "Login username";

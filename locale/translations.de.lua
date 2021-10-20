@@ -379,7 +379,8 @@ return {
 ["Lists must be preceeded and followed by at least one blank line"] = "Listen müssen von Leerzeilen umgeben sein";
 ["Lock member?"] = "Mitglied sperren?";
 ["Locked?"] = "Gesperrt?";
-["Login"] = "Anmeldung";
+["Login [headline]"] = "Anmeldung";
+["Login [button]"] = "anmelden";
 ["Login name"] = "Anmeldename";
 ["Login name request"] = "Anmeldename anfordern";
 ["Login-Name: "] = "Anmeldename: ";

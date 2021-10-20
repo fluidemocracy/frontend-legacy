@@ -358,7 +358,8 @@ return {
 ["LiquidFeedback"] = "LiquidFeedback";
 ["Lock member?"] = "Bloquear miembro";
 ["Locked?"] = "¿Bloqueado?";
-["Login"] = "Inicio de sesión";
+["Login [headline]"] = "Inicio de sesión";
+["Login [button]"] = "Inicio de sesión";
 ["Login name"] = "Nombre de usuario";
 ["Login name request"] = "Solicitud de nombre de usuario";
 ["Login to participate"] = false;

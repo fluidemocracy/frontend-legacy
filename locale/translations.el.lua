@@ -379,7 +379,8 @@ return {
 ["Lists must be preceeded and followed by at least one blank line"] = "Οι λίστες πρέπει να ακολουθούνται και να προηγείται τουλάχιστον ένα κενό διάστημα";
 ["Lock member?"] = "Κλέιδωμα μέλους;";
 ["Locked?"] = "Κλειδωμένο;";
-["Login"] = "Σύνδεση";
+["Login [headline]"] = "Σύνδεση";
+["Login [button]"] = "Σύνδεση";
 ["Login name"] = "Όνομα login";
 ["Login name request"] = "Αίτημα ονόματος login";
 ["Login-Name: "] = "Όνομα login: ";
