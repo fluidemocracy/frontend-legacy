@@ -370,7 +370,7 @@ return {
 ["Invite code"] = "Codice di invito";
 ["Invite letter"] = false;
 ["Invite member"] = "Invita utente";
-["Invited"] = "Invitato";
+["Invited [as initiator]"] = "Invitato";
 ["Issue #"] = "Tematica #";
 ["Issue ##{id}"] = "Tematica ##{id}";
 ["Issue ##{issue_id}: #{initiative_name}"] = "Tematica ##{issue_id}: #{initiative_name}";
@@ -586,7 +586,8 @@ return {
 ["Registration rejected"] = false;
 ["Registration succeeded"] = false;
 ["Reject access privilege"] = false;
-["Rejected"] = "Rifiutato";
+["Rejected [initiator invitation]"] = "Rifiutato";
+["Rejected [initiative]"] = "Rifiutato";
 ["Rejected (#{count})"] = false;
 ["Rejected (rank #{rank})"] = "Rifiutata (posizione #{rank})";
 ["Rejected accreditation requests"] = false;
@@ -878,7 +879,7 @@ return {
 ["[not displayed public]"] = "[non visibile pubblicamente]";
 ["abandoned"] = "abbandonato";
 ["accept invitation"] = "accetta invito";
-["accepted"] = false;
+["accepted [account access]"] = false;
 ["account activated"] = false;
 ["action"] = "azione";
 ["activate account"] = "attiva account";
@@ -1058,7 +1059,7 @@ return {
 ["reached #{quorum}"] = "raggiunto ";
 ["refresh my support"] = "rinnova il mio supporto";
 ["refuse invitation"] = "rifiuta l'invito";
-["rejected"] = false;
+["rejected [account access]"] = false;
 ["remove an initiator"] = "rimuovi un promotore";
 ["remove from my contact list"] = "rimuovi dalla lista dei contatti";
 ["remove my interest"] = "togli il mio interesse";

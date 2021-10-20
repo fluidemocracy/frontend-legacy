@@ -340,7 +340,7 @@ return {
 ["Invite code"] = false;
 ["Invite letter"] = "Invitation letter";
 ["Invite member"] = false;
-["Invited"] = false;
+["Invited [as initiator]"] = false;
 ["Issue #"] = false;
 ["Issue ##{id}"] = false;
 ["Issue ##{issue_id}: #{initiative_name}"] = false;
@@ -533,7 +533,8 @@ return {
 ["Registration rejected"] = false;
 ["Registration succeeded"] = "Registration successful";
 ["Reject access privilege"] = false;
-["Rejected"] = false;
+["Rejected [initiator invitation]"] = "Rejected";
+["Rejected [initiative]"] = "Rejected";
 ["Rejected (#{count})"] = false;
 ["Rejected (rank #{rank})"] = false;
 ["Rejected accreditation requests"] = false;
@@ -798,7 +799,7 @@ return {
 ["[not displayed public]"] = false;
 ["abandoned"] = false;
 ["accept invitation"] = false;
-["accepted"] = false;
+["accepted [account access]"] = "accepted";
 ["account activated"] = false;
 ["action"] = false;
 ["activate account"] = false;
@@ -974,7 +975,7 @@ return {
 ["reached #{quorum}"] = false;
 ["refresh my support"] = false;
 ["refuse invitation"] = false;
-["rejected"] = false;
+["rejected [account access]"] = "rejected";
 ["remove an initiator"] = false;
 ["remove from my contact list"] = false;
 ["remove my interest"] = "Remove my interest";

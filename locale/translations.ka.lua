@@ -338,7 +338,7 @@ return {
 ["Invite an initiator to initiative"] = "მოიწვიეთ ინიციატორი ინიციატივაზე";
 ["Invite code"] = "მოწვევის კოდი";
 ["Invite member"] = "მოიწვიეთ წევრი";
-["Invited"] = "მოწვეულია";
+["Invited [as initiator]"] = "მოწვეულია";
 ["Issue #"] = "საკითხი #";
 ["Issue ##{id}"] = "საკითხი ##{id}";
 ["Issue ##{issue_id}: #{initiative_name}"] = "საკითხი ##{issue_id}: #{initiative_name}";
@@ -514,7 +514,8 @@ return {
 ["Registration (step 1 of 3: Invite code)"] = "რეგისტრაცია (3-დან 1 საფეხური: მოწვევის კოდი)";
 ["Registration (step 2 of 3: Personal information)"] = "რეგისტრაცია (3-დან 2 საფეხური: პერსონალური ინფორმაცია)";
 ["Registration (step 3 of 3: Terms of use and password)"] = "რეგისტრაცია (3-დან 3 საფეხური: მოხმარების პირობები და პაროლი)";
-["Rejected"] = "უარყოფილია";
+["Rejected [initiator invitation]"] = "უარყოფილია";
+["Rejected [initiative]"] = "უარყოფილია";
 ["Rejected (rank #{rank})"] = "უარყოფილია (rank #{rank})";
 ["Remove"] = "მოხსნა";
 ["Remove an initiator from initiative"] = "ინიციატორის ინიციატივიდან მოხსნა";
