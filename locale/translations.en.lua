@@ -28,7 +28,6 @@ return {
 ["(new window)"] = false;
 ["(new)"] = false;
 ["+ add new subject area"] = false;
-["+getElementById("] = false;
 ["1 matching issue found"] = false;
 ["1 matching member found"] = false;
 ["4 phases of a decision"] = false;
@@ -97,13 +96,11 @@ return {
 ["Approved"] = false;
 ["Are you aware that revoking an initiative is irrevocable?"] = false;
 ["Area delegation"] = false;
-["As long as you are interested in this issue yourself, the delegation is suspended for this issue, but it will be applied again in the voting phase unless you vote yourself."] =
-"As long as you are interested in this issue yourself, your delegation will be automatically suspended for this issue. But it will be applied again in the voting phase unless you vote yourself.";
+["As long as you are interested in this issue yourself, the delegation is suspended for this issue, but it will be applied again in the voting phase unless you vote yourself."] = "As long as you are interested in this issue yourself, your delegation will be automatically suspended for this issue. But it will be applied again in the voting phase unless you vote yourself.";
 ["As soon as one initiative of this issue reaches the 1st quorum of #{quorum} support, the issue will proceed to discussion phase."] = "As soon as one initiative of this issue reaches the 1st quorum of #{quorum} supporters, the issue will proceed to discussion phase.";
 ["Attach image"] = false;
 ["Attr"] = false;
 ["Author"] = false;
-["Available policies"] = false;
 ["Avatar"] = false;
 ["Ballot of '#{member_name}'"] = false;
 ["Broken delegations"] = false;
@@ -252,7 +249,6 @@ return {
 ["Forgot password?"] = false;
 ["Free timing:"] = false;
 ["Friday"] = false;
-["Frozen"] = false;
 ["Fully frozen at"] = false;
 ["Global delegation"] = false;
 ["Go back to home page"] = false;
@@ -325,7 +321,6 @@ return {
 ["Initiative: "] = false;
 ["Initiatives and issues"] = false;
 ["Initiatives created by this member"] = false;
-["Initiatives that invited you to become initiator:"] = false;
 ["Initiators"] = false;
 ["Interested members"] = false;
 ["Internal error 1"] = false;
@@ -407,7 +402,6 @@ return {
 ["Move down"] = false;
 ["Move up"] = false;
 ["Name"] = false;
-["New"] = false;
 ["New area"] = false;
 ["New competing initiative in issue '#{issue}'"] = false;
 ["New draft for initiative '#{initiative_name}'"] = false;
@@ -462,7 +456,6 @@ return {
 ["Open requests"] = false;
 ["Open requests (#{count})"] = false;
 ["Open role requests"] = false;
-["Options"] = false;
 ["Organizational unit"] = false;
 ["Organizational units"] = false;
 ["Organizational units and subject areas"] = false;
@@ -481,7 +474,6 @@ return {
 ["Passwords don't match!"] = false;
 ["Passwords must consist of at least 8 characters!"] = false;
 ["Personal information"] = false;
-["Phase durations"] = false;
 ["Phase ends soon"] = false;
 ["Phone number used before"] = false;
 ["Phone number used before (#{count})"] = false;
@@ -512,7 +504,6 @@ return {
 ["Please enter: #{field_name}"] = false;
 ["Policies"] = false;
 ["Policy"] = false;
-["Policy '#{name}'"] = false;
 ["Policy list"] = false;
 ["Polling mode"] = false;
 ["Population"] = false;
@@ -527,7 +518,6 @@ return {
 ["Published"] = false;
 ["Published contacts"] = false;
 ["Quick guide"] = false;
-["Quorums"] = false;
 ["Reached #{sign}#{num}/#{den}"] = false;
 ["Recover login name"] = false;
 ["Redirect URI forbidden"] = false;
@@ -637,10 +627,8 @@ return {
 ["Suggestions for improvement (#{count})"] = false;
 ["Sunday"] = false;
 ["Surveys"] = false;
-["Syntax help"] = false;
 ["System settings"] = false;
-["Take a look through the existing issues. Maybe someone else started a debate on your topic (and you can join it) or the topic has been decided already in the past."] =
-"Take a look through the existing issues. It's possible someone else started a debate on your topic (and you can join it), or the topic has already been decided on in the past.";
+["Take a look through the existing issues. Maybe someone else started a debate on your topic (and you can join it) or the topic has been decided already in the past."] = "Take a look through the existing issues. It's possible someone else started a debate on your topic (and you can join it), or the topic has already been decided on in the past.";
 ["Tell others about this initiative:"] = false;
 ["Terms of use"] = false;
 ["The code you've entered is invalid"] = false;
@@ -728,14 +716,11 @@ return {
 ["Wednesday"] = false;
 ["What can I do here?"] = false;
 ["What this member is currently supporting"] = false;
-["Wiki engine"] = false;
-["Wiki engine for statement"] = false;
 ["Yes"] = false;
 ["Yes, it's implemented"] = false;
 ["You already voted this issue"] = false;
 ["You are already initiator"] = "You are already an initiator";
 ["You are already supporting the latest draft"] = false;
-["You are currently not invited to any initiative."] = false;
 ["You are currently not supporting this initiative directly. By adding suggestions to this initiative you will automatically become a potential supporter."] = false;
 ["You are initiator of this initiative"] = "You are the initiator of this initiative";
 ["You are interested in this issue"] = false;
@@ -832,8 +817,6 @@ return {
 ["and"] = false;
 ["and #{count} more initiatives"] = false;
 ["area"] = false;
-["at least #{count} approvals"] = false;
-["at least #{count} approvals or abstentions"] = false;
 ["author"] = false;
 ["automatically verified"] = false;
 ["avatar/photo"] = false;
@@ -873,6 +856,7 @@ return {
 ["choose subject area delegatee"] = "Choose subject area delegatee";
 ["closed"] = false;
 ["collective rating:"] = false;
+["compare"] = false;
 ["compare revisions"] = false;
 ["confirm"] = false;
 ["confirmed address"] = false;
@@ -919,7 +903,6 @@ return {
 ["finished"] = false;
 ["global"] = false;
 ["has my support"] = false;
-["hide details"] = false;
 ["i#{id}: #{name}"] = false;
 ["if you like to implement a suggestion in your proposal and/or reasons, update your initiative draft"] = "If you'd like to implement a suggestion in your proposal and/or reasons, update your initiative draft";
 ["implemented:"] = false;
@@ -960,7 +943,6 @@ return {
 ["new suggestion for "] = false;
 ["newest first"] = false;
 ["no delegation set"] = false;
-["no reverse beat path to status quo (including ties)"] = false;
 ["none"] = false;
 ["not activated (yet)"] = false;
 ["not admitted"] = false;
@@ -982,7 +964,6 @@ return {
 ["preference voting"] = "Preference voting";
 ["proceed with registration"] = false;
 ["profile and settings"] = "Profile and settings";
-["prohibit potentially instable results caused by multistage majorities"] = "prohibit potentially unstable results caused by multistage majorities";
 ["public administrative notice:"] = false;
 ["publish avatar/photo"] = false;
 ["publish my rating"] = false;
@@ -1012,7 +993,6 @@ return {
 ["show"] = false;
 ["show all units"] = "Show all units";
 ["show ballot"] = false;
-["show details"] = false;
 ["show differences"] = false;
 ["show incoming delegations"] = false;
 ["show my profile"] = "Show my profile";
@@ -1047,7 +1027,6 @@ return {
 ["update policy"] = false;
 ["update rating"] = false;
 ["update unit"] = false;
-["variable"] = false;
 ["verified"] = false;
 ["via delegation"] = false;
 ["vote delegation"] = "Vote delegation";
@@ -1061,7 +1040,6 @@ return {
 ["voted yes"] = false;
 ["wants to access your account"] = false;
 ["with"] = false;
-["without"] = false;
 ["without quorum"] = false;
 ["write a new suggestion"] = "Write a new suggestion";
 ["written and rated by the supportes of this initiative to improve the proposal and its reasons"] = "written and rated by the supporters of this initiative to improve the proposal and its reasons";
