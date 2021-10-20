@@ -365,7 +365,8 @@ return {
 ["Lists must be preceeded and followed by at least one blank line"] = false;
 ["Lock member?"] = false;
 ["Locked?"] = "Zárva?";
-["Login"] = "Bejelentkezés";
+["Login [headline]"] = "Bejelentkezés";
+["Login [button]"] = "Bejelentkezés";
 ["Login name"] = "Bejelentkezési név";
 ["Login name request"] = false;
 ["Login-Name: "] = false;

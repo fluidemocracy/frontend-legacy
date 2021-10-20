@@ -607,7 +607,7 @@ ui.container{ attr = { class = "mdl-card mdl-card__fullwidth mdl-shadow--2dp" },
           ui.tag{ content = _"Login to participate" }
           ui.tag{ tag = "ul", content = function()
             ui.tag{ tag = "li", content = function()
-              ui.link{ module = "index", view = "login", content = _"Login" }
+              ui.link{ module = "index", view = "login", content = _"Login [button]" }
             end }
           end }
         else

@@ -70,10 +70,9 @@ if not config.meta_navigation_items_func or not config.meta_navigation_html_func
                 ui.tag{ tag = "i", attr = { class = "material-icons", ["aria-hidden"] = "true", role="presentation" }, content = "exit_to_app" }
                 slot.put(" ")
                 ui.tag{ attr = { class = "mdl-layout--large-screen-only" }, content = function()
-                  ui.tag{ content = _"Login" }
+                  ui.tag{ content = _"Login [button]" }
                 end }
               end,
-              text   = _"Login",
               attr = { class = "mdl-navigation__link" }
             }
             if config.login and config.login.method == "oauth2" then

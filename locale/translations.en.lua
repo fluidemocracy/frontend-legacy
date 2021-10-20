@@ -358,7 +358,8 @@ return {
 ["LiquidFeedback"] = false;
 ["Lock member?"] = "Lock member out?";
 ["Locked?"] = false;
-["Login"] = false;
+["Login [headline]"] = "Login";
+["Login [button]"] = "Login";
 ["Login name"] = false;
 ["Login name request"] = false;
 ["Login to participate"] = false;
