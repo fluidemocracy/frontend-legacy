@@ -251,37 +251,38 @@ ui.container {
           if direct_supporter then
             ui.container{ attr = { class = "suggestion_rating_info" }, content = function()
               ui.tag{ attr = { id = "s" .. suggestion.id .. "_rating_text" }, content = function()
-                local text = ""
+                local text_opinion = ""
                 if opinion then
-                  if opinion.degree == 2 then
-                    text = _"must"
-                  elseif opinion.degree == 1 then
-                    text = _"should"
-                  elseif opinion.degree == 0 then
-                    text = _"neutral"
-                  elseif opinion.degree == -1 then
-                    text = _"should not"
-                  elseif opinion.degree == -2 then
-                    text = _"must not"
-                  end
-                  ui.tag { content = text }
-                  slot.put ( " " )
+                  local text_template
                   if 
                     (opinion.degree > 0 and not opinion.fulfilled)
                     or (opinion.degree < 0 and opinion.fulfilled)
                   then
-                    ui.tag{ content = _"but" }
+                    text_template = _"#{opinion} but #{implemented}"
                   else
-                    ui.tag{ content = _"and" }
+                    text_template = _"#{opinion} and #{implemented}"
                   end
-                  slot.put ( " " )
-                  local text = ""
+                  if opinion.degree == 2 then
+                    text_opinion = _"must"
+                  elseif opinion.degree == 1 then
+                    text_opinion = _"should"
+                  elseif opinion.degree == 0 then
+                    text_opinion = _"neutral"
+                  elseif opinion.degree == -1 then
+                    text_opinion = _"should not"
+                  elseif opinion.degree == -2 then
+                    text_opinion = _"must not"
+                  end
+                  local text_implemented = ""
                   if opinion.fulfilled then
-                    text = _"is implemented"
+                    text_implemented = _"is implemented"
                   else
-                    text = _"is not implemented"
+                    text_implemented = _"is not implemented"
                   end
-                  ui.tag { content = text }
+                  ui.tag { content = _(text_template, {
+                    opinion = text_opinion,
+                    implemented = text_implemented
+                  }) }
                 end
               end }
               local id = "s" .. suggestion.id .. "_rating_icon"
@@ -332,14 +333,14 @@ ui.container {
         ui.script{ script = [[
           var rateSuggestionRateText = "]] .. _"rate suggestion" .. [[";
           var rateSuggestionUpdateRatingText = "]] .. _"update rating" .. [[";
+          var rateSuggestionAndText = "]] .. _"#{opinion} and #{implemented}" .. [[";
+          var rateSuggestionButText = "]] .. _"#{opinion} but #{implemented}" .. [[";
           var rateSuggestionDegreeTexts = {
             "-2": "]] .. _"must not" .. [[",
             "-1": "]] .. _"should not" .. [[",
             "1": "]] .. _"should" .. [[",
             "2": "]] .. _"must" .. [["
           }
-          var rateSuggestionAndText = "]] .. _"and" .. [[";
-          var rateSuggestionButText = "]] .. _"but" .. [[";
           var rateSuggestionFulfilledText = "]] .. _"is implemented" .. [[";
           var rateSuggestionNotFulfilledText = "]] .. _"is not implemented" .. [[";
           window.addEventListener("load", function() {

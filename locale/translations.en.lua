@@ -816,7 +816,8 @@ return {
 ["all results"] = false;
 ["all subject areas"] = false;
 ["allow invitation again"] = false;
-["and"] = false;
+["#{opinion} and #{implemented}"] = "#{opinion} and #{implemented}";
+["#{opinion} but #{implemented}"] = "#{opinion} but #{implemented}";
 ["and #{count} more initiatives"] = false;
 ["area"] = false;
 ["author"] = false;
@@ -827,7 +828,6 @@ return {
 ["browse the platform as a guest"] = false;
 ["browse the portal as an unregistered user"] = false;
 ["browse through the competing initiatives"] = false;
-["but"] = false;
 ["by"] = false;
 ["by A-Z"] = false;
 ["by Z-A"] = false;

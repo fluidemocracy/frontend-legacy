@@ -767,7 +767,8 @@ return {
 ["add your support (see above) and rate or write new suggestions (and thereby restrict your support to certain conditions if necessary)"] = "მხარი დაუჭირეთ და შეაფასეთ ან დაწერეთ ახალი შეთავაზება (შესაბამისად შეზღუდეთ თქვენი მხარდაჭერა საჭიროებისამებრ)";
 ["all issues"] = "ყველა საკითხი";
 ["allow invitation again"] = "მოწვევაზე ნების დართვა";
-["and"] = "და";
+["#{opinion} and #{implemented}"] = "#{opinion} და #{implemented}";
+["#{opinion} but #{implemented}"] = "#{opinion} მაგრამ #{implemented}";
 ["and #{count} more initiatives"] = "და #{count} მეტი ინიციატივა";
 ["area"] = "თემატური სფერო";
 ["at least #{count} approvals"] = "სულ მცირე #{count} მოწონება";
@@ -776,7 +777,6 @@ return {
 ["avatar/photo"] = "ავატარი/ფოტო";
 ["block this member"] = "წევრის დაბლოკვა";
 ["browse through the competing initiatives"] = "გაეცანით კონკურენტ ინიციატივებს";
-["but"] = "მაგრამ";
 ["by A-Z"] = "A-Z მიხედვით";
 ["by Z-A"] = "Z-A მიხედვით";
 ["by default only those issues are shown, for which your are eligible to participate (change filters on top of the list)"] = "მხოლოდ იმ საკითხთა ჩამონათვალი ჩანს, სადაც უფლებამოსილი ხართ მონაწილეობა მიიღოთ (შეცვალეთ არსებული პარამეტრები)";
