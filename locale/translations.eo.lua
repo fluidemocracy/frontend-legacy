@@ -338,7 +338,7 @@ return {
 ["Invite an initiator to initiative"] = "Inviti inicionton al la iniciato";
 ["Invite code"] = "Invitokodo";
 ["Invite member"] = false;
-["Invited"] = "Invitita";
+["Invited [as initiator]"] = "Invitita";
 ["Issue #"] = false;
 ["Issue ##{id}"] = "Temo ##{id}";
 ["Issue ##{issue_id}: #{initiative_name}"] = false;

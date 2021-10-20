@@ -355,7 +355,7 @@ return {
 ["Invite code"] = "Code d'invitation";
 ["Invite letter"] = false;
 ["Invite member"] = "Inviter un membre";
-["Invited"] = "Invité";
+["Invited [as initiator]"] = "Invité";
 ["Issue #"] = "Thématique #";
 ["Issue ##{id}"] = "Thématique ##{id}";
 ["Issue ##{issue_id}: #{initiative_name}"] = "Thématique ##{issue_id}: #{initiative_name}";
@@ -566,7 +566,8 @@ return {
 ["Registration rejected"] = false;
 ["Registration succeeded"] = false;
 ["Reject access privilege"] = false;
-["Rejected"] = "Rejeté";
+["Rejected [initiator invitation]"] = "Rejeté";
+["Rejected [initiative]"] = "Rejeté";
 ["Rejected (#{count})"] = false;
 ["Rejected (rank #{rank})"] = "Rejeté (position #{rank})";
 ["Rejected accreditation requests"] = false;
@@ -843,7 +844,7 @@ return {
 ["[not displayed public]"] = "[affichage non public]";
 ["abandoned"] = "abandonné";
 ["accept invitation"] = "accepter l'invitation";
-["accepted"] = false;
+["accepted [account access]"] = false;
 ["account activated"] = false;
 ["action"] = "action";
 ["activate account"] = "activer le compte";
@@ -1024,7 +1025,7 @@ return {
 ["reached #{quorum}"] = "atteint";
 ["refresh my support"] = "rénover mon soutien";
 ["refuse invitation"] = "réfuser l'invitation";
-["rejected"] = false;
+["rejected [account access]"] = false;
 ["remove an initiator"] = "retirer un promoteur";
 ["remove from my contact list"] = "retirer de ma liste des contacts";
 ["remove my interest"] = "retirer mon intérêt";

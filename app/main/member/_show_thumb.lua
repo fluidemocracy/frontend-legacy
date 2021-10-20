@@ -128,9 +128,9 @@ ui.container{
 
     if initiator and initiator.accepted then
       if member.accepted == nil then
-        slot.put(_"Invited")
+        slot.put(_"Invited [as initiator]")
       elseif member.accepted == false then
-        slot.put(_"Rejected")
+        slot.put(_"Rejected [initiator invitation]")
       end
     end
 

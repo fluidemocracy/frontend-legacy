@@ -533,7 +533,8 @@ return {
 ["Registration rejected"] = "Registro rechazado";
 ["Registration succeeded"] = "Registro exitoso";
 ["Reject access privilege"] = "Rechazar privilegio de acceso";
-["Rejected"] = "Rechazado";
+["Rejected [initiator invitation"] = "Rechazado";
+["Rejected [initiative]"] = "Rechazado";
 ["Rejected (#{count})"] = "Rechazado (#{count})";
 ["Rejected (rank #{rank})"] = "Rechazado (rank #{rank})";
 ["Rejected accreditation requests"] = "Solicitudes de acreditación rechazadas";
@@ -798,7 +799,7 @@ return {
 ["[not displayed public]"] = "[no se muestra públicamente]";
 ["abandoned"] = "abandonado";
 ["accept invitation"] = "aceptar invitación";
-["accepted"] = "aceptada";
+["accepted [account access]"] = "aceptada";
 ["account activated"] = "cuenta activada";
 ["action"] = "acción";
 ["activate account"] = "activar cuenta";
@@ -973,7 +974,7 @@ return {
 ["reached #{quorum}"] = "alcanzó #{quorum}";
 ["refresh my support"] = "renovar mi apoyo";
 ["refuse invitation"] = "rechazar la invitación";
-["rejected"] = "rechazado";
+["rejected [account access]"] = "rechazado";
 ["remove an initiator"] = "Eliminar un iniciador";
 ["remove from my contact list"] = "eliminar de mi lista de contactos";
 ["remove my interest"] = "Eliminar mi interés";

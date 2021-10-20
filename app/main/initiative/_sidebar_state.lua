@@ -23,7 +23,7 @@ if initiative.issue.fully_frozen and initiative.issue.closed and initiative.admi
       elseif initiative.rank then
         head_text = _("Rejected (rank #{rank})", { rank = initiative.rank })
       else
-        head_text = _"Rejected"
+        head_text = _"Rejected [initiative]"
       end
 
       ui.heading { level = 1, content = head_text }
