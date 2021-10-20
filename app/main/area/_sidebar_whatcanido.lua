@@ -71,13 +71,15 @@ ui.container{ attr = { class = "mdl-card mdl-card__fullwidth mdl-shadow--2dp" },
           ui.tag { tag = "ul", attr = { class = "ul" }, content = function ()
             ui.tag { tag = "li", content = function ()
               ui.tag { content = function ()
-                ui.tag{ content = _"Edit your global " }
+                local text = _"Edit your global <link>notification settings</link> to receive updates by email."
+                local text_pre, text_link, text_post = string.match(text, "([^<]*)<link>([^<]+)</link>([^<]*)")
+                ui.tag{ content = text_pre }
                 ui.link {
                   module = "member", view = "settings_notification",
                   params = { return_to = "area", return_to_area_id = area.id },
-                  text = _"notification settings"
+                  text = text_link
                 }
-                ui.tag{ content = _" to receive updates by email" }
+                ui.tag{ content = text_post }
               end }
             end }
           end }

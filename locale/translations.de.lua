@@ -2,7 +2,6 @@
 return {
 [" + file_upload_id); html = html.replace("] = false;
 [" + file_upload_id); var el = document.createElement("] = false;
-[" to receive updates by email"] = " bearbeiten um Aktualisierungen per E-Mail zu erhalten";
 ["#{closed_ago} ago"] = "vor #{closed_ago}";
 ["#{count} Neutral"] = "#{count} Enthaltung";
 ["#{count} No"] = "#{count} Nein";
@@ -226,7 +225,7 @@ return {
 ["Edit"] = "Bearbeiten";
 ["Edit again"] = "Nochmal bearbeiten";
 ["Edit voting comment"] = "Abstimmungskommentar bearbeiten";
-["Edit your global "] = "Die globalen ";
+["Edit your global <link>notification settings</link> to receive updates by email."] = "Die globalen <link>Benachrichtigungseinstellungen</link> bearbeiten, um Aktualisierungen per E-Mail zu erhalten.";
 ["Edit your profile data"] = "Profildaten bearbeiten";
 ["Eligible as winner"] = "Als Gewinner qualifiziert";
 ["Eligible members (#{count})"] = "Stimmberechtigte Teilnehmende (#{count})";

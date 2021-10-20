@@ -1,6 +1,5 @@
 #!/usr/bin/env lua
 return {
-[" to receive updates by email"] = " di ricevere aggiornamenti via email";
 ["#{closed_ago} ago"] = "#{closed_ago} fa";
 ["#{count} Neutral"] = "#{count} Neutrali";
 ["#{count} No"] = "#{count} No";
@@ -231,7 +230,7 @@ return {
 ["Edit"] = "Modifica";
 ["Edit again"] = "Modifica ancora";
 ["Edit voting comment"] = "Modifica il commento al voto";
-["Edit your global "] = "Modifica le tue ";
+["Edit your global <link>notification settings</link> to receive updates by email."] = "Modifica le tue <link>impostazioni notifiche</link> di ricevere aggiornamenti via email.";
 ["Edit your profile data"] = "Modifica i dati del tuo profilo";
 ["Eligible as winner"] = "Candidato all'approvazione";
 ["Eligible members (#{count})"] = "Utenti abilitati (#{count})";
