@@ -20,8 +20,8 @@ return {
 ["#{issue} is in voting"] = "#{issue} está en votación";
 ["#{number} Image(s) has been deleted"] = "#{number} imagen(es) ha(n) sido borrada(s)";
 ["#{number} Image(s) has been updated"] = "#{number}imagen(es) ha(n) sido actualizada(s)";
-["#{opinion} and #{implemented}"] = false;
-["#{opinion} but #{implemented}"] = false;
+["#{opinion} and #{implemented}"] = "\"#{opinion}\" y #{implemented}";
+["#{opinion} but #{implemented}"] = "\"#{opinion}\" pero #{implemented}";
 ["#{percentage}%"] = "#{percentage}%";
 ["#{result}: #{yes_count} Yes (#{yes_percent}), #{no_count} No (#{no_percent}), #{neutral_count} Abstention (#{neutral_percent})"] = "#{result}: #{yes_count} Sí (#{yes_percent}), #{no_count} No (#{no_percent}), #{neutral_count} Abstención (#{neutral_percent})";
 ["(+ #{count} potential)"] = "(+ #{count} posible)";
@@ -63,7 +63,7 @@ return {
 ["Add a new suggestion for improvement"] = "Añadir una nueva sugerencia de mejora";
 ["Add new account access privilege"] = "Añadir nuevo privilegio de acceso de cuenta";
 ["Added attachments"] = "Anexos añadidos";
-["Admin?"] = "Adminstrador?";
+["Admin?"] = "¿Adminstrador?";
 ["Admission"] = "Admisión";
 ["Admission phase"] = "Fase de admisión";
 ["Admission qourum factor"] = "Factor de admisión de quórum";
@@ -215,7 +215,7 @@ return {
 ["Edit"] = "Editar";
 ["Edit again"] = "Editar de nuevo";
 ["Edit voting comment"] = "Editar comentario de votación";
-["Edit your global <link>notification settings</link> to receive updates by email."] = false;
+["Edit your global <link>notification settings</link> to receive updates by email."] = "Edita tu <link>configuración de notificaciones</link> global para recibir actualizaciones por email." ;
 ["Edit your profile data"] = "Editar tus datos de perfil";
 ["Eligible as winner"] = "Elegible como ganador";
 ["Eligible members (#{count})"] = "Miembros elegibles (#{count})";
@@ -260,6 +260,7 @@ return {
 ["Hello\n\n"] = "Hola\n\n";
 ["Hello "] = "Hola ";
 ["Hello,\n\n"] = "Hola,\n\n";
+["Hello #{name},\n\nthis is your personal digest.\n\n#{digest}\n"] = "Hola #{name},\n\neste es tu boletín personal.\n\n#{digest}\n";
 ["Hide inactive"] = "Ocultar inactividad";
 ["Hint"] = "Sugerencia";
 ["History"] = "Historia";
@@ -303,10 +304,11 @@ return {
 ["Identification"] = "Identificación";
 ["Identification used before"] = "Identificación utilizada antes";
 ["Identification used before (#{count})"] = "Identificación utilizada antes de (#{count})";
-["If this link is not working, please open following url in your web browser:\n\n"] = "Si este enlace no funciona, abre la siguiente URL en tu navegador:\n\n";
+["If this link is not working, please open following url in your web browser:\n\n"] = "Si no funciona este enlace, abre la siguiente URL en tu navegador:\n\n";
 ["If you cannot find any appropriate existing issue, "] = "Si no puedes encontrar un tema apropiado existente, ";
 ["If you have not received a PIN code, our team will need to check your registration manually. We will be in touch within two working days. Please accept our apologies for the inconvenience."] = "Si no has recibido un código PIN, nuestro equipo tendrá que comprobar tu registro manualmente. Nos pondremos en contacto contigo en un plazo de dos días laborables. Te pedimos disculpas por las molestias.";
 ["Implicitly admitted"] = "Admitido implícitamente";
+["Index (for sorting)"] = "Índice (para clasificar)";
 ["Incoming delegations"] = "Delegaciones entrantes";
 ["Incoming delegations for '#{member}'"] = "Delegaciones entrantes para '#{member}'";
 ["Indirect majority"] = "Mayoría indirecta";
@@ -341,7 +343,7 @@ return {
 ["Invite code"] = "Código de invitación";
 ["Invite letter"] = "Carta de invitación";
 ["Invite member"] = "Invitar a un miembro";
-["Invited [as initiator]"] = false;
+["Invited [as initiator]"] = "Invitado";
 ["Issue #"] = "Tema #";
 ["Issue ##{id}"] = "Tema ##{id}";
 ["Issue ##{issue_id}: #{initiative_name}"] = "Tema ##{issue_id}: #{initiative_name}";
@@ -360,12 +362,12 @@ return {
 ["Lock member?"] = "Bloquear miembro";
 ["Locked?"] = "¿Bloqueado?";
 ["Login"] = "Inicio de sesión";
-["Login [button]"] = false;
-["Login [headline]"] = false;
+["Login [button]"] = "Iniciar sesión";
+["Login [headline]"] = "Inicio de sesión";
 ["Login name"] = "Nombre de usuario";
 ["Login name request"] = "Solicitud de nombre de usuario";
 ["Login to participate"] = "Iniciar sesión para participar";
-["Login-Name: "] = "Nombre de usuario";
+["Login-Name: "] = "Nombre de usuario: ";
 ["Logout"] = "Cierre de sesión";
 ["Logout successful"] = "Cierre de sesión con éxito";
 ["Majority"] = "Mayoría";
@@ -451,7 +453,7 @@ return {
 ["Notifications"] = "Notificaciones";
 ["Old password is wrong"] = "La contraseña antigua es incorrecta";
 ["On that page please enter the confirmation code:\n\n"] = "Por favor, introduce el código de confirmación en esa página:\n\n";
-["On that page please enter the invite key:\n\n"] = "Por favor, introduce la clave de invitación en esa página::\n\n";
+["On that page please enter the invite key:\n\n"] = "Por favor, introduce la clave de invitación en esa página:\n\n";
 ["On that page please enter the reset code:\n\n"] = "Por favor, introduce el código de restablecimiento en esa página:\n\n";
 ["Open in FirstLife"] = "Abrir en FirstLife";
 ["Open initiatives you are supporting which has been updated their draft:"] = "Iniciativas abiertas que estás apoyando cuyos borradores han sido actualizados:";
@@ -522,6 +524,7 @@ return {
 ["Published contacts"] = "Contactos publicados";
 ["Quick guide"] = "Guía rápida";
 ["Reached #{sign}#{num}/#{den}"] = "Alcanzó #{sign}#{num}/#{den}";
+["Recipient"] = "Destinario";
 ["Recover login name"] = "Recuperar nombre de usuario";
 ["Redirect URI forbidden"] = "Redirección URI prohibida";
 ["Redirect URI invalid"] = "Redirección URI invalida";
@@ -537,8 +540,8 @@ return {
 ["Reject access privilege"] = "Rechazar privilegio de acceso";
 ["Rejected (#{count})"] = "Rechazado (#{count})";
 ["Rejected (rank #{rank})"] = "Rechazado (rank #{rank})";
-["Rejected [initiative]"] = false;
-["Rejected [initiator invitation]"] = false;
+["Rejected [initiative]"] = "Rechazada";
+["Rejected [initiator invitation]"] = "Rechazada";
 ["Rejected accreditation requests"] = "Solicitudes de acreditación rechazadas";
 ["Rejected request"] = "Solicitud rechazada";
 ["Rejected requests (#{count})"] = "Solicitudes rechazadas (#{count})";
@@ -548,10 +551,10 @@ return {
 ["Remove initiator"] = "Eliminar iniciador";
 ["Removed attachments"] = "Adjuntos eliminados";
 ["Rendered"] = "Renderizado";
-["Repeat new password"] = "Repetir contraseña nueva";
+["Repeat new password"] = "Repetir nueva contraseña";
 ["Repeat password"] = "Repetir contraseña";
-["Request email with login name"] = "Solicitar e-mail con nombre de usuario";
-["Request password reset link"] = "Solicitar enlace para restablecer la contraseña";
+["Request email with login name"] = "Solicitar e-mail";
+["Request password reset link"] = "Solicitar enlace";
 ["Request role account"] = "Solicitar cuenta de rol";
 ["Request role accounts"] = "Solicitar cuentas de rol";
 ["Requested at"] = "Solicitado a las";
@@ -580,7 +583,7 @@ return {
 ["Same name already exists"] = "Ya existe el mismo nombre";
 ["Saturday"] = "Sábado";
 ["Save"] = "Guardar";
-["Save new password"] = "Guardar la nueva contraseña";
+["Save new password"] = "Guardar nueva contraseña";
 ["Save voting comment"] = "Guardar comentario sobre la votación";
 ["Saved contacts"] = "Contactos guardados";
 ["Schulze rank"] = "Rango de Schulze";
@@ -728,7 +731,7 @@ return {
 ["You are currently not supporting this initiative directly. By adding suggestions to this initiative you will automatically become a potential supporter."] = "En este momento no estás apoyando esta iniciativa directamente. Al añadir sugerencias a esta iniciativa, te convertirás automáticamente en un posible colaborador.";
 ["You are initiator of this initiative"] = "Tú eres el iniciador de esta iniciativa";
 ["You are interested in this issue"] = "Estás interesado en esta iniciativa";
-["You are invited to LiquidFeedback. To register please click the following link:\n\n"] = "Estás invitado a LiquidFeedback. Para registrarte, por favor haz clic en el siguiente enlace:\n\n";
+["You are invited to LiquidFeedback. To register please click the following link:\n\n"] = "Estás invitado a usar LiquidFeedback. Para registrarte, por favor haz clic en el siguiente enlace:\n\n";
 ["You are invited to become initiator of '#{initiative_name}'"] = "Has sido invitado a ser el iniciador de '#{initiative_name}'";
 ["You are invited to become initiator of this initiative"] = "Estás invitado a convertirte en iniciador de esta iniciativa";
 ["You are not entitled to vote in this unit"] = "No tienes derecho a votar en esta unidad ";
@@ -801,7 +804,7 @@ return {
 ["[not displayed public]"] = "[no se muestra públicamente]";
 ["abandoned"] = "abandonado";
 ["accept invitation"] = "aceptar invitación";
-["accepted [account access]"] = false;
+["accepted [account access]"] = "acceptado";
 ["account activated"] = "cuenta activada";
 ["action"] = "acción";
 ["activate account"] = "activar cuenta";
@@ -857,7 +860,7 @@ return {
 ["choose issue delegatee"] = "Elegir delegado de tema";
 ["choose subject area delegatee"] = "elegir delegado de área temática";
 ["closed"] = "cerrado";
-["collective rating:"] = "clasificación colectiva:";
+["collective rating:"] = "Clasificación colectiva:";
 ["compare"] = "comparar";
 ["compare revisions"] = "comparar revisiones";
 ["confirm"] = "confirmar";
@@ -907,7 +910,7 @@ return {
 ["has my support"] = "tiene mi apoyo";
 ["i#{id}: #{name}"] = "i#{id}: #{name}";
 ["if you like to implement a suggestion in your proposal and/or reasons, update your initiative draft"] = "Si quieres implementar una sugerencia en tu propuesta y/o razones por hacerlo, actualiza el borrador de tu iniciativa.";
-["implemented:"] = "implementado";
+["implemented:"] = "Implementado";
 ["in all phases"] = "En todas las fases";
 ["in my units"] = "En mis unidades";
 ["initiated by me"] = "Iniciado por mí";
@@ -965,7 +968,7 @@ return {
 ["possibly instable result caused by multistage majority"] = "resultado posiblemente inestable causado por una mayoría multietapa";
 ["preference voting"] = "Voto preferencial";
 ["proceed with registration"] = "proceder al registro";
-["profile and settings"] = "perfil y configuración";
+["profile and settings"] = "Perfil y configuración";
 ["public administrative notice:"] = "aviso administrativo público:";
 ["publish avatar/photo"] = "publicar avatar/foto";
 ["publish my rating"] = "publicar mi calificación";
@@ -975,7 +978,7 @@ return {
 ["reached #{quorum}"] = "alcanzó #{quorum}";
 ["refresh my support"] = "renovar mi apoyo";
 ["refuse invitation"] = "rechazar la invitación";
-["rejected [account access]"] = false;
+["rejected [account access]"] = "rechazado";
 ["remove an initiator"] = "Eliminar un iniciador";
 ["remove from my contact list"] = "eliminar de mi lista de contactos";
 ["remove my interest"] = "Eliminar mi interés";
@@ -1017,7 +1020,7 @@ return {
 ["this issue is in voting phase, therefore the initiative text cannot be updated anymore"] = "este tema está en la fase de votación, así que el texto de la iniciativa ya no se puede actualizar";
 ["timeline"] = "cronología de eventos";
 ["to argue about suggestions, just add your arguments to your reasons in the initiative draft, so your supporters can learn about your opinion"] = "Para debatir las sugerencias, sólo tienes que añadir tus argumentos a tus razones en el borrador de la iniciativa, y así tus partidarios pueden ver tu opinión.";
-["to reset your password please click on the following link:\n\n"] = "Para restablecer su contraseña, por favor haz clic en el siguiente enlace:\n\n";
+["to reset your password please click on the following link:\n\n"] = "Para restablecer tu contraseña, por favor haz clic en el siguiente enlace:\n\n";
 ["today at #{time}"] = "hoy a las #{time}";
 ["unblock member"] = "desbloquear miembro";
 ["unconfirmed address"] = "dirección no confirmada";
@@ -1044,7 +1047,7 @@ return {
 ["with"] = "con";
 ["without quorum"] = "sin quórum";
 ["write a new suggestion"] = "Escribir una nueva sugerencia";
-["written and rated by the supportes of this initiative to improve the proposal and its reasons"] = "escrito y calificado por los partidarios de esta iniciativa para mejorar la propuesta y sus razones";
+["written and rated by the supportes of this initiative to improve the proposal and its reasons"] = "Escrito y calificado por los partidarios de esta iniciativa para mejorar la propuesta y sus razones";
 ["year"] = "año";
 ["year [interval ago]"] = "años";
 ["year [interval time left]"] = "años";
