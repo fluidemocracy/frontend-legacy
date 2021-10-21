@@ -1,4 +1,4 @@
-flocal function field(name, label, value, tooltip)
+local function field(name, label, value, tooltip)
   ui.field.text{
     container_attr = { class = "mdl-textfield mdl-js-textfield mdl-textfield--floating-label" },
     attr = { id = "field_" .. name, class = "mdl-textfield__input" },
