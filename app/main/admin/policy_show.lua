@@ -1,4 +1,4 @@
-local function field(name, label, value, tooltip)
+flocal function field(name, label, value, tooltip)
   ui.field.text{
     container_attr = { class = "mdl-textfield mdl-js-textfield mdl-textfield--floating-label" },
     attr = { id = "field_" .. name, class = "mdl-textfield__input" },
@@ -107,10 +107,10 @@ ui.grid{ content = function()
           id = policy.id,
           content = function()
 
-            field("index", "Index (for sorting)", hint and "1" or nil)
+            field("index", _"Index (for sorting)", hint and "1" or nil)
             ui.field.boolean{ label = _"Active?", name = "active", value = hint and true or nil }
 
-            field("name", "Name")
+            field("name", _"Name")
           
             ui.field.text{ label = _"Description", name = "description", multiline = true }
             ui.field.text{ label = _"Hint",        readonly = true, 
