@@ -101,11 +101,11 @@ ui.container{ attr = { class = "mdl-grid" }, content = function()
             content = _'Please enter your new password twice.'
           }
           ui.field.password{
-            label = "New password",
+            label = _"New password",
             name = "password1"
           }
           ui.field.password{
-            label = "New password (repeat)",
+            label = _"Repeat new password",
             name = "password2"
           }
           
