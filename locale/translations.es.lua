@@ -2,7 +2,6 @@
 return {
 [" + file_upload_id); html = html.replace("] = false;
 [" + file_upload_id); var el = document.createElement("] = false;
-[" to receive updates by email"] = " para recibir actualizaciones por correo electrónico";
 ["#{closed_ago} ago"] = "hace #{closed_ago}";
 ["#{count} Neutral"] = "#{count} Neutral";
 ["#{count} No"] = "#{count} No";
@@ -21,6 +20,8 @@ return {
 ["#{issue} is in voting"] = "#{issue} está en votación";
 ["#{number} Image(s) has been deleted"] = "#{number} imagen(es) ha(n) sido borrada(s)";
 ["#{number} Image(s) has been updated"] = "#{number}imagen(es) ha(n) sido actualizada(s)";
+["#{opinion} and #{implemented}"] = false;
+["#{opinion} but #{implemented}"] = false;
 ["#{percentage}%"] = "#{percentage}%";
 ["#{result}: #{yes_count} Yes (#{yes_percent}), #{no_count} No (#{no_percent}), #{neutral_count} Abstention (#{neutral_percent})"] = "#{result}: #{yes_count} Sí (#{yes_percent}), #{no_count} No (#{no_percent}), #{neutral_count} Abstención (#{neutral_percent})";
 ["(+ #{count} potential)"] = "(+ #{count} posible)";
@@ -214,7 +215,7 @@ return {
 ["Edit"] = "Editar";
 ["Edit again"] = "Editar de nuevo";
 ["Edit voting comment"] = "Editar comentario de votación";
-["Edit your global "] = "Edita tu global";
+["Edit your global <link>notification settings</link> to receive updates by email."] = false;
 ["Edit your profile data"] = "Editar tus datos de perfil";
 ["Eligible as winner"] = "Elegible como ganador";
 ["Eligible members (#{count})"] = "Miembros elegibles (#{count})";
@@ -340,7 +341,7 @@ return {
 ["Invite code"] = "Código de invitación";
 ["Invite letter"] = "Carta de invitación";
 ["Invite member"] = "Invitar a un miembro";
-["Invited"] = "Invitado";
+["Invited [as initiator]"] = false;
 ["Issue #"] = "Tema #";
 ["Issue ##{id}"] = "Tema ##{id}";
 ["Issue ##{issue_id}: #{initiative_name}"] = "Tema ##{issue_id}: #{initiative_name}";
@@ -359,6 +360,8 @@ return {
 ["Lock member?"] = "Bloquear miembro";
 ["Locked?"] = "¿Bloqueado?";
 ["Login"] = "Inicio de sesión";
+["Login [button]"] = false;
+["Login [headline]"] = false;
 ["Login name"] = "Nombre de usuario";
 ["Login name request"] = "Solicitud de nombre de usuario";
 ["Login to participate"] = "Iniciar sesión para participar";
@@ -532,9 +535,10 @@ return {
 ["Registration rejected"] = "Registro rechazado";
 ["Registration succeeded"] = "Registro exitoso";
 ["Reject access privilege"] = "Rechazar privilegio de acceso";
-["Rejected"] = "Rechazado";
 ["Rejected (#{count})"] = "Rechazado (#{count})";
 ["Rejected (rank #{rank})"] = "Rechazado (rank #{rank})";
+["Rejected [initiative]"] = false;
+["Rejected [initiator invitation]"] = false;
 ["Rejected accreditation requests"] = "Solicitudes de acreditación rechazadas";
 ["Rejected request"] = "Solicitud rechazada";
 ["Rejected requests (#{count})"] = "Solicitudes rechazadas (#{count})";
@@ -797,7 +801,7 @@ return {
 ["[not displayed public]"] = "[no se muestra públicamente]";
 ["abandoned"] = "abandonado";
 ["accept invitation"] = "aceptar invitación";
-["accepted"] = "aceptada";
+["accepted [account access]"] = false;
 ["account activated"] = "cuenta activada";
 ["action"] = "acción";
 ["activate account"] = "activar cuenta";
@@ -814,7 +818,6 @@ return {
 ["all results"] = "Todos los resultados";
 ["all subject areas"] = "todas las áreas temáticas";
 ["allow invitation again"] = "permitir invitación de nuevo";
-["and"] = "y";
 ["and #{count} more initiatives"] = "y #{count} más iniciativas";
 ["area"] = "área";
 ["author"] = "autor";
@@ -825,7 +828,6 @@ return {
 ["browse the platform as a guest"] = "ver la plataforma como un invitado";
 ["browse the portal as an unregistered user"] = "navegar por el portal como un usuario no registrado";
 ["browse through the competing initiatives"] = "Navegar las iniciativas de la competencia";
-["but"] = "pero";
 ["by"] = "por";
 ["by A-Z"] = "por A-Z";
 ["by Z-A"] = "por Z-A";
@@ -973,7 +975,7 @@ return {
 ["reached #{quorum}"] = "alcanzó #{quorum}";
 ["refresh my support"] = "renovar mi apoyo";
 ["refuse invitation"] = "rechazar la invitación";
-["rejected"] = "rechazado";
+["rejected [account access]"] = false;
 ["remove an initiator"] = "Eliminar un iniciador";
 ["remove from my contact list"] = "eliminar de mi lista de contactos";
 ["remove my interest"] = "Eliminar mi interés";
