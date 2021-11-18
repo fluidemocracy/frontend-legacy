@@ -783,6 +783,10 @@ div.form .member_photo .member_image.member_image_photo {
   height: unset;
 }
 
+.survey .mdl-checkbox__label {
+  line-height: 22px;
+}
+
 .ui_paginate_select .mdl-button {
   min-width: unset;
   margin-right: 0.3em;
