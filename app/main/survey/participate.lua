@@ -37,8 +37,8 @@ ui.grid{ content = function()
           if survey_member.finished then
             slot.put(survey.finished_title)
           else
-            ui.tag{ tag = "span", content = question.question }
             ui.tag{ attr = { class = "survey_counter" }, content = (question_number + 1) .. " / " .. #survey.questions }
+            ui.tag{ tag = "span", content = question.question }
           end
         end }
       end }
