@@ -767,8 +767,8 @@ div.form .member_photo .member_image.member_image_photo {
 }
 
 .survey_counter {
-  position: absolute;;
-  right: 20px;
+  float: right;
+  margin-left: 1em;
 }
 
 .survey form > div {
