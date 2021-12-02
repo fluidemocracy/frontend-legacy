@@ -59,7 +59,7 @@ if verification.verified_member_id then
     return
   end
   
-  identification = param.get("identification")
+  local identification = param.get("identification")
   if identification and #identification == 0 then
     identification = nil
   end
