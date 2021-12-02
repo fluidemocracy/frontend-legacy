@@ -59,7 +59,12 @@ if verification.verified_member_id then
     return
   end
   
-  member.identification = param.get("identification")
+  identification = param.get("identification")
+  if identification and #identification == 0 then
+    identification = nil
+  end
+  member.identification = identification
+
   member.notify_email = param.get("email")
   member:save()
   
