@@ -80,7 +80,10 @@ if verification.verified_member_id then
 
   member.notify_email = param.get("email")
 
-  check_db_error(member:try_save())
+  local success = check_db_error(member:try_save())
+  if not success then
+    return false
+  end
 
   update_data()
 
@@ -107,7 +110,11 @@ elseif param.get("accredit") then
   member.identification = identification
 
   member.notify_email = param.get("email")
-  check_db_error(member:try_save())
+
+  local success = check_db_error(member:try_save())
+  if not success then
+    return false
+  end
 
   if config.self_registration.manual_invitation then
     local function secret_token()
