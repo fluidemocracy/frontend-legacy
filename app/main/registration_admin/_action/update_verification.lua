@@ -50,6 +50,19 @@ local function update_data()
   end
 end
 
+local function check_db_error(db_error)
+  if db_error then
+    if db_error.is_kind_of("IntegrityConstraintViolation.UniqueViolation") then
+      slot.select("error", function()
+        ui.tag{ content = _"Identification unique violation: This identification is already in use for another member." }
+      end )
+      return false
+    else
+      error(db_error)
+    end
+  end
+end
+
 if verification.verified_member_id then
   
   local member = Member:by_id(verification.verified_member_id)
@@ -66,21 +79,11 @@ if verification.verified_member_id then
   member.identification = identification
 
   member.notify_email = param.get("email")
-  db_error = member:try_save()
-  
-  if db_error then
-    if db_error.is_kind_of("IntegrityConstraintViolation.UniqueViolation") then
-      slot.select("error", function()
-        ui.tag{ content = _"Identification unique violation: This identification is already in use for another member." }
-      end )
-      return false
-    else
-      error(db_error)
-    end
-  end
-  
+
+  check_db_error(member:try_save())
+
   update_data()
-  
+
   verification:save()
 
   if param.get("invite") then
@@ -98,7 +101,7 @@ elseif param.get("accredit") then
   local member = Member:by_id(verification.requesting_member_id)
   member.identification = param.get("identification")
   member.notify_email = param.get("email")
-  member:save()
+  check_db_error(member:try_save())
 
   if config.self_registration.manual_invitation then
     local function secret_token()
