@@ -52,7 +52,7 @@ end
 
 local function check_db_error(db_error)
   if db_error then
-    if db_error.is_kind_of("IntegrityConstraintViolation.UniqueViolation") then
+    if db_error:is_kind_of("IntegrityConstraintViolation.UniqueViolation") then
       slot.select("error", function()
         ui.tag{ content = _"Identification unique violation: This identification is already in use for another member." }
       end )
