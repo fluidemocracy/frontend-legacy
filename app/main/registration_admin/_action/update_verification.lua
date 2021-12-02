@@ -99,7 +99,13 @@ elseif param.get("drop") then
 elseif param.get("accredit") then
   
   local member = Member:by_id(verification.requesting_member_id)
-  member.identification = param.get("identification")
+
+  local identification = param.get("identification")
+  if identification and #identification == 0 then
+    identification = nil
+  end
+  member.identification = identification
+
   member.notify_email = param.get("email")
   check_db_error(member:try_save())
 
