@@ -66,7 +66,18 @@ if verification.verified_member_id then
   member.identification = identification
 
   member.notify_email = param.get("email")
-  member:save()
+  db_error = member:try_save()
+  
+  if db_error then
+    if db_error.is_kind_of("IntegrityConstraintViolation.UniqueViolation") then
+      slot.select("error", function()
+        ui.tag{ content = _"Identification unique violation: This identification is already in use for another member." }
+      end )
+      return false
+    else
+      error(db_error)
+    end
+  end
   
   update_data()
   
