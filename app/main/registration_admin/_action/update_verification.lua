@@ -67,11 +67,6 @@ if verification.verified_member_id then
   
   local member = Member:by_id(verification.verified_member_id)
   
-  if param.get("cancel") then
-    db:query({ "SELECT delete_member(?)", member.id })
-    return
-  end
-  
   local identification = param.get("identification")
   if identification and #identification == 0 then
     identification = nil
@@ -88,6 +83,11 @@ if verification.verified_member_id then
   update_data()
 
   verification:save()
+
+  if param.get("cancel") then
+    db:query({ "SELECT delete_member(?)", member.id })
+    return
+  end
 
   if param.get("invite") then
     member:send_invitation()
