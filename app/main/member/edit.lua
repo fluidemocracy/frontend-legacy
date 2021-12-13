@@ -32,7 +32,7 @@ ui.grid{ content = function()
                 ui.container{
                   attr = { class = "mdl-textfield mdl-js-textfield mdl-textfield--floating-label" },
                   content = function()
-                    ui.tag{ tag = "input", attr = { class = "mdl-textfield__input", name = field.id, id = "input_" .. field.id, readonly = config.locked_profile_fields[field.id], value = profile and profile.profile and profile.profile[field.id] or nil } }
+                    ui.tag{ tag = "input", attr = { class = "mdl-textfield__input", name = field.id, id = "input_" .. field.id, readonly = field.validate_func and "readonly" or nil, value = profile and profile.profile and profile.profile[field.id] or nil } }
                     ui.tag{ tag = "label", attr = { class = "mdl-textfield__label", ["for"] = "input_" .. field.id }, content = field.name }
                 end }
                 slot.put("<br />")
