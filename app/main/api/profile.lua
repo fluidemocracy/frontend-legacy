@@ -17,6 +17,12 @@ if request.is_post() then
       if value ~= nil and (field.type == "string" or field.type == "text") and json.type(value) ~= "string" then
         return util.api_error(400, "Bad Request", "string_expected", "JSON encoded string value expected")
       end
+      if field.validate_func then
+        local success = field.validate_func(field, fields)
+        if not success then
+          return util.api_error(403, "Forbidden", "validation_failure", "Request could not be validated")
+        end
+      end
       profile.profile[field.id] = value
     end
   end

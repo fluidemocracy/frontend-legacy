@@ -1,7 +1,7 @@
 local profile = app.session.member.profile
 
 for i, field in ipairs(config.member_profile_fields) do
-  if not util.is_profile_field_locked(app.session.member, field.id) then
+  if not util.is_profile_field_locked(app.session.member, field.id) and not field.validate_func then
     local value = param.get(field.id)
     if value == "" then 
       value = null
