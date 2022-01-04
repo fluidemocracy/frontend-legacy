@@ -21,7 +21,8 @@ CREATE TABLE survey_question (
 
 CREATE TABLE survey_answer_set (
   ident TEXT NOT NULL PRIMARY KEY,
-  survey_id INT4 NOT NULL REFERENCES survey(id)
+  survey_id INT4 NOT NULL REFERENCES survey(id),
+  data JSON
 );
 
 CREATE TABLE survey_answer (

@@ -40,6 +40,15 @@ else
   local answer_set = SurveyAnswerSet:new()
   answer_set.ident = random_string()
   answer_set.survey_id = survey.id
+  local verification = Verification:new_selector()
+    :add_where{ "verified_member_id = ?", app.session.member_id }
+    :optional_object_mode()
+    :exec()
+  if verification then
+    answer_set.data = verification.request_data
+    answer_set.data.name = nil
+    answer_set.data.email = nil
+  end
   answer_set:save()
   survey_member.survey_answer_set_ident = answer_set.ident
 end
