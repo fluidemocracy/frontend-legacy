@@ -155,13 +155,22 @@ slot.select ("footer", function ()
       view   = 'about'
     }
   end }
-  if not config.extra_footer_func then
-    if config.use_terms and app.session.member then
+  if not config.extra_footer_func and (config.use_terms_public_access or app.session.member)then
+    if config.use_terms then
       ui.tag{ tag = "li", content = function()
         ui.link{
-          text   = _"Use terms",
+          text   = config.use_terms_linktext or _"Use terms",
           module = 'index',
           view   = 'usage_terms'
+        }
+      end }
+    end
+    if config.privacy_policy then
+      ui.tag{ tag = "li", content = function()
+        ui.link{
+          text   = config.privacy_policy_linktext or _"Privacy policy",
+          module = 'index',
+          view   = 'privacy'
         }
       end }
     end
