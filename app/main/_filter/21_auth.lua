@@ -71,7 +71,7 @@ if app.session:has_access("anonymous") then
     or module == "file" and view == "show.jpg"
     or module == "index" and view == "search"
     or module == "index" and view == "usage_terms" and config.use_terms_public_access == true
-    or module == "index" and view == "privacy" and config.use_terms_public_access == true
+    or module == "index" and view == "privacy" and config.privacy_policy_public_access == true
     or module == "help" and view == "introduction"
     or module == "style"
   then
