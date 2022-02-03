@@ -12,8 +12,8 @@ local function field(name, label, value, tooltip)
   end
 end
 
-local function field_boolean(id, name, checked, label)
-  ui.container{ content = function()
+local function field_boolean(id, name, checked, label, depth)
+  ui.container{ attr = { style = "margin-left: " .. (depth -1) * 20 .. "px;" }, content = function()
     ui.tag{ tag = "label", attr = {
         class = "mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect",
         ["for"] = id
@@ -45,18 +45,7 @@ local deactivated = member and member.locked and member.login == nil and member.
 
 ui.titleAdmin(_"Member")
 
-local units_selector = Unit:new_selector()
-  :add_where("active")
-
-  
-if member then
-  units_selector
-    :left_join("privilege", nil, { "privilege.member_id = ? AND privilege.unit_id = unit.id", member.id })
-    :add_field("privilege.voting_right", "voting_right")
-    :add_order_by("unit.name")
-end
-
-local units = units_selector:exec()
+local units = Unit:get_flattened_tree{ include_inactive = inactive, include_hidden = true, member_id = member.id }
   
 ui.grid{ content = function()
 
@@ -106,7 +95,7 @@ ui.grid{ content = function()
             end
 
             for i, unit in ipairs(units) do
-              field_boolean("checkbox_unit_" .. unit.id, "unit_" .. unit.id, unit.voting_right, unit.name)
+              field_boolean("checkbox_unit_" .. unit.id, "unit_" .. unit.id, unit.voting_right, unit.name, unit.depth)
               
             end
             slot.put("<br />")
