@@ -19,6 +19,7 @@ var wysihtmlParserRules = {
     h5: {},
     h6: {},
     sup: {},
-    sub: {}
+    sub: {},
+    pre: {}
   }
 };

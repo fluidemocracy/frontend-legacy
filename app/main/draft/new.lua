@@ -330,8 +330,7 @@ ui.form{
                   }
                 end }
               end
-              
-              ui.container { content = _"Enter your proposal and/or reasons:" }
+
               ui.field.wysihtml{
                 name = "content",
                 multiline = true, 
