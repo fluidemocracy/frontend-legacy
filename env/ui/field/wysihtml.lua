@@ -88,17 +88,17 @@ function ui.field.wysihtml(args)
   
   ui.field.text(args)
 
-  ui.tag{ tag = "script", attr = { src = request.get_absolute_baseurl() .. "static/wysihtml/wysihtml.js" }, content = "" }
-  ui.tag{ tag = "script", attr = { src = request.get_absolute_baseurl() .. "static/wysihtml/wysihtml.all-commands.js" }, content = "" }
-  ui.tag{ tag = "script", attr = { src = request.get_absolute_baseurl() .. "static/wysihtml/wysihtml.toolbar.js" }, content = "" }
-  ui.tag{ tag = "script", attr = { src = request.get_absolute_baseurl() .. "static/wysihtml/wysihtml_liquidfeedback_rules.js" }, content = "" }
+  ui.tag{ tag = "script", attr = { src = request.get_absolute_baseurl() .. "static/wysihtml/wysihtml.js?version=1" }, content = "" }
+  ui.tag{ tag = "script", attr = { src = request.get_absolute_baseurl() .. "static/wysihtml/wysihtml.all-commands.js?version=1" }, content = "" }
+  ui.tag{ tag = "script", attr = { src = request.get_absolute_baseurl() .. "static/wysihtml/wysihtml.toolbar.js?version=1" }, content = "" }
+  ui.tag{ tag = "script", attr = { src = request.get_absolute_baseurl() .. "static/wysihtml/wysihtml_liquidfeedback_rules.js?version=2" }, content = "" }
   ui.script{ script = [[
     function initEditor() {
       var editor = new wysihtml.Editor("]] .. args.attr.id .. [[", {
         toolbar:       "toolbar",
         parserRules:   wysihtmlParserRules,
         useLineBreaks: true,
-        stylesheets: "]] .. request.get_absolute_baseurl() .. [[static/lf4.css",
+        stylesheets: "]] .. request.get_absolute_baseurl() .. [[static/lf4.css?version=3",
         name: "draft"
       });
     }
