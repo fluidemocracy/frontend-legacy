@@ -104,7 +104,7 @@ function Unit:get_flattened_tree(args)
   if not args or not args.include_hidden then
     units_selector:add_where("attr->'hidden' ISNULL OR NOT (attr->'hidden' = 'true')")
   end
-  if args.member_id then
+  if args and args.member_id then
     units_selector
       :left_join("privilege", nil, { "privilege.member_id = ? AND privilege.unit_id = unit.id", args.member_id })
       :add_field("privilege.voting_right", "voting_right")
