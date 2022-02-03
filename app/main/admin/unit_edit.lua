@@ -11,7 +11,12 @@ local units = {
 }
 
 for i, unit in ipairs(Unit:get_flattened_tree()) do
-  units[#units+1] = { id = unit.id, name = unit.name }
+  local name = ""
+  for j = 2, unit.depth do
+    name = name .. utf8.char(160).. utf8.char(160).. utf8.char(160).. utf8.char(160)
+  end
+  local name = name .. unit.name
+  units[#units+1] = { id = unit.id, name = name }
 end
 
 ui.grid{ content = function()

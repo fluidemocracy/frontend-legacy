@@ -338,7 +338,7 @@ return {
 ["Invite an initiator to initiative"] = "Nodig een initiatiefnemer bij een initiatief uit";
 ["Invite code"] = "Invite-Code";
 ["Invite member"] = false;
-["Invited"] = "Uitgenodigd";
+["Invited [as initiator]"] = "Uitgenodigd";
 ["Issue #"] = false;
 ["Issue ##{id}"] = "Onderwerp ##{id}";
 ["Issue ##{issue_id}: #{initiative_name}"] = false;
@@ -365,7 +365,8 @@ return {
 ["Lists must be preceeded and followed by at least one blank line"] = false;
 ["Lock member?"] = "Vergrendel deelnemer?";
 ["Locked?"] = "Gesloten?";
-["Login"] = "Login";
+["Login [headline]"] = "Login";
+["Login [button]"] = "Login";
 ["Login name"] = "Login naam";
 ["Login name request"] = false;
 ["Login-Name: "] = false;
@@ -513,7 +514,8 @@ return {
 ["Registration (step 1 of 3: Invite code)"] = "Registratie (stap 1 van 3: uitnodigingscode)";
 ["Registration (step 2 of 3: Personal information)"] = "Registratie (stap 1 van 3: persoonlijke informatie)";
 ["Registration (step 3 of 3: Terms of use and password)"] = "Registratie (stap 1 van 3: gebruikershandleiding en wachtwoord)";
-["Rejected"] = "Verworpen";
+["Rejected [initiative]"] = "Verworpen";
+["Rejected [initiator invitation]"] = "Verworpen";
 ["Rejected (rank #{rank})"] = false;
 ["Remove"] = "Verwijderen";
 ["Remove an initiator from initiative"] = false;

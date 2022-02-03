@@ -9,7 +9,7 @@ $color-primary-dark: ]] .. style.color.primary .. [[;
 $color-primary-contrast: ]] .. style.color.primary_contrast .. [[;
 $color-accent: ]] .. style.color.accent .. [[;
 $color-accent-contrast: ]] .. style.color.accent_contrast .. [[;
-$checkbox-image-path: "]] .. request.get_absolute_baseurl() .. "static/mdl" .. [[";
+$image-path: "]] .. request.get_absolute_baseurl() .. "static/mdl" .. [[";
 @import "../style/mdl/material-design-lite"
 ]]
 

@@ -1,4 +1,4 @@
-local unit_id = config.single_unit_id or request.get_param{ name = "unit" }
+local unit_id = config.single_unit_id or request.get_param{ name = "unit" } or app.single_unit_id
 local area_id = config.single_area_id or request.get_param{ name = "area" }
 
 local initiative = param.get("initiative", "table")
@@ -28,13 +28,17 @@ if unit then
   ui.container{ attr = { class = "mdl-card mdl-card__fullwidth mdl-shadow--2dp" }, content = function()
     ui.container{ attr = { class = "mdl-card__title mdl-card--border" }, content = function()
       ui.heading { attr = { class = "mdl-card__title-text" }, level = 2, content = unit.name }
-      if unit.description and #(unit.description) > 0 then
-        ui.container{ attr = { class = "mdl-card__subtitle-text" }, content = unit.description }
-      end
-      if config.render_external_reference_unit then
-        config.render_external_reference_unit(unit)
-      end
     end }
+    if unit.description and #(unit.description) > 0 then
+      ui.container{ attr = { class = "mdl-card__content mdl-card--border" }, content = function()
+        slot.put(format.text_with_links(unit.description))
+      end }
+    end
+    if config.render_external_reference_unit then
+      ui.container{ attr = { class = "mdl-card__content mdl-card--border" }, content = function()
+        config.render_external_reference_unit(unit)
+      end }
+    end
 
 
     if not (config.voting_only and config.disable_delegations) and app.session.member_id and (
@@ -80,10 +84,12 @@ if area then
     if unit then
       ui.container{ attr = { class = "mdl-card__title mdl-card--border" }, content = function()
         ui.heading { attr = { class = "mdl-card__title-text" }, level = 2, content = area.name }
-        if area.description and #(area.description) > 0 then
-          ui.container{ attr = { class = "mdl-card__subtitle-text" }, content = area.description }
-        end
       end }
+      if area.description and #(area.description) > 0 then
+        ui.container{ attr = { class = "mdl-card__content mdl-card--border" }, content = function()
+          slot.put(format.text_with_links(area.description))
+        end }
+      end
     end
     if not (config.voting_only and config.disable_delegations) and app.session.member_id and (
       app.session.member:has_voting_right_for_unit_id(area.unit_id) 

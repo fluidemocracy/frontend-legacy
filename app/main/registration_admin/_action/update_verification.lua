@@ -12,7 +12,7 @@ local function update_data()
       value = string.gsub(value, "[^0-9]", "")
     elseif field.name == "unit" then
       value = string.gsub(value, "[^0-9]", "")
-      if old_verification_data.unit and old_verification_data.unit ~= "" then
+      if old_verification_data.unit and old_verification_data.unit ~= "" and old_verification_data.unit ~= value then
         local old_unit_privilege = Privilege:by_pk(old_verification_data.unit, verification.requesting_member_id)
         if old_unit_privilege then
           old_unit_privilege:destroy()
@@ -50,22 +50,44 @@ local function update_data()
   end
 end
 
+local function check_db_error(db_error)
+  if db_error then
+    if db_error:is_kind_of("IntegrityConstraintViolation.UniqueViolation") then
+      slot.select("error", function()
+        ui.tag{ content = _"Identification unique violation: This identification is already in use for another member." }
+      end )
+      return false
+    else
+      error(db_error)
+    end
+  end
+end
+
 if verification.verified_member_id then
   
   local member = Member:by_id(verification.verified_member_id)
   
+  local identification = param.get("identification")
+  if identification and #identification == 0 then
+    identification = nil
+  end
+  member.identification = identification
+
+  member.notify_email = param.get("email")
+
+  local success = check_db_error(member:try_save())
+  if not success then
+    return false
+  end
+
+  update_data()
+
+  verification:save()
+
   if param.get("cancel") then
     db:query({ "SELECT delete_member(?)", member.id })
     return
   end
-  
-  member.identification = param.get("identification")
-  member.notify_email = param.get("email")
-  member:save()
-  
-  update_data()
-  
-  verification:save()
 
   if param.get("invite") then
     member:send_invitation()
@@ -80,9 +102,19 @@ elseif param.get("drop") then
 elseif param.get("accredit") then
   
   local member = Member:by_id(verification.requesting_member_id)
-  member.identification = param.get("identification")
+
+  local identification = param.get("identification")
+  if identification and #identification == 0 then
+    identification = nil
+  end
+  member.identification = identification
+
   member.notify_email = param.get("email")
-  member:save()
+
+  local success = check_db_error(member:try_save())
+  if not success then
+    return false
+  end
 
   if config.self_registration.manual_invitation then
     local function secret_token()

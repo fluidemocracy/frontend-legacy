@@ -22,6 +22,8 @@ if module == 'index' and (
   or view   == "403"
   or view   == "404"
   or view   == "405"
+  or view == "usage_terms" and config.use_terms_public_access == true
+  or view == "privacy" and config.privacy_policy_public_access == true
 ) then
   auth_needed = false
 end
@@ -61,8 +63,6 @@ if app.session:has_access("anonymous") then
     module == "index" and view == "index"
     or module == "area" and view == "show"
     or module == "unit" and view == "show"
-    or module == "policy" and view == "show"
-    or module == "policy" and view == "list"
     or module == "issue" and view == "show"
     or module == "issue" and view == "history"
     or module == "initiative" and view == "show"
@@ -73,6 +73,7 @@ if app.session:has_access("anonymous") then
     or module == "file" and view == "show.jpg"
     or module == "index" and view == "search"
     or module == "index" and view == "usage_terms"
+    or module == "index" and view == "privacy"
     or module == "help" and view == "introduction"
     or module == "style"
   then
@@ -113,8 +114,8 @@ if module == "sitemap" then
 end
 
 if app.session:has_access("anonymous") and not app.session.member_id and auth_needed and module == "index" and view == "index" then
-  if config.single_unit_id then
-    request.redirect{ module = "unit", view = "show", id = config.single_unit_id }
+  if app.single_unit_id then
+    request.redirect{ module = "unit", view = "show", id = app.single_unit_id }
   else
     request.redirect{ module = "unit", view = "list" }
   end
@@ -137,14 +138,22 @@ if auth_needed and app.session.member == nil then
       error("array type params not implemented")
     end
   end
-  request.redirect{
-    module = 'index', view = 'login', params = {
-      redirect_module = module,
-      redirect_view = view,
-      redirect_id = param.get_id(),
-      redirect_params = params
+  if config.login and config.login.method == "oauth2" then
+    request.redirect{
+      module = "oauth2_client",
+      view = "redirect",
+      params = { provider = config.login.provider }
     }
-  }
+  else
+    request.redirect{
+      module = 'index', view = 'login', params = {
+        redirect_module = module,
+        redirect_view = view,
+        redirect_id = param.get_id(),
+        redirect_params = params
+      }
+    }
+  end
 elseif auth_needed and app.session.member.locked then
   trace.debug("Member locked.")
   request.redirect{ module = 'index', view = 'login' }

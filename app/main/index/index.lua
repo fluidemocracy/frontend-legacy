@@ -26,9 +26,14 @@ end
 
 if area_id then
   area = Area:by_id(area_id)
-  if not area or area.unit_id ~= unit.id then
-    execute.view { module = "index", view = "404" }
-    request.set_status("404 Not Found")
+  if not area or (unit and area.unit_id ~= unit.id) then
+    request.redirect{ 
+      external = encode.url{
+        module = "index", view = "index", params = {
+          unit = unit_id
+        }
+      }
+    }
     return
   end
   area:load_delegation_info_once_for_member_id(app.session.member_id)
@@ -45,11 +50,17 @@ ui.grid{ content = function()
   ui.cell_main{ content = function()
 
     execute.view{ module = "index", view = "_sidebar_motd_public" }
+    if not unit_id and not area_id then
+      execute.view{ module = "index", view = "_sidebar_motd_intern_top" }
+    end
 
     execute.view{ module = "issue", view = "_list" }
   end }
 
   ui.cell_sidebar{ content = function()
+    if not unit and not area and config.logo_startpage then
+      config.logo_startpage()
+    end
     execute.view{ module = "index", view = "_head" }
     
     execute.view{ module = "index", view = "_sidebar_motd" }

@@ -156,12 +156,12 @@ ui.container{ attr = { class = "mdl-grid" }, content = function()
                 local unit_delegation = Delegation:by_pk(app.session.member_id, issue.area.unit_id)
                 if unit_delegation then
                   delegate_name = unit_delegation.trustee.name
-                  scope = config.single_unit_id and _"global" or _"unit"
+                  scope = app.single_unit_id and _"global" or _"unit"
                 end
               end
               local text_apply
               local text_abandon
-              if config.single_unit_id then
+              if app.single_unit_id then
                 text_apply = _("Apply global or area delegation for this issue (Currently: #{delegate_name} [#{scope}])", { delegate_name = delegate_name, scope = scope })
                 text_abandon = _"Abandon unit and area delegations for this issue"
               else
@@ -179,11 +179,11 @@ ui.container{ attr = { class = "mdl-grid" }, content = function()
               local unit_delegation = Delegation:by_pk(app.session.member_id, area.unit_id)
               if unit_delegation then
                 delegate_name = unit_delegation.trustee.name
-                scope = config.single_unit_id and _"global" or _"unit"
+                scope = app.single_unit_id and _"global" or _"unit"
               end
               local text_apply
               local text_abandon
-              if config.single_unit_id then
+              if app.single_unit_id then
                 text_apply = _("Apply global delegation for this area (Currently: #{delegate_name} [#{scope}])", { delegate_name = delegate_name, scope = scope })
                 text_abandon = _"Abandon global delegation for this area"
               else

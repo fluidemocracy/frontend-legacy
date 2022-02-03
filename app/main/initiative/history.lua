@@ -39,7 +39,7 @@ ui.grid{ content = function()
                   {
                     content = function(record)
                       slot.put('<label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="old_draft_id_' .. record.id .. '"><input type="radio" class="mdl-radio__button" id="old_draft_id_' .. record.id .. '" name="old_draft_id" value="' .. tostring(record.id) .. '">') 
-                      ui.tag { content = "compare" }
+                      ui.tag { content = _"compare" }
                       slot.put(" ")
                       ui.link{
                         attr = { class = "action" },

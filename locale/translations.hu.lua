@@ -338,7 +338,7 @@ return {
 ["Invite an initiator to initiative"] = "Kezdeményezõ meghívása a kezdeményezéshez";
 ["Invite code"] = "Meghívókód";
 ["Invite member"] = false;
-["Invited"] = "Meghívva";
+["Invited [as initiator]"] = "Meghívva";
 ["Issue #"] = false;
 ["Issue ##{id}"] = "Téma: ##{id}";
 ["Issue ##{issue_id}: #{initiative_name}"] = false;
@@ -365,7 +365,8 @@ return {
 ["Lists must be preceeded and followed by at least one blank line"] = false;
 ["Lock member?"] = false;
 ["Locked?"] = "Zárva?";
-["Login"] = "Bejelentkezés";
+["Login [headline]"] = "Bejelentkezés";
+["Login [button]"] = "Bejelentkezés";
 ["Login name"] = "Bejelentkezési név";
 ["Login name request"] = false;
 ["Login-Name: "] = false;
@@ -513,7 +514,8 @@ return {
 ["Registration (step 1 of 3: Invite code)"] = false;
 ["Registration (step 2 of 3: Personal information)"] = false;
 ["Registration (step 3 of 3: Terms of use and password)"] = false;
-["Rejected"] = "Elutasítva";
+["Rejected [initiator invitation]"] = "Elutasítva";
+["Rejected [initiative]"] = "Elutasítva";
 ["Rejected (rank #{rank})"] = false;
 ["Remove"] = "Eltávolítás";
 ["Remove an initiator from initiative"] = false;

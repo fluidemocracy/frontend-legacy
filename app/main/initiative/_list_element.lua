@@ -6,21 +6,6 @@ local issue = initiative.issue
 
 local position = param.get("position", atom.number)
 
-if initiative.vote_grade ~= nil then
-  if initiative.vote_grade > 0 then
-    local text = _"voted yes"
-    ui.container{ attr = { class = "mdl-list__item-avatar positive" }, content = function()
-      ui.tag{ tag = "i", attr = { class = "material-icons", title = text }, content = "thumb_up" }
-    end }
-  elseif initiative.vote_grade == 0 then
-  elseif initiative.vote_grade < 0 then
-    local text = _"voted no"
-    ui.container{ attr = { class = "mdl-list__item-avatar negative" }, content = function()
-      ui.tag{ tag = "i", attr = { class = "material-icons", title = text }, content = "thumb_down" }
-    end }
-  end
-end
-
 local class = "initiative mdl-list__item-primary-content"
 if initiative.rank == 1 then
   class = class .. " rank1"
@@ -41,6 +26,20 @@ ui.container{
     ui.container {
       attr = { class = "initiative_name" },
       content = function()
+        if initiative.vote_grade ~= nil then
+          if initiative.vote_grade > 0 then
+            local text = _"voted yes"
+            ui.container{ attr = { class = "mdl-list__item-avatar positive" }, content = function()
+              ui.tag{ tag = "i", attr = { class = "material-icons", title = text }, content = "thumb_up" }
+            end }
+          elseif initiative.vote_grade == 0 then
+          elseif initiative.vote_grade < 0 then
+            local text = _"voted no"
+            ui.container{ attr = { class = "mdl-list__item-avatar negative" }, content = function()
+              ui.tag{ tag = "i", attr = { class = "material-icons", title = text }, content = "thumb_down" }
+            end }
+          end
+        end
         if not for_member and app.session.member then
           if initiative.member_info.supported then
             if initiative.member_info.satisfied then
@@ -104,7 +103,7 @@ ui.container{
       
       if initiative.positive_votes ~= nil then
 
-        local result_text 
+        local result_text = ""
 
         if issue.voter_count == 0 then
           result_text = _("No votes (0)", { result = result })
@@ -135,11 +134,11 @@ ui.container{
             no_count = initiative.negative_votes,
             no_percent = format.percent_floor(initiative.negative_votes, issue.voter_count)
           })
-        
+
         end
 
         ui.container { attr = { class = "result" }, content = result_text }
-        
+
       end
 
     end }

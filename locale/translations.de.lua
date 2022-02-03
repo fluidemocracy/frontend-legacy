@@ -2,7 +2,6 @@
 return {
 [" + file_upload_id); html = html.replace("] = false;
 [" + file_upload_id); var el = document.createElement("] = false;
-[" to receive updates by email"] = " bearbeiten um Aktualisierungen per E-Mail zu erhalten";
 ["#{closed_ago} ago"] = "vor #{closed_ago}";
 ["#{count} Neutral"] = "#{count} Enthaltung";
 ["#{count} No"] = "#{count} Nein";
@@ -226,7 +225,7 @@ return {
 ["Edit"] = "Bearbeiten";
 ["Edit again"] = "Nochmal bearbeiten";
 ["Edit voting comment"] = "Abstimmungskommentar bearbeiten";
-["Edit your global "] = "Die globalen ";
+["Edit your global <link>notification settings</link> to receive updates by email."] = "Die globalen <link>Benachrichtigungseinstellungen</link> bearbeiten, um Aktualisierungen per E-Mail zu erhalten.";
 ["Edit your profile data"] = "Profildaten bearbeiten";
 ["Eligible as winner"] = "Als Gewinner qualifiziert";
 ["Eligible members (#{count})"] = "Stimmberechtigte Teilnehmende (#{count})";
@@ -379,7 +378,8 @@ return {
 ["Lists must be preceeded and followed by at least one blank line"] = "Listen müssen von Leerzeilen umgeben sein";
 ["Lock member?"] = "Mitglied sperren?";
 ["Locked?"] = "Gesperrt?";
-["Login"] = "Anmeldung";
+["Login [headline]"] = "Anmeldung";
+["Login [button]"] = "anmelden";
 ["Login name"] = "Anmeldename";
 ["Login name request"] = "Anmeldename anfordern";
 ["Login-Name: "] = "Anmeldename: ";
@@ -861,8 +861,9 @@ return {
 ["all results"] = "Alle Ergebnisse";
 ["all subject areas"] = "Alle Themenbereiche";
 ["allow invitation again"] = "Einladen wieder erlauben";
-["and"] = "und";
 ["and #{count} more initiatives"] = "und #{count} weitere Initiativen";
+["#{opinion} and #{implemented}"] = "#{opinion} und #{implemented}";
+["#{opinion} but #{implemented}"] = "#{opinion} aber #{implemented}";
 ["area"] = "Themenbereich";
 ["at least #{count} approvals"] = "mindestens #{count} Zustimmungen";
 ["at least #{count} approvals or abstentions"] = "mindestens #{count} Zustimmungen oder Enthaltungen";
@@ -873,7 +874,6 @@ return {
 ["browse the platform as a guest"] = "Die Plattform als Gast erkunden";
 ["browse the portal as an unregistered user"] = "Die Plattform als nicht-registrierter Benutzer erkunden";
 ["browse through the competing initiatives"] = "durch die konkurrierenden Initiativen sehen";
-["but"] = "aber";
 ["by"] = "von";
 ["by A-Z"] = "nach A-Z";
 ["by Z-A"] = "nach Z-A";
@@ -905,6 +905,7 @@ return {
 ["closed"] = "geschlossen";
 ["collective rating:"] = "kollektive Bewertung:";
 ["compare revisions"] = "Revisionen vergleichen";
+["compare"] = "vergleiche";
 ["confirm"] = "bestätigen";
 ["confirmed address"] = "bestätigte Adresse";
 ["connected applications"] = "verbundene Anwendungen";
@@ -1109,4 +1110,5 @@ return {
 ["you have #{count} incoming delegations"] = "#{count} eingehende Delegationen";
 ["you restricted your support by rating suggestions as must or must not"] = "deine Untersützung ist aufgrund von 'muss'- oder 'darf nicht'-Verbesserungsvorschlägen beschränkt";
 ["you voted"] = "du hast abgestimmt";
+["do nothing"] = "nichts machen";
 }

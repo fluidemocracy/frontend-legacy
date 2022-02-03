@@ -66,4 +66,13 @@ if locale.get("lang") == "de" then
   }
 end
 
+app.single_unit_id = config.single_unit_id
+
+if app.session.member then
+  local member_single_unit_id = app.session.member:get_single_unit_id() or config.single_unit_id
+  if member_single_unit_id then
+    app.single_unit_id = member_single_unit_id
+  end
+end
+
 execute.inner()

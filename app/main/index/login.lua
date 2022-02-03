@@ -5,8 +5,8 @@ ui.tag{
   end
 }
 
-ui.title(_"Login")
-app.html_title.title = _"Login"
+ui.title(_"Login [headline]")
+app.html_title.title = _"Login [headline]"
 
 ui.container{ attr = { class = "mdl-grid" }, content = function()
   ui.container{ attr = { class = "mdl-cell mdl-cell--12-col" }, content = function()
@@ -14,7 +14,7 @@ ui.container{ attr = { class = "mdl-grid" }, content = function()
 
     execute.view{ module = "index", view = "_lang_chooser" }
 
-    ui.heading{ level = 1, content = _"Login" }
+    ui.heading{ level = 1, content = _"Login [headline]" }
 
     local redirect_params = {}
     local redirect_params_string = param.get("redirect_params") 
@@ -80,7 +80,7 @@ ui.container{ attr = { class = "mdl-grid" }, content = function()
           attr = {
             type = "submit",
             class = "mdl-button mdl-js-button mdl-button--raised mdl-button--colored",
-            value = _'Login'
+            value = _"Login [button]"
           }
         }
         slot.put(" &nbsp; ")

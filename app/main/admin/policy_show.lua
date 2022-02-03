@@ -107,13 +107,13 @@ ui.grid{ content = function()
           id = policy.id,
           content = function()
 
-            field("index", "Index (for sorting)", hint and "1" or nil)
+            field("index", _"Index (for sorting)", hint and "1" or nil)
             ui.field.boolean{ label = _"Active?", name = "active", value = hint and true or nil }
 
-            field("name", "Name")
+            field("name", _"Name")
           
             ui.field.text{ label = _"Description", name = "description", multiline = true }
-            ui.field.text{ label = _"Hint",        readonly = true, 
+            ui.field.text{ label = "",        readonly = true, 
                             value = _"Interval format:" .. " 3 mons 2 weeks 1 day 10:30:15" }
 
                             

@@ -338,7 +338,7 @@ return {
 ["Invite an initiator to initiative"] = "Inviti inicionton al la iniciato";
 ["Invite code"] = "Invitokodo";
 ["Invite member"] = false;
-["Invited"] = "Invitita";
+["Invited [as initiator]"] = "Invitita";
 ["Issue #"] = false;
 ["Issue ##{id}"] = "Temo ##{id}";
 ["Issue ##{issue_id}: #{initiative_name}"] = false;
@@ -365,7 +365,8 @@ return {
 ["Lists must be preceeded and followed by at least one blank line"] = false;
 ["Lock member?"] = false;
 ["Locked?"] = "Ĉu blokita?";
-["Login"] = "Ensaluti";
+["Login [headline]"] = "Ensaluti";
+["Login [button]"] = "Ensaluti";
 ["Login name"] = "Salutnomo";
 ["Login name request"] = false;
 ["Login-Name: "] = false;
