@@ -17,6 +17,7 @@ function util.html_is_safe(str)
   local heading = false  -- <h1-6> tag open
   local list    = false  -- <ol> or <ul> (but no corresponding <li>) tag open
   local listelm = false  -- <li> tag (but no further <ol> or <ul> tag) open
+  local pre     = false  -- <pre> tag open
 
   -- Function looped with tail-calls:
   local function loop(str)
@@ -25,8 +26,8 @@ function util.html_is_safe(str)
     --       even if HTML5 allows it.
 
     -- Find any "<" or ">" character and determine context, i.e.
-    -- pre = text before character, tag = text until closing ">", and rest:
-    local pre, tag, rest = string.match(str, "^(.-)([<>][^<>]*>?)(.*)")
+    -- prefix = text before character, tag = text until closing ">", and rest:
+    local prefix, tag, rest = string.match(str, "^(.-)([<>][^<>]*>?)(.*)")
 
     -- If no more "<" or ">" characters are found,
     -- then return true if all tags have been closed:
@@ -40,7 +41,7 @@ function util.html_is_safe(str)
 
     -- Disallow text content (except inter-element white-space) in <ol> or <ul>
     -- when outside <li>:
-    if list and string.find(pre, "[^\t\n\f\r ]") then
+    if list and string.find(prefix, "[^\t\n\f\r ]") then
       return false, "Text content in list but outside list element"
     end
 
@@ -68,6 +69,8 @@ function util.html_is_safe(str)
       elseif closed_tagname == "li" then
         listelm = false
         list = true
+      elseif closed_tagname == "pre" then
+        pre = false
       end
       stack[#stack] = nil
       return loop(rest)
@@ -156,8 +159,16 @@ function util.html_is_safe(str)
       return loop(rest)
     end
 
+    -- Always allow <pre>
+    if tagname == "pre" then
+        pre = true
+        return loop(rest)
+    end
+
     -- Remaining tags require no open <p>, <b>, <i>, <sup>, <sub>,
     -- <a href="...">, or <h1>..</h6> tag:
+    -- TODO: HTML also requires that no <pre> tag is open, but check not done
+    -- here due to used WYSIWYG editor
     if para or bold or italic or supsub or link or heading then
       return false, "Forbidden child tag within paragraph, bold, italic, super/subscript, link, or heading tag"
     end
