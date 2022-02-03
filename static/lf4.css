@@ -592,6 +592,7 @@ select {
 .initiatives .attachment {
   max-width: 180px;
   max-height: 80px;
+  margin-bottom: 10px;
 }
 
 .competing_initiatives .initiatives .attachment {
