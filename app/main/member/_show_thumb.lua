@@ -176,7 +176,7 @@ if member.grade or (issue and weight > 1) or app.session.member_id or app.sessio
         ui.link{ attr = { class = "mdl-menu__link" }, content = _"show profile", module = "member", view = "show", id = member.id }
       end }
     end
-    if app.session.member_id then
+    if app.session.member_id and app.session.member_id ~= member.id then
       ui.tag{ tag = "li", attr = { class = "mdl-menu__item" }, content = function()
         ui.link{
           attr = { class = "mdl-menu__link" },
