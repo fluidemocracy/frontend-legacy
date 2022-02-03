@@ -19,6 +19,12 @@ ui.grid{ content = function()
               view = "show",
               id = initiative_id,
               params = { tab = "suggestions" }
+            },
+            error = {
+              mode = "forward",
+              module = "suggestion",
+              view = "new",
+              params = { initiative_id = initiative_id }
             }
           },
           attr = { class = "section vertical" },
@@ -31,8 +37,16 @@ ui.grid{ content = function()
                 value = _"You are currently not supporting this initiative directly. By adding suggestions to this initiative you will automatically become a potential supporter."
               }
             end
-            ui.field.text{ label = _"A short title (80 chars max)", name = "name" }
-            
+
+            ui.container{ attr = { class = "mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-card__fullwidth" }, content = function ()
+              ui.field.text{
+                attr = { id = "lf-initiative__name", class = "mdl-textfield__input" },
+                label_attr = { class = "mdl-textfield__label", ["for"] = "lf-initiative__name" },
+                label = _"A short title (80 chars max)",
+                name  = "name"
+              }
+            end }
+
             ui.field.text{
               label = _"Describe how the proposal and/or the reasons of the initiative could be improved",
               name = "content",
@@ -51,7 +65,9 @@ ui.grid{ content = function()
               foreign_id = "id",
               foreign_name = "name"
             }
-            
+
+            slot.put("<br>")
+
             ui.submit{ 
               attr = { class = "mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect" },
               text = _"publish suggestion" 
