@@ -28,12 +28,6 @@ function util.html_is_safe(str)
     -- pre = text before character, tag = text until closing ">", and rest:
     local pre, tag, rest = string.match(str, "^(.-)([<>][^<>]*>?)(.*)")
 
-    -- Disallow text content (except inter-element white-space) in <ol> or <ul>
-    -- when outside <li>:
-    if list and string.find(pre, "[^\t\n\f\r ]") then
-      return false, "Text content in list but outside list element"
-    end
-
     -- If no more "<" or ">" characters are found,
     -- then return true if all tags have been closed:
     if not tag then
@@ -42,6 +36,12 @@ function util.html_is_safe(str)
       else
         return false, "Not all tags have been closed"
       end
+    end
+
+    -- Disallow text content (except inter-element white-space) in <ol> or <ul>
+    -- when outside <li>:
+    if list and string.find(pre, "[^\t\n\f\r ]") then
+      return false, "Text content in list but outside list element"
     end
 
     -- Handle (expected) closing tags:
