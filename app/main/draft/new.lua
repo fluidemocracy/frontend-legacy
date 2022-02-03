@@ -22,6 +22,11 @@ else
   end
 end
 
+if #(area.allowed_policies) < 1 then
+  slot.put_into("error", _"Subject area configuration invalid. Please contact the administrator.")
+  return false
+end
+
 local polling = param.get("polling", atom.boolean)
 
 local policy_id = param.get("policy_id", atom.integer)
