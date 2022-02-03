@@ -1,8 +1,11 @@
 local inactive = param.get("inactive", atom.boolean)
+local inactive_policies = param.get("inactive_policies", atom.boolean)
+
+
 
 local units = Unit:get_flattened_tree{ include_inactive = inactive, include_hidden = true }
 
-local policies = Policy:build_selector{ active = not inactive }:exec()
+local policies = Policy:build_selector{ active = not inactive_policies }:exec()
 --local policies = Policy:build_selector{}:add_order_by("index"):exec()
 
 ui.titleAdmin()
@@ -51,16 +54,24 @@ ui.grid{ content = function()
             end
           }
         end
-        
-        slot.put("<br />")
-        ui.link { module = "admin", view = "unit_edit", content = _"Create new unit" }
-        slot.put("<br />")
-        slot.put("<br />")
+     end }
+
+     ui.container{ attr = { class = "mdl-card__actions mdl-card--border" }, content = function()
+        ui.link {
+          attr = { class = "mdl-button mdl-js-button" },
+          module = "admin", view = "unit_edit", content = _"Create new unit"
+        }
         
         if (not inactive) then
-          ui.link { module = "admin", view = "index", params = { inactive = true }, content = _"Show inactive" }
+          ui.link {
+            attr = { class = "mdl-button mdl-js-button" },
+            module = "admin", view = "index", params = { inactive = true }, content = _"Show inactive"
+          }
         else
-          ui.link { module = "admin", view = "index", content = _"Hide inactive" }
+          ui.link {
+            attr = { class = "mdl-button mdl-js-button" },
+            module = "admin", view = "index", content = _"Hide inactive"
+          }
         end
     
       end }
@@ -74,27 +85,23 @@ ui.grid{ content = function()
         ui.heading { attr = { class = "mdl-card__title-text" }, level = 2, content = _"Members" }
       end }
       ui.container{ attr = { class = "mdl-card__content" }, content = function()
-        ui.tag { tag = "ul", attr = { class = "ul" }, content = function()
-          ui.tag { tag = "li", content = function()
-            ui.form{
-              module = "admin", view = "member_list",
-              content = function()
-              
-                ui.field.text{ container_attr = { style = "display: inline-block;" }, label = _"search", name = "search" }
-                
-                ui.submit{ value = _"search" }
-              
-              end
-            }
-          end }
-        end }
-        ui.sidebarSection( "moreLink", function()
-          ui.link{
-            text = _"Register new member",
-            module = "admin",
-            view = "member_edit"
-          }
-        end )
+        ui.form{
+          module = "admin", view = "member_list",
+          content = function()
+            ui.field.text{ container_attr = { style = "display: inline-block;" }, label = _"search", name = "search" }
+            slot.put(" ")
+            ui.submit{ value = _"OK" }
+          end
+        }
+      end }
+
+      ui.container{ attr = { class = "mdl-card__actions mdl-card--border" }, content = function()
+        ui.link{
+          attr = { class = "mdl-button mdl-js-button" },
+          text = _"Add member",
+          module = "admin",
+          view = "member_edit"
+        }
       end }
     end }
 
@@ -115,17 +122,26 @@ ui.grid{ content = function()
             end }
           end
         end }
+      end }
 
+      ui.container{ attr = { class = "mdl-card__actions mdl-card--border" }, content = function()
         ui.link{
-          text = _"Create new policy",
+          attr = { class = "mdl-button mdl-js-button" },
+          text = _"Add policy",
           module = "admin",
           view = "policy_show"
         }
         slot.put(" &nbsp; ")
-        if (not inactive) then
-          ui.link { module = "admin", view = "index", params = { inactive = true }, content = _"Show inactive" }
+        if (not inactive_policies) then
+          ui.link {
+            attr = { class = "mdl-button mdl-js-button" },
+            module = "admin", view = "index", params = { inactive_policies = true }, content = _"Show inactive"
+          }
         else
-          ui.link { module = "admin", view = "index", content = _"Hide inactive" }
+          ui.link {
+            attr = { class = "mdl-button mdl-js-button" },
+            module = "admin", view = "index", content = _"Hide inactive"
+          }
         end
       end }
     end }
@@ -158,12 +174,9 @@ ui.grid{ content = function()
           module = "admin",
           view = "cancel_issue",
           content = function()
-            ui.tag { tag = "ul", attr = { class = "ul" }, content = function()
-              ui.tag { tag = "li", content = function()
-                ui.field.text{ container_attr = { style = "display: inline-block;" }, label = _"Issue #", name = "id" }
-                ui.submit{ text = _"cancel issue" }
-              end }
-            end }
+            ui.field.text{ container_attr = { style = "display: inline-block;" }, label = _"Issue #", name = "id" }
+            slot.put(" ")
+            ui.submit{ text = _"OK" }
           end
         }
       end }
