@@ -45,7 +45,7 @@ local deactivated = member and member.locked and member.login == nil and member.
 
 ui.titleAdmin(_"Member")
 
-local units = Unit:get_flattened_tree{ include_inactive = inactive, include_hidden = true, member_id = member.id }
+local units = Unit:get_flattened_tree{ include_inactive = inactive, include_hidden = true, member_id = member and member.id }
   
 ui.grid{ content = function()
 
