@@ -21,6 +21,7 @@ installed:
   * bmake
   * lsb-release
   * imagemagick
+  * sassc
 
 If you're using any other Linux distribution or BSD system, install the
 necessary software components accordingly.
