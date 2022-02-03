@@ -1110,4 +1110,5 @@ return {
 ["you have #{count} incoming delegations"] = "#{count} eingehende Delegationen";
 ["you restricted your support by rating suggestions as must or must not"] = "deine Untersützung ist aufgrund von 'muss'- oder 'darf nicht'-Verbesserungsvorschlägen beschränkt";
 ["you voted"] = "du hast abgestimmt";
+["do nothing"] = "nichts machen";
 }
