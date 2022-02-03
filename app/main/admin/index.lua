@@ -49,7 +49,6 @@ ui.grid{ content = function()
                 ui.tag { tag = "li", content = function ()
                   ui.link { module = "admin", view = "area_show", params = { unit_id = unit.id }, content = _"+ add new subject area" }
                 end }
-                slot.put("<br />")
               end }
             end
           }
