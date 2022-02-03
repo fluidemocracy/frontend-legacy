@@ -15,8 +15,12 @@ if for_initiative or for_issue or for_member then
   mode = "timeline"
 end
 
-if config.single_unit_id then
-  for_unit = Unit:by_id(config.single_unit_id)
+if app.single_unit_id then
+  if request.get_param{ name = "unit" } then
+    for_unit = Unit:by_id(request.get_param{ name = "unit" })
+  else
+    for_unit = Unit:by_id(app.single_unit_id)
+  end
 end
 
 local selector
@@ -201,8 +205,8 @@ local function doit()
       if not for_issue and not for_initiative then
         ui.container{ attr = { class = "mdl-card__title mdl-card--has-fab mdl-card--border card-issue" }, content = function()
           ui.container{ attr = { class = "contextlinks" }, content = function()
-            if not (config.single_unit_id and config.single_area_id) then
-              if not config.single_unit_id then
+            if not (app.single_unit_id and config.single_area_id) then
+              if not app.single_unit_id then
                 ui.icon("group")
                 slot.put(" ")
                 ui.link{
@@ -210,7 +214,7 @@ local function doit()
                   attr = { class = "unit" }, content = issue.area.unit.name                 }
               end
               if not config.single_area_id then
-                if not config.single_unit_id then
+                if not app.single_unit_id then
                   slot.put(" &nbsp;&nbsp;&nbsp; ")
                 end
                 ui.icon("category")
@@ -413,6 +417,9 @@ else
     ui.paginate{
       selector = selector,
       per_page = 25,
+      link_attr = { class = "mdl-button mdl-js-button mdl-button--raised" },
+      active_link_attr = { class = "mdl-button mdl-js-button mdl-button--raised mdl-button--colored" },
+      position = "after",
       content = doit
     }
   end

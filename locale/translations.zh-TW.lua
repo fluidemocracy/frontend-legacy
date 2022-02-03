@@ -338,7 +338,7 @@ return {
 ["Invite an initiator to initiative"] = "邀請發起者來提案";
 ["Invite code"] = "邀請碼";
 ["Invite member"] = false;
-["Invited"] = "已被邀請";
+["Invited [as initiator]"] = "已被邀請";
 ["Issue #"] = false;
 ["Issue ##{id}"] = "議題 ##{id}";
 ["Issue ##{issue_id}: #{initiative_name}"] = false;
@@ -365,7 +365,8 @@ return {
 ["Lists must be preceeded and followed by at least one blank line"] = false;
 ["Lock member?"] = "封鎖成員？";
 ["Locked?"] = "被封鎖？";
-["Login"] = "登入";
+["Login [headline]"] = "登入";
+["Login [button]"] = "登入";
 ["Login name"] = "帳號";
 ["Login name request"] = false;
 ["Login-Name: "] = false;
@@ -513,7 +514,8 @@ return {
 ["Registration (step 1 of 3: Invite code)"] = "註冊 (三步驟之一：邀請碼)";
 ["Registration (step 2 of 3: Personal information)"] = "註冊 (三步驟之二：個人資料)";
 ["Registration (step 3 of 3: Terms of use and password)"] = "註冊 (三步驟之三：使用條款及密碼)";
-["Rejected"] = "被婉拒";
+["Rejected [initiator invitation]"] = "被婉拒";
+["Rejected [initiative]"] = "被婉拒";
 ["Rejected (rank #{rank})"] = false;
 ["Remove"] = "移除";
 ["Remove an initiator from initiative"] = false;

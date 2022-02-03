@@ -70,10 +70,9 @@ if not config.meta_navigation_items_func or not config.meta_navigation_html_func
                 ui.tag{ tag = "i", attr = { class = "material-icons", ["aria-hidden"] = "true", role="presentation" }, content = "exit_to_app" }
                 slot.put(" ")
                 ui.tag{ attr = { class = "mdl-layout--large-screen-only" }, content = function()
-                  ui.tag{ content = _"Login" }
+                  ui.tag{ content = _"Login [button]" }
                 end }
               end,
-              text   = _"Login",
               attr = { class = "mdl-navigation__link" }
             }
             if config.login and config.login.method == "oauth2" then
@@ -116,6 +115,10 @@ if not config.meta_navigation_items_func or not config.meta_navigation_html_func
   end)
 end
 
+if config.survey and request.get_module() ~= "survey" then
+  execute.view{ module = "survey", view = "_notification" }
+end
+
 -- show notifications about things the user should take care of
 --[[
 if app.session.member then
@@ -152,13 +155,22 @@ slot.select ("footer", function ()
       view   = 'about'
     }
   end }
-  if not config.extra_footer_func then
-    if config.use_terms and app.session.member then
+  if not config.extra_footer_func and (config.use_terms_public_access or app.session.member)then
+    if config.use_terms then
       ui.tag{ tag = "li", content = function()
         ui.link{
-          text   = _"Use terms",
+          text   = config.use_terms_linktext or _"Use terms",
           module = 'index',
           view   = 'usage_terms'
+        }
+      end }
+    end
+    if config.privacy_policy then
+      ui.tag{ tag = "li", content = function()
+        ui.link{
+          text   = config.privacy_policy_linktext or _"Privacy policy",
+          module = 'index',
+          view   = 'privacy'
         }
       end }
     end

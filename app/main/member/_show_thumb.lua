@@ -128,9 +128,9 @@ ui.container{
 
     if initiator and initiator.accepted then
       if member.accepted == nil then
-        slot.put(_"Invited")
+        slot.put(_"Invited [as initiator]")
       elseif member.accepted == false then
-        slot.put(_"Rejected")
+        slot.put(_"Rejected [initiator invitation]")
       end
     end
 
@@ -176,7 +176,7 @@ if member.grade or (issue and weight > 1) or app.session.member_id or app.sessio
         ui.link{ attr = { class = "mdl-menu__link" }, content = _"show profile", module = "member", view = "show", id = member.id }
       end }
     end
-    if app.session.member_id then
+    if app.session.member_id and app.session.member_id ~= member.id then
       ui.tag{ tag = "li", attr = { class = "mdl-menu__item" }, content = function()
         ui.link{
           attr = { class = "mdl-menu__link" },
@@ -190,7 +190,8 @@ if member.grade or (issue and weight > 1) or app.session.member_id or app.sessio
               module = request.get_module(),
               view = request.get_view(),
               id = request.get_id_string(),
-              params = request.get_param_strings()
+              params = request.get_param_strings(),
+              anchor = "member_list"
             }
           }
         }

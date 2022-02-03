@@ -32,51 +32,11 @@ ui.grid{ content = function()
                 ui.container{
                   attr = { class = "mdl-textfield mdl-js-textfield mdl-textfield--floating-label" },
                   content = function()
-                    ui.tag{ tag = "input", attr = { class = "mdl-textfield__input", name = field.id, id = "input_" .. field.id, readonly = config.locked_profile_fields[field.id], value = profile and profile.profile and profile.profile[field.id] or nil } }
+                    ui.tag{ tag = "input", attr = { class = "mdl-textfield__input", name = field.id, id = "input_" .. field.id, readonly = field.validate_func and "readonly" or nil, value = profile and profile.profile and profile.profile[field.id] or nil } }
                     ui.tag{ tag = "label", attr = { class = "mdl-textfield__label", ["for"] = "input_" .. field.id }, content = field.name }
                 end }
                 slot.put("<br />")
               end
-            end
-            if not config.enforce_formatting_engine then
-              ui.field.select{
-                label = _"Wiki engine for statement",
-                name = "formatting_engine",
-                foreign_records = config.formatting_engines,
-                attr = {id = "formatting_engine"},
-                foreign_id = "id",
-                foreign_name = "name",
-                value = param.get("formatting_engine")
-              }
-              ui.tag{
-                tag = "div",
-                content = function()
-                  ui.tag{
-                    tag = "label",
-                    attr = { class = "ui_field_label" },
-                    content = function() slot.put("&nbsp;") end,
-                  }
-                  ui.tag{
-                    content = function()
-                      ui.link{
-                        text = _"Syntax help",
-                        module = "help",
-                        view = "show",
-                        id = "wikisyntax",
-                        attr = {onClick="this.href=this.href.replace(/wikisyntax[^.]*/g, 'wikisyntax_'+getElementById('formatting_engine').value)"}
-                      }
-                      slot.put(" ")
-                      ui.link{
-                        text = _"(new window)",
-                        module = "help",
-                        view = "show",
-                        id = "wikisyntax",
-                        attr = {target = "_blank", onClick="this.href=this.href.replace(/wikisyntax[^.]*/g, 'wikisyntax_'+getElementById('formatting_engine').value)"}
-                      }
-                    end
-                  }
-                end
-              }
             end
             ui.field.text{
               label = _"Statement",

@@ -72,6 +72,7 @@ filter[#filter+1] = {
 
 
 local function list_members()
+  ui.tag{ tag = "a", attr = { name = "member_list" }, content = "" }
   local ui_paginate = ui.paginate
   if no_paginate then
     ui_paginate = function (args) args.content() end

@@ -26,7 +26,7 @@ ui.grid{ content = function()
               container_attr = { class = "mdl-textfield mdl-js-textfield mdl-textfield--floating-label" },
               attr = { id = "lf-member__old_password", class = "mdl-textfield__input" },
               label_attr = { class = "mdl-textfield__label", ["for"] = "lf-member__old_password" },
-              label= _'Curent password',
+              label= _'Current password',
               name = 'old_password',
               value = ""
             }

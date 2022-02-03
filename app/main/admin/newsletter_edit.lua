@@ -40,7 +40,7 @@ ui.grid{ content = function()
             end
             ui.field.text{ label = _"Date", name = "published" }
             ui.field.select{
-              label = "Recipient",
+              label = _"Recipient",
               name = "unit_id",
               foreign_records = units,
               foreign_id = "id",

@@ -32,9 +32,9 @@ ui.grid{ content = function()
                 content = function(record)
                   local text
                   if record.accepted then
-                    text = _"accepted"
+                    text = _"accepted [account access]"
                   elseif record.accepted == false then
-                    text = _"rejected"
+                    text = _"rejected [account access]"
                   else
                     text = _"not decided yet"
                   end

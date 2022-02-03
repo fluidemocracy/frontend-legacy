@@ -1,6 +1,5 @@
 #!/usr/bin/env lua
 return {
-[" to receive updates by email"] = " di ricevere aggiornamenti via email";
 ["#{closed_ago} ago"] = "#{closed_ago} fa";
 ["#{count} Neutral"] = "#{count} Neutrali";
 ["#{count} No"] = "#{count} No";
@@ -231,7 +230,7 @@ return {
 ["Edit"] = "Modifica";
 ["Edit again"] = "Modifica ancora";
 ["Edit voting comment"] = "Modifica il commento al voto";
-["Edit your global "] = "Modifica le tue ";
+["Edit your global <link>notification settings</link> to receive updates by email."] = "Modifica le tue <link>impostazioni notifiche</link> di ricevere aggiornamenti via email.";
 ["Edit your profile data"] = "Modifica i dati del tuo profilo";
 ["Eligible as winner"] = "Candidato all'approvazione";
 ["Eligible members (#{count})"] = "Utenti abilitati (#{count})";
@@ -370,7 +369,7 @@ return {
 ["Invite code"] = "Codice di invito";
 ["Invite letter"] = false;
 ["Invite member"] = "Invita utente";
-["Invited"] = "Invitato";
+["Invited [as initiator]"] = "Invitato";
 ["Issue #"] = "Tematica #";
 ["Issue ##{id}"] = "Tematica ##{id}";
 ["Issue ##{issue_id}: #{initiative_name}"] = "Tematica ##{issue_id}: #{initiative_name}";
@@ -394,7 +393,8 @@ return {
 ["Lists must be preceeded and followed by at least one blank line"] = "Le liste devono essere precedute da almeno una linea vuota";
 ["Lock member?"] = "Blocca membro?";
 ["Locked?"] = "Bloccato?";
-["Login"] = "Login";
+["Login [headline]"] = "Login";
+["Login [button]"] = "Login";
 ["Login name"] = "Nome utente";
 ["Login name request"] = "Richiedi login username";
 ["Login-Name: "] = "Login username";
@@ -585,7 +585,8 @@ return {
 ["Registration rejected"] = false;
 ["Registration succeeded"] = false;
 ["Reject access privilege"] = false;
-["Rejected"] = "Rifiutato";
+["Rejected [initiator invitation]"] = "Rifiutato";
+["Rejected [initiative]"] = "Rifiutato";
 ["Rejected (#{count})"] = false;
 ["Rejected (rank #{rank})"] = "Rifiutata (posizione #{rank})";
 ["Rejected accreditation requests"] = false;
@@ -877,7 +878,7 @@ return {
 ["[not displayed public]"] = "[non visibile pubblicamente]";
 ["abandoned"] = "abbandonato";
 ["accept invitation"] = "accetta invito";
-["accepted"] = false;
+["accepted [account access]"] = false;
 ["account activated"] = false;
 ["action"] = "azione";
 ["activate account"] = "attiva account";
@@ -894,7 +895,8 @@ return {
 ["all results"] = false;
 ["all subject areas"] = "Tutte aree tematiche";
 ["allow invitation again"] = "abilita nuovamente inviti";
-["and"] = "e";
+["#{opinion} and #{implemented}"] = "#{opinion} e #{implemented}";
+["#{opinion} but #{implemented}"] = "#{opinion} ma #{implemented}";
 ["and #{count} more initiatives"] = "ed altre #{count} iniziative";
 ["area"] = "area";
 ["at least #{count} approvals"] = "almeno #{count} approvazioni";
@@ -906,7 +908,6 @@ return {
 ["browse the platform as a guest"] = "navigare il portale come utente non registrato";
 ["browse the portal as an unregistered user"] = "navigare il portale come utente non registrato";
 ["browse through the competing initiatives"] = "esplora le iniziative alternative";
-["but"] = "ma";
 ["by"] = false;
 ["by A-Z"] = "da A-Z";
 ["by Z-A"] = "da Z-A";
@@ -1057,7 +1058,7 @@ return {
 ["reached #{quorum}"] = "raggiunto ";
 ["refresh my support"] = "rinnova il mio supporto";
 ["refuse invitation"] = "rifiuta l'invito";
-["rejected"] = false;
+["rejected [account access]"] = false;
 ["remove an initiator"] = "rimuovi un promotore";
 ["remove from my contact list"] = "rimuovi dalla lista dei contatti";
 ["remove my interest"] = "togli il mio interesse";

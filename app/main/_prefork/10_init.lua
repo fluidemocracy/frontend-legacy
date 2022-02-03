@@ -38,7 +38,7 @@ if config.mail_subject_prefix == nil then
 end
 
 if config.notification_digest_template == nil then
-  config.notification_digest_template = "Hello #{name},\n\nthis is your personal digest.\n\n#{digest}\n"
+  config.notification_digest_template = _"Hello #{name},\n\nthis is your personal digest.\n\n#{digest}\n"
 end
 
 if config.member_image_content_type == nil then
@@ -272,7 +272,7 @@ if config.firstlife_groups then
   listen{
     {
       proto = "interval",
-      name  = "send_pending_notifications",
+      name  = "mirror_firstlife_groups",
       delay = 5,
       handler = function()
         firstlife_mirror_groups()

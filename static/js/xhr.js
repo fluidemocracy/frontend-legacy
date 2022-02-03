@@ -41,7 +41,9 @@ function rateSuggestion(id, degree, fulfilled) {
     document.getElementById('rating_fulfilled').MaterialRadio.uncheck();    
     document.getElementById('rating_notfulfilled').MaterialRadio.uncheck();    
   }
-  document.getElementById('rating_dialog').showModal();
+//  document.getElementById('rating_dialog').showModal();
+  document.getElementById('rating_dialog').classList.remove("hidden");
+
 }
 
 function updateOpinion() {
@@ -68,7 +70,7 @@ function updateOpinion() {
 
   var degreeText = rateSuggestionDegreeTexts[degree];
   var fulfilledText = fulfilled ? rateSuggestionFulfilledText : rateSuggestionNotFulfilledText;
-  var andButText;
+  var textTemplate;
   var icon;
   var iconColor;
   if (
@@ -79,12 +81,14 @@ function updateOpinion() {
     if (degree == 2 || degree == -2) { 
       iconColor = "red";
     }
-    andButText = rateSuggestionButText;
+    textTemplate = rateSuggestionButText;
   } else {
-    andButText = rateSuggestionAndText;
+    textTemplate = rateSuggestionAndText;
     icon = "done";
   }
-  var text = degreeText + " " + andButText + " " + fulfilledText;
+  textTemplate = textTemplate.replace("#{opinion}", degreeText);
+  textTemplate = textTemplate.replace("#{implemented}", fulfilledText);
+  var text = textTemplate;
   if (degree == 0) {
     text = "";
     icon = "blank";
@@ -102,7 +106,8 @@ function updateOpinion() {
     document.getElementById("s" + suggestionId + "_rate_button").innerHTML = rateSuggestionUpdateRatingText;
   }
   document.getElementById("s" + suggestionId + "_rate_button").setAttribute("onclick", "rateSuggestion(" + suggestionId + ", " + degree + ", " + fulfilled + ");return false;")
-  document.getElementById('rating_dialog').close();
+//  document.getElementById('rating_dialog').close();
+  document.getElementById('rating_dialog').classList.add("hidden");
 
   fetch(baseURL + "opinion/xhr_update", {
     method: "POST",

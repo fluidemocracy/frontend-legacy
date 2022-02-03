@@ -72,6 +72,12 @@ if not initiative and not issue and not area then
   return false
 end
 
+if not initiative and not issue and #(area.allowed_policies) < 1 then
+  slot.put_into("error", _"Subject area configuration invalid. Please contact the administrator.")
+  return false
+end
+
+
 ui.form{
   record = draft,
   attr = { class = "vertical section", enctype = 'multipart/form-data' },
@@ -128,13 +134,14 @@ ui.form{
 -- -------- PREVIEW
             if param.get("preview") and slot.get_content("error") == "" then
               ui.sectionRow( function()
-                if not issue and not initiative then
+                if not issue and not initiative and #area.allowed_policies > 1 then
                   ui.container { content = policy and policy.name or "" }
+                  slot.put("<br />")
                 end
                 if param.get("free_timing") then
                   ui.container { content = param.get("free_timing") }
+                  slot.put("<br />")
                 end
-                slot.put("<br />")
                 ui.field.hidden{ name = "policy_id", value = param.get("policy_id") }
                 ui.field.hidden{ name = "name", value = param.get("name") }
                 if config.initiative_abstract then
@@ -253,14 +260,21 @@ ui.form{
                     tmp[#tmp+1] = allowed_policy
                   end
                 end
-                ui.container{ content = _"Please choose a policy for the new issue:" }
-                ui.field.select{
-                  name = "policy_id",
-                  foreign_records = tmp,
-                  foreign_id = "id",
-                  foreign_name = "name",
-                  value = param.get("policy_id", atom.integer) or area.default_policy and area.default_policy.id
-                }
+                if #area.allowed_policies > 1 then
+                  ui.container{ content = _"Please choose a policy for the new issue:" }
+                  ui.field.select{
+                    name = "policy_id",
+                    foreign_records = tmp,
+                    foreign_id = "id",
+                    foreign_name = "name",
+                    value = param.get("policy_id", atom.integer) or area.default_policy and area.default_policy.id
+                  }
+                else
+                  ui.field.hidden{
+                    name = "policy_id",
+                    value = area.allowed_policies[1].id
+                  }
+                end
                 if policy and policy.free_timeable then
                   local available_timings
                   if config.free_timing and config.free_timing.available_func then
