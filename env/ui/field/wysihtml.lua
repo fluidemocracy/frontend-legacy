@@ -1,23 +1,26 @@
 function ui.field.wysihtml(args)
   
   local toolbar = {
-    { command = "bold", title ="CTRL+B", icon = "format_bold" },
-    { command = "italic", title ="CTRL+I", icon = "format_italic" },
-    { command = "createLink", icon = "insert_link" },
-    { command = "removeLink", icon = "insert_link", crossed = "\\" },
---    { command = "insertImage", icon = "insert_image" },
+    { command = "formatBlock", command_blank = "true", icon = "view_headline" },
     { command = "formatBlock", command_value = "h1", icon = "title", head_level = "1" },
     { command = "formatBlock", command_value = "h2", icon = "title", head_level = "2" },
     { command = "formatBlock", command_value = "h3", icon = "title", head_level = "3" },
-    { command = "formatBlock", command_blank = "true", icon = "format_clear" },
-    { command = "insertBlockQuote", icon = "format_quote" },
+    { command = "formatBlock", command_value = "pre", icon = "code" },
+    { },
+    { command = "bold", title ="CTRL+B", icon = "format_bold" },
+    { command = "italic", title ="CTRL+I", icon = "format_italic" },
+    { },
     { command = "insertUnorderedList", icon = "format_list_bulleted" },
     { command = "insertOrderedList", icon = "format_list_numbered" },
+    { },
     { command = "outdentList", icon = "format_indent_decrease" },
     { command = "indentList", icon = "format_indent_increase" },
---    { command = "alignLeftStyle", icon = "format_align_left" },
---    { command = "alignRightStyle", icon = "format_align_right" },
---    { command = "alignCenterStyle", icon = "format_align_center" },
+    { },
+    { command = "insertBlockQuote", icon = "format_quote" },
+    { },
+    { command = "createLink", icon = "insert_link" },
+    { command = "removeLink", icon = "link_off" },
+    { },
     { command = "undo", icon = "undo" },
     { command = "redo", icon = "redo" }
   }
@@ -37,15 +40,22 @@ function ui.field.wysihtml(args)
   
   ui.container{ attr = { id = "toolbar", class = "toolbar", style = "display: none;" }, content = function()
     for i, t in ipairs(toolbar) do
-      ui.tag{ tag = "a", attr = { ["data-wysihtml-command"] = t.command, ["data-wysihtml-command-value"] = t.command_value, ["data-wysihtml-command-blank-value"] = t.command_blank, title = t.shortcut }, content = function()
-        ui.tag{ tag = "i", attr = { class = "material-icons" }, content = t.icon }
-        if t.crossed then
-          ui.tag{ attr = { class = "crossed" }, content = t.crossed }
-        end
-        if t.head_level then
-          ui.tag{ attr = { class = "head_level" }, content = t.head_level }
-        end
-      end }
+      if t.command then
+        ui.tag{ tag = "a", attr = {
+          class = "mdl-button mdl-button--raised",
+          ["data-wysihtml-command"] = t.command,
+          ["data-wysihtml-command-value"] = t.command_value,
+          ["data-wysihtml-command-blank-value"] = t.command_blank,
+          title = t.shortcut
+        }, content = function()
+          ui.tag{ tag = "i", attr = { class = "material-icons" }, content = t.icon }
+          if t.head_level then
+            ui.tag{ attr = { class = "head_level" }, content = t.head_level }
+          end
+        end }
+      else
+        slot.put(" &nbsp; ")
+      end
     end
     slot.put([[
       <div data-wysihtml-dialog="createLink" style="display: none;">
@@ -87,7 +97,9 @@ function ui.field.wysihtml(args)
       var editor = new wysihtml.Editor("]] .. args.attr.id .. [[", {
         toolbar:       "toolbar",
         parserRules:   wysihtmlParserRules,
-        useLineBreaks: true
+        useLineBreaks: true,
+        stylesheets: "]] .. request.get_absolute_baseurl() .. [[static/lf4.css",
+        name: "draft"
       });
     }
     if(window.addEventListener){

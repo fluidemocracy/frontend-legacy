@@ -11,6 +11,10 @@
   src: url("font/RobotoSlab-Regular.ttf");
 }
 @font-face {
+  font-family: "Roboto Slab Bold";
+  src: url("font/RobotoSlab-Bold.ttf");
+}
+@font-face {
   font-family: 'Material Icons';
   font-style: normal;
   font-weight: 400;
@@ -298,31 +302,33 @@ color: rgba(0,0,0, 0.87);
   padding: 16px;
   border-radius: 2px;
 }
+
+.toolbar {
+  margin-bottom: 5px;
+}
+
 .toolbar a {
   color: #000;
   display: inline-block;
-  border: 1px solid #ccc;
+  padding: 0;
+  min-width: 0;
+  height: inherit;
+  line-height: 1.5;
   position: relative;
+  margin-right: 5px;
 }
 
 .toolbar a.wysihtml-command-active {
-  background: #000;
+  background: #555;
   color: #fff;
-
 }
 
-.toolbar a span.crossed {
-  position: absolute;
-  top: 0;
-  left: 8px;
-  font-weight: bold;
-  font-size: 200%;
-  line-height: 80%;
-}
 .toolbar a span.head_level {
   position: absolute;
-  right: 0;
-  bottom: 0;
+  right: 1px;
+  bottom: 3px;
+  font-size: 90%;
+  line-height: 1;
 }
 
 textarea {
@@ -344,11 +350,13 @@ textarea {
   height: 9px;
 }
 .draft {
-  font-family: 'Roboto Slab';
+  font-family: 'Roboto Slab' !important;
+  font-size: 14px !important;
   font-weight: 300;
   overflow: auto;
   clear: left;
 }
+
 .draft img {
   float: right;
   margin-left: 1em;
@@ -394,16 +402,28 @@ textarea {
 }
 
 .draft h1 {
+  font-family: 'Roboto';
+  font-weight: 300;
   font-size: 150%;
   margin-bottom: 0;
+  line-height: 1.35;
+  margin-top: 24px;
 }
 .draft h2 {
+  font-family: 'Roboto';
+  font-weight: 300;
   font-size: 133%;
   margin-bottom: 0;
+  line-height: 48px;
+  margin-top: 24px;
 }
 .draft h3 {
+  font-family: 'Roboto';
+  font-weight: 300;
   font-size: 125%;
   margin-bottom: 0;
+  line-height: 40px;
+  margin-top: 24px;
 }
 .draft > a:first-child + h1,
 .draft > h1:first-child,
@@ -415,6 +435,12 @@ textarea {
   .draft > a:first-child + h1 {
     margin-top: 20px;
   }
+}
+
+.draft > pre {
+  background: #eee;
+  padding: 5px 10px;
+  border-radius: 5px;
 }
 
 
