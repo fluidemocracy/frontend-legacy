@@ -13,7 +13,7 @@ local function field(name, label, value, tooltip)
 end
 
 local function field_boolean(id, name, checked, label, depth)
-  ui.container{ attr = { style = "margin-left: " .. (depth -1) * 20 .. "px;" }, content = function()
+  ui.container{ attr = { style = "margin-left: " .. (depth -1) * 24 .. "px;" }, content = function()
     ui.tag{ tag = "label", attr = {
         class = "mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect",
         ["for"] = id
