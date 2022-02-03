@@ -22,11 +22,6 @@ else
   end
 end
 
-if #(area.allowed_policies) < 1 then
-  slot.put_into("error", _"Subject area configuration invalid. Please contact the administrator.")
-  return false
-end
-
 local polling = param.get("polling", atom.boolean)
 
 local policy_id = param.get("policy_id", atom.integer)
@@ -76,6 +71,12 @@ if not initiative and not issue and not area then
   ui.heading{ content = _"Missing parameter" }
   return false
 end
+
+if not initiative and not issue and #(area.allowed_policies) < 1 then
+  slot.put_into("error", _"Subject area configuration invalid. Please contact the administrator.")
+  return false
+end
+
 
 ui.form{
   record = draft,
