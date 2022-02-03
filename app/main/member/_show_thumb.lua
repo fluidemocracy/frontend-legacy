@@ -190,7 +190,8 @@ if member.grade or (issue and weight > 1) or app.session.member_id or app.sessio
               module = request.get_module(),
               view = request.get_view(),
               id = request.get_id_string(),
-              params = request.get_param_strings()
+              params = request.get_param_strings(),
+              anchor = "member_list"
             }
           }
         }
