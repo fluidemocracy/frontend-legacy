@@ -233,9 +233,13 @@ if not param.get("no_star", "boolean") and issue then
     local own_weight = privilege and privilege.weight or 0
 
     if not issue.closed and info.own_participation and info.weight and info.weight > own_weight then
+      local weight = info.weight - own_weight
+      if config.token and config.token.unit_id == issue.area.unit_id then
+        weight = weight / 100 .. " " .. config.token.token_name
+      end
       slot.put(" ")
       ui.link { 
-        attr = { class = "right" }, content = "+" .. (info.weight - own_weight),
+        attr = { class = "right" }, content = "+" .. weight,
         module = "interest", view = "show_incoming", params = { 
           issue_id = issue.id, member_id = member.id
         }
