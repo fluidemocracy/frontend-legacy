@@ -223,10 +223,19 @@ if not param.get("no_star", "boolean") and issue then
         ui.tag{ tag = "i", attr = { id = "issue_" .. issue.id .. "_interest_icon", class = "material-icons" }, content = "star" }
       end
     }
-    if not issue.closed and info.own_participation and info.weight and info.weight > 1 then
+
+    local privilege = Privilege:new_selector()
+      :add_where{ "member_id = ?", member.id }
+      :add_where{ "unit_id = ?", issue.area.unit_id }
+      :optional_object_mode()
+      :exec()
+
+    local own_weight = privilege and privilege.weight or 0
+
+    if not issue.closed and info.own_participation and info.weight and info.weight > own_weight then
       slot.put(" ")
       ui.link { 
-        attr = { class = "right" }, content = "+" .. (info.weight - 1),
+        attr = { class = "right" }, content = "+" .. (info.weight - own_weight),
         module = "interest", view = "show_incoming", params = { 
           issue_id = issue.id, member_id = member.id
         }
