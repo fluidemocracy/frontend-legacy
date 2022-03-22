@@ -283,5 +283,21 @@ if config.firstlife_groups then
   }
 end
 
+if config.token then
+  assert(loadcached(encode.file_path(WEBMCP_BASE_PATH, "lib", "token", "sync.lua")))()
+  listen{
+    {
+      proto = "interval",
+      name  = "sync_token",
+      delay = 5,
+      handler = function()
+        sync_token()
+      end
+    },
+    min_fork = 1,
+    max_fork = 1
+  }
+end
+
 execute.inner()
 
