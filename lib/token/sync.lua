@@ -31,13 +31,11 @@ function _G.sync_token()
   end
 
   for i, entry in ipairs(data.data.balanceNotificationMany) do
-    print(entry.account_pk, entry.amount)
     local member = Member:new_selector()
       :join("member_profile", nil, "member_profile.member_id = member.id")
       :add_where{ "member_profile.profile->>'" .. config.token.key_profile_field .."' = ?", entry.account_pk }
       :optional_object_mode()
       :exec()
-    print(member.name)
     if member then
       local privilege = Privilege:new()
       privilege.unit_id = config.token.unit_id
