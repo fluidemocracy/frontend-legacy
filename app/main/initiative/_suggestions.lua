@@ -140,7 +140,7 @@ ui.container {
 
     ui.container { content = _"written and rated by the supportes of this initiative to improve the proposal and its reasons" }
 
-    if app.session.member_id and initiative.member_info.supported and not active_trustee_id then
+    if (initiative.issue.state == "admission" or initiative.issue.state == "discussion") and app.session.member_id and initiative.member_info.supported and not active_trustee_id then
       ui.link {
         attr = {
             style = "margin-top: 1ex;",
