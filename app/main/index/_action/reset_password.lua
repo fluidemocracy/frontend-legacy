@@ -1,5 +1,9 @@
 trace.disable()
-    
+
+if config.hide_reset_password then
+  return
+end
+
 local secret = param.get("secret")
 
 if not secret then

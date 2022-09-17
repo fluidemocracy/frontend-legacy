@@ -1,5 +1,9 @@
 trace.disable()
 
+if config.hide_recover_login then
+  return
+end
+
 local email = param.get("email")
 
 local members = Member:new_selector()
