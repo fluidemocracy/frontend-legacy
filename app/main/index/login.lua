@@ -112,26 +112,32 @@ ui.container{ attr = { class = "mdl-grid" }, content = function()
             } 
           }
         end
-        slot.put("<br /><br />")
-        ui.link{
-          attr = { class = "mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--underlined" },
-          module = "index", view = "reset_password", text = _"Forgot password?", params = {
-            redirect_module = param.get("redirect_module"),
-            redirect_view = param.get("redirect_view"),
-            redirect_id = param.get("redirect_id"),
-            redirect_params = param.get("redirect_params")
+        if not (config.hide_reset_password and config.hide_recover_login) then
+          slot.put("<br /><br />")
+        end
+        if not config.hide_reset_password then
+            ui.link{
+            attr = { class = "mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--underlined" },
+            module = "index", view = "reset_password", text = _"Forgot password?", params = {
+              redirect_module = param.get("redirect_module"),
+              redirect_view = param.get("redirect_view"),
+              redirect_id = param.get("redirect_id"),
+              redirect_params = param.get("redirect_params")
+            }
           }
-        }
-        slot.put(" &nbsp; ")
-        ui.link{
-          attr = { class = "mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--underlined" },
-          module = "index", view = "send_login", text = _"Forgot login name?", params = {
-            redirect_module = param.get("redirect_module"),
-            redirect_view = param.get("redirect_view"),
-            redirect_id = param.get("redirect_id"),
-            redirect_params = param.get("redirect_params")
+          slot.put(" &nbsp; ")
+        end
+        if not config.hide_recover_login then
+          ui.link{
+            attr = { class = "mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--underlined" },
+            module = "index", view = "send_login", text = _"Forgot login name?", params = {
+              redirect_module = param.get("redirect_module"),
+              redirect_view = param.get("redirect_view"),
+              redirect_id = param.get("redirect_id"),
+              redirect_params = param.get("redirect_params")
+            }
           }
-        }
+        end
       end
     }
   end }
