@@ -44,7 +44,7 @@ function Session.object:set_cookie()
   request.set_cookie{
     name = config.cookie_name,
     value = self.ident,
-    samesite = "none"
+    samesite = "none",
     secure = true
   }
   request.set_cookie{
